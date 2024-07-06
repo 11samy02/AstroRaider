@@ -1,0 +1,56 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Gravity Changer"
+run/main_scene="res://Titel/start_loading.tscn"
+config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/image="res://Images/titel.png"
+config/icon="res://Images/logo.svg"
+config/macos_native_icon="res://Images/logo.svg"
+config/windows_native_icon="res://Images/logo.svg"
+
+[autoload]
+
+GSignals="*res://Manager/GSignals.gd"
+GCamera="*res://Manager/GCamera.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/initial_position=Vector2i(640, 360)
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[layer_names]
+
+2d_physics/layer_1="Solid Ground"
+2d_physics/layer_2="Players"
+2d_physics/layer_3="Entitys"
+2d_physics/layer_4="Hitbox"
+2d_physics/layer_5="Destroyable Ground"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+global_illumination/voxel_gi/quality=1
+camera/depth_of_field/depth_of_field_bokeh_shape=2
+camera/depth_of_field/depth_of_field_bokeh_quality=3
+camera/depth_of_field/depth_of_field_use_jitter=true
+anti_aliasing/quality/msaa_2d=3
+anti_aliasing/quality/screen_space_aa=1
+anti_aliasing/quality/use_taa=true

@@ -1,0 +1,179 @@
+extends CharacterBody2D
+
+@onready var check_for_ground: RayCast2D = %check_for_ground
+@onready var check_for_destroyable_ground: ShapeCast2D = %check_for_destroyable_ground
+
+
+@onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var item_holder: Node2D = $item_holder
+
+@onready var item_delay: Timer = %item_delay
+@onready var bohr_damage_time: Timer = %bohr_damage_time
+
+var can_use_item := true
+@export var landing_anim_name : Array[String]
+
+@export var gravity_strength := 200.0
+var gravity_dir := Vector2.DOWN
+var gravity_break := 2.0
+var max_speed := 250.0
+
+var player_id := 0
+
+var is_bohrer_active := false
+var bohrer_damage := 1
+
+
+
+func _physics_process(delta: float) -> void:
+	apply_gravity(delta)
+	move_and_slide()
+	set_bohrer_state()
+
+func apply_gravity(delta: float) -> void:
+	if !check_for_ground.is_colliding():
+		if anim.current_animation == "idle":
+			anim.stop()
+			anim.play("fling")
+		velocity += gravity_dir * gravity_strength * delta
+	else:
+		if !anim.current_animation in landing_anim_name and !is_bohrer_active:
+			anim.stop()
+			$Sprite.frame = 4
+			anim.play("idle")
+		elif is_bohrer_active:
+			anim.play("use_item")
+		
+		else:
+			anim.play("idle")
+		
+		velocity = Vector2.ZERO
+	velocity = velocity.clamp(Vector2(-max_speed, -max_speed), Vector2(max_speed, max_speed))
+
+
+func _input(event: InputEvent) -> void:
+	input_movement(event)
+
+func input_movement(event: InputEvent) ->void:
+	if Input.is_action_just_pressed("ui_left"):
+		$Sprite.flip_h = true
+		item_holder.get_child(0).flip_h = true
+		change_gravity(Vector2.LEFT)
+	elif Input.is_action_just_pressed("ui_right"):
+		$Sprite.flip_h = false
+		item_holder.get_child(0).flip_h = false
+		change_gravity(Vector2.RIGHT)
+	elif Input.is_action_just_pressed("ui_up"):
+		change_gravity(Vector2.UP)
+	elif Input.is_action_just_pressed("ui_down"):
+		change_gravity(Vector2.DOWN)
+
+
+func change_gravity(new_dir: Vector2) -> void:
+	if new_dir != gravity_dir:
+		var new_rotation = get_target_rotation(new_dir)
+		var tween = create_tween()
+		gravity_dir = new_dir
+		velocity /= gravity_break
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(self, "rotation_degrees", new_rotation, 0.2)
+		can_use_item = false
+		item_delay.start()
+
+func get_target_rotation(new_dir: Vector2) -> float:
+	var target_angle = 0.0
+	if new_dir == Vector2.LEFT:
+		target_angle = 90.0
+	elif new_dir == Vector2.RIGHT:
+		target_angle = -90.0
+	elif new_dir == Vector2.UP:
+		target_angle = 180.0
+	elif new_dir == Vector2.DOWN:
+		target_angle = 0.0
+	
+	var current_angle = rotation_degrees
+	var angle_difference = wrap_angle(target_angle - current_angle)
+	
+	if angle_difference > 180.0:
+		angle_difference -= 360.0
+	elif angle_difference < -180.0:
+		angle_difference += 360.0
+	
+	return current_angle + angle_difference
+
+func wrap_angle(angle: float) -> float:
+	while angle >= 360.0:
+		angle -= 360.0
+	while angle < 0.0:
+		angle += 360.0
+	return angle
+
+
+
+
+func _on_item_delay_timeout() -> void:
+	can_use_item = true
+
+
+#region Bohrer Logik
+
+func set_bohrer_state() -> void:
+	if check_for_destroyable_ground.is_colliding():
+		destroy_ground()
+		use_bohrer_anim()
+		
+		if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.RIGHT and Input.is_action_pressed("ui_right"):
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.UP and Input.is_action_pressed("ui_up"):
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.DOWN and Input.is_action_pressed("ui_down"):
+			is_bohrer_active = true
+			
+		else:
+			is_bohrer_active = false
+			
+	else:
+		is_bohrer_active = false
+
+func destroy_ground() -> void:
+	if !is_bohrer_active:
+		return
+	
+	var ground_pos = check_for_destroyable_ground.get_collision_point(0)
+	
+	
+	if gravity_dir == Vector2.UP:
+		ground_pos.y -= 8
+	elif gravity_dir == Vector2.LEFT:
+		ground_pos.x -= 8
+	
+	if bohr_damage_time.is_stopped() and snappedf(item_holder.modulate.a, 0.01) == 1:
+		bohr_damage_time.start()
+		await (bohr_damage_time.timeout)
+		GSignals.ENV_destroy_tile.emit(ground_pos,bohrer_damage)
+	
+
+func use_bohrer_anim() -> void:
+	if check_for_destroyable_ground.is_colliding():
+		var tween = create_tween()
+		
+		if !is_bohrer_active or !can_use_item:
+			tween.tween_property(item_holder, "modulate", Color("#ffffff00"), 0.1)
+			return
+			
+		else:
+			tween.tween_property(item_holder, "modulate", Color("#ffffff"), 0.1)
+			if anim.current_animation != "use_item":
+				anim.stop()
+				anim.play("use_item")
+
+
+
+#endregion
+
+
