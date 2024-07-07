@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=22 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Texture2D" uid="uid://dgk1vmla3pmyf" path="res://Sprites/actors/Player.png" id="1_4tqht"]
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
@@ -175,11 +175,15 @@ animations = [{
 "speed": 50.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvkoy"]
+size = Vector2(7, 2)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_ook18")
 landing_anim_name = Array[String](["idle", "use_item"])
+gravity_strength = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_4tqht")
@@ -223,7 +227,7 @@ one_shot = true
 
 [node name="bohr_damage_time" type="Timer" parent="Timers"]
 unique_name_in_owner = true
-wait_time = 0.01
+wait_time = 0.2
 one_shot = true
 
 [node name="Rays" type="Node2D" parent="."]
@@ -232,8 +236,9 @@ one_shot = true
 unique_name_in_owner = true
 target_position = Vector2(0, 8)
 
-[node name="check_for_destroyable_ground" type="RayCast2D" parent="Rays"]
+[node name="check_for_destroyable_ground" type="ShapeCast2D" parent="Rays" groups=["Player"]]
 unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_fvkoy")
 target_position = Vector2(0, 8)
 collision_mask = 16
 

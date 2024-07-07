@@ -21,7 +21,7 @@ config/windows_native_icon="res://Images/logo.svg"
 [autoload]
 
 GSignals="*res://Manager/GSignals.gd"
-GCamera="*res://Manager/GCamera.gd"
+GlobalGame="*res://Manager/GlobalGame.gd"
 
 [display]
 

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var check_for_ground: RayCast2D = %check_for_ground
-@onready var check_for_destroyable_ground: ShapeCast2D = %check_for_destroyable_ground
+@onready var check_for_destroyable_ground: RayCast2D = %check_for_destroyable_ground
 
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -144,7 +144,7 @@ func destroy_ground() -> void:
 	if !is_bohrer_active:
 		return
 	
-	var ground_pos = check_for_destroyable_ground.get_collision_point(0)
+	var ground_pos = check_for_destroyable_ground.get_collision_point()
 	
 	
 	if gravity_dir == Vector2.UP:
@@ -163,11 +163,11 @@ func use_bohrer_anim() -> void:
 		var tween = create_tween()
 		
 		if !is_bohrer_active or !can_use_item:
-			tween.tween_property(item_holder, "modulate", Color("#ffffff00"), 0.1)
+			tween.tween_property(item_holder, "modulate", Color("#ffffff00"), 0.05)
 			return
 			
 		else:
-			tween.tween_property(item_holder, "modulate", Color("#ffffff"), 0.1)
+			tween.tween_property(item_holder, "modulate", Color("#ffffff"), 0.05)
 			if anim.current_animation != "use_item":
 				anim.stop()
 				anim.play("use_item")

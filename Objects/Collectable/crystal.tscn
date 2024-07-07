@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dv6htoe1tv4yu"]
+
+[ext_resource type="PackedScene" uid="uid://cqfioe138kr8o" path="res://Objects/Collectable/collectable_template.tscn" id="1_tfalh"]
+[ext_resource type="Script" path="res://Crystal.gd" id="2_ttcpk"]
+[ext_resource type="Texture2D" uid="uid://b2wttn85cre2k" path="res://Objects/Collectable/Cristals.png" id="3_d8oh4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r78tm"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8pqmx"]
+light_mode = 1
+
+[node name="Crystal" instance=ExtResource("1_tfalh")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_ttcpk")
+value = 10
+collectable_name = "Crystal"
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_r78tm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+material = SubResource("CanvasItemMaterial_8pqmx")
+texture = ExtResource("3_d8oh4")
+hframes = 3
+vframes = 3
