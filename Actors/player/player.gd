@@ -152,7 +152,7 @@ func destroy_ground() -> void:
 	elif gravity_dir == Vector2.LEFT:
 		ground_pos.x -= 8
 	
-	if bohr_damage_time.is_stopped() and snappedf(item_holder.modulate.a, 0.01) == 1:
+	if bohr_damage_time.is_stopped() and snappedf(item_holder.modulate.a, 0.01) >= 1:
 		bohr_damage_time.start()
 		await (bohr_damage_time.timeout)
 		GSignals.ENV_destroy_tile.emit(ground_pos,bohrer_damage)

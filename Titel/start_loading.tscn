@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://dakj0is30rwsr"]
+[gd_scene load_steps=10 format=3 uid="uid://dakj0is30rwsr"]
 
 [ext_resource type="Texture2D" uid="uid://b0u0niqk1q5ov" path="res://Images/titel.png" id="1_4ichx"]
+[ext_resource type="Script" path="res://Titel/start_loading.gd" id="1_7kjhf"]
 [ext_resource type="Texture2D" uid="uid://625atfatdtwl" path="res://Images/Godot_icon.svg" id="2_fsvmp"]
 [ext_resource type="Texture2D" uid="uid://c8t2yd5yo4sct" path="res://Images/logo.svg" id="3_cn1o3"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="4_o0jvk"]
@@ -122,6 +123,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7kjhf")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -172,7 +174,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 500.0
-offset_bottom = 500.0
+offset_right = 1920.0
+offset_bottom = 1580.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 40
@@ -207,25 +210,32 @@ theme_override_constants/separation = 40
 alignment = 1
 
 [node name="Button" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
-custom_minimum_size = Vector2(227, 90)
+custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
 text = "Continue"
 
 [node name="Button2" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
-custom_minimum_size = Vector2(227, 90)
+custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
 text = "New Game"
 
 [node name="Button3" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
-custom_minimum_size = Vector2(227, 90)
+custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_o0jvk")
+text = "Perks
+"
+
+[node name="Button4" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(227, 62)
+layout_mode = 2
+size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
 text = "Options"
 
-[node name="Button4" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
-custom_minimum_size = Vector2(227, 90)
-layout_mode = 2
-theme = ExtResource("4_o0jvk")
-text = "Neues Spiel"
+[connection signal="pressed" from="MarginContainer/TextureRect/HBoxContainer/Button2" to="." method="new_game_pressed"]

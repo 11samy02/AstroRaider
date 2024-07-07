@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ccglfq0wop5l5" path="res://Sprites/actors/thriler.png" id="4_larsr"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lgb7g"]
+light_mode = 1
 
 [sub_resource type="Animation" id="Animation_ev3cy"]
 length = 0.001

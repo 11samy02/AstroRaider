@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://ss5o0ot61xc0"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://ss5o0ot61xc0"]
 
 [ext_resource type="Texture2D" uid="uid://b8ti6qnp8y3gv" path="res://Sprites/UI/button3.png" id="1_3evjt"]
 [ext_resource type="Texture2D" uid="uid://ci3uyl5ci1j12" path="res://Sprites/UI/button1.png" id="1_n70ju"]
@@ -38,10 +38,18 @@ content_margin_bottom = 10.0
 texture = ExtResource("1_n70ju")
 region_rect = Rect2(7, 2, 48, 16)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h0gxu"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_n70ju")
+region_rect = Rect2(7, 2, 48, 16)
+
 [resource]
 Button/font_sizes/font_size = 24
 Button/fonts/font = SubResource("FontVariation_4jyes")
 Button/styles/focus = SubResource("StyleBoxTexture_v0ahe")
 Button/styles/hover = SubResource("StyleBoxTexture_upums")
 Button/styles/normal = SubResource("StyleBoxTexture_jdeaa")
-Button/styles/pressed = null
+Button/styles/pressed = SubResource("StyleBoxTexture_h0gxu")

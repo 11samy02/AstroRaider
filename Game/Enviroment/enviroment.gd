@@ -16,7 +16,7 @@ func set_live_to_tiles() -> void:
 		
 		tile_Res.pos = tile
 		tile_Res.drop_path = "res://Objects/Collectable/crystal.tscn"
-		tile_Res.drop_count.min_value = 1
+		tile_Res.drop_count.min_value = 0
 		tile_Res.drop_count.max_value = 2
 		
 		tiles_array.append(tile_Res)
