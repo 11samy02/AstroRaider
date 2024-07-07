@@ -1,9 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=22 format=3 uid="uid://bvxpu0ufiyfmj"]
 
-[ext_resource type="Texture2D" uid="uid://dgk1vmla3pmyf" path="res://Sprites/actors/Player.png" id="1_4tqht"]
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
+[ext_resource type="Texture2D" uid="uid://btfu52hwbu668" path="res://Sprites/actors/Player/Player1.png" id="2_xfvlm"]
 [ext_resource type="Texture2D" uid="uid://bu8pq2ln3ys4r" path="res://Objects/Lights/sphere_light.png" id="3_fk0u8"]
 [ext_resource type="Texture2D" uid="uid://ccglfq0wop5l5" path="res://Sprites/actors/thriler.png" id="4_larsr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lgb7g"]
 
 [sub_resource type="Animation" id="Animation_ev3cy"]
 length = 0.001
@@ -182,7 +184,8 @@ script = ExtResource("1_ook18")
 landing_anim_name = Array[String](["idle", "use_item"])
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_4tqht")
+material = SubResource("CanvasItemMaterial_lgb7g")
+texture = ExtResource("2_xfvlm")
 hframes = 4
 vframes = 3
 
@@ -193,12 +196,13 @@ libraries = {
 autoplay = "fling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_mru7q")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 1.5
 shadow_enabled = true
-shadow_filter = 1
+shadow_filter = 2
 texture = ExtResource("3_fk0u8")
 texture_scale = 1.5
 
@@ -230,10 +234,12 @@ one_shot = true
 
 [node name="check_for_ground" type="RayCast2D" parent="Rays"]
 unique_name_in_owner = true
+visible = false
 target_position = Vector2(0, 8)
 
 [node name="check_for_destroyable_ground" type="RayCast2D" parent="Rays"]
 unique_name_in_owner = true
+visible = false
 target_position = Vector2(0, 8)
 collision_mask = 16
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dakj0is30rwsr"]
+[gd_scene load_steps=9 format=3 uid="uid://dakj0is30rwsr"]
 
 [ext_resource type="Texture2D" uid="uid://b0u0niqk1q5ov" path="res://Images/titel.png" id="1_4ichx"]
 [ext_resource type="Texture2D" uid="uid://625atfatdtwl" path="res://Images/Godot_icon.svg" id="2_fsvmp"]
 [ext_resource type="Texture2D" uid="uid://c8t2yd5yo4sct" path="res://Images/logo.svg" id="3_cn1o3"]
+[ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="4_o0jvk"]
+[ext_resource type="Texture2D" uid="uid://bg6cth45e02od" path="res://Sprites/UI/button_container.png" id="5_58nfv"]
 
 [sub_resource type="Animation" id="Animation_si33c"]
 length = 0.001
@@ -41,6 +43,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("2_fsvmp")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 500)]
 }
 
 [sub_resource type="Animation" id="Animation_yy0x6"]
@@ -81,6 +95,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [ExtResource("2_fsvmp"), ExtResource("3_cn1o3")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.1, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 500), Vector2(0, 500), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkeof"]
@@ -139,3 +165,67 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_fsvmp")
 expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_o0jvk")
+texture = ExtResource("5_58nfv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -606.0
+offset_top = -45.0
+offset_right = 606.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(227, 90)
+layout_mode = 2
+theme = ExtResource("4_o0jvk")
+text = "Continue"
+
+[node name="Button2" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(227, 90)
+layout_mode = 2
+theme = ExtResource("4_o0jvk")
+text = "New Game"
+
+[node name="Button3" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(227, 90)
+layout_mode = 2
+theme = ExtResource("4_o0jvk")
+text = "Options"
+
+[node name="Button4" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(227, 90)
+layout_mode = 2
+theme = ExtResource("4_o0jvk")
+text = "Neues Spiel"
