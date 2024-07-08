@@ -2,7 +2,6 @@ extends TileMap
 
 var tiles_array: Array[DestroyableTileResource] = []
 
-var default_tiles
 
 func _enter_tree() -> void:
 	GSignals.ENV_destroy_tile.connect(destroy_tile_at)
@@ -57,3 +56,11 @@ func update_surrounding(pos: Vector2):
 	for cell in to_update:
 		set_cell(0, cell)
 	set_cells_terrain_connect(0, to_update, 0, 0)
+
+
+func fill_map(size: Vector2i) -> void:
+	for x in range(0,size.x):
+		for y in range(0,size.y):
+			set_cell(0, Vector2i(x,y), 0, Vector2i(0,0),0)
+	for tile in get_used_cells(0):
+		update_surrounding(tile)

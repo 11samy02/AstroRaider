@@ -1,7 +1,10 @@
 extends Control
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var margin_container: MarginContainer = $MarginContainer
 
+func _ready() -> void:
+	margin_container.size = margin_container.get_minimum_size()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_joy_button_pressed(0, JOY_BUTTON_A) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):

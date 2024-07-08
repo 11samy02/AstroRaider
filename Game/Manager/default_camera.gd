@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var zoom_factor: float = 800
+@export var zoom_factor: float = 900
 
 var min_zoom := 4.0
 
