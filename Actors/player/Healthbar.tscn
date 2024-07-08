@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://drplyear4uby8"]
+
+[ext_resource type="Texture2D" uid="uid://dkfyi2yu36ioh" path="res://Sprites/UI/bars/live_bar_frame.png" id="1_4t3oe"]
+[ext_resource type="Texture2D" uid="uid://cunwsolh8fo86" path="res://Sprites/UI/bars/live_bar_fill.png" id="2_vpo8i"]
+[ext_resource type="Script" path="res://Actors/player/Healthbar.gd" id="3_628qs"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t8gss"]
+light_mode = 1
+
+[node name="bar" type="TextureProgressBar"]
+material = SubResource("CanvasItemMaterial_t8gss")
+offset_right = 19.0
+offset_bottom = 3.0
+step = 0.1
+value = 100.0
+nine_patch_stretch = true
+texture_over = ExtResource("1_4t3oe")
+texture_progress = ExtResource("2_vpo8i")
+script = ExtResource("3_628qs")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

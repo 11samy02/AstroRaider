@@ -4,8 +4,9 @@
 [ext_resource type="Script" path="res://Crystal.gd" id="2_ttcpk"]
 [ext_resource type="Texture2D" uid="uid://b2wttn85cre2k" path="res://Objects/Collectable/Cristals.png" id="3_d8oh4"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_p5wjo"]
-radius = 40.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n6mn1"]
+radius = 5.0
+height = 16.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8pqmx"]
 light_mode = 1
@@ -182,7 +183,7 @@ value = 1
 collectable_name = "Crystal"
 
 [node name="CollisionShape2D" parent="." index="0"]
-shape = SubResource("CircleShape2D_p5wjo")
+shape = SubResource("CapsuleShape2D_n6mn1")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
