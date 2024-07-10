@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var check_for_ground: RayCast2D = %check_for_ground
 @onready var check_for_destroyable_ground: RayCast2D = %check_for_destroyable_ground
+@onready var hitbox: Hitbox = $Hitbox
 
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -23,7 +24,8 @@ var player_id := 0
 var is_bohrer_active := false
 var bohrer_damage := 1
 
-
+func _ready() -> void:
+	hitbox.player = self
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)

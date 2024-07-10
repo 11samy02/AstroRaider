@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=23 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Texture2D" uid="uid://btfu52hwbu668" path="res://Sprites/actors/Player/Player1.png" id="2_xfvlm"]
 [ext_resource type="Texture2D" uid="uid://bu8pq2ln3ys4r" path="res://Objects/Lights/sphere_light.png" id="3_fk0u8"]
 [ext_resource type="Texture2D" uid="uid://ccglfq0wop5l5" path="res://Sprites/actors/thriler.png" id="4_larsr"]
+[ext_resource type="Script" path="res://Manager/hitbox.gd" id="5_uglfl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lgb7g"]
 light_mode = 1
@@ -197,7 +198,6 @@ libraries = {
 autoplay = "fling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_mru7q")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -243,5 +243,11 @@ unique_name_in_owner = true
 visible = false
 target_position = Vector2(0, 8)
 collision_mask = 16
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("5_uglfl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_mru7q")
 
 [connection signal="timeout" from="Timers/item_delay" to="." method="_on_item_delay_timeout"]

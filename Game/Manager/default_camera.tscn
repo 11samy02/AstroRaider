@@ -5,3 +5,29 @@
 [node name="DefaultCamera" type="Camera2D"]
 position_smoothing_enabled = true
 script = ExtResource("1_nkrrl")
+
+[node name="pos_list" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="pos_list"]
+position = Vector2(0, -589)
+
+[node name="Marker2D2" type="Marker2D" parent="pos_list"]
+position = Vector2(-1016, -589)
+
+[node name="Marker2D3" type="Marker2D" parent="pos_list"]
+position = Vector2(-1016, 0)
+
+[node name="Marker2D4" type="Marker2D" parent="pos_list"]
+position = Vector2(-1016, 604)
+
+[node name="Marker2D5" type="Marker2D" parent="pos_list"]
+position = Vector2(0, 604)
+
+[node name="Marker2D6" type="Marker2D" parent="pos_list"]
+position = Vector2(1032, 604)
+
+[node name="Marker2D7" type="Marker2D" parent="pos_list"]
+position = Vector2(1032, 0)
+
+[node name="Marker2D8" type="Marker2D" parent="pos_list"]
+position = Vector2(1032, -589)
