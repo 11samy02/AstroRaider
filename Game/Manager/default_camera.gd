@@ -1,4 +1,5 @@
 extends Camera2D
+class_name MainCam
 
 @export var zoom_factor: float = 900
 
