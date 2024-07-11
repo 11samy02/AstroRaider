@@ -1,6 +1,9 @@
 extends Area2D
 
+const EXPLODE = preload("res://Projectiles/explosions/fire_ball_explode.tscn")
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var particle: CPUParticles2D = $particle
 
 @export var atk_resource: AttackResource = AttackResource.new()
 @export var speed := 500
@@ -15,9 +18,17 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	look_at(dir)
 	translate(dir * speed * delta)
 
 
 func _on_lifetime_timeout() -> void:
 	set_physics_process(false)
+	particle.emitting = false
 	animation_player.play("hit")
+
+func spawn_explosion() -> void:
+	var explode = EXPLODE.instantiate()
+	explode.global_position = global_position
+	explode.emitting = true
+	get_parent().add_child(explode)
