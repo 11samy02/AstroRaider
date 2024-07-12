@@ -29,6 +29,7 @@ func _process(delta: float) -> void:
 
 func applay_damage(entity: Node2D, damage: int = 1):
 	if entity == parent_entity:
+		parent_entity.get_hit_anim()
 		var tween = create_tween()
 		tween.parallel()
 		

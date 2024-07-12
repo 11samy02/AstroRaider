@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var check_for_ground: RayCast2D = %check_for_ground
 @onready var check_for_destroyable_ground: RayCast2D = %check_for_destroyable_ground
 @onready var hitbox: Hitbox = $Hitbox
+@onready var sprite: Sprite2D = $Sprite
 
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -31,6 +32,7 @@ func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
 	move_and_slide()
 	set_bohrer_state()
+	shader_effects()
 
 func apply_gravity(delta: float) -> void:
 	if !check_for_ground.is_colliding():
@@ -178,6 +180,18 @@ func use_bohrer_anim() -> void:
 
 
 
+var shader_value = 0
+
+func get_hit_anim() -> void:
+	var tween = create_tween()
+	shader_value = 1
+	sprite.scale = Vector2(1.25,1.25)
+	
+	tween.tween_property(self, "shader_value", 0, 0.2)
+	tween.parallel()
+	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)
+
 #endregion
 
-
+func shader_effects() -> void:
+	sprite.material.set_shader_parameter("mix_color", shader_value)

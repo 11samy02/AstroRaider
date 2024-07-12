@@ -40,8 +40,4 @@ stretch_mode = 6
 [node name="Player" parent="PlayerList" groups=["Player"] instance=ExtResource("2_156uu")]
 position = Vector2(831, 601)
 
-[node name="Player2" parent="PlayerList" groups=["Player"] instance=ExtResource("2_156uu")]
-position = Vector2(1082, 599)
-player_id = 1
-
 [node name="FireBallSpawner" parent="." instance=ExtResource("6_2gfhj")]

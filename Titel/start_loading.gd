@@ -11,6 +11,7 @@ extends Control
 
 
 func _ready() -> void:
+	PauseMenu.can_pause_on_screen = false
 	margin_container.size = margin_container.get_minimum_size()
 	new_game.grab_focus()
 

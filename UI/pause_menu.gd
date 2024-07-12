@@ -8,7 +8,7 @@ extends CanvasLayer
 @onready var button_margin: MarginContainer = $button_margin
 @onready var color_rect: ColorRect = $ColorRect
 
-var can_pause_on_screen := false
+var can_pause_on_screen := true
 
 func _ready() -> void:
 	hide()
