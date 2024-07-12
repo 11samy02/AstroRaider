@@ -22,7 +22,9 @@ func _process(delta: float) -> void:
 	global_position = parent_entity.global_position + Vector2(-10,-16)
 	
 	if current_hp <= 0:
-		get_tree().change_scene_to_file("res://Titel/start_loading.tscn")
+		GlobalGame.Players.erase(parent_entity)
+		if GlobalGame.Players.is_empty():
+			get_tree().change_scene_to_file("res://Titel/start_loading.tscn")
 
 
 func applay_damage(entity: Node2D, damage: int = 1):
