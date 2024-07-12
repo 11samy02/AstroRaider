@@ -7,20 +7,21 @@ const FIREBALL = preload("res://Projectiles/fire_ball.tscn")
 
 
 var wave_started := false
-var wave_fire_count := 10
-
-
+var wave_fire_count := 5
 
 func _on_wave_time_timeout() -> void:
 	wave_started = true
 
 
 func _on_fire_time_timeout() -> void:
+	randomize()
 	if wave_started:
 		if wave_fire_count <= 0:
 			wave_started = false
-			wave_fire_count = randi_range(8,20)
+			wave_fire_count = randi_range(3,10)
+			wave_time.set_wait_time(randf_range(5.0, 15.0))
 			wave_time.start()
+			return
 		
 		var spawn_pos: Vector2 = GlobalGame.camera.get_pos_out_of_cam()
 		
@@ -31,3 +32,4 @@ func _on_fire_time_timeout() -> void:
 		fire_ball.dir = (target_pos - spawn_pos).normalized()
 		
 		get_parent().add_child(fire_ball)
+		wave_fire_count -= 1

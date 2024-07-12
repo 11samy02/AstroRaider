@@ -9,25 +9,49 @@ script = ExtResource("1_nkrrl")
 [node name="pos_list" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="pos_list"]
-position = Vector2(0, -589)
+position = Vector2(0, -832)
 
 [node name="Marker2D2" type="Marker2D" parent="pos_list"]
-position = Vector2(-1016, -589)
+position = Vector2(-1280, -768)
 
 [node name="Marker2D3" type="Marker2D" parent="pos_list"]
-position = Vector2(-1016, 0)
+position = Vector2(-1536, 0)
 
 [node name="Marker2D4" type="Marker2D" parent="pos_list"]
-position = Vector2(-1016, 604)
+position = Vector2(-1280, 736)
 
 [node name="Marker2D5" type="Marker2D" parent="pos_list"]
-position = Vector2(0, 604)
+position = Vector2(0, 896)
 
 [node name="Marker2D6" type="Marker2D" parent="pos_list"]
-position = Vector2(1032, 604)
+position = Vector2(1280, 736)
 
 [node name="Marker2D7" type="Marker2D" parent="pos_list"]
-position = Vector2(1032, 0)
+position = Vector2(1408, 0)
 
 [node name="Marker2D8" type="Marker2D" parent="pos_list"]
-position = Vector2(1032, -589)
+position = Vector2(1280, -768)
+
+[node name="Marker2D9" type="Marker2D" parent="pos_list"]
+position = Vector2(640, -800)
+
+[node name="Marker2D10" type="Marker2D" parent="pos_list"]
+position = Vector2(-640, -800)
+
+[node name="Marker2D11" type="Marker2D" parent="pos_list"]
+position = Vector2(-1472, -480)
+
+[node name="Marker2D12" type="Marker2D" parent="pos_list"]
+position = Vector2(-1472, 432)
+
+[node name="Marker2D13" type="Marker2D" parent="pos_list"]
+position = Vector2(-768, 848)
+
+[node name="Marker2D14" type="Marker2D" parent="pos_list"]
+position = Vector2(688, 848)
+
+[node name="Marker2D15" type="Marker2D" parent="pos_list"]
+position = Vector2(1328, 400)
+
+[node name="Marker2D16" type="Marker2D" parent="pos_list"]
+position = Vector2(1328, -368)

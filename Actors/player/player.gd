@@ -19,7 +19,7 @@ var gravity_dir := Vector2.DOWN
 var gravity_break := 2.0
 var max_speed := 250.0
 
-var player_id := 0
+@export var player_id := 0
 
 var is_bohrer_active := false
 var bohrer_damage := 1
@@ -57,18 +57,19 @@ func _input(event: InputEvent) -> void:
 	input_movement(event)
 
 func input_movement(event: InputEvent) ->void:
-	if Input.is_action_just_pressed("ui_left"):
-		$Sprite.flip_h = true
-		item_holder.get_child(0).flip_h = true
-		change_gravity(Vector2.LEFT)
-	elif Input.is_action_just_pressed("ui_right"):
-		$Sprite.flip_h = false
-		item_holder.get_child(0).flip_h = false
-		change_gravity(Vector2.RIGHT)
-	elif Input.is_action_just_pressed("ui_up"):
-		change_gravity(Vector2.UP)
-	elif Input.is_action_just_pressed("ui_down"):
-		change_gravity(Vector2.DOWN)
+	if player_id == 0:
+		if Input.is_action_just_pressed("ui_left"):
+			$Sprite.flip_h = true
+			item_holder.get_child(0).flip_h = true
+			change_gravity(Vector2.LEFT)
+		elif Input.is_action_just_pressed("ui_right"):
+			$Sprite.flip_h = false
+			item_holder.get_child(0).flip_h = false
+			change_gravity(Vector2.RIGHT)
+		elif Input.is_action_just_pressed("ui_up"):
+			change_gravity(Vector2.UP)
+		elif Input.is_action_just_pressed("ui_down"):
+			change_gravity(Vector2.DOWN)
 
 
 func change_gravity(new_dir: Vector2) -> void:
@@ -124,20 +125,21 @@ func set_bohrer_state() -> void:
 		destroy_ground()
 		use_bohrer_anim()
 		
-		if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
-			is_bohrer_active = true
-			
-		elif gravity_dir == Vector2.RIGHT and Input.is_action_pressed("ui_right"):
-			is_bohrer_active = true
-			
-		elif gravity_dir == Vector2.UP and Input.is_action_pressed("ui_up"):
-			is_bohrer_active = true
-			
-		elif gravity_dir == Vector2.DOWN and Input.is_action_pressed("ui_down"):
-			is_bohrer_active = true
-			
-		else:
-			is_bohrer_active = false
+		if player_id == 0:
+			if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
+				is_bohrer_active = true
+				
+			elif gravity_dir == Vector2.RIGHT and Input.is_action_pressed("ui_right"):
+				is_bohrer_active = true
+				
+			elif gravity_dir == Vector2.UP and Input.is_action_pressed("ui_up"):
+				is_bohrer_active = true
+				
+			elif gravity_dir == Vector2.DOWN and Input.is_action_pressed("ui_down"):
+				is_bohrer_active = true
+				
+			else:
+				is_bohrer_active = false
 			
 	else:
 		is_bohrer_active = false

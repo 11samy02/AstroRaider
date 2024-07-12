@@ -20,11 +20,13 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 
 [node name="fire_ball_explode" type="CPUParticles2D"]
 material = SubResource("CanvasItemMaterial_n6rlr")
 emitting = false
+amount = 16
 lifetime = 0.5
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.75
 randomness = 1.0
+lifetime_randomness = 0.2
 texture = ExtResource("1_vsgh7")
 emission_shape = 1
 emission_sphere_radius = 2.0
