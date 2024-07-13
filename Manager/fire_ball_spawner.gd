@@ -25,7 +25,7 @@ func _on_fire_time_timeout() -> void:
 		
 		var spawn_pos: Vector2 = GlobalGame.camera.get_pos_out_of_cam()
 		
-		var target_pos: Vector2 = GlobalGame.Players.pick_random().global_position
+		var target_pos: Vector2 = GlobalGame.Players.pick_random().player.global_position
 		
 		var fire_ball = FIREBALL.instantiate()
 		fire_ball.global_position = spawn_pos

@@ -1,6 +1,6 @@
 extends Node
 
-var Players: Array[CharacterBody2D] = []
+var Players: Array[PlayerResource] = []
 
 var camera: MainCam
 

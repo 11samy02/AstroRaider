@@ -24,6 +24,7 @@ config/windows_native_icon="res://Images/logo.svg"
 GSignals="*res://Manager/GSignals.gd"
 GlobalGame="*res://Manager/GlobalGame.gd"
 PauseMenu="*res://UI/pause_menu.tscn"
+PerkData="*res://Perks/PerkData.gd"
 
 [display]
 

@@ -27,5 +27,9 @@ func _physics_process(delta: float) -> void:
 			translate((player_who_collected.global_position - global_position).normalized() * speed * delta)
 		else:
 			animation_player.play("Collect")
+			
+			for player_res: PlayerResource in GlobalGame.Players:
+				if player_res.player == player_who_collected:
+					player_res.crystal_count += value
 			set_physics_process(false)
 	
