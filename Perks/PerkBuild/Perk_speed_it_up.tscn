@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://har1jftqgoco"]
+
+[ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_rf5aw"]
+[ext_resource type="Script" path="res://Perks/PerkBuild/speed_it_up.gd" id="2_vhjut"]
+
+[node name="Speed_It_Up" instance=ExtResource("1_rf5aw")]
+script = ExtResource("2_vhjut")
+value_for_each_level = 10.0

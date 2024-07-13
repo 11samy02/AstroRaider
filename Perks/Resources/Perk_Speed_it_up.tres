@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://c7cw2i8t6iniu"]
+
+[ext_resource type="Texture2D" uid="uid://cox486n3g2a78" path="res://Sprites/Perks/Speed_it_up.png" id="1_7wcq7"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_aag0k"]
+
+[resource]
+script = ExtResource("1_aag0k")
+image = ExtResource("1_7wcq7")
+Key = 0
+perk_name = "Speed it up"
+description = "increas your speed
+Lv 1:	10%
+Lv 2:	30%
+Lv 3:	50%"
+type = 0
+active_type = 0

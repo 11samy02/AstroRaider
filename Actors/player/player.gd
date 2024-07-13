@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var check_for_ground: RayCast2D = %check_for_ground
 @onready var check_for_destroyable_ground: RayCast2D = %check_for_destroyable_ground
@@ -15,18 +16,20 @@ extends CharacterBody2D
 var can_use_item := true
 @export var landing_anim_name : Array[String]
 
-@export var gravity_strength := 200.0
 var gravity_dir := Vector2.DOWN
-var gravity_break := 2.0
-var max_speed := 250.0
 
 @export var player_id := 0
+@export var character_build_id := 0
 
 var is_bohrer_active := false
-var bohrer_damage := 1
+
+var stats: Stats = Stats.new()
 
 func _ready() -> void:
 	hitbox.player = self
+	
+	if character_build_id < PlayerDataBuilds.saved_builds.size():
+		stats = PlayerDataBuilds.saved_builds[character_build_id].stats
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
@@ -39,7 +42,7 @@ func apply_gravity(delta: float) -> void:
 		if anim.current_animation == "idle":
 			anim.stop()
 			anim.play("fling")
-		velocity += gravity_dir * gravity_strength * delta
+		velocity += gravity_dir * stats.gravity_strength * delta
 	else:
 		if !anim.current_animation in landing_anim_name and !is_bohrer_active:
 			anim.stop()
@@ -52,7 +55,7 @@ func apply_gravity(delta: float) -> void:
 			anim.play("idle")
 		
 		velocity = Vector2.ZERO
-	velocity = velocity.clamp(Vector2(-max_speed, -max_speed), Vector2(max_speed, max_speed))
+	velocity = velocity.clamp(Vector2(-stats.max_speed, -stats.max_speed), Vector2(stats.max_speed, stats.max_speed))
 
 
 func _input(event: InputEvent) -> void:
@@ -79,7 +82,7 @@ func change_gravity(new_dir: Vector2) -> void:
 		var new_rotation = get_target_rotation(new_dir)
 		var tween = create_tween()
 		gravity_dir = new_dir
-		velocity /= gravity_break
+		velocity /= stats.gravity_break
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(self, "rotation_degrees", new_rotation, 0.2)
 		can_use_item = false
@@ -161,7 +164,7 @@ func destroy_ground() -> void:
 	if bohr_damage_time.is_stopped() and snappedf(item_holder.modulate.a, 0.01) >= 1:
 		bohr_damage_time.start()
 		await (bohr_damage_time.timeout)
-		GSignals.ENV_destroy_tile.emit(ground_pos,bohrer_damage)
+		GSignals.ENV_destroy_tile.emit(ground_pos,stats.bohrer_damage)
 	
 
 func use_bohrer_anim() -> void:

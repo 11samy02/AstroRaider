@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5xnojapesv2"]
-
-[ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_krd2i"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/Construction_expert.gd" id="2_wbfri"]
-
-[node name="Construction_expert" instance=ExtResource("1_krd2i")]
-script = ExtResource("2_wbfri")
-Level = 20
