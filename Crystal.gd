@@ -10,6 +10,8 @@ class_name ItemCrystal
 var is_collected := false
 var player_who_collected: CharacterBody2D = null
 
+var is_first_one := true
+
 var speed := 50
 
 func _ready() -> void:
@@ -20,6 +22,8 @@ func _ready() -> void:
 func collect(body: Node2D) -> void:
 	is_collected = true
 	player_who_collected = body
+	if is_first_one:
+		GSignals.PERK_event_collect_crystal.emit(global_position)
 
 func _physics_process(delta: float) -> void:
 	if is_collected and !player_who_collected == null:

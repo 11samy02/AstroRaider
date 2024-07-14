@@ -28,8 +28,8 @@ var stats: Stats = Stats.new()
 func _ready() -> void:
 	hitbox.player = self
 	
-	if character_build_id < PlayerDataBuilds.saved_builds.size():
-		stats = PlayerDataBuilds.saved_builds[character_build_id].stats
+	if character_build_id < PlayerDataBuilds.player_saved_res.saved_builds.size():
+		stats = PlayerDataBuilds.player_saved_res.saved_builds[character_build_id].stats
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)

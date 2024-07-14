@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://b60jv1h5jty5v"]
+
+[ext_resource type="Texture2D" uid="uid://cglusam8h3boj" path="res://Sprites/Perks/Coin_Master.png" id="1_705wp"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="2_jo4of"]
+
+[resource]
+script = ExtResource("2_jo4of")
+image = ExtResource("1_705wp")
+Key = 2
+perk_name = "Coin Master"
+description = "you gain crystals after you collect
+
+LV 1: 	10 coins
+Lv 2:	5 coins
+Lv3: 	2 coins"
+type = 4
+active_type = 3
