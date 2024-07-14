@@ -7,3 +7,6 @@ signal PLA_take_damage
 
 
 signal PERK_event_collect_crystal
+
+
+signal CAM_shake_effect

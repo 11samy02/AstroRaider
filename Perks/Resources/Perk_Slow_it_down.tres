@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://dhoqblfuwg6eu"]
+
+[ext_resource type="Texture2D" uid="uid://bp1cbjha4iibh" path="res://Sprites/Perks/Slow_it_Down.png" id="1_7ralm"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="2_1ygi5"]
+
+[resource]
+script = ExtResource("2_1ygi5")
+image = ExtResource("1_7ralm")
+Key = 3
+perk_name = "Slow it Down"
+description = "imporve faster direction input
+Lv 1:	+2
+Lv 2:	+4
+Lv 3:	+6"
+type = 0
+active_type = 0

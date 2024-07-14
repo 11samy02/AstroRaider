@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq7jvguyibm1o"]
+
+[ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_wiabk"]
+[ext_resource type="Script" path="res://Perks/PerkBuild/Perk_SlowItDown.gd" id="2_f0211"]
+
+[node name="SlowItDown" instance=ExtResource("1_wiabk")]
+script = ExtResource("2_f0211")
+value_break = 2
+value_strength = 10
+Key = 3

@@ -13,6 +13,7 @@ const EXPLODE = preload("res://Projectiles/explosions/fire_ball_explode.tscn")
 func _on_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
 		area.get_hit(atk_resource)
+		GSignals.CAM_shake_effect.emit()
 		set_physics_process(false)
 		animation_player.play("hit")
 

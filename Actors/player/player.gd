@@ -30,6 +30,8 @@ func _ready() -> void:
 	
 	if character_build_id < PlayerDataBuilds.player_saved_res.saved_builds.size():
 		stats = PlayerDataBuilds.player_saved_res.saved_builds[character_build_id].stats
+	else:
+		print("No Player Build was found with the ID ", character_build_id)
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)

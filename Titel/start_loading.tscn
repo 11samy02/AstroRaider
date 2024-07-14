@@ -184,8 +184,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 500.0
-offset_right = 28800.0
-offset_bottom = 16700.0
+offset_bottom = 500.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 40
@@ -220,6 +219,7 @@ theme_override_constants/separation = 40
 alignment = 1
 
 [node name="continue" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
@@ -237,6 +237,7 @@ shortcut = SubResource("Shortcut_2j512")
 text = "New Game"
 
 [node name="perks" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4

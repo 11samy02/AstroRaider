@@ -1,3 +1,4 @@
+@tool
 extends Control
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -14,6 +15,10 @@ func _ready() -> void:
 	PauseMenu.can_pause_on_screen = false
 	margin_container.size = margin_container.get_minimum_size()
 	new_game.grab_focus()
+
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		margin_container.size = margin_container.get_minimum_size()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_anything_pressed():

@@ -7,7 +7,7 @@ const FIREBALL = preload("res://Projectiles/fire_ball.tscn")
 
 
 var wave_started := false
-var wave_fire_count := 5
+var wave_fire_count := 2
 
 func _on_wave_time_timeout() -> void:
 	wave_started = true
@@ -18,8 +18,8 @@ func _on_fire_time_timeout() -> void:
 	if wave_started:
 		if wave_fire_count <= 0:
 			wave_started = false
-			wave_fire_count = randi_range(3,10)
-			wave_time.set_wait_time(randf_range(5.0, 15.0))
+			wave_fire_count = randi_range(5,10)
+			wave_time.set_wait_time(randf_range(3.0, 5.0))
 			wave_time.start()
 			return
 		
