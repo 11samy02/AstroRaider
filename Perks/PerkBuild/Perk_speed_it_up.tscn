@@ -6,3 +6,4 @@
 [node name="Speed_It_Up" instance=ExtResource("1_rf5aw")]
 script = ExtResource("2_vhjut")
 value_for_each_level = 10.0
+Level = 20

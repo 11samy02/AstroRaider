@@ -198,3 +198,4 @@ func get_hit_anim() -> void:
 
 func shader_effects() -> void:
 	sprite.material.set_shader_parameter("mix_color", shader_value)
+

@@ -8,4 +8,4 @@ class_name Stats
 @export var bohrer_damage := 1
 
 
-@export var Perks : Array[Perk]
+@export var Perks : Array[Perk] = []

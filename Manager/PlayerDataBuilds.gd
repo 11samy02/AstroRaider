@@ -1,21 +1,49 @@
 extends Node
 
-var saved_builds : Array[PlayerCharacterBuild]
+@export var player_saved_res : PlayerSavesResource = PlayerSavesResource.new()
+
+var save_file_path : String = "user://CharacterBuilds.res"
 
 func _ready() -> void:
-	add_build()
+	add_build("Default", [
+		PerkData.load_perk_res(PerkData.Keys.Speed_It_Up),
+		PerkData.load_perk_res(PerkData.Keys.Construction_Expert),
+		])
+	player_saved_res = load_file()
 
-func add_build() -> void:
+func add_build(name_of_build: String, Perks: Array[Perk]) -> void:
 	var character_build : PlayerCharacterBuild = PlayerCharacterBuild.new()
 	
-	character_build.build_name = "Default"
+	character_build.build_name = name_of_build
 	
 	var keys = PerkData.Keys
 	
-	var perk : Perk = PerkData.load_perk_res(keys.Speed_It_Up)
-	var perk2 : Perk = PerkData.load_perk_res(keys.Construction_Expert)
+	for perk: Perk in Perks:
+		character_build.stats.Perks.append(perk)
 	
-	character_build.stats.Perks.append(perk)
-	character_build.stats.Perks.append(perk2)
+	player_saved_res.saved_builds.append(character_build)
+	save_file()
+
+
+func save_file() -> void:
+	var error = ResourceSaver.save(player_saved_res, save_file_path)
+	if error == OK:
+		print("Resourcen erfolgreich gespeichert.")
+	else:
+		print("Fehler beim Speichern der Ressourcen: ", error)
+
+
+func load_file() -> PlayerSavesResource:
+	var loaded_file = ResourceLoader.load(save_file_path)
 	
-	saved_builds.append(character_build)
+	if loaded_file and loaded_file is PlayerSavesResource :
+		print("Resource erfolgreich geladen")
+		return loaded_file
+	else:
+		print("Fehler: Geladene Datei konnte nicht gelesen werden")
+		return PlayerSavesResource.new()
+
+func delete_build(id) -> void:
+	if player_saved_res.saved_builds.size() > id:
+		player_saved_res.saved_builds.remove_at(id)
+		save_file()
