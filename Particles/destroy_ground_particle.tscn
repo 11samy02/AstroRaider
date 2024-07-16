@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpt1v4qubwff7"]
+
+[ext_resource type="Texture2D" uid="uid://v8jt5iabgfid" path="res://Sprites/Particles/ground_destroyed_particle.png" id="1_yqijk"]
+[ext_resource type="Script" path="res://Particles/destroy_ground_particle.gd" id="2_s7f8p"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yqcbj"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_qd8ss"]
+_data = [Vector2(0, 0.345847), 0.0, 0.0, 0, 0, Vector2(0.0884615, 0.646526), 0.213132, 0.213132, 0, 0, Vector2(0.888462, 0.22432), -3.3349, -3.3349, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_yy6gu"]
+offsets = PackedFloat32Array(0, 0.702586, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="destroy_ground_particle" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_yqcbj")
+emitting = false
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.8
+randomness = 0.75
+lifetime_randomness = 0.25
+texture = ExtResource("1_yqijk")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+scale_amount_curve = SubResource("Curve_qd8ss")
+color_ramp = SubResource("Gradient_yy6gu")
+anim_offset_max = 1.0
+script = ExtResource("2_s7f8p")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

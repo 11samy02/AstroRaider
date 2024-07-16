@@ -3,8 +3,8 @@ class_name MainCam
 
 @export var zoom_factor: float = 900
 
-@export var randomStrength: float = 2.0
 @export var shakeFade: float = 10
+
 
 var rng = RandomNumberGenerator.new()
 
@@ -52,7 +52,8 @@ func get_pos_out_of_cam() -> Vector2:
 	return pos_list.pick_random()
 
 
-func apply_shake() -> void:
+func apply_shake(randomStrength: float = rng.randf_range(2.0,4.0), shake_duration: float = 10) -> void:
+	shakeFade = shake_duration
 	shake_strength = randomStrength
 
 func randomOffset() -> Vector2:

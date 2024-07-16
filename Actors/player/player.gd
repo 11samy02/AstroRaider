@@ -6,8 +6,8 @@ class_name Player
 @onready var hitbox: Hitbox = $Hitbox
 @onready var sprite: Sprite2D = $Sprite
 
-
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var sprite_anim: AnimationPlayer = $Sprite/sprite_anim
 @onready var item_holder: Node2D = $item_holder
 
 @onready var item_delay: Timer = %item_delay
@@ -48,7 +48,7 @@ func apply_gravity(delta: float) -> void:
 	else:
 		if !anim.current_animation in landing_anim_name and !is_bohrer_active:
 			anim.stop()
-			$Sprite.frame = 4
+			sprite.frame = 4
 			anim.play("idle")
 		elif is_bohrer_active:
 			anim.play("use_item")
@@ -66,11 +66,11 @@ func _input(event: InputEvent) -> void:
 func input_movement(event: InputEvent) ->void:
 	if player_id == 0:
 		if Input.is_action_just_pressed("ui_left"):
-			$Sprite.flip_h = true
+			sprite.flip_h = true
 			item_holder.get_child(0).flip_h = true
 			change_gravity(Vector2.LEFT)
 		elif Input.is_action_just_pressed("ui_right"):
-			$Sprite.flip_h = false
+			sprite.flip_h = false
 			item_holder.get_child(0).flip_h = false
 			change_gravity(Vector2.RIGHT)
 		elif Input.is_action_just_pressed("ui_up"):
@@ -195,6 +195,8 @@ func get_hit_anim() -> void:
 	tween.tween_property(self, "shader_value", 0, 0.2)
 	tween.parallel()
 	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)
+	
+	sprite_anim.play("damaged", -1, stats.invincibility_frame)
 
 #endregion
 

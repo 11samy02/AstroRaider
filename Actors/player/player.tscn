@@ -1,20 +1,72 @@
-[gd_scene load_steps=24 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=26 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
-[ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="2_fk0c2"]
+[ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
 [ext_resource type="Texture2D" uid="uid://btfu52hwbu668" path="res://Sprites/actors/Player/Player1.png" id="2_xfvlm"]
 [ext_resource type="Texture2D" uid="uid://bu8pq2ln3ys4r" path="res://Objects/Lights/sphere_light.png" id="3_fk0u8"]
 [ext_resource type="Texture2D" uid="uid://ccglfq0wop5l5" path="res://Sprites/actors/thriler.png" id="4_larsr"]
 [ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="5_qr1wl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpxq8"]
-resource_local_to_scene = true
-shader = ExtResource("2_fk0c2")
-shader_parameter/opacity = 1.0
-shader_parameter/r = 0.5
-shader_parameter/g = 0.5
-shader_parameter/b = 0.5
-shader_parameter/mix_color = 0.0
+[sub_resource type="Animation" id="Animation_lepmk"]
+resource_name = "damaged"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hitbox/CollisionShape2D2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_b8c3x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hitbox/CollisionShape2D2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sefct"]
+_data = {
+"RESET": SubResource("Animation_b8c3x"),
+"damaged": SubResource("Animation_lepmk")
+}
 
 [sub_resource type="Animation" id="Animation_ev3cy"]
 length = 0.001
@@ -193,10 +245,16 @@ script = ExtResource("1_ook18")
 landing_anim_name = Array[String](["idle", "use_item"])
 
 [node name="Sprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_wpxq8")
+z_index = 1
+material = ExtResource("2_0osdd")
 texture = ExtResource("2_xfvlm")
 hframes = 4
 vframes = 3
+
+[node name="sprite_anim" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_sefct")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -255,7 +313,6 @@ collision_mask = 16
 [node name="Hitbox" parent="." instance=ExtResource("5_qr1wl")]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-visible = false
 shape = SubResource("CapsuleShape2D_mru7q")
 
 [connection signal="timeout" from="Timers/item_delay" to="." method="_on_item_delay_timeout"]

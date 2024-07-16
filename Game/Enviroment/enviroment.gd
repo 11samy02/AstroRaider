@@ -2,6 +2,8 @@ extends TileMap
 
 var tiles_array: Array[DestroyableTileResource] = []
 
+const GROUND_PARTICLE = preload("res://Particles/destroy_ground_particle.tscn")
+
 
 func _enter_tree() -> void:
 	GSignals.ENV_destroy_tile.connect(destroy_tile_at)
@@ -29,6 +31,10 @@ func destroy_tile_at(pos: Vector2, damage: int = 1) -> void:
 			tile.health -= damage
 		
 		if tile.health <= 0:
+			var particle = GROUND_PARTICLE.instantiate()
+			particle.global_position = map_to_local(tile_pos)
+			get_parent().add_child(particle)
+			
 			drop_items(tile)
 			tiles_array.erase(tile)
 			erase_cell(0, tile_pos)
