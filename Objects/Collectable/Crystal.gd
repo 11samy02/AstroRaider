@@ -12,7 +12,7 @@ var player_who_collected: CharacterBody2D = null
 
 var is_first_one := true
 
-var speed := 50
+var speed := 150
 
 func _ready() -> void:
 	sprite.frame = randi_range(0,2)

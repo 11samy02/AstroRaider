@@ -21,7 +21,7 @@ func _on_fire_time_timeout() -> void:
 		if wave_fire_count <= 0:
 			wave_started = false
 			wave_fire_count = rng.randi_range(5,10)
-			wave_time.set_wait_time(rng.randf_range(3.0, 5.0))
+			wave_time.set_wait_time(rng.randf_range(5, 10))
 			wave_time.start()
 			return
 		

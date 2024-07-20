@@ -3,7 +3,7 @@ class_name HealthBar
 
 @onready var timer: Timer = $Timer
 
-var parent_entity: Node2D = null
+var parent_entity: CharacterBody2D = null
 
 var max_hp := 100
 var current_hp := max_hp

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5fkee3ubvyvd"]
+[gd_scene load_steps=22 format=3 uid="uid://c5fkee3ubvyvd"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_nx18g"]
 [ext_resource type="Script" path="res://Bat.gd" id="2_q52fh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://depthkd2tvdg" path="res://Sprites/actors/Enemys/small/bat3.png" id="5_644au"]
 [ext_resource type="Script" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_7sg3r"]
 [ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="7_nrcht"]
+[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="7_sibcj"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="8_tqbtd"]
 
 [sub_resource type="Resource" id="Resource_5cmti"]
@@ -24,9 +25,14 @@ script = ExtResource("6_7sg3r")
 key = 2
 state = 2
 
+[sub_resource type="Resource" id="Resource_4ppjw"]
+script = ExtResource("7_sibcj")
+damage = 3
+
 [sub_resource type="Resource" id="Resource_jaqo2"]
 script = ExtResource("7_nrcht")
 max_health = 10
+attack = SubResource("Resource_4ppjw")
 ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_5cmti"), SubResource("Resource_astv6"), SubResource("Resource_5fign")])
 speed = 100.0
 
