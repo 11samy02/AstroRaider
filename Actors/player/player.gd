@@ -8,7 +8,9 @@ class_name Player
 
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite_anim: AnimationPlayer = $Sprite/sprite_anim
-@onready var item_holder: Node2D = $item_holder
+@onready var bohrer_holder: Node2D = $bohrer_holder
+@onready var bohrer_hit_coll: CollisionShape2D = $BohrerHitBox/bohrer_hit_coll
+
 
 @onready var item_delay: Timer = %item_delay
 @onready var bohr_damage_time: Timer = %bohr_damage_time
@@ -26,8 +28,6 @@ var is_bohrer_active := false
 var stats: Stats = Stats.new()
 
 func _ready() -> void:
-	hitbox.entity = self
-	
 	if character_build_id < PlayerDataBuilds.player_saved_res.saved_builds.size():
 		stats = PlayerDataBuilds.player_saved_res.saved_builds[character_build_id].stats
 	else:
@@ -67,11 +67,11 @@ func input_movement(event: InputEvent) ->void:
 	if player_id == 0:
 		if Input.is_action_just_pressed("ui_left"):
 			sprite.flip_h = true
-			item_holder.get_child(0).flip_h = true
+			bohrer_holder.get_child(0).flip_h = true
 			change_gravity(Vector2.LEFT)
 		elif Input.is_action_just_pressed("ui_right"):
 			sprite.flip_h = false
-			item_holder.get_child(0).flip_h = false
+			bohrer_holder.get_child(0).flip_h = false
 			change_gravity(Vector2.RIGHT)
 		elif Input.is_action_just_pressed("ui_up"):
 			change_gravity(Vector2.UP)
@@ -128,26 +128,26 @@ func _on_item_delay_timeout() -> void:
 #region Bohrer Logik
 
 func set_bohrer_state() -> void:
+	use_bohrer_anim()
 	if check_for_destroyable_ground.is_colliding():
 		destroy_ground()
-		use_bohrer_anim()
 		
-		if player_id == 0:
-			if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
-				is_bohrer_active = true
-				
-			elif gravity_dir == Vector2.RIGHT and Input.is_action_pressed("ui_right"):
-				is_bohrer_active = true
-				
-			elif gravity_dir == Vector2.UP and Input.is_action_pressed("ui_up"):
-				is_bohrer_active = true
-				
-			elif gravity_dir == Vector2.DOWN and Input.is_action_pressed("ui_down"):
-				is_bohrer_active = true
-				
-			else:
-				is_bohrer_active = false
+	if player_id == 0:
+		if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
+			is_bohrer_active = true
 			
+		elif gravity_dir == Vector2.RIGHT and Input.is_action_pressed("ui_right"):
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.UP and Input.is_action_pressed("ui_up"):
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.DOWN and Input.is_action_pressed("ui_down"):
+			is_bohrer_active = true
+			
+		else:
+			is_bohrer_active = false
+		
 	else:
 		is_bohrer_active = false
 
@@ -163,25 +163,26 @@ func destroy_ground() -> void:
 	elif gravity_dir == Vector2.LEFT:
 		ground_pos.x -= 8
 	
-	if bohr_damage_time.is_stopped() and snappedf(item_holder.modulate.a, 0.01) >= 1:
+	if bohr_damage_time.is_stopped() and snappedf(bohrer_holder.modulate.a, 0.01) >= 1:
 		bohr_damage_time.start()
 		await (bohr_damage_time.timeout)
 		GSignals.ENV_destroy_tile.emit(ground_pos,stats.bohrer_damage)
 	
 
 func use_bohrer_anim() -> void:
-	if check_for_destroyable_ground.is_colliding():
-		var tween = create_tween()
+	var tween = create_tween()
+	
+	if !is_bohrer_active or !can_use_item:
+		tween.tween_property(bohrer_holder, "modulate", Color("#ffffff00"), 0.05)
+		bohrer_hit_coll.set_disabled(true)
+		return
 		
-		if !is_bohrer_active or !can_use_item:
-			tween.tween_property(item_holder, "modulate", Color("#ffffff00"), 0.05)
-			return
-			
-		else:
-			tween.tween_property(item_holder, "modulate", Color("#ffffff"), 0.05)
-			if anim.current_animation != "use_item":
-				anim.stop()
-				anim.play("use_item")
+	else:
+		tween.tween_property(bohrer_holder, "modulate", Color("#ffffff"), 0.05)
+		bohrer_hit_coll.set_disabled(false)
+		if anim.current_animation != "use_item":
+			anim.stop()
+			anim.play("use_item")
 
 
 
@@ -197,6 +198,19 @@ func get_hit_anim() -> void:
 	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)
 	
 	sprite_anim.play("damaged", -1, stats.invincibility_frame)
+
+
+func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
+	if area is Hitbox:
+		if area.entity is EnemyBaseTemplate:
+			var attack: AttackResource = AttackResource.new()
+			attack.damage = stats.bohrer_damage
+			attack.knockback = stats.bohrer_knockback
+			
+			area.get_hit(attack)
+			
+			var dir : Vector2 = (area.global_position - global_position).normalized()
+			area.entity.get_knockback(dir, attack.knockback)
 
 #endregion
 

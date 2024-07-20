@@ -1,12 +1,35 @@
-[gd_scene load_steps=8 format=3 uid="uid://c82etxgt0m7uw"]
+[gd_scene load_steps=13 format=3 uid="uid://c82etxgt0m7uw"]
 
 [ext_resource type="Texture2D" uid="uid://rc4wjwgym4o6" path="res://Images/Background/bg1.png" id="1_oy3rq"]
 [ext_resource type="PackedScene" uid="uid://diaruu2bt2xvq" path="res://Game/Enviroment/enviroment.tscn" id="1_wfgm1"]
 [ext_resource type="PackedScene" uid="uid://bvxpu0ufiyfmj" path="res://Actors/player/player.tscn" id="2_156uu"]
 [ext_resource type="PackedScene" uid="uid://dgh680yd5k2y3" path="res://Game/Manager/player_list.tscn" id="3_qpkeu"]
 [ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://Game/Manager/default_camera.tscn" id="5_1oloc"]
-[ext_resource type="PackedScene" uid="uid://cb2ncsvxgjcka" path="res://Manager/fire_ball_spawner.tscn" id="6_2gfhj"]
-[ext_resource type="PackedScene" uid="uid://c5fkee3ubvyvd" path="res://Actors/Enemys/Small Enemys/bat.tscn" id="7_wuise"]
+[ext_resource type="PackedScene" uid="uid://cb2ncsvxgjcka" path="res://Manager/spawner/fire_ball_spawner.tscn" id="6_2gfhj"]
+[ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="7_e8q5d"]
+[ext_resource type="PackedScene" uid="uid://bhmsjtfelgkxa" path="res://Manager/spawner/bat_spawner.tscn" id="8_dfuog"]
+
+[sub_resource type="Resource" id="Resource_2pi61"]
+resource_local_to_scene = true
+script = ExtResource("7_e8q5d")
+min_value = 0
+max_value = 5
+
+[sub_resource type="Resource" id="Resource_wmjhu"]
+resource_local_to_scene = true
+script = ExtResource("7_e8q5d")
+min_value = 10
+max_value = 20
+
+[sub_resource type="Resource" id="Resource_wgwy4"]
+script = ExtResource("7_e8q5d")
+min_value = 200
+max_value = 300
+
+[sub_resource type="Resource" id="Resource_65cpn"]
+script = ExtResource("7_e8q5d")
+min_value = 5
+max_value = 10
 
 [node name="MainGame" type="Node"]
 
@@ -40,18 +63,9 @@ texture = ExtResource("1_oy3rq")
 position = Vector2(831, 601)
 
 [node name="FireBallSpawner" parent="." instance=ExtResource("6_2gfhj")]
+fire_per_round = SubResource("Resource_2pi61")
+time_until_wave_start = SubResource("Resource_wmjhu")
 
-[node name="Bat" parent="." instance=ExtResource("7_wuise")]
-position = Vector2(1081, 409)
-
-[node name="Bat2" parent="." instance=ExtResource("7_wuise")]
-position = Vector2(713, 388)
-
-[node name="Bat3" parent="." instance=ExtResource("7_wuise")]
-position = Vector2(488, 736)
-
-[node name="Bat4" parent="." instance=ExtResource("7_wuise")]
-position = Vector2(986, 786)
-
-[node name="Bat5" parent="." instance=ExtResource("7_wuise")]
-position = Vector2(1334, 670)
+[node name="BatSpawner" parent="." instance=ExtResource("8_dfuog")]
+spawn_per_round = SubResource("Resource_wgwy4")
+time_until_wave_start = SubResource("Resource_65cpn")

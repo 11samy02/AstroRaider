@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c5fkee3ubvyvd"]
+[gd_scene load_steps=23 format=3 uid="uid://c5fkee3ubvyvd"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_nx18g"]
 [ext_resource type="Script" path="res://Bat.gd" id="2_q52fh"]
@@ -9,18 +9,19 @@
 [ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="7_nrcht"]
 [ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="7_sibcj"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="8_tqbtd"]
+[ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="9_gg1tf"]
 
-[sub_resource type="Resource" id="Resource_5cmti"]
+[sub_resource type="Resource" id="Resource_j76pi"]
 script = ExtResource("6_7sg3r")
 key = 0
 state = 0
 
-[sub_resource type="Resource" id="Resource_astv6"]
+[sub_resource type="Resource" id="Resource_t3bil"]
 script = ExtResource("6_7sg3r")
 key = 1
 state = 1
 
-[sub_resource type="Resource" id="Resource_5fign"]
+[sub_resource type="Resource" id="Resource_1hrhx"]
 script = ExtResource("6_7sg3r")
 key = 2
 state = 2
@@ -28,12 +29,15 @@ state = 2
 [sub_resource type="Resource" id="Resource_4ppjw"]
 script = ExtResource("7_sibcj")
 damage = 3
+knockback = 1.0
 
 [sub_resource type="Resource" id="Resource_jaqo2"]
+resource_local_to_scene = true
 script = ExtResource("7_nrcht")
-max_health = 10
+max_health = 3
+current_health = 3
 attack = SubResource("Resource_4ppjw")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_5cmti"), SubResource("Resource_astv6"), SubResource("Resource_5fign")])
+ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_j76pi"), SubResource("Resource_t3bil"), SubResource("Resource_1hrhx")])
 speed = 100.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_32yl0"]
@@ -42,8 +46,14 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
 radius = 6.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6s3b0"]
-light_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ymbq"]
+resource_local_to_scene = true
+shader = ExtResource("9_gg1tf")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 1.0
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
 
 [sub_resource type="Animation" id="Animation_ryi04"]
 length = 0.001
@@ -62,7 +72,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_chyg6"]
 resource_name = "flying"
-length = 0.350005
+length = 0.500005
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -72,10 +82,10 @@ tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 2, 1, 0]
+"values": [0, 1, 2, 3, 4, 5, 4, 3, 2, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_61fje"]
@@ -90,8 +100,12 @@ radius = 6.0
 [node name="Bat" instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
-sprite_variation = Array[Texture2D]([ExtResource("3_48332"), ExtResource("4_w7qki"), ExtResource("5_644au")])
 stats = SubResource("Resource_jaqo2")
+state = null
+sprite_variation = Array[Texture2D]([ExtResource("3_48332"), ExtResource("4_w7qki"), ExtResource("5_644au")])
+
+[node name="Hitbox" parent="." index="0" node_paths=PackedStringArray("entity")]
+entity = NodePath("..")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false
@@ -104,7 +118,7 @@ position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_g3y2r")
 
 [node name="sprite" type="Sprite2D" parent="." index="2"]
-material = SubResource("CanvasItemMaterial_6s3b0")
+material = SubResource("ShaderMaterial_3ymbq")
 texture = ExtResource("3_48332")
 hframes = 3
 vframes = 2
@@ -126,7 +140,6 @@ shape = SubResource("CircleShape2D_sxo5n")
 [node name="Timer" type="Node" parent="." index="5"]
 
 [node name="wander_time" type="Timer" parent="Timer" index="0"]
-wait_time = 2.0
 one_shot = true
 
 [node name="follow_time" type="Timer" parent="Timer" index="1"]

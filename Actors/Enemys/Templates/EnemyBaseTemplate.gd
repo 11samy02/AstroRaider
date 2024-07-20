@@ -7,6 +7,13 @@ var state_mashine := AiEnemyData.state_mashine
 
 @export var state := state_mashine.Follow
 
+@onready var knockback_time: Timer = $Knockback_time
+
+var last_state := state
+
+func _enter_tree() -> void:
+	GSignals.HIT_take_Damage.connect(applay_damage)
+
 func _ready() -> void:
 	load_ai_to_node()
 
@@ -32,3 +39,29 @@ func get_closest_target() -> Vector2:
 			current_pos = pos
 	
 	return current_pos
+
+func applay_damage(entity: CharacterBody2D, damage: int = 1) -> void:
+	if entity == self:
+		stats.current_health -= damage
+
+func get_knockback(dir: Vector2, knockback: float = 1.0) -> void:
+	if knockback_time.is_stopped():
+		velocity = Vector2.ZERO
+		knockback_time.start()
+		velocity = dir * knockback * stats.speed
+		last_state = state
+		state = state_mashine.Knockback
+
+
+
+func reset_to_last_state() -> void:
+	state = last_state
+
+func check_health() -> void:
+	if stats.current_health <= 0:
+		death()
+
+##should be overwritten if you want any effect on death
+func death() -> void:
+	GlobalGame.entity_list.erase(self)
+	queue_free()

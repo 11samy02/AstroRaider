@@ -1,7 +1,7 @@
 extends Area2D
 class_name Hitbox
 
-@onready var entity: Node2D = null
+@export var entity: CharacterBody2D = null
 
 
 

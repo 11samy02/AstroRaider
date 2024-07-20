@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhmsjtfelgkxa"]
+
+[ext_resource type="Script" path="res://Manager/spawner/bat_spawner.gd" id="1_qqvtv"]
+
+[node name="BatSpawner" type="Node"]
+script = ExtResource("1_qqvtv")
+
+[node name="spawn_time" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="wave_time" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="spawn_time" to="." method="_on_spawn_time_timeout"]
+[connection signal="timeout" from="wave_time" to="." method="_on_wave_time_timeout"]

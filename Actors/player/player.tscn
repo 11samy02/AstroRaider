@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=27 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -84,7 +84,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("item_holder:position")
+tracks/1/path = NodePath("bohrer_holder:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -148,7 +148,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("item_holder:position")
+tracks/1/path = NodePath("bohrer_holder:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -237,6 +237,10 @@ animations = [{
 "speed": 50.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4eg5x"]
+radius = 7.5
+height = 20.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 17
@@ -272,11 +276,11 @@ shadow_filter = 2
 texture = ExtResource("3_fk0u8")
 texture_scale = 1.5
 
-[node name="item_holder" type="Node2D" parent="."]
+[node name="bohrer_holder" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, 11)
 
-[node name="item_sprite" type="AnimatedSprite2D" parent="item_holder"]
+[node name="item_sprite" type="AnimatedSprite2D" parent="bohrer_holder"]
 material = SubResource("CanvasItemMaterial_bg3jk")
 sprite_frames = SubResource("SpriteFrames_4pxcq")
 animation = &"use_item"
@@ -309,9 +313,21 @@ visible = false
 target_position = Vector2(0, 8)
 collision_mask = 16
 
-[node name="Hitbox" parent="." instance=ExtResource("5_qr1wl")]
+[node name="Hitbox" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]
+entity = NodePath("..")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 shape = SubResource("CapsuleShape2D_mru7q")
 
+[node name="BohrerHitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="bohrer_hit_coll" type="CollisionShape2D" parent="BohrerHitBox"]
+visible = false
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_4eg5x")
+
 [connection signal="timeout" from="Timers/item_delay" to="." method="_on_item_delay_timeout"]
+[connection signal="area_entered" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_entered"]

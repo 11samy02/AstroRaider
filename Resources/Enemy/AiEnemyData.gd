@@ -6,6 +6,7 @@ enum state_mashine {
 	Attack,
 	Wander,
 	Avoid,
+	Knockback,
 }
 
 

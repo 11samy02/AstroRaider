@@ -4,6 +4,7 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float mix_color;
+render_mode unshaded;
 
 void vertex() {
     // Called for every vertex the material is visible on.
