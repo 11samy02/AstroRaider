@@ -19,7 +19,7 @@ const Keys_res = {
 }
 
 
-const Keys_szene = {
+const Keys_scene = {
 	Keys.Speed_It_Up:  "res://Perks/PerkBuild/Perk_speed_it_up.tscn",
 	Keys.Construction_Expert: "res://Perks/PerkBuild/Perk_construction_expert.tscn",
 	Keys.Coin_Master: "res://Perks/PerkBuild/Perk_CoinMaster.tscn",
@@ -28,7 +28,7 @@ const Keys_szene = {
 
 
 static func load_perk(key : Keys) -> PackedScene:
-	return load(Keys_szene.get(key))
+	return load(Keys_scene.get(key))
 
 
 static func load_perk_res(key : Keys) -> Perk:

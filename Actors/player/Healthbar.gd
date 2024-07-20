@@ -9,7 +9,7 @@ var max_hp := 100
 var current_hp := max_hp
 
 func _enter_tree() -> void:
-	GSignals.PLA_take_damage.connect(applay_damage)
+	GSignals.HIT_take_Damage.connect(applay_damage)
 
 func _ready() -> void:
 	if parent_entity == null:

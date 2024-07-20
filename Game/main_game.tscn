@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c82etxgt0m7uw"]
+[gd_scene load_steps=8 format=3 uid="uid://c82etxgt0m7uw"]
 
 [ext_resource type="Texture2D" uid="uid://rc4wjwgym4o6" path="res://Images/Background/bg1.png" id="1_oy3rq"]
 [ext_resource type="PackedScene" uid="uid://diaruu2bt2xvq" path="res://Game/Enviroment/enviroment.tscn" id="1_wfgm1"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgh680yd5k2y3" path="res://Game/Manager/player_list.tscn" id="3_qpkeu"]
 [ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://Game/Manager/default_camera.tscn" id="5_1oloc"]
 [ext_resource type="PackedScene" uid="uid://cb2ncsvxgjcka" path="res://Manager/fire_ball_spawner.tscn" id="6_2gfhj"]
+[ext_resource type="PackedScene" uid="uid://c5fkee3ubvyvd" path="res://Actors/Enemys/Small Enemys/bat.tscn" id="7_wuise"]
 
 [node name="MainGame" type="Node"]
 
@@ -38,4 +39,17 @@ texture = ExtResource("1_oy3rq")
 [node name="Player" parent="PlayerList" instance=ExtResource("2_156uu")]
 position = Vector2(831, 601)
 
+[node name="Player2" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(1089, 596)
+player_id = 1
+
 [node name="FireBallSpawner" parent="." instance=ExtResource("6_2gfhj")]
+
+[node name="Bat" parent="." instance=ExtResource("7_wuise")]
+position = Vector2(1047, 462)
+
+[node name="Bat2" parent="." instance=ExtResource("7_wuise")]
+position = Vector2(743, 468)
+
+[node name="Bat3" parent="." instance=ExtResource("7_wuise")]
+position = Vector2(677, 625)

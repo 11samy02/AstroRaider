@@ -13,6 +13,7 @@ var wave_fire_count := 2
 
 func _on_wave_time_timeout() -> void:
 	wave_started = true
+	GSignals.CAM_shake_effect.emit(0.5, 1)
 
 
 func _on_fire_time_timeout() -> void:

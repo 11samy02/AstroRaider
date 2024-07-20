@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgew27qh41xmn"]
+
+[ext_resource type="Script" path="res://Resources/Enemy/Ai/simple_attack_dash.gd" id="1_3481e"]
+
+[node name="Simple_attack_dash" type="Node"]
+script = ExtResource("1_3481e")
+
+[node name="dash_time" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="dash_time" to="." method="_on_dash_time_timeout"]

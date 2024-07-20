@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://6mo722gvco50"]
+
+[ext_resource type="Script" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.gd" id="1_di2us"]
+[ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="4_dx01d"]
+
+[node name="EnemyBaseTemplate" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_di2us")
+
+[node name="Hitbox" parent="." instance=ExtResource("4_dx01d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

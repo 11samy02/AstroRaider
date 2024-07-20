@@ -6,16 +6,17 @@ const EXPLODE = preload("res://Projectiles/explosions/fire_ball_explode.tscn")
 @onready var particle: CPUParticles2D = $particle
 
 @export var atk_resource: AttackResource = AttackResource.new()
-@export var speed := 500
+@export var speed := 600
 @export var dir := Vector2.ZERO
 
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
-		area.get_hit(atk_resource)
-		GSignals.CAM_shake_effect.emit()
-		set_physics_process(false)
-		animation_player.play("hit")
+		if area.entity is Player:
+			area.get_hit(atk_resource)
+			GSignals.CAM_shake_effect.emit()
+			set_physics_process(false)
+			animation_player.play("hit")
 
 
 func _physics_process(delta: float) -> void:
