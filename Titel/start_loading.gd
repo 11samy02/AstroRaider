@@ -10,6 +10,8 @@ extends Control
 @onready var perks: Button = $MarginContainer/TextureRect/HBoxContainer/perks
 
 
+func _enter_tree() -> void:
+	PauseMenu.can_pause_on_screen = false
 
 func _ready() -> void:
 	PauseMenu.can_pause_on_screen = false
@@ -24,6 +26,9 @@ func _input(event: InputEvent) -> void:
 	if Input.is_anything_pressed():
 		if animation_player.current_animation == "show_godot_logo":
 			animation_player.speed_scale = 10
+	
+	if Input.is_joy_button_pressed(0, JOY_BUTTON_A) and new_game.has_focus() and !new_game.disabled:
+		new_game_pressed()
 
 
 func new_game_pressed() -> void:

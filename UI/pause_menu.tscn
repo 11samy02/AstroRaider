@@ -1,17 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3hm7di5du4m"]
+[gd_scene load_steps=4 format=3 uid="uid://d3hm7di5du4m"]
 
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_8lq8x"]
 [ext_resource type="Script" path="res://UI/pause_menu.gd" id="1_t2frn"]
 [ext_resource type="Texture2D" uid="uid://t8h74uusbxr7" path="res://Sprites/UI/button_container_vertical.png" id="2_v720i"]
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ati3p"]
-
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_pqx4n"]
-axis = 5
-axis_value = 1.0
-
-[sub_resource type="Shortcut" id="Shortcut_08dd8"]
-events = [SubResource("InputEventJoypadButton_ati3p"), SubResource("InputEventJoypadMotion_pqx4n")]
 
 [node name="Pause Menu" type="CanvasLayer"]
 process_mode = 3
@@ -78,7 +69,6 @@ custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("1_8lq8x")
-shortcut = SubResource("Shortcut_08dd8")
 text = "Titelscreen"
 
 [node name="Exit" type="Button" parent="button_margin/TextureRect/HBoxContainer"]

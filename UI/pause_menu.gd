@@ -10,6 +10,8 @@ extends CanvasLayer
 
 var can_pause_on_screen := true
 
+var has_pressed_pause := false
+
 func _ready() -> void:
 	hide()
 	button_margin.modulate.a = 1
@@ -20,19 +22,32 @@ func _input(event: InputEvent) -> void:
 		check_for_paused()
 	
 	
-	for player_id in range(0, GlobalGame.Players.size() - 1):
-		if Input.is_joy_button_pressed(player_id,JOY_BUTTON_START):
-			check_for_paused()
-			break
+	if Input.is_joy_button_pressed(0,JOY_BUTTON_START) and !has_pressed_pause:
+		has_pressed_pause = true
+		check_for_paused()
+	if !Input.is_joy_button_pressed(0,JOY_BUTTON_START):
+		has_pressed_pause = false
+	
+	if Input.is_joy_button_pressed(0, JOY_BUTTON_A) and continue_button.has_focus():
+		continue_pressed()
+	
+	if Input.is_joy_button_pressed(0, JOY_BUTTON_A) and options.has_focus():
+		options_pressed()
+	
+	if Input.is_joy_button_pressed(0, JOY_BUTTON_A) and titelscreen.has_focus():
+		titelscreen_pressed()
+	
+	if Input.is_joy_button_pressed(0, JOY_BUTTON_A) and exit.has_focus():
+		exit_the_game()
 
 func check_for_paused() -> void:
 	if can_pause_on_screen:
 		if get_tree().paused:
-			hide()
 			get_tree().paused = false
+			hide()
 		else:
-			show()
 			get_tree().paused = true
+			show()
 			continue_button.grab_focus()
 
 

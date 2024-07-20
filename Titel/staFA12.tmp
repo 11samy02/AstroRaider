@@ -1,0 +1,248 @@
+[gd_scene load_steps=10 format=3 uid="uid://dakj0is30rwsr"]
+
+[ext_resource type="Texture2D" uid="uid://b0u0niqk1q5ov" path="res://Images/titel.png" id="1_4ichx"]
+[ext_resource type="Script" path="res://Titel/start_loading.gd" id="1_7kjhf"]
+[ext_resource type="Texture2D" uid="uid://625atfatdtwl" path="res://Images/Godot_icon.svg" id="2_fsvmp"]
+[ext_resource type="Texture2D" uid="uid://c8t2yd5yo4sct" path="res://Images/logo.svg" id="3_cn1o3"]
+[ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="4_o0jvk"]
+[ext_resource type="Texture2D" uid="uid://bg6cth45e02od" path="res://Sprites/UI/button_container.png" id="5_58nfv"]
+
+[sub_resource type="Animation" id="Animation_si33c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("godot_logo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("godot_logo:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_fsvmp")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 500)]
+}
+
+[sub_resource type="Animation" id="Animation_yy0x6"]
+resource_name = "show_godot_logo"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.5, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("godot_logo:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 1.6, 2.1, 2.6, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("godot_logo:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_fsvmp"), ExtResource("3_cn1o3")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.6, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 500), Vector2(0, 500), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xkeof"]
+_data = {
+"RESET": SubResource("Animation_si33c"),
+"show_godot_logo": SubResource("Animation_yy0x6")
+}
+
+[node name="Start_loading" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7kjhf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4ichx")
+expand_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xkeof")
+}
+autoplay = "show_godot_logo"
+
+[node name="godot_logo" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0)
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_fsvmp")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_o0jvk")
+texture = ExtResource("5_58nfv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -606.0
+offset_top = -45.0
+offset_right = 606.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="continue" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(227, 62)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_o0jvk")
+disabled = true
+text = "Continue"
+
+[node name="new_game" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(227, 62)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_o0jvk")
+disabled = true
+text = "New Game"
+
+[node name="perks" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(227, 62)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_o0jvk")
+disabled = true
+text = "Perks
+"
+
+[node name="options" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+custom_minimum_size = Vector2(227, 62)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("4_o0jvk")
+disabled = true
+text = "Options"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="MarginContainer/TextureRect/HBoxContainer/new_game" to="." method="new_game_pressed"]
