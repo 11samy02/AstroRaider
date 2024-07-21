@@ -48,7 +48,7 @@ func get_knockback(dir: Vector2, knockback: float = 1.0) -> void:
 	if knockback_time.is_stopped():
 		velocity = Vector2.ZERO
 		knockback_time.start()
-		velocity = dir * knockback * stats.speed
+		velocity = dir * knockback * stats.speed * 2
 		last_state = state
 		state = state_mashine.Knockback
 

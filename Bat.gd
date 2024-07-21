@@ -37,7 +37,7 @@ func controll_state_mashine():
 				state = state_mashine.Wander
 				if wander_time.is_stopped():
 					wander_time.start()
-		elif global_position.distance_to(get_closest_target()) < 50:
+		elif global_position.distance_to(get_closest_target()) < 50 and state != state_mashine.Wander:
 			state = state_mashine.Attack
 	else:
 		move_and_slide()

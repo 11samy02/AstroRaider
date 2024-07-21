@@ -21,10 +21,10 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Paused"):
 		check_for_paused()
 	
-	
 	if Input.is_joy_button_pressed(0,JOY_BUTTON_START) and !has_pressed_pause:
 		has_pressed_pause = true
 		check_for_paused()
+		
 	if !Input.is_joy_button_pressed(0,JOY_BUTTON_START):
 		has_pressed_pause = false
 	

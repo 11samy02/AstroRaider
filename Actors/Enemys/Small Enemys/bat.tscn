@@ -102,7 +102,6 @@ z_index = 2
 script = ExtResource("2_q52fh")
 sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 stats = SubResource("Resource_jaqo2")
-state = null
 
 [node name="Hitbox" parent="." index="0" node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
