@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_nx18g"]
 [ext_resource type="Script" path="res://Bat.gd" id="2_q52fh"]
-[ext_resource type="Texture2D" uid="uid://yn8hs0doptif" path="res://Sprites/actors/Enemys/small/bat.png" id="3_48332"]
-[ext_resource type="Texture2D" uid="uid://dfcw4blui0371" path="res://Sprites/actors/Enemys/small/bat2.png" id="4_w7qki"]
-[ext_resource type="Texture2D" uid="uid://depthkd2tvdg" path="res://Sprites/actors/Enemys/small/bat3.png" id="5_644au"]
+[ext_resource type="Texture2D" uid="uid://bdlx6gosn67up" path="res://Sprites/actors/Enemys/small/bat/bat.png" id="3_kxtlt"]
+[ext_resource type="Texture2D" uid="uid://0ynwmka8end" path="res://Sprites/actors/Enemys/small/bat/bat2.png" id="4_awakt"]
+[ext_resource type="Texture2D" uid="uid://bud0ciyc7qwjn" path="res://Sprites/actors/Enemys/small/bat/bat3.png" id="5_epev5"]
 [ext_resource type="Script" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_7sg3r"]
 [ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="7_nrcht"]
 [ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="7_sibcj"]
@@ -100,7 +100,7 @@ radius = 6.0
 [node name="Bat" instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
-sprite_variation = Array[Texture2D]([ExtResource("3_48332"), ExtResource("4_w7qki"), ExtResource("5_644au")])
+sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 stats = SubResource("Resource_jaqo2")
 state = null
 
@@ -119,7 +119,7 @@ shape = SubResource("CircleShape2D_g3y2r")
 
 [node name="sprite" type="Sprite2D" parent="." index="2"]
 material = SubResource("ShaderMaterial_3ymbq")
-texture = ExtResource("3_48332")
+texture = ExtResource("3_kxtlt")
 hframes = 3
 vframes = 2
 
