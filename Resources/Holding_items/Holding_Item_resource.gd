@@ -3,6 +3,9 @@ class_name HoldingItem
 
 
 @export var key : ItemConfig.Keys
+@export var type : ItemConfig.Type
 @export var item_name := ""
-@export_multiline var item_description := ""
-@export var item_cost := 0
+@export var cost := 0
+@export_multiline var description := ""
+@export_multiline var history := ""
+@export var texture : Texture2D

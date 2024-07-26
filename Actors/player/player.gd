@@ -12,10 +12,11 @@ class_name Player
 @onready var bohrer_hit_coll: CollisionShape2D = $BohrerHitBox/bohrer_hit_coll
 
 
-@onready var item_delay: Timer = %item_delay
+@onready var bohrer_delay: Timer = %Bohrer_delay
 @onready var bohr_damage_time: Timer = %bohr_damage_time
 
-var can_use_item := true
+var can_use_bohrer := false
+
 @export var landing_anim_name : Array[String]
 
 var gravity_dir := Vector2.DOWN
@@ -87,8 +88,8 @@ func change_gravity(new_dir: Vector2) -> void:
 		velocity /= stats.gravity_break
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(self, "rotation_degrees", new_rotation, 0.2)
-		can_use_item = false
-		item_delay.start()
+		can_use_bohrer = false
+		bohrer_delay.start()
 
 func get_target_rotation(new_dir: Vector2) -> float:
 	var target_angle = 0.0
@@ -121,8 +122,8 @@ func wrap_angle(angle: float) -> float:
 
 
 
-func _on_item_delay_timeout() -> void:
-	can_use_item = true
+func _on_bohrer_delay_timeout() -> void:
+	can_use_bohrer = true
 
 
 #region Bohrer Logik
@@ -172,7 +173,7 @@ func destroy_ground() -> void:
 func use_bohrer_anim() -> void:
 	var tween = create_tween()
 	
-	if !is_bohrer_active or !can_use_item:
+	if !is_bohrer_active or !can_use_bohrer:
 		tween.tween_property(bohrer_holder, "modulate", Color("#ffffff00"), 0.05)
 		bohrer_hit_coll.set_disabled(true)
 		return

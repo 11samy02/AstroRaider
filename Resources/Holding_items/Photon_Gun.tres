@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HoldingItem" load_steps=3 format=3 uid="uid://bkxks318tx6hh"]
+
+[ext_resource type="Script" path="res://Resources/Holding_items/Holding_Item_resource.gd" id="1_7hg41"]
+[ext_resource type="Texture2D" uid="uid://devw02cvoiikl" path="res://Sprites/Items/Icons/Proton Gun.png" id="2_povoe"]
+
+[resource]
+script = ExtResource("1_7hg41")
+key = 0
+type = 0
+item_name = "Photon Gun"
+cost = 50
+description = "Shoots energy balls in a straight line. Can quickly overheat if used continuously."
+history = "Originally designed to simplify mining operations by breaking through tough materials, the Photon Gun was soon repurposed as a weapon. Engineers realized its potential for defense and combat, leading to its adaptation for the Astro Raiders, becoming a crucial tool in their quest for survival and treasure."
+texture = ExtResource("2_povoe")

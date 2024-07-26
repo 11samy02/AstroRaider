@@ -1,0 +1,174 @@
+[gd_scene load_steps=13 format=3 uid="uid://cwi0qr43hj35l"]
+
+[ext_resource type="Script" path="res://Projectiles/Photon_gun_projectile.gd" id="1_08njn"]
+[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_8acic"]
+[ext_resource type="Texture2D" uid="uid://betk3rgbaluts" path="res://Sprites/Projectiles/energy_ball_blue.png" id="3_3sbgt"]
+
+[sub_resource type="Resource" id="Resource_y1juh"]
+script = ExtResource("2_8acic")
+damage = 1
+knockback = 2.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwaew"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="Animation" id="Animation_5lcwe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3j0tr"]
+resource_name = "hit"
+length = 0.1
+step = 0.015
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.075, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"spawn_explosion"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.1001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 0.1), Vector2(0.325, 0.325)]
+}
+
+[sub_resource type="Animation" id="Animation_pv78o"]
+resource_name = "appearing"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fp201"]
+_data = {
+"RESET": SubResource("Animation_5lcwe"),
+"appearing": SubResource("Animation_pv78o"),
+"hit": SubResource("Animation_3j0tr")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x50bl"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_iiadq"]
+_data = [Vector2(0, 0.252396), 0.0, 3.85669, 0, 0, Vector2(0.652174, 0.21978), -0.180534, -0.180534, 0, 0, Vector2(1, 0), -1.64286, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_twtt0"]
+offsets = PackedFloat32Array(0.0247525, 0.133663, 0.544554, 0.826733, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="PhotoGunProjectile" type="Area2D"]
+modulate = Color(1, 1, 1, 0)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_08njn")
+atk_resource = SubResource("Resource_y1juh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+top_level = true
+position = Vector2(-5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_iwaew")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fp201")
+}
+
+[node name="lifetime" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="particle" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_x50bl")
+amount = 256
+lifetime = 0.2
+speed_scale = 2.0
+texture = ExtResource("3_3sbgt")
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+linear_accel_min = 30.0
+linear_accel_max = 80.0
+scale_amount_curve = SubResource("Curve_iiadq")
+color_ramp = SubResource("Gradient_twtt0")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]
