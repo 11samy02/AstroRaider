@@ -26,7 +26,7 @@ func _on_spawn_time_timeout() -> void:
 	randomize()
 	if GlobalGame.entity_list.size() < GlobalGame.max_entitys_on_screen:
 		if wave_started:
-			if wave_spawn_count <= 0:
+			if wave_spawn_count <= 0 and GlobalGame.entity_list.is_empty():
 				wave_started = false
 				wave_spawn_count = rng.randi_range(spawn_per_round.min_value + 1*(wave_count%10), spawn_per_round.max_value + 1*(wave_count%5))
 				wave_time.set_wait_time(rng.randf_range(time_until_wave_start.min_value, time_until_wave_start.max_value))
