@@ -35,7 +35,7 @@ knockback = 1.0
 resource_local_to_scene = true
 script = ExtResource("7_nrcht")
 max_health = 3
-current_health = 3
+max_Random_health_edit = 2
 attack = SubResource("Resource_4ppjw")
 ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_j76pi"), SubResource("Resource_t3bil"), SubResource("Resource_1hrhx")])
 speed = 100.0
@@ -100,8 +100,8 @@ radius = 6.0
 [node name="Bat" instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
-sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 stats = SubResource("Resource_jaqo2")
+sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 
 [node name="Hitbox" parent="." index="0" node_paths=PackedStringArray("entity")]
 entity = NodePath("..")

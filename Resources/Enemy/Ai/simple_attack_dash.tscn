@@ -4,6 +4,8 @@
 
 [node name="Simple_attack_dash" type="Node"]
 script = ExtResource("1_3481e")
+key = 1
+state = 1
 
 [node name="dash_time" type="Timer" parent="."]
 one_shot = true

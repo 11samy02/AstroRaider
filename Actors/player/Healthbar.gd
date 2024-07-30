@@ -5,7 +5,7 @@ class_name HealthBar
 
 @export var parent_entity: CharacterBody2D = null
 
-var max_hp := 100
+var max_hp := 200
 var current_hp := max_hp
 
 func _enter_tree() -> void:

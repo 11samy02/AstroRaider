@@ -1,25 +1,18 @@
-[gd_scene load_steps=11 format=3 uid="uid://c82etxgt0m7uw"]
+[gd_scene load_steps=9 format=3 uid="uid://c82etxgt0m7uw"]
 
 [ext_resource type="Texture2D" uid="uid://rc4wjwgym4o6" path="res://Images/Background/bg1.png" id="1_oy3rq"]
 [ext_resource type="PackedScene" uid="uid://diaruu2bt2xvq" path="res://Game/Enviroment/enviroment.tscn" id="1_wfgm1"]
 [ext_resource type="PackedScene" uid="uid://bvxpu0ufiyfmj" path="res://Actors/player/player.tscn" id="2_156uu"]
 [ext_resource type="PackedScene" uid="uid://dgh680yd5k2y3" path="res://Game/Manager/player_list.tscn" id="3_qpkeu"]
 [ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://Game/Manager/default_camera.tscn" id="5_1oloc"]
-[ext_resource type="PackedScene" uid="uid://cb2ncsvxgjcka" path="res://Manager/spawner/fire_ball_spawner.tscn" id="6_2gfhj"]
-[ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="7_e8q5d"]
-[ext_resource type="PackedScene" uid="uid://bhmsjtfelgkxa" path="res://Manager/spawner/bat_spawner.tscn" id="8_dfuog"]
+[ext_resource type="PackedScene" uid="uid://bhmsjtfelgkxa" path="res://Manager/spawner/bat_spawner.tscn" id="6_kru1y"]
+[ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="7_n75fg"]
 
-[sub_resource type="Resource" id="Resource_2pi61"]
+[sub_resource type="Resource" id="Resource_8hn5y"]
 resource_local_to_scene = true
-script = ExtResource("7_e8q5d")
-min_value = 0
-max_value = 5
-
-[sub_resource type="Resource" id="Resource_wmjhu"]
-resource_local_to_scene = true
-script = ExtResource("7_e8q5d")
-min_value = 10
-max_value = 20
+script = ExtResource("7_n75fg")
+min_value = 1
+max_value = 2
 
 [node name="MainGame" type="Node"]
 
@@ -52,8 +45,5 @@ texture = ExtResource("1_oy3rq")
 [node name="Player" parent="PlayerList" instance=ExtResource("2_156uu")]
 position = Vector2(831, 601)
 
-[node name="FireBallSpawner" parent="." instance=ExtResource("6_2gfhj")]
-fire_per_round = SubResource("Resource_2pi61")
-time_until_wave_start = SubResource("Resource_wmjhu")
-
-[node name="BatSpawner" parent="." instance=ExtResource("8_dfuog")]
+[node name="BatSpawner" parent="." instance=ExtResource("6_kru1y")]
+spawn_per_round = SubResource("Resource_8hn5y")

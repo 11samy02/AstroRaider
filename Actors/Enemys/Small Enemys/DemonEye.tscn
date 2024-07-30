@@ -1,0 +1,167 @@
+[gd_scene load_steps=24 format=3 uid="uid://d2r6ecatdtqut"]
+
+[ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_400u0"]
+[ext_resource type="Script" path="res://Actors/Enemys/Small Enemys/DemonEye.gd" id="2_xjylt"]
+[ext_resource type="PackedScene" uid="uid://b7mdapvgvv4d4" path="res://Projectiles/fire_ball.tscn" id="5_4325e"]
+[ext_resource type="Script" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_ra7ad"]
+[ext_resource type="Texture2D" uid="uid://chj2k1h3hk3xq" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye.png" id="7_1k81c"]
+[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="7_jiem3"]
+[ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="8_yj8bj"]
+[ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="9_u1xt7"]
+[ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="10_jwp4k"]
+
+[sub_resource type="Resource" id="Resource_yo7tm"]
+script = ExtResource("6_ra7ad")
+key = 0
+state = 0
+
+[sub_resource type="Resource" id="Resource_77sd8"]
+script = ExtResource("6_ra7ad")
+key = 1
+state = 1
+
+[sub_resource type="Resource" id="Resource_ef5g6"]
+script = ExtResource("6_ra7ad")
+key = 2
+state = 2
+
+[sub_resource type="Resource" id="Resource_mdgop"]
+script = ExtResource("6_ra7ad")
+key = 3
+state = 5
+
+[sub_resource type="Resource" id="Resource_6j027"]
+script = ExtResource("7_jiem3")
+damage = 5
+knockback = 1.0
+
+[sub_resource type="Resource" id="Resource_bm7ho"]
+script = ExtResource("7_jiem3")
+damage = 5
+knockback = 1.0
+
+[sub_resource type="Resource" id="Resource_ncasc"]
+resource_local_to_scene = true
+script = ExtResource("8_yj8bj")
+max_health = 2
+max_Random_health_edit = 1
+attack = SubResource("Resource_6j027")
+ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_yo7tm"), SubResource("Resource_77sd8"), SubResource("Resource_ef5g6"), SubResource("Resource_mdgop")])
+speed = 50.0
+projectile = ExtResource("5_4325e")
+ranged_attack = SubResource("Resource_bm7ho")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3cst2"]
+radius = 6.0
+height = 25.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vyc"]
+radius = 6.0
+height = 25.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ymbq"]
+resource_local_to_scene = true
+shader = ExtResource("9_u1xt7")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 1.0
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
+
+[sub_resource type="Animation" id="Animation_ryi04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_chyg6"]
+resource_name = "flying"
+length = 0.500005
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 4, 3, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_61fje"]
+_data = {
+"RESET": SubResource("Animation_ryi04"),
+"flying": SubResource("Animation_chyg6")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d84vw"]
+radius = 6.0
+height = 25.0
+
+[node name="DemonEye" instance=ExtResource("1_400u0")]
+z_index = 2
+script = ExtResource("2_xjylt")
+stats = SubResource("Resource_ncasc")
+sprite_variation = Array[Texture2D]([ExtResource("7_1k81c")])
+
+[node name="Hitbox" parent="." index="0" node_paths=PackedStringArray("entity")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_3cst2")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_q2vyc")
+
+[node name="sprite" type="Sprite2D" parent="." index="2"]
+material = SubResource("ShaderMaterial_3ymbq")
+position = Vector2(0, 8)
+texture = ExtResource("7_1k81c")
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_61fje")
+}
+autoplay = "flying"
+
+[node name="AttackBox" parent="." index="4" node_paths=PackedStringArray("owner_entity") instance=ExtResource("10_jwp4k")]
+owner_entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0"]
+visible = false
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_d84vw")
+
+[node name="Timer" type="Node" parent="." index="5"]
+
+[node name="wander_time" type="Timer" parent="Timer" index="0"]
+one_shot = true
+
+[node name="follow_time" type="Timer" parent="Timer" index="1"]
+wait_time = 2.0
+one_shot = true
+
+[node name="shoot_delay" type="Timer" parent="Timer" index="2"]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

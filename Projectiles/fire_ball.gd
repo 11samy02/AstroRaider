@@ -1,4 +1,5 @@
 extends Area2D
+class_name EnemyProjectile
 
 const EXPLODE = preload("res://Projectiles/explosions/fire_ball_explode.tscn")
 

@@ -7,6 +7,7 @@ enum state_mashine {
 	Wander,
 	Avoid,
 	Knockback,
+	Ranged_Attack,
 }
 
 
@@ -14,6 +15,7 @@ enum Keys {
 	Simple_Follow_Target,
 	Simple_Attack_Dash,
 	Simple_Wander_Around,
+	Simple_Stay_and_Shoot,
 }
 
 
@@ -21,6 +23,7 @@ const Keys_scene = {
 	Keys.Simple_Follow_Target: "res://Resources/Enemy/Ai/simple_follow_target.tscn",
 	Keys.Simple_Attack_Dash: "res://Resources/Enemy/Ai/simple_attack_dash.tscn",
 	Keys.Simple_Wander_Around: "res://Resources/Enemy/Ai/simple_wander_around.tscn",
+	Keys.Simple_Stay_and_Shoot: "res://Resources/Enemy/Ai/simple_stay_and_shoot.tscn",
 }
 
 

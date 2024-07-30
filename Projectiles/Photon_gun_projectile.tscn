@@ -151,8 +151,9 @@ autostart = true
 [node name="particle" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_x50bl")
 amount = 256
-lifetime = 0.2
+lifetime = 0.5
 speed_scale = 2.0
+fract_delta = false
 texture = ExtResource("3_3sbgt")
 emission_shape = 1
 emission_sphere_radius = 2.0

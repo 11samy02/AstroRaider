@@ -3,6 +3,8 @@ class_name EnemyBaseTemplate
 
 @export var stats: EnemyStats = EnemyStats.new()
 
+@export var sprite_variation: Array[Texture2D]
+
 var state_mashine := AiEnemyData.state_mashine
 
 @export var state := state_mashine.Follow
@@ -11,8 +13,11 @@ var state_mashine := AiEnemyData.state_mashine
 
 var last_state := state
 
+
 func _enter_tree() -> void:
 	GSignals.HIT_take_Damage.connect(applay_damage)
+	stats.max_health += randi_range(0, stats.max_Random_health_edit)
+	stats.current_health = stats.max_health
 
 func _ready() -> void:
 	load_ai_to_node()
@@ -58,7 +63,7 @@ func reset_to_last_state() -> void:
 	state = last_state
 
 func check_health() -> void:
-	if stats.current_health <= 0:
+	if stats.current_health <= 0 and state != state_mashine.Knockback:
 		death()
 
 ##should be overwritten if you want any effect on death

@@ -1,15 +1,16 @@
 extends EnemyBaseTemplate
+class_name Bat
 
 const DIE_PARTICLE = preload("res://Particles/Enemys/small/bat_die_particle.tscn")
-
-@export var sprite_variation: Array[Texture2D]
 
 
 @onready var sprite: Sprite2D = $sprite
 @onready var wander_time: Timer = $Timer/wander_time
 @onready var follow_time: Timer = $Timer/follow_time
 
-var shader_value:float = 0.0
+var shader_value: float = 0.0
+
+static var kill_count: int = 0
 
 func _ready() -> void:
 	super()
@@ -24,10 +25,10 @@ func _physics_process(delta: float) -> void:
 
 func controll_state_mashine():
 	if knockback_time.is_stopped():
-		if global_position.distance_to(get_closest_target()) >= 300:
+		if global_position.distance_to(get_closest_target()) >= 200:
 			state = state_mashine.Follow
 			if follow_time.is_stopped():
-				follow_time.start(3)
+				follow_time.start()
 		if global_position.distance_to(get_closest_target()) >= 50:
 			if randi_range(0,1) == 0 and wander_time.is_stopped():
 				state = state_mashine.Follow
@@ -73,4 +74,5 @@ func death() -> void:
 	particle.global_position = global_position
 	particle.sprite_id = sprite_variation.find(sprite.texture)
 	get_parent().add_child(particle)
+	kill_count += 1
 	super()
