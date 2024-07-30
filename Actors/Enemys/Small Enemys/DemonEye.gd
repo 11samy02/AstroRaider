@@ -33,7 +33,7 @@ func controll_state_mashine():
 			if follow_time.is_stopped():
 				follow_time.start()
 		if global_position.distance_to(get_closest_target()) >= 100 and shoot_delay.is_stopped() and global_position.distance_to(get_closest_target()) <= 200:
-			var random_number = randi_range(0,2)
+			var random_number = randi_range(0,3)
 			if random_number == 0 and wander_time.is_stopped():
 				state = state_mashine.Follow
 				if follow_time.is_stopped():
