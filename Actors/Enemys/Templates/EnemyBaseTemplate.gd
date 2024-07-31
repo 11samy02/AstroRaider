@@ -13,6 +13,8 @@ var state_mashine := AiEnemyData.state_mashine
 
 var last_state := state
 
+static var max_entitys_on_screen = 80
+static var entity_list: Array[EnemyBaseTemplate]
 
 func _enter_tree() -> void:
 	GSignals.HIT_take_Damage.connect(applay_damage)
@@ -68,5 +70,14 @@ func check_health() -> void:
 
 ##should be overwritten if you want any effect on death
 func death() -> void:
-	GlobalGame.entity_list.erase(self)
+	if self in entity_list:
+		entity_list.erase(self)
+		print("Entity removed from list. Current entity list size:", entity_list.size())
+	else:
+		print("Entity not found in list. Unable to remove.")
 	queue_free()
+
+
+static func reset() -> void:
+	entity_list.clear()
+	GlobalGame.Players.clear()

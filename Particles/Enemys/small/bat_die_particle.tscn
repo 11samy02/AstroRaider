@@ -47,3 +47,5 @@ color_ramp = SubResource("Gradient_qb4jj")
 anim_offset_max = 1.0
 script = ExtResource("2_7shaj")
 sprite_variation = Array[Texture2D]([ExtResource("1_xiqvy"), ExtResource("3_74rrh"), ExtResource("4_gn0ce")])
+
+[connection signal="finished" from="." to="." method="_on_finished"]
