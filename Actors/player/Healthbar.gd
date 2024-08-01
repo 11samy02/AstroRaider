@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 				GlobalGame.Players.erase(player_res)
 	if GlobalGame.Players.is_empty():
 		get_tree().change_scene_to_file("res://Titel/start_loading.tscn")
-		GlobalGame.reset()
 
 
 func applay_damage(entity: Node2D, damage: int = 1):

@@ -72,9 +72,6 @@ func check_health() -> void:
 func death() -> void:
 	if self in entity_list:
 		entity_list.erase(self)
-		print("Entity removed from list. Current entity list size:", entity_list.size())
-	else:
-		print("Entity not found in list. Unable to remove.")
 	queue_free()
 
 

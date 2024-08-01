@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhmsjtfelgkxa"]
+
+[ext_resource type="Script" path="res://Manager/spawner/EntitySpawner.gd" id="1_qqvtv"]
+[ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="2_2abb3"]
+
+[sub_resource type="Resource" id="Resource_4tqhy"]
+script = ExtResource("2_2abb3")
+min_value = 4
+max_value = 4
+
+[sub_resource type="Resource" id="Resource_663ip"]
+script = ExtResource("2_2abb3")
+min_value = 5
+max_value = 5
+
+[node name="EntitySpawner" type="Node"]
+script = ExtResource("1_qqvtv")
+spawn_per_round = SubResource("Resource_4tqhy")
+time_until_wave_start = SubResource("Resource_663ip")
+
+[node name="spawn_time" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="wave_time" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="spawn_time" to="." method="_on_spawn_time_timeout"]
+[connection signal="timeout" from="wave_time" to="." method="_on_wave_time_timeout"]

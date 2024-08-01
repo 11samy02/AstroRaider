@@ -161,7 +161,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="shoot_delay" type="Timer" parent="Timer" index="2"]
-wait_time = 0.3
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

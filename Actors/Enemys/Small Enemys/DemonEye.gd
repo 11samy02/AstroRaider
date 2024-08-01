@@ -16,7 +16,6 @@ static var kill_count: int = 0
 func _ready() -> void:
 	super()
 	sprite.set_texture(sprite_variation.pick_random())
-	print(stats.max_health, "  ", stats.current_health)
 
 
 func _physics_process(delta: float) -> void:
@@ -28,7 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func controll_state_mashine():
 	if knockback_time.is_stopped():
-		if global_position.distance_to(get_closest_target()) >= 200 and state != state_mashine.Ranged_Attack:
+		if global_position.distance_to(get_closest_target()) >= 300 and state != state_mashine.Ranged_Attack:
 			state = state_mashine.Follow
 			if follow_time.is_stopped():
 				follow_time.start()
