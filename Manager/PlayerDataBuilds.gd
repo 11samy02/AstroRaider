@@ -5,6 +5,13 @@ extends Node
 var save_file_path : String = "user://CharacterBuilds.res"
 
 func _ready() -> void:
+	var perks : Array[Perk] = []
+	perks.append(PerkData.load_perk_scene_res(PerkData.Keys.Vampire_Bite))
+	perks.append(PerkData.load_perk_scene_res(PerkData.Keys.Speed_It_Up))
+	perks.append(PerkData.load_perk_scene_res(PerkData.Keys.Construction_Expert))
+	perks.append(PerkData.load_perk_scene_res(PerkData.Keys.Coin_Master))
+	perks.append(PerkData.load_perk_scene_res(PerkData.Keys.Slow_It_Down))
+	add_build("default", perks)
 	save_file()
 	player_saved_res = load_file()
 

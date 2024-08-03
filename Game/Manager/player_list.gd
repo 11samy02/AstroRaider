@@ -25,7 +25,9 @@ func add_perks_to_player():
 	for player_res: PlayerResource in GlobalGame.Players:
 		var stats = player_res.player.stats
 		for perk: Perk in stats.Perks:
-			var perk_szene = PerkData.load_perk(perk.Key).instantiate()
-			perk_szene.Player_Res = player_res
+			var perk_szene = PerkData.load_perk_scene(perk.Key).instantiate()
+			if perk_szene is PerkBuild:
+				perk_szene.Player_Res = player_res
+				perk_szene.Level = perk.level
 			add_child(perk_szene)
 			

@@ -5,8 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_4tqhy"]
 script = ExtResource("2_2abb3")
-min_value = 4
-max_value = 4
+min_value = 1
+max_value = 1
 
 [sub_resource type="Resource" id="Resource_663ip"]
 script = ExtResource("2_2abb3")

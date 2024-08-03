@@ -208,7 +208,7 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 			attack.damage = stats.bohrer_damage
 			attack.knockback = stats.bohrer_knockback
 			
-			area.get_hit(attack)
+			area.get_hit(attack, self)
 			
 			var dir : Vector2 = (area.global_position - global_position).normalized()
 			area.entity.get_knockback(dir, attack.knockback)

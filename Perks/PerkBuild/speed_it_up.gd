@@ -2,7 +2,7 @@ extends PerkBuild
 
 var default_max_speed
 var default_gravity_strength
-@export var value_for_each_level := 10.0
+@export var value_for_each_level := 10
 
 func _enter_tree() -> void:
 	super()

@@ -8,10 +8,8 @@ script = ExtResource("2_hujdb")
 image = ExtResource("1_46uwh")
 Key = 1
 perk_name = "Construction Expert"
-description = "Increases your mining speed
-
-Lv 1:	+1
-Lv 2:	+3
-Lv 3:	+5"
+level = 6
+value = Array[int]([1, 2, 3, 4, 5, 6])
+description = "Increases your mining speed +{{value}}"
 type = 4
 active_type = 0

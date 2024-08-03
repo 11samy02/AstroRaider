@@ -9,16 +9,16 @@ func attack(delta) -> void:
 	match parent.state:
 		state:
 			if !has_attacked:
-				parent.velocity = lerp(parent.velocity, Vector2.ZERO, delta * parent.stats.speed)
+				parent.velocity = lerp(parent.velocity, Vector2.ZERO, delta * parent.active_stats.speed)
 				
-				if abs(parent.velocity) < Vector2(5,5):
+				if abs(parent.velocity) < Vector2(10,10):
 					has_attacked = true
-					if parent.stats.projectile != null:
-						var projectile = parent.stats.projectile.instantiate()
+					if parent.active_stats.projectile != null:
+						var projectile = parent.active_stats.projectile.instantiate()
 						
 						if projectile is EnemyProjectile:
 							projectile.dir = (parent.get_closest_target() - parent.global_position).normalized()
-							projectile.atk_resource = parent.stats.ranged_attack.duplicate()
+							projectile.atk_resource = parent.active_stats.ranged_attack.duplicate()
 							projectile.global_position = parent.global_position
 							parent.get_parent().add_child(projectile)
 							

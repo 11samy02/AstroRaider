@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://jr45fvm1o3b4"]
+
+[ext_resource type="Texture2D" uid="uid://da7kbu7amc2ga" path="res://Sprites/Perks/Vampire_bite.png" id="1_lg6bm"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="2_s2p5t"]
+
+[resource]
+script = ExtResource("2_s2p5t")
+image = ExtResource("1_lg6bm")
+Key = 4
+perk_name = "Vampire Bite"
+level = 6
+value = Array[int]([1, 2, 3, 4, 5, 6])
+description = "After each Kill you heal +{{value}}"
+type = 2
+active_type = 3

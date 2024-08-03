@@ -10,6 +10,7 @@ const EXPLODE = ""
 @export var speed := 600
 @export var dir := Vector2.ZERO
 
+@export var parent : Player = null
 
 func _ready() -> void:
 	look_at(dir)
@@ -18,7 +19,7 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate:
-			area.get_hit(atk_resource)
+			area.get_hit(atk_resource, parent)
 			set_physics_process(false)
 			area.entity.get_knockback(dir, atk_resource.knockback)
 			animation_player.play("hit")

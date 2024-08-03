@@ -8,10 +8,8 @@ script = ExtResource("2_jo4of")
 image = ExtResource("1_705wp")
 Key = 2
 perk_name = "Coin Master"
-description = "you gain crystals after you collect
-
-LV 1: 	10 coins
-Lv 2:	5 coins
-Lv3: 	2 coins"
+level = 6
+value = Array[int]([1, 2, 3, 4, 5, 6])
+description = "you get more Crystals to an max  of +{{value}} crystals "
 type = 4
 active_type = 3

@@ -6,4 +6,3 @@
 [node name="CoinMaster" instance=ExtResource("1_tj7ts")]
 script = ExtResource("2_bj7uf")
 Key = 2
-Level = 3

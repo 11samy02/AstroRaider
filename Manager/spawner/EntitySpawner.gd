@@ -37,7 +37,7 @@ func _on_spawn_time_timeout() -> void:
 
 func start_new_wave() -> void:
 	wave_count += 1
-	wave_spawn_count = rng.randi_range(spawn_per_round.min_value + wave_count, spawn_per_round.max_value + wave_count)
+	wave_spawn_count = rng.randi_range(spawn_per_round.min_value + wave_count + GlobalGame.Players.size(), spawn_per_round.max_value + wave_count + GlobalGame.Players.size())
 	spawn_time.start()
 
 func spawn_enemy() -> void:
@@ -45,6 +45,7 @@ func spawn_enemy() -> void:
 	var spawn_pos: Vector2 = GlobalGame.camera.get_pos_out_of_cam()
 	var enemy = ENEMY.pick_random().instantiate()
 	enemy.global_position = spawn_pos
+	enemy.level = floori(wave_count/10)
 	get_parent().add_child(enemy)
 	EnemyBaseTemplate.entity_list.append(enemy)
 	wave_spawn_count -= 1

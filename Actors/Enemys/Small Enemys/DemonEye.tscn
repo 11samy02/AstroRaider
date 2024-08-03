@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2r6ecatdtqut"]
+[gd_scene load_steps=27 format=3 uid="uid://d2r6ecatdtqut"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_400u0"]
 [ext_resource type="Script" path="res://Actors/Enemys/Small Enemys/DemonEye.gd" id="2_xjylt"]
@@ -10,46 +10,67 @@
 [ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="9_u1xt7"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="10_jwp4k"]
 
-[sub_resource type="Resource" id="Resource_yo7tm"]
+[sub_resource type="Resource" id="Resource_f31fk"]
 script = ExtResource("6_ra7ad")
 key = 0
 state = 0
 
-[sub_resource type="Resource" id="Resource_77sd8"]
+[sub_resource type="Resource" id="Resource_2vq8i"]
 script = ExtResource("6_ra7ad")
 key = 1
 state = 1
 
-[sub_resource type="Resource" id="Resource_ef5g6"]
+[sub_resource type="Resource" id="Resource_iyomo"]
 script = ExtResource("6_ra7ad")
 key = 2
 state = 2
 
-[sub_resource type="Resource" id="Resource_mdgop"]
+[sub_resource type="Resource" id="Resource_q4r2s"]
 script = ExtResource("6_ra7ad")
 key = 3
 state = 5
 
-[sub_resource type="Resource" id="Resource_6j027"]
+[sub_resource type="Resource" id="Resource_bog6j"]
+script = ExtResource("7_jiem3")
+damage = 2
+knockback = 1.0
+
+[sub_resource type="Resource" id="Resource_v1q11"]
 script = ExtResource("7_jiem3")
 damage = 5
 knockback = 1.0
 
-[sub_resource type="Resource" id="Resource_bm7ho"]
-script = ExtResource("7_jiem3")
-damage = 5
-knockback = 1.0
-
-[sub_resource type="Resource" id="Resource_ncasc"]
+[sub_resource type="Resource" id="Resource_fb4iu"]
 resource_local_to_scene = true
 script = ExtResource("8_yj8bj")
 max_health = 2
-max_Random_health_edit = 1
-attack = SubResource("Resource_6j027")
-ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_yo7tm"), SubResource("Resource_77sd8"), SubResource("Resource_ef5g6"), SubResource("Resource_mdgop")])
+max_Random_health_edit = 0
+attack = SubResource("Resource_bog6j")
+ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_f31fk"), SubResource("Resource_2vq8i"), SubResource("Resource_iyomo"), SubResource("Resource_q4r2s")])
 speed = 50.0
 projectile = ExtResource("5_4325e")
-ranged_attack = SubResource("Resource_bm7ho")
+ranged_attack = SubResource("Resource_v1q11")
+
+[sub_resource type="Resource" id="Resource_60sad"]
+script = ExtResource("7_jiem3")
+damage = 5
+knockback = 1.0
+
+[sub_resource type="Resource" id="Resource_aqit4"]
+script = ExtResource("7_jiem3")
+damage = 20
+knockback = 1.0
+
+[sub_resource type="Resource" id="Resource_hsww1"]
+resource_local_to_scene = true
+script = ExtResource("8_yj8bj")
+max_health = 5
+max_Random_health_edit = 0
+attack = SubResource("Resource_60sad")
+ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_f31fk"), SubResource("Resource_2vq8i"), SubResource("Resource_iyomo"), SubResource("Resource_q4r2s")])
+speed = 100.0
+projectile = ExtResource("5_4325e")
+ranged_attack = SubResource("Resource_aqit4")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3cst2"]
 radius = 6.0
@@ -114,11 +135,8 @@ height = 25.0
 [node name="DemonEye" instance=ExtResource("1_400u0")]
 z_index = 2
 script = ExtResource("2_xjylt")
-stats = SubResource("Resource_ncasc")
+stats = Array[Object]([SubResource("Resource_fb4iu"), SubResource("Resource_hsww1"), SubResource("Resource_hsww1"), SubResource("Resource_hsww1"), SubResource("Resource_hsww1")])
 sprite_variation = Array[Texture2D]([ExtResource("7_1k81c")])
-
-[node name="Hitbox" parent="." index="0" node_paths=PackedStringArray("entity")]
-entity = NodePath("..")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false

@@ -10,6 +10,7 @@ var current_hp := max_hp
 
 func _enter_tree() -> void:
 	GSignals.HIT_take_Damage.connect(applay_damage)
+	GSignals.HIT_take_heal.connect(applay_heal)
 
 func _ready() -> void:
 	if parent_entity == null:
@@ -41,6 +42,14 @@ func applay_damage(entity: Node2D, damage: int = 1):
 		current_hp = clampi(current_hp,0, max_hp)
 		timer.start()
 
+func applay_heal(entity: Node2D, heal_value : int):
+	if entity == parent_entity:
+		var tween = create_tween()
+		tween.parallel()
+		
+		tween.tween_property(self, "modulate", Color("#ffffff"), 0.05)
+		tween.tween_property(self,"current_hp", current_hp + heal_value,0.2)
+		current_hp = clampi(current_hp,0, max_hp)
 
 
 func _on_timer_timeout() -> void:

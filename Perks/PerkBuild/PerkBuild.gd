@@ -11,7 +11,7 @@ func _enter_tree() -> void:
 	stats = Player_Res.player.stats
 
 func _ready() -> void:
-	var perk_res: Perk = PerkData.load_perk_res(Key)
+	var perk_res: Perk = PerkData.load_perk_scene_res(Key)
 	
 	if perk_res.active_type == perk_res.Active_type_keys.Start:
 		activate_perk()
