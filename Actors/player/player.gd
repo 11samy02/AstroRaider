@@ -28,6 +28,7 @@ var is_bohrer_active := false
 
 var stats: Stats = Stats.new()
 
+
 func _ready() -> void:
 	if character_build_id < PlayerDataBuilds.player_saved_res.saved_builds.size():
 		stats = PlayerDataBuilds.player_saved_res.saved_builds[character_build_id].stats

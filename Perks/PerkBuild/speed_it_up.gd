@@ -5,9 +5,10 @@ var default_gravity_strength
 @export var value_for_each_level := 10
 
 func _enter_tree() -> void:
-	super()
 	default_max_speed = stats.max_speed
 	default_gravity_strength = stats.gravity_strength
+	print(stats.max_speed, " ", default_max_speed)
+	super()
 
 
 func activate_perk() -> void:

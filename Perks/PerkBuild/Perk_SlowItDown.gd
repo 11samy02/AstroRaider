@@ -7,9 +7,9 @@ var default_gravity_break
 var default_gravity_strength
 
 func _enter_tree() -> void:
-	super()
 	default_gravity_break = stats.gravity_break
 	default_gravity_strength = stats.gravity_strength
+	super()
 	
 
 

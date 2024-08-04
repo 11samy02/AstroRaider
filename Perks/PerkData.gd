@@ -40,5 +40,5 @@ static func load_perk_scene(key : Keys) -> PackedScene:
 	return load(Keys_scene.get(key))
 
 
-static func load_perk_scene_res(key : Keys) -> Perk:
+static func load_perk_res(key : Keys) -> Perk:
 	return load(Keys_res.get(key))

@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dxo01u6t5rsdj"]
+
+[ext_resource type="Texture2D" uid="uid://bfb26nir61r5m" path="res://Sprites/Perks/Frame.png" id="1_thfce"]
+[ext_resource type="Texture2D" uid="uid://ba7fwmdktqvkg" path="res://Sprites/Perks/Frame_hover.png" id="2_srg1d"]
+[ext_resource type="Script" path="res://UI/PerkSelector/perk_button.gd" id="3_fvgbe"]
+[ext_resource type="Texture2D" uid="uid://cglusam8h3boj" path="res://Sprites/Perks/Coin_Master.png" id="4_u433w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sxfc"]
+atlas = ExtResource("1_thfce")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl7lb"]
+atlas = ExtResource("2_srg1d")
+region = Rect2(0, 0, 32, 32)
+
+[node name="PerkButton" type="TextureButton"]
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = SubResource("AtlasTexture_8sxfc")
+texture_hover = SubResource("AtlasTexture_vl7lb")
+texture_focused = SubResource("AtlasTexture_vl7lb")
+stretch_mode = 5
+script = ExtResource("3_fvgbe")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="perk_image" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("4_u433w")
+stretch_mode = 5
+
+[connection signal="focus_entered" from="." to="." method="send_change_description"]
+[connection signal="mouse_entered" from="." to="." method="send_change_description"]
