@@ -18,9 +18,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_check_perk_rarity()
 	_clean_null_entries()
+	check_pressed()
 	
 	if perk_buttons.is_empty():
 		get_tree().paused = false
+		PauseMenu.can_pause_on_screen = true
 		queue_free()
 
 func change_description(perk: Perk) -> void:
@@ -91,3 +93,22 @@ func set_perk_button():
 
 func pause_game():
 	get_tree().paused = true
+	
+
+var has_clicked := false
+
+func check_pressed():
+	if Input.is_joy_button_pressed(player_id, JOY_BUTTON_A):
+		for perk_button in perk_buttons:
+			if perk_button != null and perk_button.has_focus():
+				perk_button._on_button_down()
+				has_clicked = true
+				return
+		if !has_clicked:
+			if assume.has_focus():
+				assume_perk()
+	else:
+		has_clicked = false
+
+func _exit_tree() -> void:
+	PauseMenu.can_pause_on_screen = false

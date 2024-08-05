@@ -5,7 +5,7 @@ class_name HealthBar
 
 @export var parent_entity: CharacterBody2D = null
 
-var max_hp := 100
+var max_hp := 150
 var current_hp := max_hp
 
 func _enter_tree() -> void:
@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 			if player_res.player == parent_entity:
 				GlobalGame.Players.erase(player_res)
 	if GlobalGame.Players.is_empty():
-		get_tree().change_scene_to_file("res://Titel/start_loading.tscn")
+		GameOverScreen.game_over()
 
 
 func applay_damage(entity: Node2D, damage: int = 1):

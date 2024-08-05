@@ -40,20 +40,23 @@ func load_ai_to_node():
 		add_child(ai_init)
 
 func get_closest_target() -> Vector2:
-	var player_pos: Array[Vector2]
+	if !GlobalGame.Players.is_empty():
+		var player_pos: Array[Vector2]
+		
+		for player_res: PlayerResource in GlobalGame.Players:
+			player_pos.append(player_res.player.global_position)
+		
+		var closest_distance := global_position.distance_to(player_pos[0])
+		var current_pos := player_pos[0]
+		
+		for pos in player_pos:
+			if global_position.distance_to(pos) < closest_distance:
+				closest_distance = global_position.distance_to(pos)
+				current_pos = pos
+		
+		return current_pos
 	
-	for player_res: PlayerResource in GlobalGame.Players:
-		player_pos.append(player_res.player.global_position)
-	
-	var closest_distance := global_position.distance_to(player_pos[0])
-	var current_pos := player_pos[0]
-	
-	for pos in player_pos:
-		if global_position.distance_to(pos) < closest_distance:
-			closest_distance = global_position.distance_to(pos)
-			current_pos = pos
-	
-	return current_pos
+	return global_position
 
 func applay_damage(entity: CharacterBody2D, damage: int = 1) -> void:
 	if entity == self:

@@ -8,6 +8,7 @@
 light_mode = 1
 
 [node name="bar" type="TextureProgressBar"]
+process_mode = 3
 material = SubResource("CanvasItemMaterial_t8gss")
 offset_right = 19.0
 offset_bottom = 3.0
