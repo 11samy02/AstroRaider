@@ -13,17 +13,19 @@ const PERK_BUTTON = preload("res://UI/PerkSelector/perk_button.tscn")
 var player_id = 0
 
 func _ready() -> void:
+	active = false
 	add_buttons(3)
 
 func _process(delta: float) -> void:
 	_check_perk_rarity()
 	_clean_null_entries()
-	check_pressed()
 	
 	if perk_buttons.is_empty():
 		get_tree().paused = false
 		PauseMenu.can_pause_on_screen = true
 		queue_free()
+	
+	check_pressed()
 
 func change_description(perk: Perk) -> void:
 	label.set_text(perk.get_description())
@@ -39,8 +41,12 @@ func add_buttons(count: int):
 		perk_button.connect("tree_exited", _on_perk_button_removed)
 	
 	if !perk_buttons.is_empty():
-		perk_buttons[0].grab_focus()
-		active_perk_button = perk_buttons[0]
+		for i in range(0, perk_buttons.size()):
+			if perk_buttons[i] != null:
+				perk_buttons[i].grab_focus()
+				active_perk_button = perk_buttons[i]
+				active = true
+				break
 
 func _on_perk_button_removed():
 	_clean_null_entries()
@@ -95,20 +101,22 @@ func pause_game():
 	get_tree().paused = true
 	
 
-var has_clicked := false
+var has_clicked := true
+var active := false
 
 func check_pressed():
-	if Input.is_joy_button_pressed(player_id, JOY_BUTTON_A):
-		for perk_button in perk_buttons:
-			if perk_button != null and perk_button.has_focus():
-				perk_button._on_button_down()
-				has_clicked = true
-				return
-		if !has_clicked:
-			if assume.has_focus():
-				assume_perk()
-	else:
-		has_clicked = false
+	if active:
+		if Input.is_joy_button_pressed(player_id, JOY_BUTTON_A):
+			for perk_button in perk_buttons:
+				if perk_button != null and perk_button.has_focus():
+					perk_button._on_button_down()
+					has_clicked = true
+					return
+			if !has_clicked:
+				if assume.has_focus():
+					assume_perk()
+		else:
+			has_clicked = false
 
 func _exit_tree() -> void:
 	PauseMenu.can_pause_on_screen = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=30 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -169,8 +169,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mru7q"]
-radius = 5.0
-height = 14.0
+radius = 1.0
+height = 13.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bg3jk"]
 light_mode = 1
@@ -239,6 +239,10 @@ animations = [{
 "speed": 50.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pi8s8"]
+radius = 6.0
+height = 14.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4eg5x"]
 radius = 7.5
 height = 20.0
@@ -297,22 +301,21 @@ unique_name_in_owner = true
 wait_time = 0.2
 one_shot = true
 
-[node name="bohr_damage_time" type="Timer" parent="Timers"]
-unique_name_in_owner = true
-wait_time = 0.01
-one_shot = true
-
 [node name="Rays" type="Node2D" parent="."]
 
-[node name="check_for_ground" type="RayCast2D" parent="Rays"]
+[node name="check_for_ground" type="ShapeCast2D" parent="Rays"]
 unique_name_in_owner = true
 visible = false
-target_position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_mru7q")
+target_position = Vector2(0, 2)
+max_results = 4
 
-[node name="check_for_destroyable_ground" type="RayCast2D" parent="Rays"]
+[node name="check_for_destoyable_ground" type="ShapeCast2D" parent="Rays"]
 unique_name_in_owner = true
 visible = false
-target_position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_pi8s8")
+target_position = Vector2(0, 6)
+max_results = 8
 collision_mask = 16
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]

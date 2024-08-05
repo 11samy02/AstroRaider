@@ -43,7 +43,7 @@ texture = ExtResource("1_oy3rq")
 [node name="PlayerList" parent="." instance=ExtResource("3_qpkeu")]
 
 [node name="Player" parent="PlayerList" instance=ExtResource("2_156uu")]
-position = Vector2(942, 873)
+position = Vector2(942, 859)
 
 [node name="EntitySpawner" parent="." instance=ExtResource("6_kru1y")]
 

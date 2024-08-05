@@ -16,11 +16,12 @@ func _process(delta: float) -> void:
 func check_crystals() -> void:
 	for player_res: PlayerResource in GlobalGame.Players:
 		if player_res.crystal_count >= player_res.crystals_needed:
-			player_res.crystal_count -= player_res.crystals_needed
-			player_res.crystals_needed += amount_added_per_perk
-			
-			var perk_selector = PERK_SELECTOR.instantiate()
-			
-			perk_selector.player_id = player_res.player.player_id
-			
-			add_child(perk_selector)
+			if get_child_count() == 0:
+				player_res.crystal_count -= player_res.crystals_needed
+				player_res.crystals_needed += amount_added_per_perk
+				
+				var perk_selector = PERK_SELECTOR.instantiate()
+				
+				perk_selector.player_id = player_res.player.player_id
+				
+				add_child(perk_selector)

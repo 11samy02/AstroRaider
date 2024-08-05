@@ -1,8 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var check_for_ground: RayCast2D = %check_for_ground
-@onready var check_for_destroyable_ground: RayCast2D = %check_for_destroyable_ground
+@onready var check_for_ground: ShapeCast2D = %check_for_ground
+@onready var check_for_destoyable_ground: ShapeCast2D = %check_for_destoyable_ground
+
+
 @onready var hitbox: Hitbox = $Hitbox
 @onready var sprite: Sprite2D = $Sprite
 
@@ -13,9 +15,7 @@ class_name Player
 
 
 @onready var bohrer_delay: Timer = %Bohrer_delay
-@onready var bohr_damage_time: Timer = %bohr_damage_time
 
-var can_use_bohrer := false
 
 @export var landing_anim_name : Array[String]
 
@@ -25,6 +25,7 @@ var gravity_dir := Vector2.DOWN
 @export var character_build_id := 0
 
 var is_bohrer_active := false
+var deadzone := 0.25
 
 var stats: Stats = Stats.new()
 
@@ -89,7 +90,6 @@ func change_gravity(new_dir: Vector2) -> void:
 		velocity /= stats.gravity_break
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(self, "rotation_degrees", new_rotation, 0.2)
-		can_use_bohrer = false
 		bohrer_delay.start()
 
 func get_target_rotation(new_dir: Vector2) -> float:
@@ -123,18 +123,15 @@ func wrap_angle(angle: float) -> float:
 
 
 
-func _on_bohrer_delay_timeout() -> void:
-	can_use_bohrer = true
-
 
 #region Bohrer Logik
 
 func set_bohrer_state() -> void:
 	use_bohrer_anim()
-	if check_for_destroyable_ground.is_colliding():
+	if check_for_destoyable_ground.is_colliding():
 		destroy_ground()
 		
-	if player_id == 0:
+	if player_id == 0 and Input.get_connected_joypads().size() == 0:
 		if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
 			is_bohrer_active = true
 			
@@ -149,32 +146,47 @@ func set_bohrer_state() -> void:
 			
 		else:
 			is_bohrer_active = false
-		
 	else:
-		is_bohrer_active = false
+		if gravity_dir == Vector2.LEFT and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone:
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.RIGHT and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone :
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.UP and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone :
+			is_bohrer_active = true
+			
+		elif gravity_dir == Vector2.DOWN and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone :
+			is_bohrer_active = true
+			
+		else:
+			is_bohrer_active = false
+			
 
 func destroy_ground() -> void:
 	if !is_bohrer_active:
 		return
 	
-	var ground_pos = check_for_destroyable_ground.get_collision_point()
+	var signals_per_frame := 0
 	
-	
-	if gravity_dir == Vector2.UP:
-		ground_pos.y -= 8
-	elif gravity_dir == Vector2.LEFT:
-		ground_pos.x -= 8
-	
-	if bohr_damage_time.is_stopped() and snappedf(bohrer_holder.modulate.a, 0.01) >= 1:
-		bohr_damage_time.start()
-		await (bohr_damage_time.timeout)
-		GSignals.ENV_destroy_tile.emit(ground_pos,stats.bohrer_damage)
-	
+	for i in range(check_for_destoyable_ground.get_collision_count()):
+		var ground_pos = check_for_destoyable_ground.get_collision_point(i)
+		
+		
+		if gravity_dir == Vector2.UP:
+			ground_pos.y -= 2
+		elif gravity_dir == Vector2.LEFT:
+			ground_pos.x -= 8
+		
+		if bohrer_holder.modulate.a >= 0.99 and signals_per_frame < 1:
+			signals_per_frame += 1
+			GSignals.ENV_destroy_tile.emit(ground_pos,stats.bohrer_damage)
+		
 
 func use_bohrer_anim() -> void:
 	var tween = create_tween()
 	
-	if !is_bohrer_active or !can_use_bohrer:
+	if !is_bohrer_active:
 		tween.tween_property(bohrer_holder, "modulate", Color("#ffffff00"), 0.05)
 		bohrer_hit_coll.set_disabled(true)
 		return
