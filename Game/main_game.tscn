@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c82etxgt0m7uw"]
+[gd_scene load_steps=9 format=3 uid="uid://c82etxgt0m7uw"]
 
 [ext_resource type="Texture2D" uid="uid://rc4wjwgym4o6" path="res://Images/Background/bg1.png" id="1_oy3rq"]
 [ext_resource type="PackedScene" uid="uid://diaruu2bt2xvq" path="res://Game/Enviroment/enviroment.tscn" id="1_wfgm1"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cy8yxobay3dcf" path="res://UI/game_ui.tscn" id="4_niwkq"]
 [ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://Game/Manager/default_camera.tscn" id="5_1oloc"]
 [ext_resource type="PackedScene" uid="uid://bhmsjtfelgkxa" path="res://Manager/spawner/EntitySpawner.tscn" id="6_kru1y"]
+[ext_resource type="PackedScene" uid="uid://du5pj78hk5mo8" path="res://Manager/UI/perk_selector_check.tscn" id="8_d4ofr"]
 
 [node name="MainGame" type="Node"]
 
@@ -42,3 +43,5 @@ texture = ExtResource("1_oy3rq")
 position = Vector2(831, 601)
 
 [node name="EntitySpawner" parent="." instance=ExtResource("6_kru1y")]
+
+[node name="PerkSelectorCheck" parent="." instance=ExtResource("8_d4ofr")]

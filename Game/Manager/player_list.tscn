@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://Game/Manager/player_list.gd" id="1_tw5xr"]
 
 [node name="PlayerList" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_tw5xr")

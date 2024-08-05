@@ -12,6 +12,8 @@ extends Control
 
 func _enter_tree() -> void:
 	PauseMenu.can_pause_on_screen = false
+	GlobalGame.Players.clear()
+	PerkButton.reset_perks_in_use()
 
 func _ready() -> void:
 	GlobalGame.Players.clear()

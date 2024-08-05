@@ -16,3 +16,7 @@ func _enter_tree() -> void:
 func activate_perk() -> void:
 	stats.gravity_break = default_gravity_break + Level * value_break
 	stats.gravity_strength = default_gravity_strength + default_gravity_strength / 100 * value_strength * Level
+
+func _exit_tree() -> void:
+	stats.gravity_break = default_gravity_break
+	stats.gravity_strength = default_gravity_strength

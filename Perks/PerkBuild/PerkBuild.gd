@@ -18,3 +18,9 @@ func _ready() -> void:
 
 func activate_perk() -> void:
 	pass
+
+
+func _exit_tree() -> void:
+	print("")
+	printerr(" _exit_tree() needs to be overwritten in the Perk: " + self.name)
+	print("")

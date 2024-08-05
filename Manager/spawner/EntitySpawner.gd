@@ -19,8 +19,6 @@ static var wave_count := 0
 
 func _ready() -> void:
 	reset()
-	spawn_time.timeout.connect(_on_spawn_time_timeout)
-	wave_time.timeout.connect(_on_wave_time_timeout)
 	start_new_wave()
 
 func _on_wave_time_timeout() -> void:
