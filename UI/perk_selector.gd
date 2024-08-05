@@ -111,4 +111,4 @@ func check_pressed():
 		has_clicked = false
 
 func _exit_tree() -> void:
-	PauseMenu.can_pause_on_screen = false
+	PauseMenu.can_pause_on_screen = true
