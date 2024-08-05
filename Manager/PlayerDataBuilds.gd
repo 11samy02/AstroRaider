@@ -5,6 +5,9 @@ extends Node
 var save_file_path : String = "user://CharacterBuilds.res"
 
 func _ready() -> void:
+	var perks : Array[Perk]
+	perks.append(PerkData.load_perk_res(PerkData.Keys.Each_Round_Heal))
+	add_build("default", perks)
 	save_file()
 	player_saved_res = load_file()
 

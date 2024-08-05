@@ -15,15 +15,26 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if parent_entity == null:
 		queue_free()
+	current_hp = max_hp
 
 
 func _process(delta: float) -> void:
+	health_control()
+	update_player_health_in_res()
+
+func update_player_health_in_res():
+	for player_res: PlayerResource in GlobalGame.Players:
+			if player_res.player == parent_entity:
+				player_res.max_health = max_hp
+				player_res.current_health = current_hp
+
+func health_control():
 	max_value = max_hp
 	value = current_hp
 	global_position = parent_entity.global_position + Vector2(-10,-16)
 	
 	if current_hp <= 0:
-		for player_res in GlobalGame.Players:
+		for player_res: PlayerResource in GlobalGame.Players:
 			if player_res.player == parent_entity:
 				GlobalGame.Players.erase(player_res)
 	if GlobalGame.Players.is_empty():
@@ -47,9 +58,13 @@ func applay_heal(entity: Node2D, heal_value : int):
 		var tween = create_tween()
 		tween.parallel()
 		
+		timer.stop()
 		tween.tween_property(self, "modulate", Color("#ffffff"), 0.05)
 		tween.tween_property(self,"current_hp", current_hp + heal_value,0.2)
 		current_hp = clampi(current_hp,0, max_hp)
+		if current_hp > max_hp:
+			current_hp = max_hp
+		timer.start()
 
 
 func _on_timer_timeout() -> void:
