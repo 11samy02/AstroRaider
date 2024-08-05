@@ -1,7 +1,7 @@
 extends Node
 
-@export var start_amount := 10
-@export var amount_added_per_perk := 20
+@export var start_amount := 5
+@export var amount_added_per_perk := 10
 
 const PERK_SELECTOR = preload("res://UI/perk_selector.tscn")
 

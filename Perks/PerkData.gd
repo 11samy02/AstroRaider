@@ -7,22 +7,12 @@ enum Keys {
 	Coin_Master,
 	Slow_It_Down,
 	Vampire_Bite,
-	#Each_Round_Heal,
+	Each_Round_Heal,
 	#Barrier_Shield,
 }
 
 
 
-
-const Keys_res = {
-	Keys.Speed_It_Up: "res://Perks/Resources/Perk_Speed_it_up.tres",
-	Keys.Construction_Expert: "res://Perks/Resources/Perk_Construction_expert.tres",
-	Keys.Coin_Master: "res://Perks/Resources/Perk_Coin_Master.tres",
-	Keys.Slow_It_Down: "res://Perks/Resources/Perk_Slow_it_down.tres",
-	Keys.Vampire_Bite: "res://Perks/Resources/Perk_Vampire_Bite.tres",
-	#Keys.Each_Round_Heal: "",
-	#Keys.Barrier_Shield: "",
-}
 
 
 const Keys_scene = {
@@ -31,7 +21,17 @@ const Keys_scene = {
 	Keys.Coin_Master: "res://Perks/PerkBuild/Perk_CoinMaster.tscn",
 	Keys.Slow_It_Down: "res://Perks/PerkBuild/Perk_SlowItDown.tscn",
 	Keys.Vampire_Bite: "res://Perks/PerkBuild/Perk_Vampire_Bite.tscn",
-	#Keys.Each_Round_Heal: "",
+	Keys.Each_Round_Heal: "res://Perks/PerkBuild/Perk_Each_Round_Heal.tscn",
+	#Keys.Barrier_Shield: "",
+}
+
+const Keys_res = {
+	Keys.Speed_It_Up: "res://Perks/Resources/Perk_Speed_it_up.tres",
+	Keys.Construction_Expert: "res://Perks/Resources/Perk_Construction_expert.tres",
+	Keys.Coin_Master: "res://Perks/Resources/Perk_Coin_Master.tres",
+	Keys.Slow_It_Down: "res://Perks/Resources/Perk_Slow_it_down.tres",
+	Keys.Vampire_Bite: "res://Perks/Resources/Perk_Vampire_Bite.tres",
+	Keys.Each_Round_Heal: "res://Perks/Resources/Perk_Each_Round_Heal.tres",
 	#Keys.Barrier_Shield: "",
 }
 

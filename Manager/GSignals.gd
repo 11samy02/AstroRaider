@@ -17,3 +17,6 @@ signal CAM_shake_effect
 
 #Enemy
 signal ENE_killed_by
+
+#Waves
+signal WAV_wave_endet

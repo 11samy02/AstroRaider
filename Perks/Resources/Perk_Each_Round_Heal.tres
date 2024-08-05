@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://brbcy124mswp1"]
+
+[ext_resource type="Texture2D" uid="uid://df8ns1fyykf0m" path="res://Sprites/Perks/EachRoundHeal.png" id="1_fa71l"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="2_joykj"]
+
+[resource]
+script = ExtResource("2_joykj")
+image = ExtResource("1_fa71l")
+Key = 5
+perk_name = "Each Round Heal"
+level = 1
+value = Array[int]([5, 10, 15, 20, 25, 30])
+description = "After each Round you Heal {{value}}% "
+type = 2
+active_type = 3
