@@ -1,0 +1,350 @@
+[gd_scene load_steps=29 format=3 uid="uid://bvxpu0ufiyfmj"]
+
+[ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
+[ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
+[ext_resource type="Texture2D" uid="uid://btfu52hwbu668" path="res://Sprites/actors/Player/Player1.png" id="2_xfvlm"]
+[ext_resource type="Texture2D" uid="uid://bu8pq2ln3ys4r" path="res://Objects/Lights/sphere_light.png" id="3_fk0u8"]
+[ext_resource type="Texture2D" uid="uid://h7tvg3phhnw4" path="res://Sprites/actors/items/thriler.png" id="5_l8fgy"]
+[ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="5_qr1wl"]
+[ext_resource type="Script" path="res://Actors/player/Crosshair.gd" id="7_pdl7m"]
+[ext_resource type="Texture2D" uid="uid://c3v5coeuuf6c6" path="res://Sprites/actors/items/crosshair.png" id="7_vmm8m"]
+
+[sub_resource type="Animation" id="Animation_b8c3x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hitbox/CollisionShape2D2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lepmk"]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Hitbox/CollisionShape2D2:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sefct"]
+_data = {
+"RESET": SubResource("Animation_b8c3x"),
+"damaged": SubResource("Animation_lepmk")
+}
+
+[sub_resource type="Animation" id="Animation_ev3cy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bohrer_holder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 11)]
+}
+
+[sub_resource type="Animation" id="Animation_41xe3"]
+resource_name = "fling"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 6]
+}
+
+[sub_resource type="Animation" id="Animation_aoyaw"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_bodas"]
+resource_name = "use_item"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bohrer_holder:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(0, 11), Vector2(0, 12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t64nr"]
+_data = {
+"RESET": SubResource("Animation_ev3cy"),
+"fling": SubResource("Animation_41xe3"),
+"idle": SubResource("Animation_aoyaw"),
+"use_item": SubResource("Animation_bodas")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mru7q"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bg3jk"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edimk"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl1mi"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld5aq"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odwb1"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5chj7"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2gtq"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_235rb"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfj5y"]
+atlas = ExtResource("5_l8fgy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4pxcq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edimk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl1mi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld5aq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odwb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5chj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2gtq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_235rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfj5y")
+}],
+"loop": true,
+"name": &"use_item",
+"speed": 50.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4eg5x"]
+radius = 7.5
+height = 20.0
+
+[node name="Player" type="CharacterBody2D"]
+process_mode = 1
+collision_layer = 2
+collision_mask = 17
+script = ExtResource("1_ook18")
+landing_anim_name = Array[String](["idle", "use_item"])
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+material = ExtResource("2_0osdd")
+texture = ExtResource("2_xfvlm")
+hframes = 4
+vframes = 3
+
+[node name="sprite_anim" type="AnimationPlayer" parent="Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_sefct")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t64nr")
+}
+autoplay = "fling"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CapsuleShape2D_mru7q")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 1.5
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("3_fk0u8")
+texture_scale = 1.5
+
+[node name="bohrer_holder" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 11)
+
+[node name="item_sprite" type="AnimatedSprite2D" parent="bohrer_holder"]
+material = SubResource("CanvasItemMaterial_bg3jk")
+sprite_frames = SubResource("SpriteFrames_4pxcq")
+animation = &"use_item"
+autoplay = "use_item"
+frame_progress = 0.2695
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Bohrer_delay" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[node name="bohr_damage_time" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.01
+one_shot = true
+
+[node name="Rays" type="Node2D" parent="."]
+
+[node name="check_for_ground" type="RayCast2D" parent="Rays"]
+unique_name_in_owner = true
+visible = false
+target_position = Vector2(0, 8)
+
+[node name="check_for_destroyable_ground" type="RayCast2D" parent="Rays"]
+unique_name_in_owner = true
+visible = false
+target_position = Vector2(0, 8)
+collision_mask = 16
+
+[node name="Hitbox" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+visible = false
+shape = SubResource("CapsuleShape2D_mru7q")
+
+[node name="BohrerHitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="bohrer_hit_coll" type="CollisionShape2D" parent="BohrerHitBox"]
+visible = false
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_4eg5x")
+
+[node name="Crosshair" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+top_level = true
+script = ExtResource("7_pdl7m")
+player = NodePath("..")
+item_key = null
+
+[node name="sprite" type="Sprite2D" parent="Crosshair"]
+position = Vector2(50, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_vmm8m")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Crosshair")
+update_rotation = false
+
+[connection signal="timeout" from="Timers/Bohrer_delay" to="." method="_on_bohrer_delay_timeout"]
+[connection signal="area_entered" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_entered"]

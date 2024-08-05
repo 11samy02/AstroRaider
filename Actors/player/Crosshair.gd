@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.get_joy_axis(player.player_id , JOY_AXIS_TRIGGER_RIGHT) > 0:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.get_joy_axis(player.player_id , JOY_AXIS_TRIGGER_RIGHT) > 0 or Input.is_joy_button_pressed(player.player_id, JOY_BUTTON_RIGHT_SHOULDER):
 		if !had_shoot:
 			if holding_item != null:
 				if holding_item.type == ItemConfig.Type.Ranged_Weapon:
