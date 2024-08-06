@@ -23,7 +23,7 @@ var gravity_dir := Vector2.DOWN
 @export var character_build_id := 0
 
 var is_bohrer_active := false
-var deadzone := 0.1
+var deadzone := 0.25
 
 var stats: Stats = Stats.new()
 
@@ -79,17 +79,17 @@ func input_movement(event: InputEvent) ->void:
 		elif Input.is_action_pressed("ui_down"):
 			change_gravity(Vector2.DOWN)
 	else:
-		if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone:
+		if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_LEFT):
 			sprite.flip_h = true
 			bohrer_holder.get_child(0).flip_h = true
 			change_gravity(Vector2.LEFT)
-		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone:
+		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_RIGHT):
 			sprite.flip_h = false
 			bohrer_holder.get_child(0).flip_h = false
 			change_gravity(Vector2.RIGHT)
-		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone:
+		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_UP):
 			change_gravity(Vector2.UP)
-		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone:
+		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_DOWN):
 			change_gravity(Vector2.DOWN)
 
 
@@ -157,17 +157,21 @@ func set_bohrer_state() -> void:
 		else:
 			is_bohrer_active = false
 	else:
-		if gravity_dir == Vector2.LEFT and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone:
-			is_bohrer_active = true
+		if gravity_dir == Vector2.LEFT:
+			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_LEFT) :
+				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.RIGHT and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone :
-			is_bohrer_active = true
+		elif gravity_dir == Vector2.RIGHT:
+			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_RIGHT) :
+				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.UP and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone :
-			is_bohrer_active = true
+		elif gravity_dir == Vector2.UP:
+			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_UP):
+				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.DOWN and Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone :
-			is_bohrer_active = true
+		elif gravity_dir == Vector2.DOWN:
+			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_DOWN):
+				is_bohrer_active = true
 			
 		else:
 			is_bohrer_active = false
