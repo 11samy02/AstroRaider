@@ -16,6 +16,11 @@ func _ready() -> void:
 	if perk_res.active_type == perk_res.Active_type_keys.Start:
 		activate_perk()
 
+func _process(delta: float) -> void:
+	var perk_res: Perk = PerkData.load_perk_res(Key)
+	if perk_res.active_type == perk_res.Active_type_keys.Always:
+		activate_perk()
+
 func activate_perk() -> void:
 	pass
 

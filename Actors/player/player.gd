@@ -157,45 +157,44 @@ func set_bohrer_state() -> void:
 		else:
 			is_bohrer_active = false
 	else:
-		if gravity_dir == Vector2.LEFT:
-			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_LEFT) :
+		if gravity_dir == Vector2.LEFT and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_LEFT)) :
 				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.RIGHT:
-			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_RIGHT) :
+		elif gravity_dir == Vector2.RIGHT and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_RIGHT)) :
 				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.UP:
-			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_UP):
+		elif gravity_dir == Vector2.UP and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_UP)):
 				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.DOWN:
-			if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_DOWN):
+		elif gravity_dir == Vector2.DOWN and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_DOWN)):
 				is_bohrer_active = true
 			
 		else:
 			is_bohrer_active = false
 			
 
+##Muss geändert werden: ERROR
 func destroy_ground() -> void:
 	if !is_bohrer_active:
 		return
 	
 	var signals_per_frame := 0
-	
 	for i in range(check_for_destoyable_ground.get_collision_count()):
 		var ground_pos = check_for_destoyable_ground.get_collision_point(i)
 		
-		
-		if gravity_dir == Vector2.UP:
-			ground_pos.y -= 2
-		elif gravity_dir == Vector2.LEFT:
+		if gravity_dir == Vector2.DOWN:
+			ground_pos.x -= 4
+		if gravity_dir == Vector2.LEFT:
 			ground_pos.x -= 8
+			ground_pos.y -= 4
+		if gravity_dir == Vector2.UP:
+			ground_pos.y -= 4
+		if gravity_dir == Vector2.RIGHT:
+			ground_pos.y += 0
 		
 		if bohrer_holder.modulate.a >= 0.99 and signals_per_frame < 1:
 			signals_per_frame += 1
 			GSignals.ENV_destroy_tile.emit(ground_pos,stats.bohrer_damage)
-		
 
 func use_bohrer_anim() -> void:
 	var tween = create_tween()

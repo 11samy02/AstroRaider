@@ -12,4 +12,4 @@ level = 1
 value = Array[int]([15, 25, 35, 45, 55, 65])
 description = "increas your speed by +{{value}}%"
 type = 0
-active_type = 0
+active_type = 3

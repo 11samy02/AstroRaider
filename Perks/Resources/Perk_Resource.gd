@@ -9,6 +9,7 @@ enum Active_type_keys {
 	OneTime,
 	TimeDelay,
 	Always,
+	Custom_Condition,
 }
 
 enum Type_keys {
