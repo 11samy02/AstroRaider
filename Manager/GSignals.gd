@@ -10,6 +10,7 @@ signal HIT_take_heal
 #Perks
 signal PERK_event_collect_crystal
 signal PERK_reset_perks_from_player_id
+signal PERK_barrier_shield_destroyed
 
 ## first value -> strength, seconst value -> duration
 signal CAM_shake_effect

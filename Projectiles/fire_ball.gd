@@ -18,6 +18,8 @@ func _on_area_entered(area: Area2D) -> void:
 			GSignals.CAM_shake_effect.emit()
 			set_physics_process(false)
 			animation_player.play("hit")
+		if area.entity is BarrierShield:
+			area.get_hit(atk_resource)
 
 
 func _physics_process(delta: float) -> void:

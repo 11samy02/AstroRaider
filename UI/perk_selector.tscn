@@ -1,11 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://pfjuoa6k6quo"]
+[gd_scene load_steps=13 format=3 uid="uid://pfjuoa6k6quo"]
 
 [ext_resource type="Script" path="res://UI/perk_selector.gd" id="1_i5chb"]
 [ext_resource type="Texture2D" uid="uid://0f2fj0rwhl2w" path="res://Sprites/UI/PerkContainer.png" id="1_ipp58"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_ugfhr"]
+[sub_resource type="LabelSettings" id="LabelSettings_fy7n1"]
 line_spacing = 5.0
 font_size = 36
+font_color = Color(1, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ugfhr"]
+line_spacing = 5.0
+font_size = 28
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g74hj"]
 bg_color = Color(0.267794, 0.188246, 0.432153, 1)
@@ -222,7 +227,18 @@ theme_override_constants/margin_left = 136
 theme_override_constants/margin_top = 108
 theme_override_constants/margin_right = 136
 
-[node name="Label" type="Label" parent="button_margin/TextureRect/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="button_margin/TextureRect/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="perk_name" type="Label" parent="button_margin/TextureRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "test"
+label_settings = SubResource("LabelSettings_fy7n1")
+horizontal_alignment = 1
+
+[node name="description" type="Label" parent="button_margin/TextureRect/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1

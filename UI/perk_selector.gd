@@ -6,7 +6,9 @@ var active_perk_button: PerkButton
 
 const PERK_BUTTON = preload("res://UI/PerkSelector/perk_button.tscn")
 
-@onready var label: Label = %Label
+@onready var perk_name: Label = %perk_name
+@onready var description: Label = %description
+
 @onready var perk_container: HBoxContainer = %Perk_container
 @onready var assume: Button = $button_margin/TextureRect/MarginContainer/assume
 
@@ -28,7 +30,8 @@ func _process(delta: float) -> void:
 	check_pressed()
 
 func change_description(perk: Perk) -> void:
-	label.set_text(perk.get_description())
+	description.set_text(perk.get_description())
+	perk_name.set_text(perk.perk_name)
 
 func add_buttons(count: int):
 	for i in range(0, count):
