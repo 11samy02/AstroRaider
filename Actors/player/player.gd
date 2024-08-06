@@ -14,8 +14,6 @@ class_name Player
 @onready var bohrer_hit_coll: CollisionShape2D = $BohrerHitBox/bohrer_hit_coll
 
 
-@onready var bohrer_delay: Timer = %Bohrer_delay
-
 
 @export var landing_anim_name : Array[String]
 
@@ -25,7 +23,7 @@ var gravity_dir := Vector2.DOWN
 @export var character_build_id := 0
 
 var is_bohrer_active := false
-var deadzone := 0.25
+var deadzone := 0.1
 
 var stats: Stats = Stats.new()
 
@@ -67,30 +65,42 @@ func _input(event: InputEvent) -> void:
 	input_movement(event)
 
 func input_movement(event: InputEvent) ->void:
-	if player_id == 0:
-		if Input.is_action_just_pressed("ui_left"):
+	if player_id == 0 and Input.get_connected_joypads().size() == 0:
+		if Input.is_action_pressed("ui_left"):
 			sprite.flip_h = true
 			bohrer_holder.get_child(0).flip_h = true
 			change_gravity(Vector2.LEFT)
-		elif Input.is_action_just_pressed("ui_right"):
+		elif Input.is_action_pressed("ui_right"):
 			sprite.flip_h = false
 			bohrer_holder.get_child(0).flip_h = false
 			change_gravity(Vector2.RIGHT)
-		elif Input.is_action_just_pressed("ui_up"):
+		elif Input.is_action_pressed("ui_up"):
 			change_gravity(Vector2.UP)
-		elif Input.is_action_just_pressed("ui_down"):
+		elif Input.is_action_pressed("ui_down"):
+			change_gravity(Vector2.DOWN)
+	else:
+		if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone:
+			sprite.flip_h = true
+			bohrer_holder.get_child(0).flip_h = true
+			change_gravity(Vector2.LEFT)
+		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone:
+			sprite.flip_h = false
+			bohrer_holder.get_child(0).flip_h = false
+			change_gravity(Vector2.RIGHT)
+		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone:
+			change_gravity(Vector2.UP)
+		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone:
 			change_gravity(Vector2.DOWN)
 
 
 func change_gravity(new_dir: Vector2) -> void:
-	if new_dir != gravity_dir:
+	if gravity_dir != new_dir:
 		var new_rotation = get_target_rotation(new_dir)
 		var tween = create_tween()
 		gravity_dir = new_dir
 		velocity /= stats.gravity_break
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(self, "rotation_degrees", new_rotation, 0.2)
-		bohrer_delay.start()
 
 func get_target_rotation(new_dir: Vector2) -> float:
 	var target_angle = 0.0

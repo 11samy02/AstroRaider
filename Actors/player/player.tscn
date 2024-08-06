@@ -294,13 +294,6 @@ animation = &"use_item"
 autoplay = "use_item"
 frame_progress = 0.2695
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="Bohrer_delay" type="Timer" parent="Timers"]
-unique_name_in_owner = true
-wait_time = 0.2
-one_shot = true
-
 [node name="Rays" type="Node2D" parent="."]
 
 [node name="check_for_ground" type="ShapeCast2D" parent="Rays"]
@@ -349,5 +342,4 @@ texture = ExtResource("7_vmm8m")
 remote_path = NodePath("../Crosshair")
 update_rotation = false
 
-[connection signal="timeout" from="Timers/Bohrer_delay" to="." method="_on_bohrer_delay_timeout"]
 [connection signal="area_entered" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_entered"]

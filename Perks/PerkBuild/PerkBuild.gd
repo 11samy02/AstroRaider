@@ -24,3 +24,6 @@ func _exit_tree() -> void:
 	print("")
 	printerr(" _exit_tree() needs to be overwritten in the Perk: " + self.name)
 	print("")
+
+func get_value():
+	return PerkData.load_perk_res(Key).value[Level - 1]

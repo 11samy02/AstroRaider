@@ -10,11 +10,11 @@ func _ready() -> void:
 
 func spawn_more_coins(pos: Vector2) -> void:
 	math.min_value = 0
-	math.max_value = Level 
+	math.max_value = get_value()
 	for i in range(math.min_value, math.max_value):
 		var new_crystal: ItemCrystal = ITEM_CRYSTAL.instantiate()
 		
-		new_crystal.global_position = pos + Vector2(randi_range(-5,5), randi_range(-5,5))
+		new_crystal.global_position = pos + Vector2(randi_range(-10,10), randi_range(-10,10))
 		new_crystal.is_first_one = false
 		
 		get_parent().add_child(new_crystal)

@@ -5,3 +5,4 @@
 
 [node name="VampireBite" instance=ExtResource("1_accch")]
 script = ExtResource("2_qv054")
+Key = 4

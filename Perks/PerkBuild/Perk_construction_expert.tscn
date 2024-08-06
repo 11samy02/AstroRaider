@@ -5,3 +5,4 @@
 
 [node name="Construction_expert" instance=ExtResource("1_ix0r8")]
 script = ExtResource("2_xcq6c")
+Key = 1

@@ -8,6 +8,7 @@ enum Keys {
 	Slow_It_Down,
 	Vampire_Bite,
 	Each_Round_Heal,
+	Not_So_Fast,
 	#Barrier_Shield,
 }
 
@@ -22,6 +23,7 @@ const Keys_scene = {
 	Keys.Slow_It_Down: "res://Perks/PerkBuild/Perk_SlowItDown.tscn",
 	Keys.Vampire_Bite: "res://Perks/PerkBuild/Perk_Vampire_Bite.tscn",
 	Keys.Each_Round_Heal: "res://Perks/PerkBuild/Perk_Each_Round_Heal.tscn",
+	Keys.Not_So_Fast: "res://Perks/PerkBuild/Perk_Not_So_Fast.tscn",
 	#Keys.Barrier_Shield: "",
 }
 
@@ -32,6 +34,7 @@ const Keys_res = {
 	Keys.Slow_It_Down: "res://Perks/Resources/Perk_Slow_it_down.tres",
 	Keys.Vampire_Bite: "res://Perks/Resources/Perk_Vampire_Bite.tres",
 	Keys.Each_Round_Heal: "res://Perks/Resources/Perk_Each_Round_Heal.tres",
+	Keys.Not_So_Fast: "res://Perks/Resources/Perk_Not_So_Fast.tres",
 	#Keys.Barrier_Shield: "",
 }
 

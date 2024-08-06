@@ -8,7 +8,7 @@ class_name Stats
 @export var bohrer_damage := 1
 @export var bohrer_knockback := 3.0
 
-@export var invincibility_frame := 2.00
+@export var invincibility_frame : float = 2.00
 
 @export var Perks : Array[Perk] = []
 
