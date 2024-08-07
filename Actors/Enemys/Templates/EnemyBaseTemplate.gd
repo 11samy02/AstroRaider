@@ -22,11 +22,12 @@ static var entity_list: Array[EnemyBaseTemplate]
 var killed_by : CharacterBody2D = null
 
 func _enter_tree() -> void:
-	clamp(level, 0, stats.size() - 1)
+	clamp(level, 0, stats.size())
 	GSignals.HIT_take_Damage.connect(applay_damage)
-	active_stats = stats[level].duplicate()
+	active_stats = stats[level-1].duplicate()
 	active_stats.max_health += randi_range(0, active_stats.max_Random_health_edit)
 	active_stats.current_health = active_stats.max_health
+	print(level)
 
 func _ready() -> void:
 	load_ai_to_node()
