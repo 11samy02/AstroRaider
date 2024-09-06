@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://eedujqbpycs2"]
+
+[ext_resource type="Script" path="res://Manager/enemy_detector.gd" id="1_ebfil"]
+
+[node name="EnemyDetector" type="Area2D"]
+script = ExtResource("1_ebfil")

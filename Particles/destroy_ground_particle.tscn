@@ -20,6 +20,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
 [node name="destroy_ground_particle" type="CPUParticles2D"]
 material = SubResource("CanvasItemMaterial_yqcbj")
 emitting = false
+amount = 4
 lifetime = 3.0
 one_shot = true
 speed_scale = 3.0

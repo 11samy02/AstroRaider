@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6umi41quwnhs"]
+
+[ext_resource type="Script" path="res://Actors/player/detector.gd" id="1_yj3oo"]
+[ext_resource type="PackedScene" uid="uid://58thecdy1yjh" path="res://Actors/player/single_detector.tscn" id="2_bnbmk"]
+
+[node name="Detector" type="Node2D"]
+visible = false
+script = ExtResource("1_yj3oo")
+detector = ExtResource("2_bnbmk")

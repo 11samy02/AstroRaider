@@ -8,4 +8,3 @@ func get_hit(attack: AttackResource, who_attacked: CharacterBody2D = null) -> vo
 	if entity is EnemyBaseTemplate:
 		entity.killed_by = who_attacked
 	GSignals.HIT_take_Damage.emit(entity, attack.damage)
-

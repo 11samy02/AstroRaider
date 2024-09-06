@@ -245,4 +245,7 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="VisibleOnScreenNotifier2D" parent="." index="7"]
+rect = Rect2(-10, -10, 20, 40)
+
 [connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

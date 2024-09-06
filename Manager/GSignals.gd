@@ -2,6 +2,7 @@ extends Node
 
 #Enviroment
 signal ENV_destroy_tile
+signal ENV_check_detection_tile
 
 #Hitbox
 signal HIT_take_Damage
@@ -11,6 +12,7 @@ signal HIT_take_heal
 signal PERK_event_collect_crystal
 signal PERK_reset_perks_from_player_id
 signal PERK_barrier_shield_destroyed
+signal PERK_Aim_bot_activate
 
 ## first value -> strength, seconst value -> duration
 signal CAM_shake_effect

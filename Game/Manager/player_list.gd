@@ -14,6 +14,7 @@ func _ready() -> void:
 			GlobalGame.Players.append(player_res)
 			
 	spawn_healtbars_to_players()
+	spawn_detector_to_player()
 	
 	for i in range(0,GlobalGame.Players.size()):
 		add_perks_to_player(i)
@@ -46,3 +47,9 @@ func reset_perk_from_player(id:int) -> void:
 				perk_build.queue_free()
 	
 	add_perks_to_player(id)
+
+func spawn_detector_to_player() -> void:
+	for player_res: PlayerResource in GlobalGame.Players:
+		var detector = preload("res://Actors/player/detector.tscn").instantiate()
+		detector.player = player_res.player
+		add_child(detector)

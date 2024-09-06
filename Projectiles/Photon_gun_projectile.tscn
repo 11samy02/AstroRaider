@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwi0qr43hj35l"]
+[gd_scene load_steps=15 format=3 uid="uid://cwi0qr43hj35l"]
 
 [ext_resource type="Script" path="res://Projectiles/Photon_gun_projectile.gd" id="1_08njn"]
 [ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_8acic"]
 [ext_resource type="Texture2D" uid="uid://betk3rgbaluts" path="res://Sprites/Projectiles/energy_ball_blue.png" id="3_3sbgt"]
+[ext_resource type="Script" path="res://Manager/enemy_detector.gd" id="4_ibkb1"]
 
 [sub_resource type="Resource" id="Resource_y1juh"]
 script = ExtResource("2_8acic")
@@ -125,6 +126,9 @@ point_count = 3
 offsets = PackedFloat32Array(0.0247525, 0.133663, 0.544554, 0.826733, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5jacb"]
+radius = 128.0
+
 [node name="PhotoGunProjectile" type="Area2D"]
 modulate = Color(1, 1, 1, 0)
 collision_layer = 0
@@ -170,6 +174,15 @@ scale_amount_curve = SubResource("Curve_iiadq")
 color_ramp = SubResource("Gradient_twtt0")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
+
+[node name="EnemyDetectorArea" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_ibkb1")
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea"]
+shape = SubResource("CircleShape2D_5jacb")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]

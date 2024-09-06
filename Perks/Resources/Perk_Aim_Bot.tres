@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://dml2y1d80mvg0"]
+
+[ext_resource type="Texture2D" uid="uid://ctj5u4dfj6704" path="res://Sprites/Perks/AutoTargeting.png" id="1_r76u1"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_u7ugd"]
+
+[resource]
+script = ExtResource("1_u7ugd")
+image = ExtResource("1_r76u1")
+Key = 0
+perk_name = ""
+level = 1
+value = Array[int]([10, 20, 30, 40, 50, 60])
+description = ""
+type = 2
+active_type = 4

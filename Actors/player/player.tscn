@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=30 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -169,7 +169,7 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xxfga"]
-radius = 5.0
+radius = 6.0
 height = 16.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bg3jk"]
@@ -243,9 +243,6 @@ animations = [{
 radius = 1.0
 height = 13.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqcio"]
-size = Vector2(10, 12)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4eg5x"]
 radius = 7.5
 height = 20.0
@@ -300,18 +297,14 @@ frame_progress = 0.2695
 [node name="Rays" type="Node2D" parent="."]
 
 [node name="check_for_ground" type="ShapeCast2D" parent="Rays"]
-unique_name_in_owner = true
-visible = false
 shape = SubResource("CapsuleShape2D_mru7q")
 target_position = Vector2(0, 2)
 max_results = 4
 
-[node name="check_for_destoyable_ground" type="ShapeCast2D" parent="Rays"]
-unique_name_in_owner = true
-shape = SubResource("RectangleShape2D_aqcio")
-target_position = Vector2(0, 4)
-margin = 1.0
-collision_mask = 16
+[node name="check_for_destroyable_ground" type="ShapeCast2D" parent="Rays"]
+shape = SubResource("CapsuleShape2D_mru7q")
+target_position = Vector2(0, 2)
+max_results = 4
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]
 entity = NodePath("..")

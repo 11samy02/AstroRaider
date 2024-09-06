@@ -10,4 +10,3 @@ func heal_self() -> void:
 
 func _exit_tree() -> void:
 	pass
-

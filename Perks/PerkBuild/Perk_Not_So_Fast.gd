@@ -12,5 +12,3 @@ func activate_perk() -> void:
 
 func _exit_tree() -> void:
 	stats.invincibility_frame = default_value
-
-

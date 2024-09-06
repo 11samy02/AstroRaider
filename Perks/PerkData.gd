@@ -10,6 +10,7 @@ enum Keys {
 	Each_Round_Heal,
 	Not_So_Fast,
 	Barrier_Shield,
+	#Aim_Bot,
 }
 
 
@@ -25,6 +26,7 @@ const Keys_scene = {
 	Keys.Each_Round_Heal: "res://Perks/PerkBuild/Perk_Each_Round_Heal.tscn",
 	Keys.Not_So_Fast: "res://Perks/PerkBuild/Perk_Not_So_Fast.tscn",
 	Keys.Barrier_Shield: "res://Perks/PerkBuild/Perk_Barrier_Shield.tscn",
+	#Keys.Aim_Bot: "",
 }
 
 const Keys_res = {
@@ -36,12 +38,22 @@ const Keys_res = {
 	Keys.Each_Round_Heal: "res://Perks/Resources/Perk_Each_Round_Heal.tres",
 	Keys.Not_So_Fast: "res://Perks/Resources/Perk_Not_So_Fast.tres",
 	Keys.Barrier_Shield: "res://Perks/Resources/Perk_Barrier_Shield.tres",
+	#Keys.Aim_Bot: "res://Perks/Resources/Perk_Aim_Bot.tres",
 }
+
+func _ready() -> void:
+	for key in PerkData.Keys.values():
+		print("Valid Key: ", key)
 
 
 static func load_perk_scene(key : Keys) -> PackedScene:
 	return load(Keys_scene.get(key))
 
 
-static func load_perk_res(key : Keys) -> Perk:
-	return load(Keys_res.get(key))
+static func load_perk_res(key: Keys) -> Perk:
+	var res_path = Keys_res.get(key)
+	print("Loading perk resource for key: ", key, " at path: ", res_path)
+	var perk_res = load(res_path)
+	if perk_res == null:
+		print("Error: Could not load perk resource at path: ", res_path)
+	return perk_res

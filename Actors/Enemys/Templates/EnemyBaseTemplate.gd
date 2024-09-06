@@ -16,7 +16,7 @@ var state_mashine := AiEnemyData.state_mashine
 
 var last_state := state
 
-static var max_entitys_on_screen = 80
+static var max_entitys_on_screen = 100
 static var entity_list: Array[EnemyBaseTemplate]
 
 var killed_by : CharacterBody2D = null

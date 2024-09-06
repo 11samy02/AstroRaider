@@ -1,8 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var check_for_ground: ShapeCast2D = %check_for_ground
-@onready var check_for_destoyable_ground: ShapeCast2D = %check_for_destoyable_ground
+@onready var check_for_ground: ShapeCast2D = $Rays/check_for_ground
+@onready var check_for_destroyable_ground: ShapeCast2D = $Rays/check_for_destroyable_ground
+
 
 
 @onready var hitbox: Hitbox = $Hitbox
@@ -138,7 +139,7 @@ func wrap_angle(angle: float) -> float:
 
 func set_bohrer_state() -> void:
 	use_bohrer_anim()
-	if check_for_destoyable_ground.is_colliding():
+	if check_for_destroyable_ground.is_colliding():
 		destroy_ground()
 		
 	if player_id == 0 and Input.get_connected_joypads().size() == 0:
@@ -178,23 +179,8 @@ func destroy_ground() -> void:
 	if !is_bohrer_active:
 		return
 	
-	var signals_per_frame := 0
-	for i in range(check_for_destoyable_ground.get_collision_count()):
-		var ground_pos = check_for_destoyable_ground.get_collision_point(i)
-		
-		if gravity_dir == Vector2.DOWN:
-			ground_pos.x -= 4
-		if gravity_dir == Vector2.LEFT:
-			ground_pos.x -= 8
-			ground_pos.y -= 4
-		if gravity_dir == Vector2.UP:
-			ground_pos.y -= 4
-		if gravity_dir == Vector2.RIGHT:
-			ground_pos.y += 0
-		
-		if bohrer_holder.modulate.a >= 0.99 and signals_per_frame < 1:
-			signals_per_frame += 1
-			GSignals.ENV_destroy_tile.emit(ground_pos,stats.bohrer_damage)
+	if bohrer_holder.modulate.a >= 0.99:
+		GSignals.ENV_check_detection_tile.emit(stats.bohrer_damage)
 
 func use_bohrer_anim() -> void:
 	var tween = create_tween()
@@ -243,4 +229,3 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 
 func shader_effects() -> void:
 	sprite.material.set_shader_parameter("mix_color", shader_value)
-
