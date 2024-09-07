@@ -10,7 +10,7 @@ enum Keys {
 	Each_Round_Heal,
 	Not_So_Fast,
 	Barrier_Shield,
-	#Aim_Bot,
+	Aim_Bot,
 }
 
 
@@ -26,7 +26,7 @@ const Keys_scene = {
 	Keys.Each_Round_Heal: "res://Perks/PerkBuild/Perk_Each_Round_Heal.tscn",
 	Keys.Not_So_Fast: "res://Perks/PerkBuild/Perk_Not_So_Fast.tscn",
 	Keys.Barrier_Shield: "res://Perks/PerkBuild/Perk_Barrier_Shield.tscn",
-	#Keys.Aim_Bot: "",
+	Keys.Aim_Bot: "res://Perks/PerkBuild/Perk_Aim_Bot.tscn",
 }
 
 const Keys_res = {
@@ -38,7 +38,7 @@ const Keys_res = {
 	Keys.Each_Round_Heal: "res://Perks/Resources/Perk_Each_Round_Heal.tres",
 	Keys.Not_So_Fast: "res://Perks/Resources/Perk_Not_So_Fast.tres",
 	Keys.Barrier_Shield: "res://Perks/Resources/Perk_Barrier_Shield.tres",
-	#Keys.Aim_Bot: "res://Perks/Resources/Perk_Aim_Bot.tres",
+	Keys.Aim_Bot: "res://Perks/Resources/Perk_Aim_Bot.tres",
 }
 
 func _ready() -> void:

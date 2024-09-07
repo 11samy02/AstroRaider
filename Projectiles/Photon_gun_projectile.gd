@@ -7,7 +7,7 @@ const EXPLODE = ""
 @onready var particle: CPUParticles2D = $particle
 
 @export var atk_resource: AttackResource = AttackResource.new()
-@export var speed := 600
+@export var speed := 500
 @export var dir := Vector2.ZERO
 
 @export var parent : Player = null

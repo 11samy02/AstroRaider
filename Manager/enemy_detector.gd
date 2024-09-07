@@ -37,10 +37,13 @@ func _process(delta: float) -> void:
 	if aim_bot_on:
 		aim_to_target()
 
-func activate_aim_bot(new_value: float):
-	value = new_value
-	aim_bot_on = true
+func activate_aim_bot(player:Player, new_value: float):
+	if parent.parent == player:
+		value = new_value
+		aim_bot_on = true
+
 
 func aim_to_target() -> void:
 	if !Enemy_list.is_empty():
-		parent.dir = (get_closest_target_pos() - global_position).normalized()
+		var target_dir = (get_closest_target_pos() - global_position).normalized()
+		parent.dir = parent.dir.lerp(target_dir, value/100)

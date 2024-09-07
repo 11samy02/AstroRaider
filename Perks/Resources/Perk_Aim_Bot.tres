@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("1_u7ugd")
 image = ExtResource("1_r76u1")
-Key = 0
-perk_name = ""
+Key = 8
+perk_name = "Aim Bot"
 level = 1
 value = Array[int]([10, 20, 30, 40, 50, 60])
-description = ""
+description = "your projectiles can auto Target the enemy by a value of {{value}}"
 type = 2
 active_type = 4

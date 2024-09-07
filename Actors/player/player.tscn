@@ -326,7 +326,6 @@ shape = SubResource("CapsuleShape2D_4eg5x")
 top_level = true
 script = ExtResource("7_pdl7m")
 player = NodePath("..")
-item_key = null
 
 [node name="sprite" type="Sprite2D" parent="Crosshair"]
 position = Vector2(50, 0)

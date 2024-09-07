@@ -102,7 +102,7 @@ ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_noxau"), Sub
 speed = 200.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_32yl0"]
-radius = 6.0
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
 radius = 6.0

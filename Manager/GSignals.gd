@@ -23,3 +23,6 @@ signal ENE_killed_by
 
 #Waves
 signal WAV_wave_endet
+
+#Player
+signal PLA_is_shooting

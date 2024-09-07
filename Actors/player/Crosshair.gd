@@ -60,3 +60,4 @@ func shoot():
 	get_parent().get_parent().add_child(projectile)
 	await (get_tree().create_timer(0.2).timeout)
 	had_shoot = false
+	GSignals.PLA_is_shooting.emit(player)
