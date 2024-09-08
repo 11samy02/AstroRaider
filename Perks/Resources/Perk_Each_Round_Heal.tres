@@ -6,9 +6,9 @@
 [resource]
 script = ExtResource("2_joykj")
 image = ExtResource("1_fa71l")
-Key = 5
+Key = 4
 perk_name = "Each Round Heal"
-level = 6
+level = 1
 value = Array[int]([10, 20, 30, 40, 50, 60])
 description = "After each Round you Heal {{value}}% of your max "
 type = 2

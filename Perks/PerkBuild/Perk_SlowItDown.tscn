@@ -1,9 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq7jvguyibm1o"]
+[gd_scene load_steps=3 format=3 uid="uid://4ebrirbcaprp"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_wiabk"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/Perk_SlowItDown.gd" id="2_f0211"]
+
+[sub_resource type="GDScript" id="GDScript_v6nuw"]
+script/source = "extends PerkBuild
+
+@export var value_break := 2
+
+var default_gravity_break
+var default_gravity_strength
+
+func _enter_tree() -> void:
+	default_gravity_break = stats.gravity_break
+	default_gravity_strength = stats.gravity_strength
+	super()
+	
+
+
+func activate_perk() -> void:
+	stats.gravity_break = default_gravity_break + Level * value_break
+	stats.gravity_strength = default_gravity_strength + default_gravity_strength / 100 * get_value()
+
+func _exit_tree() -> void:
+	stats.gravity_break = default_gravity_break
+	stats.gravity_strength = default_gravity_strength
+"
 
 [node name="SlowItDown" instance=ExtResource("1_wiabk")]
-script = ExtResource("2_f0211")
+script = SubResource("GDScript_v6nuw")
 value_break = 2
 Key = 3

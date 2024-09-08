@@ -70,15 +70,18 @@ func add_buttons(count: int):
 func connect_perk_button(perk_button):
 	if not perk_button.is_connected("change_description", Callable(self, "change_description")):
 		perk_button.connect("change_description", Callable(self, "change_description"))
-
+	
 	if not perk_button.is_connected("focus_entered", Callable(self, "_on_perk_button_focused")):
 		perk_button.connect("focus_entered", Callable(self, "_on_perk_button_focused"))
-
+	
 	if not perk_button.is_connected("mouse_entered", Callable(self, "_on_perk_button_hovered")):
 		perk_button.connect("mouse_entered", Callable(self, "_on_perk_button_hovered"))
-
+	
 	if not perk_button.is_connected("tree_exited", Callable(self, "_on_perk_button_removed")):
 		perk_button.connect("tree_exited", Callable(self, "_on_perk_button_removed"))
+	
+	if not perk_button.is_connected("set_perk_button", Callable(self, "_on_perk_button_click")):
+		perk_button.connect("set_perk_button", Callable(self, "_on_perk_button_click"))
 
 # Handle when a perk button is focused (via keyboard/controller)
 func _on_perk_button_focused():
@@ -147,20 +150,21 @@ func assume_perk() -> void:
 	else:
 		print("No active perk button found")
 		return
-
+	
 	var player_Perks = GlobalGame.Players[player_id].player.stats.Perks
 	if active_perk_button != null and is_instance_valid(active_perk_button):
 		for perk in player_Perks:
 			if perk.Key == active_perk_button.key:
 				player_Perks.erase(perk)
-
+	
 		player_Perks.append(active_perk_button.perk)
 		print("Selected Perk: ", active_perk_button.perk.perk_name)
-
+	
 		PerkButton.perk_in_use.clear()
-
+	GSignals.PERK_reset_perks_from_player_id.emit(player_id)
 	get_tree().paused = false
 	queue_free()
+
 
 func _check_perk_rarity():
 	var player_Perks = GlobalGame.Players[player_id].player.stats.Perks
@@ -209,3 +213,7 @@ func check_pressed():
 func _exit_tree() -> void:
 	PauseMenu.can_pause_on_screen = true
 	get_tree().paused = false
+
+func _on_perk_button_click() ->void:
+	has_clicked = true
+	assume.grab_focus()
