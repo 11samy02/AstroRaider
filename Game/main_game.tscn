@@ -45,6 +45,34 @@ texture = ExtResource("1_oy3rq")
 [node name="Player" parent="PlayerList" instance=ExtResource("2_156uu")]
 position = Vector2(937, 534)
 
+[node name="Player2" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(633, 346)
+
+[node name="Player3" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(1043, 262)
+
+[node name="Player4" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(1322, 454)
+
+[node name="Player5" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(1330, 720)
+
+[node name="Player6" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(1101, 875)
+
+[node name="Player7" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(753, 882)
+
+[node name="Player8" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(600, 726)
+
+[node name="Player9" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(378, 536)
+
+[node name="Player10" parent="PlayerList" instance=ExtResource("2_156uu")]
+position = Vector2(1451, 245)
+
 [node name="EntitySpawner" parent="." instance=ExtResource("6_kru1y")]
 
 [node name="PerkSelectorCheck" parent="." instance=ExtResource("8_d4ofr")]
+start_amount = 5

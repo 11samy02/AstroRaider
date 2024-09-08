@@ -24,10 +24,13 @@ func check_crystals() -> void:
 				for perk:Perk in all_perks:
 					level_count_perks.append(perk.level)
 				
-				if level_count_perks.has(!6):
-					has_all_perks_on_max_level = true
+				for level in level_count_perks:
+					if level != 6:
+						has_all_perks_on_max_level = true
+						break
 			# Sicherstellen, dass keine andere Instanz bereits geladen ist
 			if get_child_count() == 0 and !has_all_perks_on_max_level:
+				PerkButton.perk_in_use.clear()
 				player_res.crystal_count -= player_res.crystals_needed
 				player_res.crystals_needed += amount_added_per_perk
 				
@@ -39,6 +42,7 @@ func check_crystals() -> void:
 				
 				# Füge den PerkSelector als Kind zu der Szene hinzu
 				add_child(perk_selector)
+				print("PERK SELECTOR")
 				# Initialisiere und setze den Fokus auf den ersten PerkButton nach dem Hinzufügen
 				call_deferred("_initialize_and_focus_perk_selector", perk_selector)
 

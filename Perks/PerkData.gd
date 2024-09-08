@@ -51,9 +51,4 @@ static func load_perk_scene(key : Keys) -> PackedScene:
 
 
 static func load_perk_res(key: Keys) -> Perk:
-	var res_path = Keys_res.get(key)
-	print("Loading perk resource for key: ", key, " at path: ", res_path)
-	var perk_res = load(res_path)
-	if perk_res == null:
-		print("Error: Could not load perk resource at path: ", res_path)
-	return perk_res
+	return load(Keys_res.get(key))
