@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var waves: Label = $MarginContainer/VBoxContainer/waves
 @onready var list: VBoxContainer = $Scoreboard/TextureRect/HBoxContainer/List
 @onready var user_score: PanelContainer = $"Scoreboard/TextureRect/HBoxContainer/your rank/UserScore"
+@onready var save: Button = $UserScore/TextureRect/HBoxContainer/save
 
 var is_showing := false
 
@@ -28,6 +29,7 @@ func game_over():
 		waves.set_text("Rounds Survived:  " + str(EntitySpawner.wave_count))
 		titelscreen.grab_focus()
 		$AnimationPlayer.play("Show")
+		username.grab_focus()
 
 func _input(event: InputEvent) -> void:
 	if Input.is_joy_button_pressed(0, JOY_BUTTON_A) and options.has_focus():
@@ -42,6 +44,8 @@ func _input(event: InputEvent) -> void:
 func pause_game():
 	get_tree().paused = true
 	
+
+
 
 
 func _on_titelscreen_pressed() -> void:
@@ -86,3 +90,7 @@ func _on_save_pressed() -> void:
 func _on_button_pressed() -> void:
 	$Scoreboard.hide()
 	$button.show()
+
+func _process(delta: float) -> void:
+	if save.has_focus() and Input.is_joy_button_pressed(0, JOY_BUTTON_A):
+		_on_save_pressed()
