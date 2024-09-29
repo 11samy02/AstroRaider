@@ -347,7 +347,7 @@ horizontal_alignment = 1
 [node name="UserScore" parent="Scoreboard/TextureRect/HBoxContainer/your rank" instance=ExtResource("4_qbnb8")]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Scoreboard/TextureRect/HBoxContainer/your rank"]
+[node name="Continue" type="Button" parent="Scoreboard/TextureRect/HBoxContainer/your rank"]
 layout_mode = 2
 theme = ExtResource("1_k85x5")
 text = "Continue"
@@ -363,4 +363,4 @@ libraries = {
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="UserScore/TextureRect/HBoxContainer/save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="Scoreboard/TextureRect/HBoxContainer/your rank/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Scoreboard/TextureRect/HBoxContainer/your rank/Continue" to="." method="_on_continue_pressed"]

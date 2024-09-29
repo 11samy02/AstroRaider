@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var list: VBoxContainer = $Scoreboard/TextureRect/HBoxContainer/List
 @onready var user_score: PanelContainer = $"Scoreboard/TextureRect/HBoxContainer/your rank/UserScore"
 @onready var save: Button = $UserScore/TextureRect/HBoxContainer/save
+@onready var continue_button: Button = $"Scoreboard/TextureRect/HBoxContainer/your rank/Continue"
 
 var is_showing := false
 
@@ -85,12 +86,14 @@ func _on_save_pressed() -> void:
 	
 	user_score.get_child(0).text = username.text + " | " + str(EntitySpawner.wave_count)
 	
+	continue_button.grab_focus()
 
-
-func _on_button_pressed() -> void:
-	$Scoreboard.hide()
-	$button.show()
 
 func _process(delta: float) -> void:
 	if save.has_focus() and Input.is_joy_button_pressed(0, JOY_BUTTON_A):
 		_on_save_pressed()
+
+
+func _on_continue_pressed() -> void:
+	$Scoreboard.hide()
+	$button.show()
