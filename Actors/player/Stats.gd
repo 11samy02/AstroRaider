@@ -13,3 +13,5 @@ class_name Stats
 @export var Perks : Array[Perk] = []
 
 @export var rotation_speed := 10.0
+
+@export var max_hp := 50

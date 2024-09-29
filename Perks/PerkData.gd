@@ -10,6 +10,7 @@ enum Keys {
 	Not_So_Fast,
 	Barrier_Shield,
 	Aim_Bot,
+	Extra_Health,
 }
 
 
@@ -25,6 +26,7 @@ const Keys_scene = {
 	Keys.Not_So_Fast: "res://Perks/PerkBuild/Perk_Not_So_Fast.tscn",
 	Keys.Barrier_Shield: "res://Perks/PerkBuild/Perk_Barrier_Shield.tscn",
 	Keys.Aim_Bot: "res://Perks/PerkBuild/Perk_Aim_Bot.tscn",
+	Keys.Extra_Health: "res://Perks/PerkBuild/Perk_Extra_Health.tscn",
 }
 
 const Keys_res = {
@@ -36,6 +38,7 @@ const Keys_res = {
 	Keys.Not_So_Fast: "res://Perks/Resources/Perk_Not_So_Fast.tres",
 	Keys.Barrier_Shield: "res://Perks/Resources/Perk_Barrier_Shield.tres",
 	Keys.Aim_Bot: "res://Perks/Resources/Perk_Aim_Bot.tres",
+	Keys.Extra_Health: "res://Perks/Resources/Perk_Extra_Health.tres",
 }
 
 func _ready() -> void:

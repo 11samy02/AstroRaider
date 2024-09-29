@@ -10,3 +10,6 @@ func _process(delta: float) -> void:
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	

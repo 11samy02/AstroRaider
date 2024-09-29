@@ -11,10 +11,14 @@ var current_hp := max_hp
 func _enter_tree() -> void:
 	GSignals.HIT_take_Damage.connect(applay_damage)
 	GSignals.HIT_take_heal.connect(applay_heal)
+	GSignals.PERK_Extra_health.connect(increase_max_health)
 
 func _ready() -> void:
 	if parent_entity == null:
 		queue_free()
+	
+	if parent_entity is Player:
+		max_hp = parent_entity.stats.max_hp
 	current_hp = max_hp
 
 
@@ -70,3 +74,12 @@ func applay_heal(entity: Node2D, heal_value : int):
 func _on_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color("#ffffff00"), 0.2)
+
+func increase_max_health() -> void:
+	var last_value = max_hp
+	if parent_entity is Player:
+		max_hp = parent_entity.stats.max_hp
+		if current_hp + max_hp - last_value <= max_hp:
+			current_hp += max_hp - last_value
+		else:
+			current_hp = max_hp

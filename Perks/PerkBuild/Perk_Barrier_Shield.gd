@@ -34,3 +34,6 @@ func reset_shield():
 func remove_shield(shield: BarrierShield):
 	if shield_in_use_on.has(shield):
 		shield_in_use_on.erase(shield)
+
+func _exit_tree() -> void:
+	pass

@@ -74,7 +74,7 @@ func _on_save_pressed() -> void:
 	
 	var count = 1
 	for score in FirebaseSync.All_Highscores:
-		if list.get_child_count() <= 8:
+		if list.get_child_count() < 8:
 			var score_label = SCORE_PLAYER.instantiate()
 			
 			score_label.get_child(0).text = str(count) + ". " + score.player_name + " | " + str(score.wave)

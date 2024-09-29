@@ -18,3 +18,6 @@ func spawn_more_coins(pos: Vector2) -> void:
 		new_crystal.is_first_one = false
 		
 		get_parent().add_child(new_crystal)
+
+func _exit_tree() -> void:
+	pass

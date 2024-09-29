@@ -13,6 +13,7 @@ signal PERK_event_collect_crystal
 signal PERK_reset_perks_from_player_id
 signal PERK_barrier_shield_destroyed
 signal PERK_Aim_bot_activate
+signal PERK_Extra_health
 
 ## first value -> strength, seconst value -> duration
 signal CAM_shake_effect
