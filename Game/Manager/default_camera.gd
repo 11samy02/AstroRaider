@@ -10,7 +10,7 @@ var rng = RandomNumberGenerator.new()
 
 var shake_strength: float = 0.0
 
-var min_zoom := 3.0
+var min_zoom := 5.0
 
 func _enter_tree() -> void:
 	GlobalGame.camera = self
