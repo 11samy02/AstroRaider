@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdw8cgfs4k3s0"]
+[gd_scene load_steps=11 format=3 uid="uid://bdw8cgfs4k3s0"]
 
 [ext_resource type="Script" path="res://UI/game_over_screen.gd" id="1_j8g0j"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_k85x5"]
 [ext_resource type="Texture2D" uid="uid://t8h74uusbxr7" path="res://Sprites/UI/button_container_vertical.png" id="2_jd5dt"]
+[ext_resource type="PackedScene" uid="uid://0h7fesak0yyv" path="res://UI/score_player.tscn" id="4_qbnb8"]
 
 [sub_resource type="SystemFont" id="SystemFont_4dhts"]
 font_names = PackedStringArray("November")
@@ -54,6 +55,18 @@ tracks/2/path = NodePath("button:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UserScore:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -114,6 +127,18 @@ tracks/3/keys = {
 "method": &"pause_game"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UserScore:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6w5cw"]
 _data = {
@@ -157,12 +182,12 @@ horizontal_alignment = 1
 process_mode = 3
 layout_mode = 2
 size_flags_vertical = 0
-text = "Rounds Survived:   1
-Time Survived:  1m"
+text = "Rounds Survived:   1"
 label_settings = SubResource("LabelSettings_u1nij")
 horizontal_alignment = 1
 
 [node name="button" type="MarginContainer" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -174,14 +199,13 @@ theme_override_constants/margin_top = 400
 theme_override_constants/margin_right = 160
 theme_override_constants/margin_bottom = 100
 
-[node name="menu" type="TextureRect" parent="button"]
+[node name="TextureRect" type="TextureRect" parent="button"]
 layout_mode = 2
 theme = ExtResource("1_k85x5")
 texture = ExtResource("2_jd5dt")
 stretch_mode = 5
 
-[node name="HBoxContainer" type="VBoxContainer" parent="button/menu"]
-visible = false
+[node name="HBoxContainer" type="VBoxContainer" parent="button/TextureRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -189,17 +213,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -113.5
-offset_top = -133.0
+offset_top = -184.0
 offset_right = 113.5
-offset_bottom = 133.0
+offset_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="Titelscreen" type="Button" parent="button/menu/HBoxContainer"]
-unique_name_in_owner = true
+[node name="Titelscreen" type="Button" parent="button/TextureRect/HBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
@@ -207,8 +230,7 @@ size_flags_vertical = 4
 theme = ExtResource("1_k85x5")
 text = "Titelscreen"
 
-[node name="options" type="Button" parent="button/menu/HBoxContainer"]
-unique_name_in_owner = true
+[node name="options" type="Button" parent="button/TextureRect/HBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
@@ -216,8 +238,7 @@ size_flags_vertical = 4
 theme = ExtResource("1_k85x5")
 text = "Options"
 
-[node name="Exit" type="Button" parent="button/menu/HBoxContainer"]
-unique_name_in_owner = true
+[node name="Exit" type="Button" parent="button/TextureRect/HBoxContainer"]
 process_mode = 3
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
@@ -226,98 +247,108 @@ theme = ExtResource("1_k85x5")
 text = "Exit
 "
 
-[node name="Scoreboard" type="TextureRect" parent="button"]
+[node name="UserScore" type="MarginContainer" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 160
+theme_override_constants/margin_bottom = 100
+
+[node name="TextureRect" type="TextureRect" parent="UserScore"]
 layout_mode = 2
 theme = ExtResource("1_k85x5")
 texture = ExtResource("2_jd5dt")
 stretch_mode = 5
 
-[node name="enterUsername" type="VBoxContainer" parent="button/Scoreboard"]
-visible = false
-custom_minimum_size = Vector2(400, 0)
+[node name="HBoxContainer" type="VBoxContainer" parent="UserScore/TextureRect"]
+custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -113.5
-offset_top = -184.0
-offset_right = 113.5
-offset_bottom = 184.0
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
+theme = ExtResource("1_k85x5")
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="username" type="LineEdit" parent="button/Scoreboard/enterUsername"]
-unique_name_in_owner = true
+[node name="Username" type="LineEdit" parent="UserScore/TextureRect/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_k85x5")
-placeholder_text = "enter your username"
-alignment = 1
+placeholder_text = "Enter your username"
 
-[node name="Save" type="Button" parent="button/Scoreboard/enterUsername"]
-process_mode = 3
-custom_minimum_size = Vector2(200, 0)
+[node name="save" type="Button" parent="UserScore/TextureRect/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 4
 theme = ExtResource("1_k85x5")
 text = "Save"
 
-[node name="scoreboardList" type="VBoxContainer" parent="button/Scoreboard"]
-custom_minimum_size = Vector2(400, 0)
+[node name="Scoreboard" type="MarginContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 400
+theme_override_constants/margin_right = 160
+theme_override_constants/margin_bottom = 100
+
+[node name="TextureRect" type="TextureRect" parent="Scoreboard"]
+layout_mode = 2
+theme = ExtResource("1_k85x5")
+texture = ExtResource("2_jd5dt")
+stretch_mode = 5
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Scoreboard/TextureRect"]
+custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -113.5
-offset_top = -184.0
-offset_right = 113.5
-offset_bottom = 184.0
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
-theme_override_constants/separation = 80
-alignment = 1
+theme = ExtResource("1_k85x5")
+theme_override_constants/separation = 40
 
-[node name="list" type="VBoxContainer" parent="button/Scoreboard/scoreboardList"]
+[node name="List" type="VBoxContainer" parent="Scoreboard/TextureRect/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="button/Scoreboard/scoreboardList"]
+[node name="your rank" type="VBoxContainer" parent="Scoreboard/TextureRect/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="button/Scoreboard/scoreboardList/VBoxContainer"]
+[node name="Label" type="Label" parent="Scoreboard/TextureRect/HBoxContainer/your rank"]
 layout_mode = 2
 theme = ExtResource("1_k85x5")
-theme_override_font_sizes/font_size = 28
-text = "your Ranking"
+theme_override_font_sizes/font_size = 32
+text = "Your Rank"
 horizontal_alignment = 1
 
-[node name="your rank" type="PanelContainer" parent="button/Scoreboard/scoreboardList/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="UserScore" parent="Scoreboard/TextureRect/HBoxContainer/your rank" instance=ExtResource("4_qbnb8")]
 layout_mode = 2
-theme = ExtResource("1_k85x5")
 
-[node name="Label" type="Label" parent="button/Scoreboard/scoreboardList/VBoxContainer/your rank"]
+[node name="Button" type="Button" parent="Scoreboard/TextureRect/HBoxContainer/your rank"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("1_k85x5")
-theme_override_font_sizes/font_size = 24
-text = "Samy | 24
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Continue" type="Button" parent="button/Scoreboard/scoreboardList/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-size_flags_vertical = 4
 theme = ExtResource("1_k85x5")
 text = "Continue"
 
@@ -326,11 +357,10 @@ process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_6w5cw")
 }
-autoplay = "Show"
 
-[connection signal="pressed" from="button/menu/HBoxContainer/Titelscreen" to="." method="_on_titelscreen_pressed"]
-[connection signal="pressed" from="button/menu/HBoxContainer/Titelscreen" to="." method="titelscreen_pressed"]
-[connection signal="pressed" from="button/menu/HBoxContainer/options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="button/menu/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="button/Scoreboard/enterUsername/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="button/Scoreboard/scoreboardList/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="_on_titelscreen_pressed"]
+[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="titelscreen_pressed"]
+[connection signal="pressed" from="button/TextureRect/HBoxContainer/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="button/TextureRect/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="UserScore/TextureRect/HBoxContainer/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Scoreboard/TextureRect/HBoxContainer/your rank/Button" to="." method="_on_button_pressed"]

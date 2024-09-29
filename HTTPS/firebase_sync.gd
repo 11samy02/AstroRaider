@@ -12,6 +12,8 @@ signal request_finished
 func _ready() -> void:
 	http_request.request_completed.connect(on_http_request_request_completed)
 
+
+
 func send_highscore(player_name: String, wave: int):
 	current_request = "POST"
 	
@@ -56,7 +58,14 @@ func on_http_request_request_completed(result, response_code, headers, body):
 			else:
 				for key in highscores.keys():
 					All_Highscores.append(highscores[key])
+				
+				All_Highscores.sort_custom(compare_highscores)
 				request_finished.emit()
 	else:
 		print("Fehler bei der Anfrage:", response_code)
 		print("Antwort:", body.get_string_from_utf8())
+
+func compare_highscores(a, b):
+	if a["wave"] > b["wave"]:
+		return true
+	return false

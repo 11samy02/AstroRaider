@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://0h7fesak0yyv"]
+
+[ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_kcvg4"]
+
+[node name="scorePlayer" type="PanelContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_kcvg4")
+text = "Samy"

@@ -1,29 +1,24 @@
 extends CanvasLayer
 
-@onready var options: Button = %options
-@onready var titelscreen: Button = %Titelscreen
-@onready var exit: Button = %Exit
-@onready var username: LineEdit = %username
-@onready var enter_username: VBoxContainer = $button/Scoreboard/enterUsername
-@onready var scoreboard_list: VBoxContainer = $button/Scoreboard/scoreboardList
-@onready var list: VBoxContainer = $button/Scoreboard/scoreboardList/list
-@onready var scoreboard: TextureRect = $button/Scoreboard
-@onready var menu: TextureRect = $button/menu
+@onready var options: Button = $button/TextureRect/HBoxContainer/options
+@onready var titelscreen: Button = $button/TextureRect/HBoxContainer/Titelscreen
+@onready var exit: Button = $button/TextureRect/HBoxContainer/Exit
+@onready var username: LineEdit = $UserScore/TextureRect/HBoxContainer/Username
+
 
 @onready var waves: Label = $MarginContainer/VBoxContainer/waves
+@onready var list: VBoxContainer = $Scoreboard/TextureRect/HBoxContainer/List
+@onready var user_score: PanelContainer = $"Scoreboard/TextureRect/HBoxContainer/your rank/UserScore"
 
 var is_showing := false
 
-
-const PLAYER_SCORE = preload("res://UI/Game Over screen/highscore_single.tscn")
-
+const SCORE_PLAYER = preload("res://UI/score_player.tscn")
 
 func _ready() -> void:
 	visible = false
-	scoreboard.show()
-	menu.hide()
-	enter_username.show()
-	scoreboard_list.hide()
+	$button.hide()
+	$Scoreboard.hide()
+	$UserScore.show()
 
 func game_over():
 	if !is_showing:
@@ -66,24 +61,28 @@ func _on_options_pressed() -> void:
 
 func _on_save_pressed() -> void:
 	FirebaseSync.send_highscore(username.text, EntitySpawner.wave_count)
-	enter_username.hide()
+	$UserScore.hide()
+	$Scoreboard.show()
+	await (FirebaseSync.request_finished)
 	FirebaseSync.get_highscores()
+	await (FirebaseSync.request_finished)
 	
-	for child in list.get_children():
-		child.queue_free()
-	
-	for highscore in FirebaseSync.All_Highscores:
-		if list.get_child_count() < 5:
-			var score = PLAYER_SCORE.instantiate()
+	var count = 1
+	for score in FirebaseSync.All_Highscores:
+		if list.get_child_count() <= 8:
+			var score_label = SCORE_PLAYER.instantiate()
 			
-			score.get_child(0).text = score.player_name + str(score.wave)
-			list.add_child(score)
+			score_label.get_child(0).text = str(count) + ". " + score.player_name + " | " + str(score.wave)
+			count += 1
+			
+			list.add_child(score_label)
 		else:
 			break
 	
-	scoreboard_list.show()
+	user_score.get_child(0).text = username.text + " | " + str(EntitySpawner.wave_count)
+	
 
 
-func _on_continue_pressed() -> void:
-	scoreboard.hide()
-	menu.show()
+func _on_button_pressed() -> void:
+	$Scoreboard.hide()
+	$button.show()

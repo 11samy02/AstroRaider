@@ -48,4 +48,3 @@ position = Vector2(937, 534)
 [node name="EntitySpawner" parent="." instance=ExtResource("6_kru1y")]
 
 [node name="PerkSelectorCheck" parent="." instance=ExtResource("8_d4ofr")]
-start_amount = 10

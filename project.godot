@@ -15,20 +15,20 @@ run/main_scene="res://Titel/start_loading.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-config/icon="res://Images/logo.ico"
+config/icon="res://Images/logo.svg"
 config/macos_native_icon="res://Images/logo.svg"
-config/windows_native_icon="res://Images/logo.ico"
+config/windows_native_icon="res://Images/logo.svg"
 
 [autoload]
 
 GSignals="*res://Manager/GSignals.gd"
 GlobalGame="*res://Manager/GlobalGame.gd"
-GameOverScreen="*res://UI/game_over_screen.tscn"
+PauseMenu="*res://UI/pause_menu.tscn"
 PerkData="*res://Perks/PerkData.gd"
 PlayerDataBuilds="*res://Manager/PlayerDataBuilds.gd"
 AiEnemyData="*res://Resources/Enemy/AiEnemyData.gd"
-PauseMenu="*res://UI/pause_menu.tscn"
-FirebaseSync="*res://HTTPS/firebase_sync.tscn"
+GameOverScreen="*res://UI/game_over_screen.tscn"
+FirebaseSync="*res://Https/firebase_sync.tscn"
 
 [display]
 
@@ -43,10 +43,6 @@ window/per_pixel_transparency/allowed=true
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/http-sse-client/plugin.cfg")
 
 [input]
 
@@ -100,6 +96,10 @@ Paused={
 [memory]
 
 limits/message_queue/max_size_mb=64
+
+[physics]
+
+common/physics_ticks_per_second=120
 
 [rendering]
 

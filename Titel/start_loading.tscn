@@ -217,6 +217,7 @@ custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
+disabled = true
 text = "Continue"
 
 [node name="new_game" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
@@ -224,6 +225,7 @@ custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
+disabled = true
 text = "New Game"
 
 [node name="perks" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
@@ -232,6 +234,7 @@ custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
+disabled = true
 text = "Perks
 "
 
@@ -240,6 +243,7 @@ custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
+disabled = true
 text = "Options"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
