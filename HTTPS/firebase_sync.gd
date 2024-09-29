@@ -12,8 +12,6 @@ signal request_finished
 func _ready() -> void:
 	http_request.request_completed.connect(on_http_request_request_completed)
 
-
-
 func send_highscore(player_name: String, wave: int):
 	current_request = "POST"
 	

@@ -92,6 +92,9 @@ func _on_save_pressed() -> void:
 func _process(delta: float) -> void:
 	if save.has_focus() and Input.is_joy_button_pressed(0, JOY_BUTTON_A):
 		_on_save_pressed()
+	
+	if continue_button.has_focus() and Input.is_joy_button_pressed(0, JOY_BUTTON_A):
+		_on_continue_pressed()
 
 
 func _on_continue_pressed() -> void:

@@ -187,7 +187,6 @@ label_settings = SubResource("LabelSettings_u1nij")
 horizontal_alignment = 1
 
 [node name="button" type="MarginContainer" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -248,7 +247,6 @@ text = "Exit
 "
 
 [node name="UserScore" type="MarginContainer" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -358,8 +356,8 @@ libraries = {
 "": SubResource("AnimationLibrary_6w5cw")
 }
 
-[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="_on_titelscreen_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="titelscreen_pressed"]
+[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="_on_titelscreen_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="UserScore/TextureRect/HBoxContainer/save" to="." method="_on_save_pressed"]
