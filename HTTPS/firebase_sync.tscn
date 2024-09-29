@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://oimuwju5na12"]
+
+[ext_resource type="Script" path="res://HTTPS/firebase_sync.gd" id="1_mcw8s"]
+
+[node name="Firebase Sync" type="Node"]
+script = ExtResource("1_mcw8s")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+use_threads = true

@@ -1,17 +1,14 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://ss5o0ot61xc0"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://ss5o0ot61xc0"]
 
 [ext_resource type="Texture2D" uid="uid://b8ti6qnp8y3gv" path="res://Sprites/UI/button3.png" id="1_3evjt"]
 [ext_resource type="Texture2D" uid="uid://ci3uyl5ci1j12" path="res://Sprites/UI/button1.png" id="1_n70ju"]
 
 [sub_resource type="SystemFont" id="SystemFont_csgn7"]
 font_names = PackedStringArray("Orbitron")
-font_weight = 800
-oversampling = 10.0
 
-[sub_resource type="FontVariation" id="FontVariation_4jyes"]
+[sub_resource type="FontVariation" id="FontVariation_sdi0l"]
 base_font = SubResource("SystemFont_csgn7")
-variation_embolden = 2.0
-spacing_glyph = 1
+spacing_glyph = 4
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v0ahe"]
 content_margin_left = 10.0
@@ -45,10 +42,63 @@ content_margin_bottom = 10.0
 texture = ExtResource("1_n70ju")
 region_rect = Rect2(7, 2, 48, 16)
 
+[sub_resource type="FontVariation" id="FontVariation_72p7u"]
+base_font = SubResource("SystemFont_csgn7")
+spacing_glyph = 4
+
+[sub_resource type="FontVariation" id="FontVariation_qkxn6"]
+base_font = SubResource("SystemFont_csgn7")
+spacing_glyph = 4
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xu1cu"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_3evjt")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(7, 2, 48, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_acisl"]
+load_path = "res://.godot/imported/button1.png-b8ec5d8b9fc5db2eb64213613e3e033e.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_727np"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("CompressedTexture2D_acisl")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(7, 2, 48, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k50hs"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("CompressedTexture2D_acisl")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(7, 2, 48, 16)
+
 [resource]
 Button/font_sizes/font_size = 24
-Button/fonts/font = SubResource("FontVariation_4jyes")
+Button/fonts/font = SubResource("FontVariation_sdi0l")
 Button/styles/focus = SubResource("StyleBoxTexture_v0ahe")
 Button/styles/hover = SubResource("StyleBoxTexture_1w0yu")
 Button/styles/normal = SubResource("StyleBoxTexture_jdeaa")
 Button/styles/pressed = SubResource("StyleBoxTexture_h0gxu")
+Label/fonts/font = SubResource("FontVariation_72p7u")
+LineEdit/font_sizes/font_size = 28
+LineEdit/fonts/font = SubResource("FontVariation_qkxn6")
+LineEdit/styles/focus = SubResource("StyleBoxTexture_xu1cu")
+LineEdit/styles/normal = SubResource("StyleBoxTexture_727np")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_k50hs")
