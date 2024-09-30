@@ -13,6 +13,9 @@ var rng = RandomNumberGenerator.new()
 
 var wave_spawn_count := 0
 static var wave_count := 0
+static var wave_time_to_next := 0.00
+static var wave_time_max_time := 0.00
+static var wave_time_stopped := true
 
 @export var spawn_per_round: SimplefySettingMath = SimplefySettingMath.new()
 @export var time_until_wave_start: SimplefySettingMath = SimplefySettingMath.new()
@@ -20,6 +23,11 @@ static var wave_count := 0
 func _ready() -> void:
 	reset()
 	start_new_wave()
+
+func _process(delta: float) -> void:
+	wave_time_max_time = wave_time.wait_time
+	wave_time_to_next = wave_time.wait_time - wave_time.time_left
+	wave_time_stopped = wave_time.is_stopped()
 
 func _on_wave_time_timeout() -> void:
 	if EnemyBaseTemplate.entity_list.is_empty():

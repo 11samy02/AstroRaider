@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b7mdapvgvv4d4"]
+[gd_scene load_steps=15 format=3 uid="uid://b7mdapvgvv4d4"]
 
 [ext_resource type="Script" path="res://Projectiles/fire_ball.gd" id="1_tdq83"]
 [ext_resource type="Texture2D" uid="uid://bypxtb1t4uu87" path="res://Sprites/Projectiles/energy_ball_green.png" id="1_xyj5b"]
@@ -75,13 +75,37 @@ particles_anim_h_frames = 2
 particles_anim_v_frames = 2
 particles_anim_loop = true
 
+[sub_resource type="Gradient" id="Gradient_twtt0"]
+offsets = PackedFloat32Array(0.0247525, 0.133663, 0.544554, 0.826733, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wkynl"]
+gradient = SubResource("Gradient_twtt0")
+
 [sub_resource type="Curve" id="Curve_iiadq"]
 _data = [Vector2(0.0173913, 0.263736), 0.0, 2.88854, 0, 0, Vector2(0.652174, 0.21978), -0.180534, -0.180534, 0, 0, Vector2(1, 0), -1.64286, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_twtt0"]
-offsets = PackedFloat32Array(0.0247525, 0.133663, 0.544554, 0.826733, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+[sub_resource type="CurveTexture" id="CurveTexture_1mrwb"]
+curve = SubResource("Curve_iiadq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kfn24"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 30.0
+linear_accel_max = 80.0
+scale_curve = SubResource("CurveTexture_1mrwb")
+color_ramp = SubResource("GradientTexture1D_wkynl")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="FireBall" type="Area2D"]
 collision_layer = 0
@@ -106,28 +130,20 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="particle" type="CPUParticles2D" parent="."]
+[node name="particle" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_x50bl")
 amount = 256
+process_material = SubResource("ParticleProcessMaterial_kfn24")
+texture = ExtResource("1_xyj5b")
 lifetime = 0.75
 speed_scale = 2.0
+fixed_fps = 0
 fract_delta = false
-texture = ExtResource("1_xyj5b")
-emission_shape = 1
-emission_sphere_radius = 2.0
-direction = Vector2(-1, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-angular_velocity_min = -360.0
-angular_velocity_max = 360.0
-linear_accel_min = 30.0
-linear_accel_max = 80.0
-scale_amount_curve = SubResource("Curve_iiadq")
-color_ramp = SubResource("Gradient_twtt0")
-anim_speed_min = 1.0
-anim_speed_max = 1.0
+draw_order = 0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-16, 0)
+scale = Vector2(2.875, 1)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]

@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://84vvohor50dh"]
+
+[ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="1_gswfc"]
+[ext_resource type="Script" path="res://Objects/Objects/crystal_generator.gd" id="1_qydqw"]
+[ext_resource type="AudioStream" uid="uid://cnwdm2llqw4lb" path="res://Sounds/CrystalCollectSound.wav" id="3_fkod7"]
+[ext_resource type="Script" path="res://UX/audio_2d.gd" id="4_hf2de"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_68g0p"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4jwol"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3y5b"]
+atlas = ExtResource("1_gswfc")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrua"]
+atlas = ExtResource("1_gswfc")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nqou"]
+atlas = ExtResource("1_gswfc")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4rba"]
+atlas = ExtResource("1_gswfc")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xr5b"]
+atlas = ExtResource("1_gswfc")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6xngr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3y5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nqou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4rba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6xr5b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g8ix4"]
+radius = 14.0357
+
+[node name="CrystalGenerator" type="Area2D"]
+z_index = -10
+material = SubResource("CanvasItemMaterial_68g0p")
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_qydqw")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_4jwol")
+sprite_frames = SubResource("SpriteFrames_6xngr")
+autoplay = "default"
+frame_progress = 0.0931071
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+shape = SubResource("CircleShape2D_g8ix4")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="CollectCrystal" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("3_fkod7")
+script = ExtResource("4_hf2de")
+min_random_pitch = 0.75
+max_random_pitch = 1.5
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

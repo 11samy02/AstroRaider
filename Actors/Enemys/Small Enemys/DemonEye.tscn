@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d2r6ecatdtqut"]
+[gd_scene load_steps=38 format=3 uid="uid://d2r6ecatdtqut"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_400u0"]
 [ext_resource type="Script" path="res://Actors/Enemys/Small Enemys/DemonEye.gd" id="2_xjylt"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="8_yj8bj"]
 [ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="9_u1xt7"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="10_jwp4k"]
+[ext_resource type="AudioStream" uid="uid://ctshalo85y3xo" path="res://Sounds/LaserEnemy.wav" id="10_qctm1"]
+[ext_resource type="Script" path="res://UX/audio_2d.gd" id="11_kusyn"]
 
 [sub_resource type="Resource" id="Resource_f31fk"]
 script = ExtResource("6_ra7ad")
@@ -195,11 +197,12 @@ _data = {
 radius = 6.0
 height = 25.0
 
-[node name="DemonEye" instance=ExtResource("1_400u0")]
+[node name="DemonEye" node_paths=PackedStringArray("Shoot_sound") instance=ExtResource("1_400u0")]
 z_index = 2
 script = ExtResource("2_xjylt")
 stats = Array[Object]([SubResource("Resource_fb4iu"), SubResource("Resource_hsww1"), SubResource("Resource_esdlx"), SubResource("Resource_70xna"), SubResource("Resource_wk034")])
 sprite_variation = Array[Texture2D]([ExtResource("7_1k81c")])
+Shoot_sound = NodePath("Sounds/ShootSound")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(1, 7)
@@ -246,5 +249,15 @@ one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="7"]
 rect = Rect2(-10, -10, 20, 40)
+
+[node name="Death" parent="Sounds" index="0"]
+pitch_scale = 1.5
+min_random_pitch = 1.5
+max_random_pitch = 2.0
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource("10_qctm1")
+script = ExtResource("11_kusyn")
+max_random_pitch = 1.5
 
 [connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

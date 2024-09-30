@@ -1146,6 +1146,7 @@ sources/0 = SubResource("TileSetAtlasSource_ncg6w")
 sources/1 = SubResource("TileSetAtlasSource_usi5d")
 
 [node name="Enviroment" type="TileMap"]
+z_index = -5
 tile_set = SubResource("TileSet_53qbr")
 format = 2
 script = ExtResource("2_ytm3t")

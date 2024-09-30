@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv6htoe1tv4yu"]
+[gd_scene load_steps=12 format=3 uid="uid://dv6htoe1tv4yu"]
 
 [ext_resource type="PackedScene" uid="uid://cqfioe138kr8o" path="res://Objects/Collectable/collectable_template.tscn" id="1_tfalh"]
 [ext_resource type="Script" path="res://Objects/Collectable/Crystal.gd" id="2_ttcpk"]
 [ext_resource type="Texture2D" uid="uid://b2wttn85cre2k" path="res://Objects/Collectable/Cristals.png" id="3_d8oh4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27kij"]
-radius = 32.0
+resource_local_to_scene = true
+radius = 60.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8pqmx"]
 light_mode = 1
@@ -175,8 +176,15 @@ _data = {
 "spawn": SubResource("Animation_lp41r")
 }
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gmry1"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_jawau"]
+colors = PackedColorArray(0.363773, 0.247698, 0.0909713, 1, 0.82395, 0.629323, 0.312403, 1)
+
 [node name="Crystal" instance=ExtResource("1_tfalh")]
 scale = Vector2(0.5, 0.5)
+collision_layer = 32
 script = ExtResource("2_ttcpk")
 value = 1
 collectable_name = "Crystal"
@@ -195,3 +203,12 @@ vframes = 3
 libraries = {
 "": SubResource("AnimationLibrary_2rmbn")
 }
+
+[node name="rope" type="Line2D" parent="." index="3"]
+show_behind_parent = true
+z_index = -2
+material = SubResource("CanvasItemMaterial_gmry1")
+width = 1.0
+gradient = SubResource("Gradient_jawau")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="4"]

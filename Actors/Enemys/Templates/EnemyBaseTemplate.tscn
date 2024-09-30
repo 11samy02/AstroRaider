@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://6mo722gvco50"]
+[gd_scene load_steps=5 format=3 uid="uid://6mo722gvco50"]
 
 [ext_resource type="Script" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.gd" id="1_di2us"]
+[ext_resource type="AudioStream" uid="uid://bedq6k2r4i0qw" path="res://Sounds/AlienDeathSound.wav" id="3_ggwx2"]
+[ext_resource type="Script" path="res://UX/audio_2d.gd" id="4_clgxi"]
 [ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="4_dx01d"]
 
 [node name="EnemyBaseTemplate" type="CharacterBody2D"]
@@ -20,5 +22,12 @@ wait_time = 0.1
 one_shot = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("3_ggwx2")
+max_distance = 5000.0
+script = ExtResource("4_clgxi")
 
 [connection signal="timeout" from="Knockback_time" to="." method="reset_to_last_state"]

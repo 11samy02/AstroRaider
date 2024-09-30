@@ -203,4 +203,8 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="Death" parent="Sounds" index="0"]
+min_random_pitch = 2.0
+max_random_pitch = 3.0
+
 [connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

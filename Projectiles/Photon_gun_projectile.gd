@@ -4,7 +4,7 @@ class_name PlayerProjectile
 const EXPLODE = ""
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var particle: CPUParticles2D = $particle
+@onready var particle: GPUParticles2D = $particle
 
 @export var atk_resource: AttackResource = AttackResource.new()
 @export var speed := 500

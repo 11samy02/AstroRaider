@@ -68,6 +68,7 @@ func _on_save_pressed() -> void:
 	FirebaseSync.send_highscore(username.text, EntitySpawner.wave_count)
 	$UserScore.hide()
 	$Scoreboard.show()
+	$button.hide()
 	await (FirebaseSync.request_finished)
 	FirebaseSync.get_highscores()
 	await (FirebaseSync.request_finished)

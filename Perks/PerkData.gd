@@ -41,10 +41,6 @@ const Keys_res = {
 	Keys.Extra_Health: "res://Perks/Resources/Perk_Extra_Health.tres",
 }
 
-func _ready() -> void:
-	for key in PerkData.Keys.values():
-		print("Valid Key: ", key)
-
 
 static func load_perk_scene(key : Keys) -> PackedScene:
 	return load(Keys_scene.get(key))

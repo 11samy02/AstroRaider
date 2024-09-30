@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=34 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="5_qr1wl"]
 [ext_resource type="Script" path="res://Actors/player/Crosshair.gd" id="7_pdl7m"]
 [ext_resource type="Texture2D" uid="uid://c3v5coeuuf6c6" path="res://Sprites/actors/items/crosshair.png" id="7_vmm8m"]
+[ext_resource type="AudioStream" uid="uid://dhq4tomopgolt" path="res://Sounds/LaserSound.wav" id="9_51d1q"]
+[ext_resource type="Script" path="res://UX/audio_2d.gd" id="10_pasbu"]
+[ext_resource type="AudioStream" uid="uid://dlo0yu1a81ksu" path="res://Sounds/damage.wav" id="11_bdp4b"]
+[ext_resource type="AudioStream" uid="uid://nf0618xwf4nf" path="res://Sounds/BohrerSound.wav" id="12_purh8"]
 
 [sub_resource type="Animation" id="Animation_b8c3x"]
 length = 0.001
@@ -332,8 +336,28 @@ position = Vector2(50, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_vmm8m")
 
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Crosshair"]
+stream = ExtResource("9_51d1q")
+script = ExtResource("10_pasbu")
+min_random_pitch = 0.5
+max_random_pitch = 1.5
+
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../Crosshair")
 update_rotation = false
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("11_bdp4b")
+script = ExtResource("10_pasbu")
+min_random_pitch = 0.4
+
+[node name="BohrerSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("12_purh8")
+pitch_scale = 0.5
+script = ExtResource("10_pasbu")
+min_random_pitch = 0.5
+max_random_pitch = 0.75
 
 [connection signal="area_entered" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_entered"]

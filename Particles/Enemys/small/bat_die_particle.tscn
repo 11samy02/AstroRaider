@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djgofvqfirgee"]
+[gd_scene load_steps=11 format=3 uid="uid://djgofvqfirgee"]
 
 [ext_resource type="Texture2D" uid="uid://b81tkcbnqcdis" path="res://Sprites/actors/Enemys/small/bat/bat_particle.png" id="1_xiqvy"]
 [ext_resource type="Script" path="res://Particles/Enemys/small/bat_die_particle.gd" id="2_7shaj"]
@@ -12,39 +12,51 @@ particles_anim_h_frames = 3
 particles_anim_v_frames = 4
 particles_anim_loop = false
 
-[sub_resource type="Curve" id="Curve_6vs1h"]
-_data = [Vector2(0, 0.242013), 0.0, 0.0, 0, 0, Vector2(0.103846, 0.688498), 2.33972, 2.33972, 0, 0, Vector2(0.669231, 0.615815), -0.308535, -0.308535, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
-
 [sub_resource type="Gradient" id="Gradient_qb4jj"]
 offsets = PackedFloat32Array(0, 0.62069, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.14902, 0.14902, 0.14902, 0)
 
-[node name="BatDieParticle" type="CPUParticles2D"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_clbnq"]
+gradient = SubResource("Gradient_qb4jj")
+
+[sub_resource type="Curve" id="Curve_6vs1h"]
+_data = [Vector2(0, 0.242013), 0.0, 0.0, 0, 0, Vector2(0.103846, 0.688498), 2.33972, 2.33972, 0, 0, Vector2(0.669231, 0.615815), -0.308535, -0.308535, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_fl7cw"]
+curve = SubResource("Curve_6vs1h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_17ovt"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 4.0
+angle_min = -360.0
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 0, 0)
+linear_accel_max = 20.0
+radial_accel_max = 50.0
+scale_curve = SubResource("CurveTexture_fl7cw")
+color_ramp = SubResource("GradientTexture1D_clbnq")
+anim_offset_max = 1.0
+
+[node name="BatDieParticle" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_nwymu")
 emitting = false
+process_material = SubResource("ParticleProcessMaterial_17ovt")
+texture = ExtResource("1_xiqvy")
 lifetime = 2.0
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.9
 randomness = 1.0
-lifetime_randomness = 0.5
-texture = ExtResource("1_xiqvy")
-emission_shape = 1
-emission_sphere_radius = 4.0
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 30.0
-angular_velocity_min = -360.0
-angular_velocity_max = 360.0
-linear_accel_max = 20.0
-radial_accel_max = 50.0
-angle_min = -360.0
-angle_max = 360.0
-scale_amount_curve = SubResource("Curve_6vs1h")
-color_ramp = SubResource("Gradient_qb4jj")
-anim_offset_max = 1.0
+fixed_fps = 0
+draw_order = 0
 script = ExtResource("2_7shaj")
 sprite_variation = Array[Texture2D]([ExtResource("1_xiqvy"), ExtResource("3_74rrh"), ExtResource("4_gn0ce")])
 

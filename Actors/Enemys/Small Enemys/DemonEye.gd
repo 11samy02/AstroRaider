@@ -4,6 +4,7 @@ class_name DemonEye
 const DIE_PARTICLE = preload("res://Particles/Enemys/small/bat_die_particle.tscn")
 
 
+
 @onready var sprite: Sprite2D = $sprite
 @onready var wander_time: Timer = $Timer/wander_time
 @onready var follow_time: Timer = $Timer/follow_time

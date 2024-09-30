@@ -14,6 +14,8 @@ class_name Player
 @onready var bohrer_holder: Node2D = $bohrer_holder
 @onready var bohrer_hit_coll: CollisionShape2D = $BohrerHitBox/bohrer_hit_coll
 
+@onready var damage_sound: Audio2D = $Sounds/Damage
+@onready var bohrer_sound: Audio2D = $Sounds/BohrerSound
 
 
 @export var landing_anim_name : Array[String]
@@ -157,6 +159,7 @@ func set_bohrer_state() -> void:
 			
 		else:
 			is_bohrer_active = false
+			bohrer_sound.stop()
 	else:
 		if gravity_dir == Vector2.LEFT and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_LEFT)) :
 				is_bohrer_active = true
@@ -171,16 +174,22 @@ func set_bohrer_state() -> void:
 				is_bohrer_active = true
 			
 		else:
+			bohrer_sound.stop()
 			is_bohrer_active = false
 			
 
 ##Muss geändert werden: ERROR
 func destroy_ground() -> void:
 	if !is_bohrer_active:
+		bohrer_sound.stop()
 		return
 	
 	if bohrer_holder.modulate.a >= 0.99:
+		if !bohrer_sound.playing:
+			bohrer_sound.play_sound()
 		GSignals.ENV_check_detection_tile.emit(stats.bohrer_damage)
+	else:
+		bohrer_sound.stop()
 
 func use_bohrer_anim() -> void:
 	var tween = create_tween()
@@ -206,6 +215,7 @@ func get_hit_anim() -> void:
 	shader_value = 1
 	sprite.scale = Vector2(1.25,1.25)
 	
+	damage_sound.play_sound()
 	tween.tween_property(self, "shader_value", 0, 0.2)
 	tween.parallel()
 	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)

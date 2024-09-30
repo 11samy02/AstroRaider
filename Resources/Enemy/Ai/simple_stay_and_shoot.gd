@@ -14,6 +14,8 @@ func attack(delta) -> void:
 				if abs(parent.velocity) < Vector2(10,10):
 					has_attacked = true
 					if parent.active_stats.projectile != null:
+						if parent.Shoot_sound != null:
+							parent.Shoot_sound.play_sound()
 						var projectile = parent.active_stats.projectile.instantiate()
 						
 						if projectile is EnemyProjectile:

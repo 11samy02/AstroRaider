@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://pfjuoa6k6quo"]
+[gd_scene load_steps=8 format=3 uid="uid://pfjuoa6k6quo"]
 
 [ext_resource type="Script" path="res://UI/perk_selector.gd" id="1_i5chb"]
 [ext_resource type="Texture2D" uid="uid://0f2fj0rwhl2w" path="res://Sprites/UI/PerkContainer.png" id="1_ipp58"]
@@ -11,76 +11,6 @@ font_color = Color(1, 1, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_ugfhr"]
 line_spacing = 5.0
 font_size = 28
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g74hj"]
-bg_color = Color(0.267794, 0.188246, 0.432153, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mu0af"]
-bg_color = Color(0.330145, 0.237312, 0.523753, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uufei"]
-bg_color = Color(0.159617, 0.105777, 0.270018, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d8cq0"]
-bg_color = Color(0.0212685, 0.0105699, 0.0557445, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-border_blend = true
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-expand_margin_left = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
-
-[sub_resource type="Theme" id="Theme_erk8b"]
-Button/font_sizes/font_size = 36
-Button/styles/focus = SubResource("StyleBoxFlat_g74hj")
-Button/styles/hover = SubResource("StyleBoxFlat_mu0af")
-Button/styles/normal = SubResource("StyleBoxFlat_uufei")
-Button/styles/pressed = SubResource("StyleBoxFlat_d8cq0")
 
 [sub_resource type="Animation" id="Animation_4ukhq"]
 length = 0.001
@@ -247,17 +177,8 @@ label_settings = SubResource("LabelSettings_ugfhr")
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="assume" type="Button" parent="button_margin/TextureRect/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-theme = SubResource("Theme_erk8b")
-text = "assume"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_egph8")
 }
 autoplay = "show"
-
-[connection signal="button_down" from="button_margin/TextureRect/MarginContainer/assume" to="." method="assume_perk"]

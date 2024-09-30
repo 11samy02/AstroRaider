@@ -4,7 +4,7 @@ class_name EnemyProjectile
 const EXPLODE = preload("res://Projectiles/explosions/fire_ball_explode.tscn")
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var particle: CPUParticles2D = $particle
+@onready var particle: GPUParticles2D = $particle
 
 @export var atk_resource: AttackResource = AttackResource.new()
 @export var speed := 600

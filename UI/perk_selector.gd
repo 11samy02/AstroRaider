@@ -8,7 +8,6 @@ const PERK_BUTTON = preload("res://UI/PerkSelector/perk_button.tscn")
 @onready var perk_name: Label = %perk_name
 @onready var description: Label = %description
 @onready var perk_container: HBoxContainer = %Perk_container
-@onready var assume: Button = $button_margin/TextureRect/MarginContainer/assume
 
 var player_id = 0
 var has_clicked := true
@@ -17,6 +16,7 @@ var focus_set := false
 var current_focus_index := -1  # Tracks the currently focused perk index
 
 func _ready() -> void:
+	PauseMenu.can_pause_on_screen = false
 	active = false
 	focus_set = false
 	current_focus_index = -1
@@ -204,16 +204,10 @@ func check_pressed():
 				if perk_button != null and is_instance_valid(perk_button) and perk_button.has_focus():
 					perk_button._on_button_down()
 					has_clicked = true
-					return
-			if not has_clicked and assume.has_focus():
-				assume_perk()
+					assume_perk()
 		else:
 			has_clicked = false
 
 func _exit_tree() -> void:
 	PauseMenu.can_pause_on_screen = true
 	get_tree().paused = false
-
-func _on_perk_button_click() ->void:
-	has_clicked = true
-	assume.grab_focus()

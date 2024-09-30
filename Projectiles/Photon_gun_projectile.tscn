@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwi0qr43hj35l"]
+[gd_scene load_steps=18 format=3 uid="uid://cwi0qr43hj35l"]
 
 [ext_resource type="Script" path="res://Projectiles/Photon_gun_projectile.gd" id="1_08njn"]
 [ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_8acic"]
@@ -52,7 +52,7 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.03, 0.1),
+"times": PackedFloat32Array(0, 0.03, 0.05),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(0.2, 0.2), Vector2(0.2, 0.2), Vector2(1, 1)]
@@ -64,7 +64,7 @@ tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.03, 0.1),
+"times": PackedFloat32Array(0, 0.03, 0.05),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -118,13 +118,37 @@ particles_anim_h_frames = 2
 particles_anim_v_frames = 2
 particles_anim_loop = true
 
+[sub_resource type="Gradient" id="Gradient_twtt0"]
+offsets = PackedFloat32Array(0.0247525, 0.133663, 0.544554, 0.826733, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8g21i"]
+gradient = SubResource("Gradient_twtt0")
+
 [sub_resource type="Curve" id="Curve_iiadq"]
 _data = [Vector2(0, 0.252396), 0.0, 3.85669, 0, 0, Vector2(0.652174, 0.21978), -0.180534, -0.180534, 0, 0, Vector2(1, 0), -1.64286, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_twtt0"]
-offsets = PackedFloat32Array(0.0247525, 0.133663, 0.544554, 0.826733, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+[sub_resource type="CurveTexture" id="CurveTexture_14hi4"]
+curve = SubResource("Curve_iiadq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcrm6"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 10.0
+linear_accel_max = 20.0
+scale_curve = SubResource("CurveTexture_14hi4")
+color_ramp = SubResource("GradientTexture1D_8g21i")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jacb"]
 radius = 128.0
@@ -153,28 +177,16 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="particle" type="CPUParticles2D" parent="."]
+[node name="particle" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_x50bl")
 amount = 256
+process_material = SubResource("ParticleProcessMaterial_hcrm6")
+texture = ExtResource("3_3sbgt")
 lifetime = 0.5
 speed_scale = 2.0
+fixed_fps = 0
 fract_delta = false
-texture = ExtResource("3_3sbgt")
-emission_shape = 1
-emission_sphere_radius = 2.0
-direction = Vector2(-1, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-angular_velocity_min = -360.0
-angular_velocity_max = 360.0
-linear_accel_min = 30.0
-linear_accel_max = 80.0
-scale_amount_curve = SubResource("Curve_iiadq")
-color_ramp = SubResource("Gradient_twtt0")
-anim_speed_min = 1.0
-anim_speed_max = 1.0
+draw_order = 0
 
 [node name="EnemyDetectorArea" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
 collision_layer = 0
@@ -184,6 +196,10 @@ parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea"]
 shape = SubResource("CircleShape2D_5jacb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-16, 0)
+scale = Vector2(2.875, 1)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]

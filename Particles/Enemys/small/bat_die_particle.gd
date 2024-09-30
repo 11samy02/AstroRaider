@@ -1,4 +1,4 @@
-extends CPUParticles2D
+extends GPUParticles2D
 
 @export var sprite_variation : Array[Texture2D]
 

@@ -7,6 +7,7 @@ extends Node2D
 var holding_item : HoldingItem
 
 @onready var sprite: Sprite2D = $sprite
+@onready var shoot_sound: Audio2D = $ShootSound
 
 var had_shoot := false
 
@@ -58,6 +59,7 @@ func shoot():
 	projectile.global_position = player.global_position
 	projectile.parent = player
 	get_parent().get_parent().add_child(projectile)
+	shoot_sound.play_sound()
 	await (get_tree().create_timer(0.2).timeout)
 	had_shoot = false
 	GSignals.PLA_is_shooting.emit(player)

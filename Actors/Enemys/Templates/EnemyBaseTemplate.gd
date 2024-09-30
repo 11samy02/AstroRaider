@@ -13,6 +13,10 @@ var state_mashine := AiEnemyData.state_mashine
 
 @onready var knockback_time: Timer = $Knockback_time
 
+@onready var death_sound: Audio2D = $Sounds/Death
+
+@export_category("Sounds")
+@export var Shoot_sound: Audio2D
 
 var last_state := state
 
@@ -30,7 +34,6 @@ func _enter_tree() -> void:
 		active_stats = stats[-1].duplicate()
 	active_stats.max_health += randi_range(0, active_stats.max_Random_health_edit)
 	active_stats.current_health = active_stats.max_health
-	print(level)
 
 func _ready() -> void:
 	load_ai_to_node()
@@ -85,9 +88,13 @@ func check_health() -> void:
 
 ##should be overwritten if you want any effect on death
 func death() -> void:
+	var real_sound:Audio2D = death_sound.duplicate()
+	get_parent().add_child(real_sound)
+	real_sound.play_sound()
+	real_sound.global_position = self.global_position
 	if self in entity_list:
 		entity_list.erase(self)
-		GSignals.ENE_killed_by.emit(self)
+		GSignals.ENE_killed_by.emit(killed_by)
 	queue_free()
 
 
