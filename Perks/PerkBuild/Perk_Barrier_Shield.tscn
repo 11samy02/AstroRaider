@@ -4,3 +4,4 @@
 
 [node name="BarrierShield" type="Node"]
 script = ExtResource("1_fugwd")
+Key = 6

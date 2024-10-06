@@ -1,6 +1,6 @@
 extends PerkBuild
 
-var used_shield:= false
+var used_shield := false
 
 const BARRIER_SHIELD = preload("res://Objects/Perk Specials/barrier_shield.tscn")
 
@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	for shield: BarrierShield in shield_in_use_on:
 		if shield.entity == Player_Res.player:
 			shield_is_in_use = true
-	if Player_Res.current_health <= Player_Res.max_health/100 * 25 and !used_shield and !shield_is_in_use:
+	if Player_Res.current_health <= Player_Res.max_health/2 and !used_shield and !shield_is_in_use:
 		used_shield = true
 		activate_perk()
 

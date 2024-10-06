@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cqfioe138kr8o" path="res://Objects/Collectable/collectable_template.tscn" id="1_tfalh"]
 [ext_resource type="Script" path="res://Objects/Collectable/Crystal.gd" id="2_ttcpk"]
-[ext_resource type="Texture2D" uid="uid://b2wttn85cre2k" path="res://Objects/Collectable/Cristals.png" id="3_d8oh4"]
+[ext_resource type="Texture2D" uid="uid://b2wttn85cre2k" path="res://Sprites/Items/Ores/Cristals.png" id="3_d8oh4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27kij"]
 resource_local_to_scene = true
@@ -18,14 +18,14 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
+"times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Vector2(0, 0), Vector2(0, -15), Vector2(0, -30)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -42,14 +42,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/path = NodePath("Sprite2D:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
+"times": PackedFloat32Array(0, 0.15, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -15), Vector2(0, -30)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -83,14 +83,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -107,14 +107,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/path = NodePath("Sprite2D:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -147,26 +147,26 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/path = NodePath("Sprite2D:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.25, 0.25), Vector2(1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/path = NodePath("Sprite2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(0.25, 0.25), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2rmbn"]
@@ -190,13 +190,15 @@ value = 1
 collectable_name = "Crystal"
 
 [node name="CollisionShape2D" parent="." index="0"]
+visible = false
 shape = SubResource("CircleShape2D_27kij")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+self_modulate = Color(1.25, 1.25, 1.25, 1)
 material = SubResource("CanvasItemMaterial_8pqmx")
 texture = ExtResource("3_d8oh4")
-hframes = 3
+hframes = 5
 vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
@@ -212,3 +214,4 @@ width = 1.0
 gradient = SubResource("Gradient_jawau")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="4"]
+visible = false

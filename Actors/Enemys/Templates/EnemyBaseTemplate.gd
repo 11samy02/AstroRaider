@@ -1,11 +1,17 @@
 extends CharacterBody2D
 class_name EnemyBaseTemplate
 
+const DIE_PARTICLE = preload("res://Particles/Enemys/small/Enemy_die_particle.tscn")
+
+@onready var sprite: Sprite2D = $sprite
+
+
 @export var stats: Array[EnemyStats] = [EnemyStats.new()]
 var level := 0
 var active_stats: EnemyStats = stats[level]
 
 @export var sprite_variation: Array[Texture2D]
+@export var die_particle_variation: Array[Texture2D]
 
 var state_mashine := AiEnemyData.state_mashine
 
@@ -20,7 +26,7 @@ var state_mashine := AiEnemyData.state_mashine
 
 var last_state := state
 
-static var max_entitys_on_screen = 100
+static var max_entitys_on_screen = 60
 static var entity_list: Array[EnemyBaseTemplate]
 
 var killed_by : CharacterBody2D = null
@@ -36,6 +42,7 @@ func _enter_tree() -> void:
 	active_stats.current_health = active_stats.max_health
 
 func _ready() -> void:
+	sprite.set_texture(sprite_variation.pick_random())
 	load_ai_to_node()
 
 
@@ -88,6 +95,12 @@ func check_health() -> void:
 
 ##should be overwritten if you want any effect on death
 func death() -> void:
+	var particle = DIE_PARTICLE.instantiate()
+	particle.global_position = global_position
+	particle.sprite_variation = die_particle_variation
+	particle.sprite_id = sprite_variation.find(sprite.texture)
+	get_parent().add_child(particle)
+	
 	var real_sound:Audio2D = death_sound.duplicate()
 	get_parent().add_child(real_sound)
 	real_sound.play_sound()

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbax3fkng4f7n"]
+
+[ext_resource type="PackedScene" uid="uid://dd8s7nwmnq0ud" path="res://Objects/Collectable/ore_template.tscn" id="1_jaebk"]
+[ext_resource type="Texture2D" uid="uid://wwu4lio5gwqa" path="res://Sprites/Items/Ores/iron_ore.png" id="2_02qvw"]
+
+[node name="IronOre" instance=ExtResource("1_jaebk")]
+scale = Vector2(0.1, 0.1)
+mass = 4
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_02qvw")

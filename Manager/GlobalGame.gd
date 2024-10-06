@@ -1,5 +1,6 @@
 extends Node
 
+var Player_count: int = 1
 var Players: Array[PlayerResource] = []
 
 var camera: MainCam

@@ -52,7 +52,7 @@ func add_buttons(count: int):
 		# Load a random perk and validate
 		perk_button.load_random_perk()
 
-		if perk_button.key != null and is_instance_valid(perk_button) and perk_button.key != 0:
+		if perk_button.key != null and is_instance_valid(perk_button):
 			perk_buttons.append(perk_button)
 			connect_perk_button(perk_button)
 			print("Perk Button Added: ", perk_button.perk.perk_name, " with key: ", perk_button.key)
@@ -211,3 +211,7 @@ func check_pressed():
 func _exit_tree() -> void:
 	PauseMenu.can_pause_on_screen = true
 	get_tree().paused = false
+
+func _on_perk_button_click():
+	has_clicked = true
+	assume_perk()

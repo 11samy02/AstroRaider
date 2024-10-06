@@ -16,6 +16,9 @@ var is_showing := false
 
 const SCORE_PLAYER = preload("res://UI/score_player.tscn")
 
+var new_szene : PackedScene = preload("res://Titel/start_loading.tscn")
+
+
 func _ready() -> void:
 	visible = false
 	$button.hide()
@@ -52,8 +55,11 @@ func pause_game():
 func _on_titelscreen_pressed() -> void:
 	visible = false
 	is_showing = false
+	$button.hide()
+	$Scoreboard.hide()
+	$UserScore.show()
+	ScreenTransition.change_scene_to(new_szene)
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Titel/start_loading.tscn")
 
 
 func _on_exit_pressed() -> void:
@@ -101,3 +107,4 @@ func _process(delta: float) -> void:
 func _on_continue_pressed() -> void:
 	$Scoreboard.hide()
 	$button.show()
+	titelscreen.grab_focus()

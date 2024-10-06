@@ -277,6 +277,7 @@ libraries = {
 autoplay = "fling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 shape = SubResource("CapsuleShape2D_xxfga")
 
@@ -355,9 +356,9 @@ min_random_pitch = 0.4
 
 [node name="BohrerSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("12_purh8")
-pitch_scale = 0.5
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 0.75
 
 [connection signal="area_entered" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_entered"]
+[connection signal="area_exited" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_exited"]

@@ -38,9 +38,10 @@ func _process(delta: float) -> void:
 		aim_to_target()
 
 func activate_aim_bot(player:Player, new_value: float):
-	if parent.parent == player:
-		value = new_value
-		aim_bot_on = true
+	if is_instance_valid(parent):
+		if parent.parent == player:
+			value = new_value
+			aim_bot_on = true
 
 
 func aim_to_target() -> void:

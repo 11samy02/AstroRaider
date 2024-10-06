@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhmvhsrfsgk2j"]
+
+[ext_resource type="Script" path="res://Objects/Buildings/building_template.gd" id="1_kya05"]
+
+[node name="Building" type="Area2D"]
+z_index = -5
+script = ExtResource("1_kya05")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+
+[node name="collision" type="CollisionShape2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_collect_fuel"]

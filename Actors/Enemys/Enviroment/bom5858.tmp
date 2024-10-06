@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbf58whxftfq3"]
+
+[ext_resource type="Script" path="res://Actors/Enemys/Enviroment/bomb.gd" id="1_4jhmr"]
+[ext_resource type="Texture2D" uid="uid://dffqsxjstmde0" path="res://Sprites/actors/Enemys/small/Bomb/Bomb.png" id="1_esvsy"]
+[ext_resource type="PackedScene" uid="uid://70v4d2478xol" path="res://Manager/static_hitbox.tscn" id="3_oj0tp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7ufsx"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpj2u"]
+atlas = ExtResource("1_esvsy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0xam"]
+atlas = ExtResource("1_esvsy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0lnoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpj2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0xam")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f0b4e"]
+radius = 7.0
+
+[node name="Bomb" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_4jhmr")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_7ufsx")
+sprite_frames = SubResource("SpriteFrames_0lnoq")
+autoplay = "default"
+frame_progress = 0.900006
+
+[node name="explode_time" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f0b4e")
+
+[node name="StaticHitbox" parent="." instance=ExtResource("3_oj0tp")]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticHitbox"]
+shape = SubResource("CircleShape2D_f0b4e")
+
+[connection signal="timeout" from="explode_time" to="." method="_on_explode_time_timeout"]

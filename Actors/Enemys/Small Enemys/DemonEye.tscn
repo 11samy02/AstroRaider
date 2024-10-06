@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://d2r6ecatdtqut"]
+[gd_scene load_steps=41 format=3 uid="uid://d2r6ecatdtqut"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_400u0"]
 [ext_resource type="Script" path="res://Actors/Enemys/Small Enemys/DemonEye.gd" id="2_xjylt"]
@@ -6,8 +6,11 @@
 [ext_resource type="Script" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_ra7ad"]
 [ext_resource type="Texture2D" uid="uid://chj2k1h3hk3xq" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye.png" id="7_1k81c"]
 [ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="7_jiem3"]
+[ext_resource type="Texture2D" uid="uid://drw5se8c5e33u" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye2.png" id="8_hpmga"]
 [ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="8_yj8bj"]
 [ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="9_u1xt7"]
+[ext_resource type="Texture2D" uid="uid://b81tkcbnqcdis" path="res://Sprites/actors/Enemys/small/bat/bat_particle.png" id="9_w3rug"]
+[ext_resource type="Texture2D" uid="uid://gsta6urcksvx" path="res://Sprites/actors/Enemys/small/bat/bat_particle3.png" id="10_ilnne"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="10_jwp4k"]
 [ext_resource type="AudioStream" uid="uid://ctshalo85y3xo" path="res://Sounds/LaserEnemy.wav" id="10_qctm1"]
 [ext_resource type="Script" path="res://UX/audio_2d.gd" id="11_kusyn"]
@@ -141,18 +144,14 @@ ranged_attack = SubResource("Resource_23apr")
 radius = 5.0
 height = 25.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vyc"]
-radius = 6.0
-height = 25.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ymbq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_un5xr"]
 resource_local_to_scene = true
 shader = ExtResource("9_u1xt7")
 shader_parameter/opacity = 1.0
 shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
+shader_parameter/g = null
+shader_parameter/b = null
+shader_parameter/mix_color = null
 
 [sub_resource type="Animation" id="Animation_ryi04"]
 length = 0.001
@@ -197,36 +196,36 @@ _data = {
 radius = 6.0
 height = 25.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vyc"]
+radius = 6.0
+height = 25.0
+
 [node name="DemonEye" node_paths=PackedStringArray("Shoot_sound") instance=ExtResource("1_400u0")]
 z_index = 2
 script = ExtResource("2_xjylt")
 stats = Array[Object]([SubResource("Resource_fb4iu"), SubResource("Resource_hsww1"), SubResource("Resource_esdlx"), SubResource("Resource_70xna"), SubResource("Resource_wk034")])
-sprite_variation = Array[Texture2D]([ExtResource("7_1k81c")])
+sprite_variation = Array[Texture2D]([ExtResource("7_1k81c"), ExtResource("8_hpmga")])
+die_particle_variation = Array[Texture2D]([ExtResource("9_w3rug"), ExtResource("10_ilnne")])
 Shoot_sound = NodePath("Sounds/ShootSound")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(1, 7)
 shape = SubResource("CapsuleShape2D_3cst2")
 
-[node name="CollisionShape2D" parent="." index="1"]
-visible = false
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_q2vyc")
-
-[node name="sprite" type="Sprite2D" parent="." index="2"]
-material = SubResource("ShaderMaterial_3ymbq")
-position = Vector2(0, 8)
+[node name="sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_un5xr")
+position = Vector2(0, 7)
 texture = ExtResource("7_1k81c")
 hframes = 3
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_61fje")
 }
 autoplay = "flying"
 
-[node name="AttackBox" parent="." index="4" node_paths=PackedStringArray("owner_entity") instance=ExtResource("10_jwp4k")]
+[node name="AttackBox" parent="." index="3" node_paths=PackedStringArray("owner_entity") instance=ExtResource("10_jwp4k")]
 owner_entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0"]
@@ -234,7 +233,7 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_d84vw")
 
-[node name="Timer" type="Node" parent="." index="5"]
+[node name="Timer" type="Node" parent="." index="4"]
 
 [node name="wander_time" type="Timer" parent="Timer" index="0"]
 one_shot = true
@@ -246,6 +245,11 @@ one_shot = true
 [node name="shoot_delay" type="Timer" parent="Timer" index="2"]
 wait_time = 0.5
 one_shot = true
+
+[node name="CollisionShape2D" parent="." index="5"]
+visible = false
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_q2vyc")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="7"]
 rect = Rect2(-10, -10, 20, 40)

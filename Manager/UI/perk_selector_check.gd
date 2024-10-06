@@ -5,7 +5,7 @@ extends Node
 
 const PERK_SELECTOR = preload("res://UI/perk_selector.tscn")
 
-func _ready() -> void:
+func set_player_Stats() -> void:
 	for player_res: PlayerResource in GlobalGame.Players:
 		player_res.crystals_needed = start_amount
 
@@ -13,6 +13,9 @@ func _process(delta: float) -> void:
 	check_crystals()
 
 func check_crystals() -> void:
+	if GlobalGame.Players.is_empty():
+		return
+	
 	for player_res: PlayerResource in GlobalGame.Players:
 		if player_res.crystal_count >= player_res.crystals_needed:
 			var has_all_perks_on_max_level := false

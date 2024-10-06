@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxws2mlpf26mt"]
+
+[ext_resource type="Script" path="res://Actors/Enemys/Enviroment/bomb_explosion.gd" id="1_2qx2q"]
+[ext_resource type="Texture2D" uid="uid://b3mpkn3jvacv1" path="res://Sprites/Projectiles/Fireball.png" id="1_w5xmk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_12530"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_eghff"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.52747, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5jhvf"]
+offsets = PackedFloat32Array(0.648515, 1)
+colors = PackedColorArray(1.5, 1.5, 1.5, 1, 0, 0, 0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dug5j"]
+radius = 56.0803
+
+[node name="Bomb Explosion" type="CPUParticles2D"]
+self_modulate = Color(1.75, 1.75, 1, 1)
+material = SubResource("CanvasItemMaterial_12530")
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.8
+randomness = 1.0
+texture = ExtResource("1_w5xmk")
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+angle_min = -360.0
+angle_max = 360.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_eghff")
+color_ramp = SubResource("Gradient_5jhvf")
+script = ExtResource("1_2qx2q")
+
+[node name="StaticAttackBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticAttackBox"]
+shape = SubResource("CircleShape2D_dug5j")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
+[connection signal="area_entered" from="StaticAttackBox" to="." method="_on_static_attack_box_area_entered"]

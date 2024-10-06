@@ -5,6 +5,11 @@ var Health := 25
 @export var atk_resource: AttackResource
 
 
+func _enter_tree() -> void:
+	if entity is Player:
+		entity.can_take_damage = false
+
+
 func _physics_process(delta: float) -> void:
 	global_position = entity.global_position
 
@@ -20,4 +25,6 @@ func _on_area_entered(area: Area2D) -> void:
 			area.entity.get_knockback((area.global_position - global_position).normalized(), atk_resource.knockback)
 
 func _exit_tree() -> void:
+	if entity is Player:
+		entity.can_take_damage = true
 	GSignals.PERK_barrier_shield_destroyed.emit(self)

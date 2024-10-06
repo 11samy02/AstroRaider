@@ -356,8 +356,8 @@ libraries = {
 "": SubResource("AnimationLibrary_6w5cw")
 }
 
-[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="_on_titelscreen_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="titelscreen_pressed"]
+[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="_on_titelscreen_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="UserScore/TextureRect/HBoxContainer/save" to="." method="_on_save_pressed"]

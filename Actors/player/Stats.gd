@@ -14,4 +14,4 @@ class_name Stats
 
 @export var rotation_speed := 10.0
 
-@export var max_hp := 50
+@export var max_hp := 100

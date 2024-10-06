@@ -1,11 +1,7 @@
 extends EnemyBaseTemplate
 class_name DemonEye
 
-const DIE_PARTICLE = preload("res://Particles/Enemys/small/bat_die_particle.tscn")
 
-
-
-@onready var sprite: Sprite2D = $sprite
 @onready var wander_time: Timer = $Timer/wander_time
 @onready var follow_time: Timer = $Timer/follow_time
 @onready var shoot_delay: Timer = $Timer/shoot_delay
@@ -13,11 +9,6 @@ const DIE_PARTICLE = preload("res://Particles/Enemys/small/bat_die_particle.tscn
 var shader_value:float = 0.0
 
 static var kill_count: int = 0
-
-func _ready() -> void:
-	super()
-	sprite.set_texture(sprite_variation.pick_random())
-
 
 func _physics_process(delta: float) -> void:
 	check_health()
@@ -86,15 +77,13 @@ func applay_damage(entity: CharacterBody2D, damage: int = 1) -> void:
 		
 	
 
-func death() -> void:
-	var particle = DIE_PARTICLE.instantiate()
-	particle.global_position = global_position
-	particle.sprite_id = sprite_variation.find(sprite.texture)
-	get_parent().add_child(particle)
-	super()
-
 func look_direction():
 	if get_closest_target().x < global_position.x:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
+
+
+func death() -> void:
+	kill_count += 1
+	super()

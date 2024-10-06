@@ -22,6 +22,8 @@ static var wave_time_stopped := true
 
 func _ready() -> void:
 	reset()
+
+func start_wave():
 	start_new_wave()
 
 func _process(delta: float) -> void:

@@ -1,11 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://84vvohor50dh"]
+[gd_scene load_steps=13 format=3 uid="uid://84vvohor50dh"]
 
 [ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="1_gswfc"]
 [ext_resource type="Script" path="res://Objects/Objects/crystal_generator.gd" id="1_qydqw"]
 [ext_resource type="AudioStream" uid="uid://cnwdm2llqw4lb" path="res://Sounds/CrystalCollectSound.wav" id="3_fkod7"]
 [ext_resource type="Script" path="res://UX/audio_2d.gd" id="4_hf2de"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_68g0p"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4jwol"]
 light_mode = 1
@@ -57,8 +55,7 @@ animations = [{
 radius = 14.0357
 
 [node name="CrystalGenerator" type="Area2D"]
-z_index = -10
-material = SubResource("CanvasItemMaterial_68g0p")
+z_index = -20
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("1_qydqw")

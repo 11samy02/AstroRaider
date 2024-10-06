@@ -1,8 +1,10 @@
-[gd_scene load_steps=98 format=3 uid="uid://diaruu2bt2xvq"]
+[gd_scene load_steps=108 format=3 uid="uid://diaruu2bt2xvq"]
 
 [ext_resource type="Texture2D" uid="uid://cbgp1ldvf7w6f" path="res://Sprites/enviroment/walls.png" id="1_efltj"]
 [ext_resource type="Texture2D" uid="uid://cc5jk37665ht8" path="res://Sprites/enviroment/solid_walls.png" id="2_5icth"]
 [ext_resource type="Script" path="res://Game/Enviroment/enviroment.gd" id="2_ytm3t"]
+[ext_resource type="Script" path="res://Resources/Enviroment/Destroyable Tiles/TileDropResource.gd" id="4_wu72t"]
+[ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="5_8pt2k"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xieh5"]
 polygon = PackedVector2Array(-4, -4, 4, -4, 4, 8, -4, 8)
@@ -357,6 +359,7 @@ texture = ExtResource("1_efltj")
 1:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_34xwt")
 1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:3/0/terrains_peering_bit/right_side = 0
+0:3/next_alternative_id = 2
 0:3/0 = 0
 0:3/0/terrain_set = 0
 0:3/0/terrain = 0
@@ -1145,8 +1148,61 @@ terrain_set_0/terrain_2/color = Color(0.321569, 0.321569, 0.321569, 1)
 sources/0 = SubResource("TileSetAtlasSource_ncg6w")
 sources/1 = SubResource("TileSetAtlasSource_usi5d")
 
-[node name="Enviroment" type="TileMap"]
-z_index = -5
+[sub_resource type="Resource" id="Resource_eij58"]
+script = ExtResource("4_wu72t")
+Drop_path = "res://Objects/Collectable/crystal.tscn"
+min_amount = 0
+max_amount = 2
+rarity = 80
+
+[sub_resource type="Resource" id="Resource_x8itx"]
+script = ExtResource("4_wu72t")
+Drop_path = "res://Actors/Enemys/Enviroment/bomb.tscn"
+min_amount = 1
+max_amount = 1
+rarity = 5
+
+[sub_resource type="Resource" id="Resource_khkbr"]
+script = ExtResource("4_wu72t")
+Drop_path = "res://Objects/Collectable/iron_ore.tscn"
+min_amount = 1
+max_amount = 1
+rarity = 3
+
+[sub_resource type="Resource" id="Resource_ooggv"]
+script = ExtResource("4_wu72t")
+Drop_path = "res://Objects/Collectable/Copper_Ore.tscn"
+min_amount = 1
+max_amount = 1
+rarity = 2
+
+[sub_resource type="Resource" id="Resource_3cukr"]
+script = ExtResource("4_wu72t")
+Drop_path = "res://Objects/Collectable/Gold_ore.tscn"
+min_amount = 1
+max_amount = 1
+rarity = 1
+
+[sub_resource type="Resource" id="Resource_x3pi4"]
+script = ExtResource("5_8pt2k")
+min_value = 8
+max_value = 12
+
+[sub_resource type="Resource" id="Resource_6i0rp"]
+script = ExtResource("5_8pt2k")
+min_value = 3
+max_value = 6
+
+[sub_resource type="Resource" id="Resource_c0xtb"]
+script = ExtResource("5_8pt2k")
+min_value = 8
+max_value = 16
+
+[node name="Enviroment" type="TileMapLayer"]
+z_index = -20
 tile_set = SubResource("TileSet_53qbr")
-format = 2
 script = ExtResource("2_ytm3t")
+TileDrops = Array[ExtResource("4_wu72t")]([SubResource("Resource_eij58"), SubResource("Resource_x8itx"), SubResource("Resource_khkbr"), SubResource("Resource_ooggv"), SubResource("Resource_3cukr")])
+start_area_size = SubResource("Resource_x3pi4")
+room_count = SubResource("Resource_6i0rp")
+room_size = SubResource("Resource_c0xtb")

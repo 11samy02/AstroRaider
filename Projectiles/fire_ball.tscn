@@ -76,8 +76,8 @@ particles_anim_v_frames = 2
 particles_anim_loop = true
 
 [sub_resource type="Gradient" id="Gradient_twtt0"]
-offsets = PackedFloat32Array(0.0247525, 0.133663, 0.544554, 0.826733, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+offsets = PackedFloat32Array(0.0247525, 0.172414, 0.735632, 0.994253, 1)
+colors = PackedColorArray(1, 1, 1, 0, 2, 2, 2, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_wkynl"]
 gradient = SubResource("Gradient_twtt0")
@@ -90,10 +90,10 @@ point_count = 3
 curve = SubResource("Curve_iiadq")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kfn24"]
-particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
 emission_shape = 1
 emission_sphere_radius = 2.0
-direction = Vector3(-1, 0, 0)
+direction = Vector3(0, 0, 0)
 spread = 0.0
 initial_velocity_min = 10.0
 initial_velocity_max = 20.0

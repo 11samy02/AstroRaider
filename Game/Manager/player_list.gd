@@ -5,7 +5,7 @@ class_name PlayerList
 func _enter_tree() -> void:
 	GSignals.PERK_reset_perks_from_player_id.connect(reset_perk_from_player)
 
-func _ready() -> void:
+func set_players() -> void:
 	GlobalGame.Players.clear()
 	for player in get_children():
 		if player is Player:

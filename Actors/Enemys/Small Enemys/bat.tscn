@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c5fkee3ubvyvd"]
+[gd_scene load_steps=36 format=3 uid="uid://c5fkee3ubvyvd"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_nx18g"]
 [ext_resource type="Script" path="res://Bat.gd" id="2_q52fh"]
@@ -9,7 +9,10 @@
 [ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="7_nrcht"]
 [ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="7_sibcj"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="8_tqbtd"]
+[ext_resource type="Texture2D" uid="uid://b81tkcbnqcdis" path="res://Sprites/actors/Enemys/small/bat/bat_particle.png" id="9_4w8is"]
 [ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="9_gg1tf"]
+[ext_resource type="Texture2D" uid="uid://10cki7mqt6mb" path="res://Sprites/actors/Enemys/small/bat/bat_particle2.png" id="10_mcywg"]
+[ext_resource type="Texture2D" uid="uid://gsta6urcksvx" path="res://Sprites/actors/Enemys/small/bat/bat_particle3.png" id="11_m18u0"]
 
 [sub_resource type="Resource" id="Resource_noxau"]
 script = ExtResource("6_7sg3r")
@@ -104,17 +107,14 @@ speed = 200.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_32yl0"]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
-radius = 6.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ymbq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2ik0"]
 resource_local_to_scene = true
 shader = ExtResource("9_gg1tf")
 shader_parameter/opacity = 1.0
 shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
+shader_parameter/g = null
+shader_parameter/b = null
+shader_parameter/mix_color = null
 
 [sub_resource type="Animation" id="Animation_ryi04"]
 length = 0.001
@@ -158,35 +158,34 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxo5n"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
+radius = 6.0
+
 [node name="Bat" instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
 stats = Array[Object]([SubResource("Resource_mh5wc"), SubResource("Resource_i4s8y"), SubResource("Resource_00d2r"), SubResource("Resource_xcvgl"), SubResource("Resource_nip0v")])
 sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
+die_particle_variation = Array[Texture2D]([ExtResource("9_4w8is"), ExtResource("10_mcywg"), ExtResource("11_m18u0")])
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_32yl0")
 
-[node name="CollisionShape2D" parent="." index="1"]
-visible = false
-position = Vector2(0, -1)
-shape = SubResource("CircleShape2D_g3y2r")
-
-[node name="sprite" type="Sprite2D" parent="." index="2"]
-material = SubResource("ShaderMaterial_3ymbq")
+[node name="sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_a2ik0")
 texture = ExtResource("3_kxtlt")
 hframes = 3
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_61fje")
 }
 autoplay = "flying"
 
-[node name="AttackBox" parent="." index="4" node_paths=PackedStringArray("owner_entity") instance=ExtResource("8_tqbtd")]
+[node name="AttackBox" parent="." index="3" node_paths=PackedStringArray("owner_entity") instance=ExtResource("8_tqbtd")]
 owner_entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0"]
@@ -194,7 +193,7 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_sxo5n")
 
-[node name="Timer" type="Node" parent="." index="5"]
+[node name="Timer" type="Node" parent="." index="4"]
 
 [node name="wander_time" type="Timer" parent="Timer" index="0"]
 one_shot = true
@@ -202,6 +201,11 @@ one_shot = true
 [node name="follow_time" type="Timer" parent="Timer" index="1"]
 wait_time = 2.0
 one_shot = true
+
+[node name="CollisionShape2D" parent="." index="5"]
+visible = false
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_g3y2r")
 
 [node name="Death" parent="Sounds" index="0"]
 min_random_pitch = 2.0

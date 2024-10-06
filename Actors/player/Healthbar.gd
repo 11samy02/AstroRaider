@@ -8,6 +8,8 @@ class_name HealthBar
 var max_hp := 50
 var current_hp := max_hp
 
+var game_over := false
+
 func _enter_tree() -> void:
 	GSignals.HIT_take_Damage.connect(applay_damage)
 	GSignals.HIT_take_heal.connect(applay_heal)
@@ -41,12 +43,19 @@ func health_control():
 		for player_res: PlayerResource in GlobalGame.Players:
 			if player_res.player == parent_entity:
 				GlobalGame.Players.erase(player_res)
-	if GlobalGame.Players.is_empty():
+	if GlobalGame.Players.is_empty() and !game_over:
+		game_over = true
 		GameOverScreen.game_over()
 
 
 func applay_damage(entity: Node2D, damage: int = 1):
 	if entity == parent_entity:
+		if entity is not Player:
+			return
+		
+		if entity is Player:
+			if !entity.can_take_damage:
+				return
 		parent_entity.get_hit_anim()
 		var tween = create_tween()
 		tween.parallel()
@@ -79,7 +88,6 @@ func increase_max_health() -> void:
 	var last_value = max_hp
 	if parent_entity is Player:
 		max_hp = parent_entity.stats.max_hp
-		if current_hp + max_hp - last_value <= max_hp:
-			current_hp += max_hp - last_value
-		else:
-			current_hp = max_hp
+		var perk : Perk = PerkData.load_perk_res(PerkData.Keys.Extra_Health)
+		perk.level = 1
+		current_hp += perk.value[0]

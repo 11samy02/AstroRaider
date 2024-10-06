@@ -30,6 +30,10 @@ var deadzone := 0.25
 
 var stats: Stats = Stats.new()
 
+var collected_crystals : Array[ItemCrystal] = []
+
+var can_take_damage := true
+
 
 func _ready() -> void:
 	if character_build_id < PlayerDataBuilds.player_saved_res.saved_builds.size():
@@ -42,6 +46,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	set_bohrer_state()
 	shader_effects()
+
+#region Movement
 
 func apply_gravity(delta: float) -> void:
 	if !check_for_ground.is_colliding():
@@ -101,7 +107,6 @@ func change_gravity(new_dir: Vector2) -> void:
 		var new_rotation = get_target_rotation(new_dir)
 		var tween = create_tween()
 		gravity_dir = new_dir
-		velocity /= stats.gravity_break
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(self, "rotation_degrees", new_rotation, 0.2)
 
@@ -133,14 +138,13 @@ func wrap_angle(angle: float) -> float:
 		angle += 360.0
 	return angle
 
-
-
-
+#endregion
 
 #region Bohrer Logik
 
 func set_bohrer_state() -> void:
 	use_bohrer_anim()
+	bohrer_damage_on_static_hit()
 	if check_for_destroyable_ground.is_colliding():
 		destroy_ground()
 		
@@ -187,7 +191,7 @@ func destroy_ground() -> void:
 	if bohrer_holder.modulate.a >= 0.99:
 		if !bohrer_sound.playing:
 			bohrer_sound.play_sound()
-		GSignals.ENV_check_detection_tile.emit(stats.bohrer_damage)
+		GSignals.ENV_check_detection_tile.emit(self, stats.bohrer_damage)
 	else:
 		bohrer_sound.stop()
 
@@ -222,6 +226,7 @@ func get_hit_anim() -> void:
 	
 	sprite_anim.play("damaged", -1, stats.invincibility_frame)
 
+var static_hit_list : Array[StaticHitbox] = []
 
 func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
@@ -234,8 +239,30 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 			
 			var dir : Vector2 = (area.global_position - global_position).normalized()
 			area.entity.get_knockback(dir, attack.knockback)
+	
+	if area is StaticHitbox:
+		static_hit_list.append(area)
+		
 
+func _on_bohrer_hit_box_area_exited(area: Area2D) -> void:
+	static_hit_list.erase(area)
+
+func bohrer_damage_on_static_hit() -> void:
+	if static_hit_list.is_empty():
+		return
+	
+	var attack: AttackResource = AttackResource.new()
+	attack.damage = stats.bohrer_damage
+	for area in static_hit_list:
+		if is_instance_valid(area.entity):
+			await area.get_hit(attack, self)
 #endregion
+
 
 func shader_effects() -> void:
 	sprite.material.set_shader_parameter("mix_color", shader_value)
+
+func clear_collected_null() -> void:
+	for i in range(collected_crystals.size() - 1, -1, -1):
+		if collected_crystals[i] == null:
+			collected_crystals.remove_at(i)

@@ -1,0 +1,143 @@
+[gd_scene load_steps=23 format=3 uid="uid://dsqtnel040hel"]
+
+[ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_ri5sr"]
+[ext_resource type="Script" path="res://Objects/Buildings/torrent.gd" id="2_d2g3u"]
+[ext_resource type="Texture2D" uid="uid://njsnttqo3qtt" path="res://Sprites/Buildings/Torrent.png" id="3_2r018"]
+[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="3_c3c0x"]
+[ext_resource type="Script" path="res://Manager/enemy_detector.gd" id="4_lwr6g"]
+[ext_resource type="AudioStream" uid="uid://dhq4tomopgolt" path="res://Sounds/LaserSound.wav" id="5_cqh6p"]
+[ext_resource type="Script" path="res://UX/audio_2d.gd" id="6_q54f1"]
+
+[sub_resource type="Resource" id="Resource_ntmmc"]
+script = ExtResource("3_c3c0x")
+damage = 1
+knockback = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s06gm"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf1n5"]
+atlas = ExtResource("3_2r018")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msaxk"]
+atlas = ExtResource("3_2r018")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smqby"]
+atlas = ExtResource("3_2r018")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkvy0"]
+atlas = ExtResource("3_2r018")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhthu"]
+atlas = ExtResource("3_2r018")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hjqu"]
+atlas = ExtResource("3_2r018")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdwsw"]
+atlas = ExtResource("3_2r018")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbyr1"]
+atlas = ExtResource("3_2r018")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wf7xi"]
+atlas = ExtResource("3_2r018")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbfqo"]
+atlas = ExtResource("3_2r018")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hobbd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf1n5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msaxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smqby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkvy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhthu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hjqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdwsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbyr1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wf7xi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbfqo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 14.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q7f57"]
+radius = 12.0416
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xjr8"]
+radius = 250.0
+
+[node name="Torrent" instance=ExtResource("1_ri5sr")]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("2_d2g3u")
+atk_res = SubResource("Resource_ntmmc")
+has_fuel = true
+max_fuel = 50
+fuel_used = 2
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("CanvasItemMaterial_s06gm")
+sprite_frames = SubResource("SpriteFrames_hobbd")
+autoplay = "default"
+frame_progress = 0.510967
+
+[node name="collision" parent="." index="1"]
+visible = false
+shape = SubResource("CircleShape2D_q7f57")
+
+[node name="EnemyDetectorArea" type="Area2D" parent="." index="2"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_lwr6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_6xjr8")
+
+[node name="shoot_time" type="Timer" parent="." index="3"]
+wait_time = 0.5
+autostart = true
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource("5_cqh6p")
+script = ExtResource("6_q54f1")
+min_random_pitch = 0.5
+max_random_pitch = 1.5
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+
+[connection signal="timeout" from="shoot_time" to="." method="_on_shoot_time_timeout"]

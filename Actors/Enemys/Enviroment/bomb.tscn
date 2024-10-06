@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://bbf58whxftfq3"]
+
+[ext_resource type="Script" path="res://Actors/Enemys/Enviroment/bomb.gd" id="1_4jhmr"]
+[ext_resource type="Texture2D" uid="uid://dffqsxjstmde0" path="res://Sprites/actors/Enemys/small/Bomb/Bomb.png" id="1_esvsy"]
+[ext_resource type="PackedScene" uid="uid://70v4d2478xol" path="res://Manager/static_hitbox.tscn" id="3_oj0tp"]
+[ext_resource type="AudioStream" uid="uid://gco2mrp5n4nt" path="res://Sounds/Explosion.wav" id="4_i0o46"]
+[ext_resource type="Script" path="res://UX/audio_2d.gd" id="5_05reu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7ufsx"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpj2u"]
+atlas = ExtResource("1_esvsy")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0xam"]
+atlas = ExtResource("1_esvsy")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0lnoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpj2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0xam")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f0b4e"]
+radius = 7.0
+
+[node name="Bomb" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_4jhmr")
+damage = 25
+hp = 30
+valnuable_time = 0.2
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+modulate = Color(2, 2, 2, 1)
+material = SubResource("CanvasItemMaterial_7ufsx")
+sprite_frames = SubResource("SpriteFrames_0lnoq")
+autoplay = "default"
+frame_progress = 0.64454
+
+[node name="explode_time" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_f0b4e")
+
+[node name="StaticHitbox" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_oj0tp")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticHitbox"]
+shape = SubResource("CircleShape2D_f0b4e")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_i0o46")
+max_distance = 5000.0
+script = ExtResource("5_05reu")
+min_random_pitch = 0.75
+max_random_pitch = 1.5
+
+[node name="initiate_time" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="explode_time" to="." method="_on_explode_time_timeout"]
+[connection signal="timeout" from="initiate_time" to="." method="_on_initiate_time_timeout"]

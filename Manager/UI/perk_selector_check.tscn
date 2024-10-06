@@ -4,5 +4,4 @@
 
 [node name="PerkSelectorCheck" type="Node"]
 script = ExtResource("1_3ixyx")
-start_amount = 10
-amount_added_per_perk = 20
+amount_added_per_perk = 15
