@@ -14,13 +14,13 @@ static var Sound_audio_on := true
 func _physics_process(delta: float) -> void:
 	if type == "Music":
 		volume_db = Music_volume
-		stream_paused = !Music_audio_on
 	elif type == "Sound Effect":
 		volume_db = Sound_volume
-		stream_paused = !Sound_audio_on
 	
 
 func play_sound() -> void:
+	if type == "Music" and Music_audio_on or type == "Sound Effect" and Sound_audio_on:
+		return
 	randomize()
 	pitch_scale = randf_range(min_random_pitch, max_random_pitch)
 	play()

@@ -3,6 +3,8 @@ class_name Building
 
 @onready var sprite: AnimatedSprite2D = $sprite
 
+@export var radar_icon: Texture2D
+
 @export_category("Fuel")
 @export var has_fuel := false
 @export var max_fuel := 100
@@ -38,3 +40,10 @@ func _collect_fuel(area: Area2D) -> void:
 			if current_fuel <= max_fuel:
 				current_fuel += area.value
 				area.destroy()
+
+
+func _enter_tree() -> void:
+	GlobalGame.Buildings.append(self)
+
+func _exit_tree() -> void:
+	GlobalGame.Buildings.erase(self)

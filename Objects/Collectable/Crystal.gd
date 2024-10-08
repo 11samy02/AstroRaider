@@ -43,7 +43,17 @@ func collect(body: Node2D) -> void:
 	if body is Player and !is_collected:
 		is_collected = true
 		player_who_collected = body
-		if player_who_collected.collected_crystals.size() < 60 - GlobalGame.Players.size() * 10:
+		
+		var max_collect_count := 50
+		
+		if GlobalGame.Players.size() <= 2:
+			max_collect_count = 50
+		elif GlobalGame.Players.size() <= 4:
+			max_collect_count = 30
+		else:
+			max_collect_count = 20
+		
+		if player_who_collected.collected_crystals.size() < max_collect_count:
 			player_who_collected.collected_crystals.push_back(self)
 		else:
 			rope.hide()

@@ -44,7 +44,7 @@ environment = SubResource("Environment_4h7l4")
 [node name="DefaultCamera" parent="." instance=ExtResource("5_1oloc")]
 limit_smoothed = true
 position_smoothing_speed = 10.0
-max_zoom = null
+max_zoom = 1.5
 
 [node name="tileMap Holder" type="Node2D" parent="."]
 

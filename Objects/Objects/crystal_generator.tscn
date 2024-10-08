@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://84vvohor50dh"]
+[gd_scene load_steps=14 format=3 uid="uid://84vvohor50dh"]
 
 [ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="1_gswfc"]
 [ext_resource type="Script" path="res://Objects/Objects/crystal_generator.gd" id="1_qydqw"]
+[ext_resource type="Texture2D" uid="uid://f37v14aimli5" path="res://Sprites/UI/in Game/generator.png" id="2_cbnsh"]
 [ext_resource type="AudioStream" uid="uid://cnwdm2llqw4lb" path="res://Sounds/CrystalCollectSound.wav" id="3_fkod7"]
 [ext_resource type="Script" path="res://UX/audio_2d.gd" id="4_hf2de"]
 
@@ -59,6 +60,7 @@ z_index = -20
 collision_layer = 0
 collision_mask = 32
 script = ExtResource("1_qydqw")
+radar_icon = ExtResource("2_cbnsh")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_4jwol")

@@ -9,7 +9,7 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
     for (float i = -ceil(outline_width); i <= ceil(outline_width); i++) {
         float x = abs(i) > outline_width ? outline_width * sign(i) : i;
         float offset;
-        
+
         if (outline_pattern == 0) {
             offset = outline_width - abs(x);
         } else if (outline_pattern == 1) {
@@ -17,17 +17,17 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
         } else if (outline_pattern == 2) {
             offset = outline_width;
         }
-        
+
         for (float j = -ceil(offset); j <= ceil(offset); j++) {
             float y = abs(j) > offset ? offset * sign(j) : j;
             vec2 xy = uv + texture_pixel_size * vec2(x, y);
-            
+
             if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == outline_inside) {
                 return true;
             }
         }
     }
-    
+
     return false;
 }
 

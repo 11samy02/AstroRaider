@@ -34,7 +34,7 @@ func _ready() -> void:
 	desired_distance += randf_range(-10,10)
 
 func collect(body: Node2D) -> void:
-	if body is Player:
+	if body is Player and !is_collected:
 		is_collected = true
 		player_who_collected = body
 		

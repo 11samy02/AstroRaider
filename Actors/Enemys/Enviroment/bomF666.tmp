@@ -39,6 +39,7 @@ radius = 7.0
 collision_mask = 0
 script = ExtResource("1_4jhmr")
 damage = 25
+detector_count = 7
 detector = ExtResource("2_bkor8")
 valnuable_time = 0.2
 

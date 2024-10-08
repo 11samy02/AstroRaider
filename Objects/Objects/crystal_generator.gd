@@ -1,9 +1,10 @@
-extends Area2D
+extends Building
 class_name CrystalGenerator
 
 @onready var collect_crystal: AudioStreamPlayer2D = $Sounds/CollectCrystal
 
 var Ores: Dictionary = {}
+
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is ItemCrystal:

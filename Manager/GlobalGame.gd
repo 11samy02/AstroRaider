@@ -1,7 +1,10 @@
 extends Node
 
-var Player_count: int = 1
+var Player_count: int = 3
 var Players: Array[PlayerResource] = []
+
+var Enemies: Array[EnemyBaseTemplate] = []
+var Buildings: Array[CrystalGenerator]
 
 var camera: MainCam
 

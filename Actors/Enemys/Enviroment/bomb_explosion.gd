@@ -20,9 +20,14 @@ func _on_static_attack_box_area_entered(area: Area2D) -> void:
 		if area is Hitbox:
 			var attack := AttackResource.new()
 			attack.damage = damage
-			attack.knockback = 0
+			attack.knockback = 5
 			if area.entity is Player:
 				area.get_hit(attack)
 				GSignals.CAM_shake_effect.emit()
 			if area.entity is BarrierShield:
 				area.get_hit(attack)
+			if area.entity is EnemyBaseTemplate:
+				area.get_hit(attack)
+				var dir : Vector2 = (area.global_position - global_position).normalized()
+				area.entity.get_knockback(dir, attack.knockback)
+				

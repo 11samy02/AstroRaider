@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+@export var radar_icon : Texture2D
+
 @onready var check_for_ground: ShapeCast2D = $Rays/check_for_ground
 @onready var check_for_destroyable_ground: ShapeCast2D = $Rays/check_for_destroyable_ground
 

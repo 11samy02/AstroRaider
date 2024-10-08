@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://wwu4lio5gwqa" path="res://Sprites/Items/Ores/iron_ore.png" id="2_02qvw"]
 
 [node name="IronOre" instance=ExtResource("1_jaebk")]
-scale = Vector2(0.1, 0.1)
 mass = 4
 
 [node name="Sprite2D" parent="." index="0"]

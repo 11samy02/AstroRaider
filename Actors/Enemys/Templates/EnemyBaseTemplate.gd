@@ -12,6 +12,7 @@ var active_stats: EnemyStats = stats[level]
 
 @export var sprite_variation: Array[Texture2D]
 @export var die_particle_variation: Array[Texture2D]
+@export var radar_icon: Texture2D
 
 var state_mashine := AiEnemyData.state_mashine
 
@@ -32,6 +33,7 @@ static var entity_list: Array[EnemyBaseTemplate]
 var killed_by : CharacterBody2D = null
 
 func _enter_tree() -> void:
+	GlobalGame.Enemies.append(self)
 	clamp(level, 0, stats.size() - 1)
 	GSignals.HIT_take_Damage.connect(applay_damage)
 	if level < stats.size():
@@ -109,6 +111,10 @@ func death() -> void:
 		entity_list.erase(self)
 		GSignals.ENE_killed_by.emit(killed_by)
 	queue_free()
+
+
+func _exit_tree() -> void:
+	GlobalGame.Enemies.erase(self)
 
 
 static func reset() -> void:

@@ -39,6 +39,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	rng.randomize()
 	seed = rng.randi()
+	reset_objects()
 	room_count.min_value = ceil(3 + Map_Size.x / 20)
 	room_count.max_value = ceil(7 + Map_Size.x / 20)
 	fill_map(Vector2i(-Map_Size.x / 2, -Map_Size.y / 2), Vector2i(Map_Size.x / 2, Map_Size.y / 2))
@@ -340,3 +341,7 @@ func check_player_pos() -> void:
 		for chunk_info in chunks_to_fill:
 			await fill_map(chunk_info[0], chunk_info[1], chunk_info[2])
 			await get_tree().process_frame
+
+func reset_objects() -> void:
+	Bomb.reset()
+	
