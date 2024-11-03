@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://du71etym3o4r"]
+
+[ext_resource type="Script" path="res://UI/ControllerSetup/player_card.gd" id="2_4pmx7"]
+[ext_resource type="Texture2D" uid="uid://oiip5a3yjyxy" path="res://Sprites/UI/ControllerSelect/controller_inaktiv.png" id="3_g0r2y"]
+[ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="4_fnqb8"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0576f"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jffi6"]
+line_spacing = 1.0
+font_size = 30
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.767)
+
+[node name="player_card" type="NinePatchRect"]
+size_flags_horizontal = 3
+texture = SubResource("CompressedTexture2D_0576f")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+script = ExtResource("2_4pmx7")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="icon" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_g0r2y")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("4_fnqb8")
+text = "Press Start"
+label_settings = SubResource("LabelSettings_jffi6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

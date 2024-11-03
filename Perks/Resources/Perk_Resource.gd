@@ -10,6 +10,7 @@ enum Active_type_keys {
 	TimeDelay,
 	Always,
 	Custom_Condition,
+	Activation,
 }
 
 enum Type_keys {
@@ -25,11 +26,18 @@ enum Type_keys {
 @export var perk_name := ""
 @export_range(1,6) var level := 1
 
+@export var cost : Array[int] = [0,0,0,0,0,0]:
+	set(cos):
+		cost = set_cost(cos)
+	get:
+		return cost
+
 @export var value : Array[int] = [0,0,0,0,0,0]:
-	set (val):
+	set(val):
 		value = set_value(val)
 	get:
 		return value
+
 
 
 @export_multiline var description := ""
@@ -39,7 +47,13 @@ enum Type_keys {
 func get_description() -> String:
 	return(description.replace("{{value}}", str(value[level-1])))
 
+func get_cost() -> String:
+	return(str(cost[level-1]))
 
 func set_value(new_value: Array[int]):
+	if new_value.size() == value.size():
+		return(new_value)
+
+func set_cost(new_value: Array[int]):
 	if new_value.size() == value.size():
 		return(new_value)

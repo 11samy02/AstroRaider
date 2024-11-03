@@ -25,6 +25,7 @@ class_name Player
 var gravity_dir := Vector2.DOWN
 
 @export var player_id := 0
+@export var controller_id := 0
 @export var character_build_id := 0
 
 var is_bohrer_active := false
@@ -76,7 +77,7 @@ func _input(event: InputEvent) -> void:
 	input_movement(event)
 
 func input_movement(event: InputEvent) ->void:
-	if player_id == 0 and Input.get_connected_joypads().size() == 0:
+	if controller_id == 0 and Input.get_connected_joypads().size() == 0:
 		if Input.is_action_pressed("ui_left"):
 			sprite.flip_h = true
 			bohrer_holder.get_child(0).flip_h = true
@@ -90,17 +91,17 @@ func input_movement(event: InputEvent) ->void:
 		elif Input.is_action_pressed("ui_down"):
 			change_gravity(Vector2.DOWN)
 	else:
-		if Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_LEFT):
+		if Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_LEFT):
 			sprite.flip_h = true
 			bohrer_holder.get_child(0).flip_h = true
 			change_gravity(Vector2.LEFT)
-		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_RIGHT):
+		elif Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_RIGHT):
 			sprite.flip_h = false
 			bohrer_holder.get_child(0).flip_h = false
 			change_gravity(Vector2.RIGHT)
-		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_UP):
+		elif Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_UP):
 			change_gravity(Vector2.UP)
-		elif Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_DOWN):
+		elif Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_DOWN):
 			change_gravity(Vector2.DOWN)
 
 
@@ -150,7 +151,7 @@ func set_bohrer_state() -> void:
 	if check_for_destroyable_ground.is_colliding():
 		destroy_ground()
 		
-	if player_id == 0 and Input.get_connected_joypads().size() == 0:
+	if controller_id == 0 and Input.get_connected_joypads().size() == 0:
 		if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
 			is_bohrer_active = true
 			
@@ -167,16 +168,16 @@ func set_bohrer_state() -> void:
 			is_bohrer_active = false
 			bohrer_sound.stop()
 	else:
-		if gravity_dir == Vector2.LEFT and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_LEFT)) :
+		if gravity_dir == Vector2.LEFT and (Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_X) < -deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_LEFT)) :
 				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.RIGHT and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_RIGHT)) :
+		elif gravity_dir == Vector2.RIGHT and (Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_X) > deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_RIGHT)) :
 				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.UP and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_UP)):
+		elif gravity_dir == Vector2.UP and (Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_Y) < -deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_UP)):
 				is_bohrer_active = true
 			
-		elif gravity_dir == Vector2.DOWN and (Input.get_joy_axis(player_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(player_id, JOY_BUTTON_DPAD_DOWN)):
+		elif gravity_dir == Vector2.DOWN and (Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_Y) > deadzone or Input.is_joy_button_pressed(controller_id, JOY_BUTTON_DPAD_DOWN)):
 				is_bohrer_active = true
 			
 		else:

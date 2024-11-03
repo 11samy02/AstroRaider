@@ -1,17 +1,31 @@
 extends Node2D
 class_name PlayerList
 
+const SKILL_TREE := preload("res://Manager/UI/skill_tree.tscn")
 
 func _enter_tree() -> void:
-	GSignals.PERK_reset_perks_from_player_id.connect(reset_perk_from_player)
+	GSignals.PERK_reset_perks_from_controller_id.connect(reset_perk_from_player)
 
 func set_players() -> void:
 	GlobalGame.Players.clear()
+	var id = 0
 	for player in get_children():
 		if player is Player:
 			var player_res : PlayerResource = PlayerResource.new()
 			player_res.player = player
+			player_res.Role = load("res://Resources/Characters/Roles/Role_Trailblazer.tres")
 			GlobalGame.Players.append(player_res)
+			
+			if !ControllerHolder.registered_controllers.is_empty():
+				player_res.player.controller_id = ControllerHolder.registered_controllers[id]
+				player_res.player.player_id = id
+			
+			var skill_tree : SkillTree = SKILL_TREE.instantiate()
+			skill_tree.player_res = player_res
+			
+			add_child(skill_tree)
+			
+			id += 1
 			
 	spawn_healtbars_to_players()
 	spawn_detector_to_player()
@@ -30,7 +44,7 @@ func spawn_healtbars_to_players():
 
 func add_perks_to_player(id:int):
 	for player_res: PlayerResource in GlobalGame.Players:
-		if player_res.player.player_id == id:
+		if player_res.player.controller_id == id:
 			var stats = player_res.player.stats
 			for perk: Perk in stats.Perks:
 				var perk_szene = PerkData.load_perk_scene(perk.Key).instantiate()
@@ -43,7 +57,7 @@ func add_perks_to_player(id:int):
 func reset_perk_from_player(id:int) -> void:
 	for perk_build in get_children():
 		if perk_build is PerkBuild:
-			if perk_build.Player_Res.player.player_id == id:
+			if perk_build.Player_Res.player.controller_id == id:
 				perk_build.queue_free()
 	
 	add_perks_to_player(id)

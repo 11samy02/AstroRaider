@@ -3,7 +3,6 @@ extends Node
 @export var enviroment : Enviroment
 
 @onready var entity_spawner: EntitySpawner = $EntitySpawner
-@onready var perk_selector_check: Node = $PerkSelectorCheck
 
 const PLAYER = preload("res://Actors/player/player.tscn")
 
@@ -30,8 +29,7 @@ func start_Game() -> void:
 		player_instance.player_id = player_id
 		player_list.add_child(player_instance)
 		i += 1
-
+		
+	
 	player_list.set_players()
-	perk_selector_check.set_player_Stats()
-
 	entity_spawner.start_wave()

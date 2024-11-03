@@ -9,6 +9,7 @@ image = ExtResource("1_r76u1")
 Key = 7
 perk_name = "Aim Bot"
 level = 1
+cost = Array[int]([50, 75, 100, 125, 150, 175])
 value = Array[int]([2, 4, 6, 8, 10, 12])
 description = "your projectiles can auto Target the enemy by a value of {{value}}"
 type = 2

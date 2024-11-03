@@ -1,7 +1,6 @@
 extends Area2D
 class_name PlayerProjectile
 
-const EXPLODE = ""
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var particle: GPUParticles2D = $particle
@@ -34,10 +33,3 @@ func _on_lifetime_timeout() -> void:
 	set_physics_process(false)
 	particle.emitting = false
 	animation_player.play("hit")
-
-func spawn_explosion() -> void:
-	#var explode = EXPLODE.instantiate()
-	#explode.global_position = global_position
-	#explode.emitting = true
-	#get_parent().add_child(explode)
-	pass

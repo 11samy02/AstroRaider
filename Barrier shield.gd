@@ -17,6 +17,7 @@ func get_hit(attack: AttackResource, who_attacked: CharacterBody2D = null) -> vo
 	Health -= attack.damage
 	
 	if Health <= 0:
+		GSignals.PERK_barrier_shield_destroyed.emit(self)
 		$AnimationPlayer.play("destroy")
 
 func _on_area_entered(area: Area2D) -> void:
@@ -27,4 +28,6 @@ func _on_area_entered(area: Area2D) -> void:
 func _exit_tree() -> void:
 	if entity is Player:
 		entity.can_take_damage = true
-	GSignals.PERK_barrier_shield_destroyed.emit(self)
+
+func destroy():
+	queue_free()

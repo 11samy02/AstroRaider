@@ -10,7 +10,7 @@ signal HIT_take_heal
 
 #Perks
 signal PERK_event_collect_crystal
-signal PERK_reset_perks_from_player_id
+signal PERK_reset_perks_from_controller_id
 signal PERK_barrier_shield_destroyed
 signal PERK_Aim_bot_activate
 signal PERK_Extra_health
@@ -27,3 +27,4 @@ signal WAV_wave_endet
 
 #Player
 signal PLA_is_shooting
+signal PLA_open_skill_tree

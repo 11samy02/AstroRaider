@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.get_joy_axis(player.player_id , JOY_AXIS_TRIGGER_RIGHT) > 0 or Input.is_joy_button_pressed(player.player_id, JOY_BUTTON_RIGHT_SHOULDER):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.get_joy_axis(player.controller_id , JOY_AXIS_TRIGGER_RIGHT) > 0 or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_RIGHT_SHOULDER):
 		if !had_shoot:
 			if holding_item != null:
 				if holding_item.type == ItemConfig.Type.Ranged_Weapon:
@@ -47,10 +47,10 @@ func _input(event: InputEvent) -> void:
 
 func get_input_axis() -> Vector2:
 	var input_axis: Vector2
-	if abs(Input.get_joy_axis(player.player_id,JOY_AXIS_RIGHT_X)) > 0.1:
-		input_axis.x = Input.get_joy_axis(player.player_id,JOY_AXIS_RIGHT_X)
-	if abs(Input.get_joy_axis(player.player_id,JOY_AXIS_RIGHT_Y)) > 0.1:
-		input_axis.y = Input.get_joy_axis(player.player_id,JOY_AXIS_RIGHT_Y)
+	if abs(Input.get_joy_axis(player.controller_id,JOY_AXIS_RIGHT_X)) > 0.1:
+		input_axis.x = Input.get_joy_axis(player.controller_id,JOY_AXIS_RIGHT_X)
+	if abs(Input.get_joy_axis(player.controller_id,JOY_AXIS_RIGHT_Y)) > 0.1:
+		input_axis.y = Input.get_joy_axis(player.controller_id,JOY_AXIS_RIGHT_Y)
 	return input_axis.normalized()
 
 func shoot():

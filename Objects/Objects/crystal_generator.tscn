@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://84vvohor50dh"]
+[gd_scene load_steps=15 format=3 uid="uid://84vvohor50dh"]
 
 [ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="1_gswfc"]
 [ext_resource type="Script" path="res://Objects/Objects/crystal_generator.gd" id="1_qydqw"]
@@ -55,6 +55,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_g8ix4"]
 radius = 14.0357
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsdkb"]
+radius = 30.1496
+
 [node name="CrystalGenerator" type="Area2D"]
 z_index = -20
 collision_layer = 0
@@ -69,7 +72,7 @@ autoplay = "default"
 frame_progress = 0.0931071
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-modulate = Color(1, 1, 1, 0)
+visible = false
 shape = SubResource("CircleShape2D_g8ix4")
 
 [node name="Sounds" type="Node2D" parent="."]
@@ -80,4 +83,14 @@ script = ExtResource("4_hf2de")
 min_random_pitch = 0.75
 max_random_pitch = 1.5
 
+[node name="CheckPlayerNearby" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPlayerNearby"]
+visible = false
+shape = SubResource("CircleShape2D_lsdkb")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="CheckPlayerNearby" to="." method="_on_check_player_nearby_body_entered"]
+[connection signal="body_exited" from="CheckPlayerNearby" to="." method="_on_check_player_nearby_body_exited"]

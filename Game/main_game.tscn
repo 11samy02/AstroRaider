@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c82etxgt0m7uw"]
+[gd_scene load_steps=9 format=3 uid="uid://c82etxgt0m7uw"]
 
 [ext_resource type="Texture2D" uid="uid://rc4wjwgym4o6" path="res://Images/Background/bg1.png" id="1_oy3rq"]
 [ext_resource type="Script" path="res://Game/main_game.gd" id="1_to3au"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cy8yxobay3dcf" path="res://UI/game_ui.tscn" id="4_niwkq"]
 [ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://Game/Manager/default_camera.tscn" id="5_1oloc"]
 [ext_resource type="PackedScene" uid="uid://bhmsjtfelgkxa" path="res://Manager/spawner/EntitySpawner.tscn" id="6_kru1y"]
-[ext_resource type="PackedScene" uid="uid://du5pj78hk5mo8" path="res://Manager/UI/perk_selector_check.tscn" id="8_d4ofr"]
 [ext_resource type="PackedScene" uid="uid://84vvohor50dh" path="res://Objects/Objects/crystal_generator.tscn" id="9_30ivo"]
 
 [sub_resource type="Environment" id="Environment_4h7l4"]
@@ -49,6 +48,8 @@ max_zoom = 1.5
 [node name="tileMap Holder" type="Node2D" parent="."]
 
 [node name="default" parent="tileMap Holder" instance=ExtResource("1_wfgm1")]
+Map_Size = Vector2i(100, 100)
+threshold = Vector2i(25, 20)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.721569, 0.729412, 0.776471, 1)
@@ -72,5 +73,3 @@ texture = ExtResource("1_oy3rq")
 [node name="CrystalGenerator" parent="." instance=ExtResource("9_30ivo")]
 
 [node name="EntitySpawner" parent="." instance=ExtResource("6_kru1y")]
-
-[node name="PerkSelectorCheck" parent="." instance=ExtResource("8_d4ofr")]

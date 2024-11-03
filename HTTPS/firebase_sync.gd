@@ -64,9 +64,6 @@ func on_http_request_request_completed(result, response_code, headers, body):
 		print("Antwort:", body.get_string_from_utf8())
 
 func compare_highscores(a, b):
-	if typeof(a["wave"]) == TYPE_INT and typeof(b["wave"]) == TYPE_INT:
-		if a["wave"] > b["wave"]:
-			return true
-	elif typeof(a["wave"]) == TYPE_INT and typeof(b["wave"]) != TYPE_INT:
+	if a["wave"] > b["wave"]:
 		return true
 	return false

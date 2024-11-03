@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://couxge5p5egvg" path="res://Sprites/Items/Ores/gold_ore.png" id="2_43dbl"]
 
 [node name="Gold_Ore" instance=ExtResource("1_y7sq5")]
-scale = Vector2(0.1, 0.1)
 Ore_type = 2
 mass = 3
 

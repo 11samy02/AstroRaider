@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4kynp1alo4i3"]
+
+[ext_resource type="Texture2D" uid="uid://betk3rgbaluts" path="res://Sprites/Projectiles/energy_ball_blue.png" id="1_7vjf8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n6rlr"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_3msgg"]
+_data = [Vector2(0.0130435, 0.307692), 0.0, -0.123291, 0, 0, Vector2(0.573913, 0.208791), -0.180534, -0.180534, 0, 0, Vector2(1, 0), -1.64286, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_l5gx0"]
+offsets = PackedFloat32Array(0.0247525, 0.282178, 0.450495, 0.747525, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.658416, 0.658416, 0.658416, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[node name="fire_ball_explode" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_n6rlr")
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.75
+randomness = 1.0
+lifetime_randomness = 0.2
+texture = ExtResource("1_7vjf8")
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+linear_accel_max = 50.0
+radial_accel_min = -32.0
+radial_accel_max = 32.0
+scale_amount_curve = SubResource("Curve_3msgg")
+color_ramp = SubResource("Gradient_l5gx0")
+anim_speed_min = 1.0
+anim_speed_max = 1.0

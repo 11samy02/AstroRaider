@@ -123,6 +123,7 @@ _data = {
 }
 
 [node name="GameUI" type="CanvasLayer"]
+process_mode = 3
 layer = 100
 script = ExtResource("1_wtiqs")
 
@@ -192,6 +193,7 @@ texture = SubResource("AtlasTexture_k2fda")
 script = ExtResource("5_fm8ch")
 
 [node name="curser" type="TextureRect" parent="Control/MarginContainer/Rader"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

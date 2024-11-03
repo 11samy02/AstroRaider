@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://ss5o0ot61xc0"]
+[gd_resource type="Theme" load_steps=20 format=3 uid="uid://ss5o0ot61xc0"]
 
 [ext_resource type="Texture2D" uid="uid://b8ti6qnp8y3gv" path="res://Sprites/UI/button3.png" id="1_3evjt"]
 [ext_resource type="Texture2D" uid="uid://ci3uyl5ci1j12" path="res://Sprites/UI/button1.png" id="1_n70ju"]
@@ -97,6 +97,44 @@ texture_margin_right = 1.0
 texture_margin_bottom = 2.0
 region_rect = Rect2(7, 2, 48, 16)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f2tks"]
+content_margin_left = 164.0
+content_margin_right = 164.0
+texture = ExtResource("1_3evjt")
+texture_margin_left = 8.0
+texture_margin_top = 4.0
+texture_margin_right = 8.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6m6dc"]
+content_margin_left = 164.0
+content_margin_right = 164.0
+texture = ExtResource("1_3evjt")
+texture_margin_left = 8.0
+texture_margin_top = 4.0
+texture_margin_right = 8.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ooi17"]
+content_margin_left = 164.0
+content_margin_right = 164.0
+texture = ExtResource("1_3evjt")
+texture_margin_left = 8.0
+texture_margin_top = 4.0
+texture_margin_right = 8.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvmiq"]
+content_margin_left = 164.0
+content_margin_right = 164.0
+texture = ExtResource("1_n70ju")
+texture_margin_left = 8.0
+texture_margin_top = 4.0
+texture_margin_right = 8.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmbiv"]
+
 [resource]
 Button/font_sizes/font_size = 24
 Button/fonts/font = SubResource("FontVariation_sdi0l")
@@ -110,3 +148,15 @@ LineEdit/fonts/font = SubResource("FontVariation_qkxn6")
 LineEdit/styles/focus = SubResource("StyleBoxTexture_xu1cu")
 LineEdit/styles/normal = SubResource("StyleBoxTexture_727np")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_k50hs")
+TabBar/icons/close = null
+TabBar/icons/decrement = null
+TabBar/icons/decrement_highlight = null
+TabBar/icons/drop_mark = null
+TabBar/icons/increment = null
+TabBar/icons/increment_highlight = null
+TabBar/styles/button_pressed = SubResource("StyleBoxTexture_f2tks")
+TabBar/styles/tab_hovered = SubResource("StyleBoxTexture_6m6dc")
+TabBar/styles/tab_selected = SubResource("StyleBoxTexture_ooi17")
+TabBar/styles/tab_unselected = SubResource("StyleBoxTexture_xvmiq")
+TabContainer/font_sizes/font_size = 32
+TabContainer/styles/panel = SubResource("StyleBoxEmpty_mmbiv")

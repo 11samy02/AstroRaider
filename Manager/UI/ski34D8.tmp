@@ -1,0 +1,327 @@
+[gd_scene load_steps=3 format=3 uid="uid://vxe42563otpi"]
+
+[ext_resource type="Script" path="res://Manager/UI/skill_tree.gd" id="1_hpmon"]
+[ext_resource type="Texture2D" uid="uid://cxer7mwrg8vwh" path="res://Sprites/UI/scale_able_container.png" id="1_kthid"]
+
+[node name="SkillTree" type="CanvasLayer"]
+script = ExtResource("1_hpmon")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_kthid")
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+
+[node name="tree_pos" type="FlowContainer" parent="Control/MarginContainer/NinePatchRect/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+alignment = 1
+
+[node name="pos" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos2" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos3" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos4" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos5" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos6" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos7" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos8" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos9" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos10" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos11" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos15" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos16" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos17" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos18" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos19" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos20" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos21" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos22" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos23" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos24" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos25" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos26" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos27" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos28" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos29" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos30" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos31" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos32" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos33" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos34" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos35" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos36" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos37" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos38" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos39" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos40" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos41" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos42" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos43" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos44" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos45" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos46" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos47" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos48" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos49" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos50" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos51" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos52" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos53" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos54" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos55" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos56" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos57" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos58" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos59" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos60" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos61" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos62" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos63" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos64" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos65" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="pos66" type="Control" parent="Control/MarginContainer/NinePatchRect/MarginContainer/tree_pos"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2

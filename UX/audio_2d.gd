@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func play_sound() -> void:
-	if type == "Music" and Music_audio_on or type == "Sound Effect" and Sound_audio_on:
+	if type == "Music" and !Music_audio_on or type == "Sound Effect" and !Sound_audio_on:
 		return
 	randomize()
 	pitch_scale = randf_range(min_random_pitch, max_random_pitch)

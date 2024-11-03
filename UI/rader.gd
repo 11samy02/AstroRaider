@@ -11,17 +11,23 @@ func _process(delta: float) -> void:
 	update_map_positions()
 
 func set_rader_scale():
-	var cam = GlobalGame.camera
-	var zoom_diff = (cam.min_zoom - cam.max_zoom) / 5
-	rader_index = int((cam.min_zoom - cam.zoom.x) / zoom_diff)
-	rader_index = clamp(rader_index, 0, 4)
+	if GlobalGame.Players.size() > 1:
+		var cam = GlobalGame.camera
+		var zoom_diff = (cam.min_zoom - cam.max_zoom) / 5
+		rader_index = int((cam.min_zoom - cam.zoom.x) / zoom_diff)
+		rader_index = clamp(rader_index, 0, 4)
+	elif Input.is_action_just_pressed("MapZoom"):
+		if rader_index < 4:
+			rader_index += 1
+		else:
+			rader_index = 0
 	
 	if texture is AtlasTexture:
 		texture.region.position.x = 78 * rader_index
 		if rader_index != 0:
-			radar_scale_factor = 0.25 / (2 * rader_index)
+			radar_scale_factor = 0.1 / (2 * rader_index)
 		else:
-			radar_scale_factor = 0.25
+			radar_scale_factor = 0.1
 
 func update_map_positions():
 	var cam = GlobalGame.camera
@@ -49,16 +55,17 @@ func update_map_positions():
 		var radar_position = radar_center + relative_pos
 		update_radar_icon_position(building.radar_icon, radar_position)
 	
-	for player_res: PlayerResource in GlobalGame.Players:
-		var player = player_res.player
-		var pos = player.global_position
-		var relative_pos = (pos - cam_center) * radar_zoom 
-		
-		if relative_pos.length() > radar_radius:
-			relative_pos = relative_pos.normalized() * radar_radius
-		
-		var radar_position = radar_center + relative_pos
-		update_radar_icon_position(player.radar_icon, radar_position)
+	if GlobalGame.Players.size() > 1:
+		for player_res: PlayerResource in GlobalGame.Players:
+			var player = player_res.player
+			var pos = player.global_position
+			var relative_pos = (pos - cam_center) * radar_zoom 
+			
+			if relative_pos.length() > radar_radius:
+				relative_pos = relative_pos.normalized() * radar_radius
+			
+			var radar_position = radar_center + relative_pos
+			update_radar_icon_position(player.radar_icon, radar_position)
 
 func update_radar_icon_position(icon_tex: Texture2D, radar_position: Vector2):
 	var icon = TextureRect.new()

@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cf4tb0omtqrn2" path="res://Sprites/Items/Ores/copper_ore.png" id="2_qfdv2"]
 
 [node name="IronOre" instance=ExtResource("1_6aupr")]
-scale = Vector2(0.1, 0.1)
 Ore_type = 1
 mass = 2
 

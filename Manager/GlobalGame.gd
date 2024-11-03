@@ -1,6 +1,6 @@
 extends Node
 
-var Player_count: int = 3
+var Player_count: int = 1
 var Players: Array[PlayerResource] = []
 
 var Enemies: Array[EnemyBaseTemplate] = []

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://deniacf7djdsm"]
+
+[ext_resource type="Texture2D" uid="uid://3sr8we51k6o7" path="res://Sprites/Perks/new_frames/new_frame_design2.png" id="1_ofqmc"]
+[ext_resource type="Texture2D" uid="uid://c8qy75batm08p" path="res://Sprites/Perks/new_frames/new_frame_design3.png" id="2_8cerm"]
+[ext_resource type="Texture2D" uid="uid://dbkuxe7t2om3w" path="res://Sprites/Perks/new_frames/new_frame_design4.png" id="3_0hgmw"]
+[ext_resource type="Script" path="res://Manager/UI/perk_button.gd" id="4_ly8wx"]
+
+[node name="PerkButton" type="TextureButton"]
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+disabled = true
+texture_normal = ExtResource("1_ofqmc")
+texture_hover = ExtResource("2_8cerm")
+texture_disabled = ExtResource("3_0hgmw")
+texture_focused = ExtResource("2_8cerm")
+stretch_mode = 5
+script = ExtResource("4_ly8wx")
+
+[node name="icon" type="TextureRect" parent="."]
+modulate = Color(0.389287, 0.389287, 0.389287, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

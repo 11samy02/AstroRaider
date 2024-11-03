@@ -9,6 +9,7 @@ image = ExtResource("1_p0ph6")
 Key = 8
 perk_name = "Extra Health"
 level = 1
+cost = Array[int]([25, 50, 75, 100, 125, 150])
 value = Array[int]([25, 50, 75, 100, 125, 150])
 description = "Increases your max health by +{{value}}"
 type = 1

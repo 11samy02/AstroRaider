@@ -27,7 +27,6 @@ func _process(delta: float) -> void:
 func check_for_paused() -> void:
 	if can_pause_on_screen:
 		if get_tree().paused:
-			print(2)
 			get_tree().paused = false
 			hide()
 		else:

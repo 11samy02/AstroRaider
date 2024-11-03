@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=36 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://UX/audio_2d.gd" id="10_pasbu"]
 [ext_resource type="AudioStream" uid="uid://dlo0yu1a81ksu" path="res://Sounds/damage.wav" id="11_bdp4b"]
 [ext_resource type="AudioStream" uid="uid://nf0618xwf4nf" path="res://Sounds/BohrerSound.wav" id="12_purh8"]
+[ext_resource type="Script" path="res://Actors/player/activation_abilities.gd" id="14_0hd48"]
 
 [sub_resource type="Animation" id="Animation_b8c3x"]
 length = 0.001
@@ -361,6 +362,10 @@ stream = ExtResource("12_purh8")
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 0.75
+
+[node name="Activation_abilities" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("14_0hd48")
+player = NodePath("..")
 
 [connection signal="area_entered" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_exited"]

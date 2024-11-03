@@ -88,6 +88,5 @@ func increase_max_health() -> void:
 	var last_value = max_hp
 	if parent_entity is Player:
 		max_hp = parent_entity.stats.max_hp
-		var perk : Perk = PerkData.load_perk_res(PerkData.Keys.Extra_Health)
-		perk.level = 1
-		current_hp += perk.value[0]
+		var perk: Perk = PerkData.load_perk_res(PerkData.Keys.Extra_Health)
+		GSignals.HIT_take_heal.emit(perk.value)

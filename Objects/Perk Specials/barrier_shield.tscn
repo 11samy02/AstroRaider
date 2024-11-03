@@ -1,15 +1,15 @@
 [gd_scene load_steps=25 format=3 uid="uid://byl3b28jf16ly"]
 
 [ext_resource type="Script" path="res://Barrier shield.gd" id="1_iqax3"]
+[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_a3fp7"]
 [ext_resource type="Texture2D" uid="uid://eyxyeinfb8we" path="res://Sprites/actors/items/Barrier_shield.png" id="2_api35"]
-[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_bccys"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qngd0"]
 light_mode = 1
 
-[sub_resource type="Resource" id="Resource_gjkxq"]
-script = ExtResource("2_bccys")
-damage = 0
+[sub_resource type="Resource" id="Resource_1huv2"]
+script = ExtResource("2_a3fp7")
+damage = 1
 knockback = 3.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cewf6"]
@@ -159,7 +159,7 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"queue_free"
+"method": &"destroy"
 }]
 }
 
@@ -178,7 +178,7 @@ material = SubResource("CanvasItemMaterial_qngd0")
 collision_layer = 8
 collision_mask = 8
 script = ExtResource("1_iqax3")
-atk_resource = SubResource("Resource_gjkxq")
+atk_resource = SubResource("Resource_1huv2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qu6u8")
