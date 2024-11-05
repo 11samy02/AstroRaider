@@ -5,6 +5,8 @@ class_name Stats
 @export var gravity_break := 2.0
 @export var max_speed := 250.0
 
+@export var slowness_energy := 100.0
+
 @export var bohrer_damage := 1
 @export var bohrer_knockback := 3.0
 
@@ -15,3 +17,4 @@ class_name Stats
 @export var rotation_speed := 10.0
 
 @export var max_hp := 100
+@export var armor := 1

@@ -2,7 +2,7 @@ extends Resource
 class_name PlayerResource
 
 var player : Player
-var crystal_count := 5000
+var crystal_count := 0
 var max_health := 150
 var current_health := 150
 

@@ -7,4 +7,12 @@ class_name Hitbox
 func get_hit(attack: AttackResource, who_attacked: CharacterBody2D = null) -> void:
 	if entity is EnemyBaseTemplate:
 		entity.killed_by = who_attacked
-	GSignals.HIT_take_Damage.emit(entity, attack.damage)
+	GSignals.HIT_take_Damage.emit(entity, calculate_real_damage(attack.damage))
+
+
+func calculate_real_damage(damage: int) -> int:
+	if entity is Player:
+		var armor = entity.stats.armor
+		
+		return ceil(damage / armor)
+	return damage

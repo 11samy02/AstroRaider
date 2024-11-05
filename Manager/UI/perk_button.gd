@@ -22,6 +22,8 @@ func _on_button_down() -> void:
 		skill.is_active = true
 		var new_perk:Perk = PerkData.load_perk_res(skill.key)
 		new_perk.level = skill.level 
+		skill.player_res.crystal_count -= new_perk.get_cost()
+		GSignals.UI_reset_skill_tree.emit()
 		
 		var found_similar_perk := false
 		for perk in skill.player_res.player.stats.Perks:

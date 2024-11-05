@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 
 func apply_gravity(delta: float) -> void:
 	if !check_for_ground.is_colliding():
+		
 		if anim.current_animation == "idle":
 			anim.stop()
 			anim.play("fling")

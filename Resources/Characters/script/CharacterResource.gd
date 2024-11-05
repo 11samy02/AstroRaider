@@ -3,6 +3,7 @@ class_name CharacterRole
 
 @export var Role_key : RolesData.Role = RolesData.Role.Trailblazer
 @export var controller_id := 0
+@export_multiline var describtion := ""
 
 
 func can_buy_skill(skill_id: int) -> bool:

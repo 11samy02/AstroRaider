@@ -15,6 +15,7 @@ const PERKBUTTON = preload("res://Manager/UI/perk_button.tscn")
 @onready var title: Label = %Title
 @onready var describtion: Label = %Describtion
 @onready var cost_2: Label = %cost2
+@onready var owned_money: Label = %owned_money
 
 
 var tap_index := 0
@@ -24,8 +25,10 @@ var has_pressed_tap_change_left := false
 @export var skill_list : Array[CharacterSkill] = []
 @export var reset_skill_list := false
 
+
 func _enter_tree() -> void:
 	GSignals.PLA_open_skill_tree.connect(open_skill_tree)
+	GSignals.UI_reset_skill_tree.connect(reset_perks)
 	hide()
 
 func _ready() -> void:
@@ -38,17 +41,16 @@ func _process(delta: float) -> void:
 			_add_all_skills_to_list()
 			reset_skill_list = false
 		return
+	
 	change_tap()
 	close_skill_tree(delta)
 	
+	if player_res != null:
+		owned_money.set_text(str(player_res.crystal_count) + "$")
 	
-	if visible:
-		
-		for tab in tab_container.get_children():
-			for pos in tab.get_children():
-				for button in pos.get_children():
-					if button is PerkButton:
-						button.set_icon()
+
+
+
 
 
 func change_tap():
@@ -120,4 +122,16 @@ func _add_all_skills_to_list():
 func change_description(perk: Perk) -> void:
 	title.set_text(perk.perk_name)
 	describtion.set_text(perk.get_description())
-	cost_2.set_text(perk.get_cost() + "$")
+	cost_2.set_text(str(perk.get_cost()) + "$")
+
+
+func _on_visibility_changed() -> void:
+	reset_perks()
+
+func reset_perks():
+	if is_instance_valid(tab_container):
+		for tab in tab_container.get_children():
+			for pos in tab.get_children():
+				for button in pos.get_children():
+					if button is PerkButton:
+						button.set_icon()

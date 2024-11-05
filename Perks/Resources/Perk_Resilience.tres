@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://dee4qmbi800yd"]
+
+[ext_resource type="Texture2D" uid="uid://dh4sboeevsghg" path="res://Sprites/Perks/NotSoFast.png" id="1_ti5b4"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="2_2pdkf"]
+
+[resource]
+script = ExtResource("2_2pdkf")
+image = ExtResource("1_ti5b4")
+Key = 5
+perk_name = "Resilience"
+level = 1
+cost = Array[int]([25, 50, 75, 100, 125, 150])
+value = Array[int]([50, 75, 100, 125, 150, 175])
+description = "the varnuable time after you get hit increases by {{value}}%"
+type = 2
+active_type = 0

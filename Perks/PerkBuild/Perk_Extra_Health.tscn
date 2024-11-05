@@ -5,3 +5,4 @@
 
 [node name="Extra_Health" instance=ExtResource("1_3xbvp")]
 script = ExtResource("2_4oabf")
+Key = 8

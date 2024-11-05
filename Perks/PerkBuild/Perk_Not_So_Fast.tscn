@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpu5ag6xorgc1"]
-
-[ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_85n0u"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/Perk_Not_So_Fast.gd" id="2_y6uxa"]
-
-[node name="Not_So_Fast" instance=ExtResource("1_85n0u")]
-script = ExtResource("2_y6uxa")
-Key = 6

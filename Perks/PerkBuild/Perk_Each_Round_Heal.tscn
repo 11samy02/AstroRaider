@@ -5,4 +5,4 @@
 
 [node name="Each_Round_Heal" instance=ExtResource("1_qywxt")]
 script = ExtResource("2_cq1qq")
-Key = 5
+Key = 4

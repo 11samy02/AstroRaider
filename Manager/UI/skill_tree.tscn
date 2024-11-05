@@ -432,7 +432,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(314, 100)
 layout_mode = 2
 theme = ExtResource("3_k1lub")
-text = "perk Name"
+text = "No Perk Selected"
 label_settings = SubResource("LabelSettings_tviql")
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -443,7 +443,6 @@ custom_minimum_size = Vector2(0, 579)
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_k1lub")
-text = "test"
 label_settings = SubResource("LabelSettings_ufqak")
 horizontal_alignment = 3
 autowrap_mode = 3
@@ -488,7 +487,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 theme = ExtResource("3_k1lub")
-text = "250$"
+text = "???$"
 label_settings = SubResource("LabelSettings_py3kk")
 horizontal_alignment = 2
 clip_text = true
@@ -500,7 +499,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("3_k1lub")
 tab_alignment = 1
-current_tab = 1
+current_tab = 2
 tabs_visible = false
 
 [node name="Movement" type="FlowContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer"]
@@ -808,6 +807,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Defens" type="FlowContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 40
@@ -1045,7 +1045,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Offens" type="FlowContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 40
@@ -1495,5 +1494,6 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="tab_button_pressed" from="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_button_pressed"]
 [connection signal="tab_hovered" from="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_button_pressed"]

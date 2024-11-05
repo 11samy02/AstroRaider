@@ -47,8 +47,8 @@ enum Type_keys {
 func get_description() -> String:
 	return(description.replace("{{value}}", str(value[level-1])))
 
-func get_cost() -> String:
-	return(str(cost[level-1]))
+func get_cost() -> int:
+	return(cost[level-1])
 
 func set_value(new_value: Array[int]):
 	if new_value.size() == value.size():
