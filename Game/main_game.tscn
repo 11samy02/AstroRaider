@@ -42,14 +42,13 @@ environment = SubResource("Environment_4h7l4")
 
 [node name="DefaultCamera" parent="." instance=ExtResource("5_1oloc")]
 limit_smoothed = true
-position_smoothing_speed = 10.0
 max_zoom = 1.5
 
 [node name="tileMap Holder" type="Node2D" parent="."]
 
 [node name="default" parent="tileMap Holder" instance=ExtResource("1_wfgm1")]
-Map_Size = Vector2i(100, 100)
-threshold = Vector2i(25, 20)
+threshold = Vector2i(50, 30)
+batch_size = 100
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.721569, 0.729412, 0.776471, 1)

@@ -78,7 +78,7 @@ func _input(event: InputEvent) -> void:
 	input_movement(event)
 
 func input_movement(event: InputEvent) ->void:
-	if controller_id == 0 and Input.get_connected_joypads().size() == 0:
+	if controller_id == 0 and Input.get_connected_joypads().size() == 0 and player_id == 0:
 		if Input.is_action_pressed("ui_left"):
 			sprite.flip_h = true
 			bohrer_holder.get_child(0).flip_h = true
@@ -152,7 +152,7 @@ func set_bohrer_state() -> void:
 	if check_for_destroyable_ground.is_colliding():
 		destroy_ground()
 		
-	if controller_id == 0 and Input.get_connected_joypads().size() == 0:
+	if controller_id == 0 and Input.get_connected_joypads().size() == 0 and player_id == 0:
 		if gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
 			is_bohrer_active = true
 			
@@ -249,7 +249,8 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 		
 
 func _on_bohrer_hit_box_area_exited(area: Area2D) -> void:
-	static_hit_list.erase(area)
+	if static_hit_list.has(area):
+		static_hit_list.erase(area)
 
 func bohrer_damage_on_static_hit() -> void:
 	if static_hit_list.is_empty():

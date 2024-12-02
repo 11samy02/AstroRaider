@@ -6,8 +6,10 @@ extends Node
 
 const PLAYER = preload("res://Actors/player/player.tscn")
 
+
 func _enter_tree() -> void:
 	enviroment.map_was_created.connect(start_Game)
+	GlobalGame.time_played = 0
 
 
 func start_Game() -> void:
@@ -33,3 +35,7 @@ func start_Game() -> void:
 	
 	player_list.set_players()
 	entity_spawner.start_wave()
+
+
+func _process(delta: float) -> void:
+	GlobalGame.time_played += delta

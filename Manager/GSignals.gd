@@ -28,6 +28,7 @@ signal WAV_wave_endet
 #Player
 signal PLA_is_shooting
 signal PLA_open_skill_tree
+signal PLA_collects_crystal
 
 #UI
 signal UI_reset_skill_tree

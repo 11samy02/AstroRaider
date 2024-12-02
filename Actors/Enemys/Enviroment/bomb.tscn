@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbf58whxftfq3"]
+[gd_scene load_steps=13 format=3 uid="uid://bbf58whxftfq3"]
 
 [ext_resource type="Script" path="res://Actors/Enemys/Enviroment/bomb.gd" id="1_4jhmr"]
 [ext_resource type="Texture2D" uid="uid://dffqsxjstmde0" path="res://Sprites/actors/Enemys/small/Bomb/Bomb.png" id="1_esvsy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://70v4d2478xol" path="res://Manager/static_hitbox.tscn" id="3_oj0tp"]
 [ext_resource type="AudioStream" uid="uid://gco2mrp5n4nt" path="res://Sounds/Explosion.wav" id="4_i0o46"]
 [ext_resource type="Script" path="res://UX/audio_2d.gd" id="5_05reu"]
+[ext_resource type="PackedScene" uid="uid://bcmf2abm1rjmp" path="res://Visuel Feedback Tutorial/dashed_circle.tscn" id="7_pwacc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7ufsx"]
 light_mode = 1
@@ -39,6 +40,7 @@ radius = 7.0
 collision_mask = 0
 script = ExtResource("1_4jhmr")
 damage = 25
+detector_count = 13
 detector = ExtResource("2_bkor8")
 valnuable_time = 0.2
 
@@ -75,6 +77,8 @@ autostart = true
 
 [node name="TilesDetector" type="Node2D" parent="."]
 visible = false
+
+[node name="DashedCircle" parent="." instance=ExtResource("7_pwacc")]
 
 [connection signal="timeout" from="explode_time" to="." method="_on_explode_time_timeout"]
 [connection signal="timeout" from="initiate_time" to="." method="_on_initiate_time_timeout"]

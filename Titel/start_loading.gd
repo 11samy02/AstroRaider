@@ -15,7 +15,8 @@ extends Control
 
 func _enter_tree() -> void:
 	PauseMenu.can_pause_on_screen = false
-	GlobalGame.Players.clear()
+	GlobalGame.reset()
+
 
 func _ready() -> void:
 	GlobalGame.Players.clear()

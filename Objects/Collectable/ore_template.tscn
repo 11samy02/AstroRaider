@@ -11,8 +11,8 @@ radius = 40.0
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s5hma"]
 light_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_sydyf"]
-colors = PackedColorArray(0.363773, 0.247698, 0.0909713, 1, 0.82395, 0.629323, 0.312403, 1)
+[sub_resource type="Gradient" id="Gradient_d5afr"]
+colors = PackedColorArray(0.36, 0.36, 0.36, 1, 0.82, 0.82, 0.82, 1)
 
 [sub_resource type="Animation" id="Animation_70wes"]
 resource_name = "Appear"
@@ -121,11 +121,12 @@ scale = Vector2(0.75, 0.75)
 shape = SubResource("CircleShape2D_ig0dg")
 
 [node name="rope" type="Line2D" parent="."]
+modulate = Color(1, 0.768627, 0, 1)
 show_behind_parent = true
 z_index = -2
 material = SubResource("CanvasItemMaterial_s5hma")
 width = 1.0
-gradient = SubResource("Gradient_sydyf")
+gradient = SubResource("Gradient_d5afr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://vxe42563otpi"]
+[gd_scene load_steps=58 format=3 uid="uid://vxe42563otpi"]
 
 [ext_resource type="Script" path="res://Manager/UI/skill_tree.gd" id="1_hpmon"]
 [ext_resource type="Texture2D" uid="uid://cxer7mwrg8vwh" path="res://Sprites/UI/scale_able_container.png" id="1_kthid"]
@@ -226,12 +226,75 @@ connection_id = 27
 is_active = false
 can_buy = false
 
-[sub_resource type="Resource" id="Resource_cqxko"]
+[sub_resource type="Resource" id="Resource_nsje6"]
+script = ExtResource("9_f55wj")
+id = 60
+key = 6
+level = 1
+connection_id = 28
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_4ikra"]
+script = ExtResource("9_f55wj")
+id = 61
+key = 6
+level = 2
+connection_id = 60
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_7fuer"]
+script = ExtResource("9_f55wj")
+id = 62
+key = 6
+level = 3
+connection_id = 61
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_ldx2p"]
 script = ExtResource("9_f55wj")
 id = 31
 key = 4
 level = 2
 connection_id = 30
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_dhet1"]
+script = ExtResource("9_f55wj")
+id = 33
+key = 13
+level = 1
+connection_id = 31
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_t7qmo"]
+script = ExtResource("9_f55wj")
+id = 34
+key = 13
+level = 2
+connection_id = 33
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_gtr6a"]
+script = ExtResource("9_f55wj")
+id = 35
+key = 13
+level = 3
+connection_id = 34
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_cqxko"]
+script = ExtResource("9_f55wj")
+id = 32
+key = 4
+level = 3
+connection_id = 31
 is_active = false
 can_buy = false
 
@@ -298,6 +361,33 @@ connection_id = 24
 is_active = false
 can_buy = false
 
+[sub_resource type="Resource" id="Resource_kji5q"]
+script = ExtResource("9_f55wj")
+id = 40
+key = 15
+level = 1
+connection_id = 40
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_h7qa0"]
+script = ExtResource("9_f55wj")
+id = 41
+key = 15
+level = 2
+connection_id = 40
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_gxr3c"]
+script = ExtResource("9_f55wj")
+id = 42
+key = 15
+level = 3
+connection_id = 41
+is_active = false
+can_buy = false
+
 [sub_resource type="LabelSettings" id="LabelSettings_tviql"]
 font_size = 34
 font_color = Color(100, 100, 0, 1)
@@ -325,7 +415,7 @@ font_color = Color(0.540339, 0.85309, 1, 1)
 process_mode = 3
 layer = 128
 script = ExtResource("1_hpmon")
-skill_list = Array[ExtResource("9_f55wj")]([SubResource("Resource_ms3et"), SubResource("Resource_bnd6m"), SubResource("Resource_1xbna"), SubResource("Resource_ovak5"), SubResource("Resource_ofv2r"), SubResource("Resource_k21jc"), SubResource("Resource_b0exc"), SubResource("Resource_6tpfk"), SubResource("Resource_spi0a"), SubResource("Resource_mbu4g"), SubResource("Resource_sykav"), SubResource("Resource_osjc4"), SubResource("Resource_672vl"), SubResource("Resource_jodpx"), SubResource("Resource_u3nbm"), SubResource("Resource_2vguq"), SubResource("Resource_28ttk"), SubResource("Resource_80wdb"), SubResource("Resource_r4852"), SubResource("Resource_cnoh7"), SubResource("Resource_ecd0l"), SubResource("Resource_nnvkc"), SubResource("Resource_i0suv"), SubResource("Resource_llpul"), SubResource("Resource_cqxko"), SubResource("Resource_vorqj"), SubResource("Resource_uy4cp"), SubResource("Resource_cr7io"), SubResource("Resource_t4lsl"), SubResource("Resource_5lbv4"), SubResource("Resource_5vku4"), SubResource("Resource_4h2lb")])
+skill_list = Array[ExtResource("9_f55wj")]([SubResource("Resource_ms3et"), SubResource("Resource_bnd6m"), SubResource("Resource_1xbna"), SubResource("Resource_ovak5"), SubResource("Resource_ofv2r"), SubResource("Resource_k21jc"), SubResource("Resource_b0exc"), SubResource("Resource_6tpfk"), SubResource("Resource_spi0a"), SubResource("Resource_mbu4g"), SubResource("Resource_sykav"), SubResource("Resource_osjc4"), SubResource("Resource_672vl"), SubResource("Resource_jodpx"), SubResource("Resource_u3nbm"), SubResource("Resource_2vguq"), SubResource("Resource_28ttk"), SubResource("Resource_80wdb"), SubResource("Resource_r4852"), SubResource("Resource_cnoh7"), SubResource("Resource_ecd0l"), SubResource("Resource_nnvkc"), SubResource("Resource_i0suv"), SubResource("Resource_llpul"), SubResource("Resource_nsje6"), SubResource("Resource_4ikra"), SubResource("Resource_7fuer"), SubResource("Resource_ldx2p"), SubResource("Resource_dhet1"), SubResource("Resource_t7qmo"), SubResource("Resource_gtr6a"), SubResource("Resource_cqxko"), SubResource("Resource_vorqj"), SubResource("Resource_uy4cp"), SubResource("Resource_cr7io"), SubResource("Resource_t4lsl"), SubResource("Resource_5lbv4"), SubResource("Resource_5vku4"), SubResource("Resource_4h2lb"), SubResource("Resource_kji5q"), SubResource("Resource_h7qa0"), SubResource("Resource_gxr3c")])
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -409,7 +499,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(1, 1, 1, 0)
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/Control/ColorRect"]
 layout_mode = 1
@@ -455,7 +545,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("3_k1lub")
-text = "Cost:"
+text = "Money:"
 label_settings = SubResource("LabelSettings_5gl1l")
 horizontal_alignment = 1
 
@@ -499,7 +589,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("3_k1lub")
 tab_alignment = 1
-current_tab = 2
+current_tab = 3
 tabs_visible = false
 
 [node name="Movement" type="FlowContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer"]
@@ -824,20 +914,40 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos2" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_cnoh7")
+
 [node name="pos3" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos3" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_ecd0l")
 
 [node name="pos4" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos4" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_nnvkc")
+
 [node name="pos5" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos5" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_i0suv")
 
 [node name="pos6" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
@@ -864,11 +974,6 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos10" instance=ExtResource("8_qns8v")]
-layout_mode = 1
-scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_cnoh7")
-
 [node name="pos11" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
@@ -877,7 +982,7 @@ size_flags_horizontal = 3
 [node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos11" instance=ExtResource("8_qns8v")]
 layout_mode = 1
 scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_ecd0l")
+skill = SubResource("Resource_llpul")
 
 [node name="pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
@@ -887,7 +992,7 @@ size_flags_horizontal = 3
 [node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos12" instance=ExtResource("8_qns8v")]
 layout_mode = 1
 scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_nnvkc")
+skill = SubResource("Resource_nsje6")
 
 [node name="pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
@@ -897,12 +1002,17 @@ size_flags_horizontal = 3
 [node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos13" instance=ExtResource("8_qns8v")]
 layout_mode = 1
 scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_i0suv")
+skill = SubResource("Resource_4ikra")
 
 [node name="pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos14" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_7fuer")
 
 [node name="pos15" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
@@ -932,22 +1042,37 @@ size_flags_horizontal = 3
 [node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos19" instance=ExtResource("8_qns8v")]
 layout_mode = 1
 scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_llpul")
+skill = SubResource("Resource_ldx2p")
 
 [node name="pos20" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos20" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_dhet1")
+
 [node name="pos21" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos21" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_t7qmo")
+
 [node name="pos22" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens/pos22" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_gtr6a")
 
 [node name="pos23" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Defens"]
 custom_minimum_size = Vector2(128, 128)
@@ -1045,6 +1170,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Offens" type="FlowContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 40
@@ -1061,20 +1187,40 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos2" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_vorqj")
+
 [node name="pos3" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos3" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_uy4cp")
 
 [node name="pos4" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos4" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_cr7io")
+
 [node name="pos5" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos5" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_t4lsl")
 
 [node name="pos6" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
@@ -1101,11 +1247,6 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos10" instance=ExtResource("8_qns8v")]
-layout_mode = 1
-scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_vorqj")
-
 [node name="pos11" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
@@ -1114,27 +1255,17 @@ size_flags_horizontal = 3
 [node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos11" instance=ExtResource("8_qns8v")]
 layout_mode = 1
 scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_uy4cp")
+skill = SubResource("Resource_5lbv4")
 
 [node name="pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos12" instance=ExtResource("8_qns8v")]
-layout_mode = 1
-scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_cr7io")
-
 [node name="pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos13" instance=ExtResource("8_qns8v")]
-layout_mode = 1
-scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_t4lsl")
 
 [node name="pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
@@ -1169,7 +1300,7 @@ size_flags_horizontal = 3
 [node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos19" instance=ExtResource("8_qns8v")]
 layout_mode = 1
 scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_5lbv4")
+skill = SubResource("Resource_5vku4")
 
 [node name="pos20" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
@@ -1214,7 +1345,7 @@ size_flags_horizontal = 3
 [node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos27" instance=ExtResource("8_qns8v")]
 layout_mode = 1
 scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_5vku4")
+skill = SubResource("Resource_4h2lb")
 
 [node name="pos28" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
@@ -1256,11 +1387,6 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens/pos35" instance=ExtResource("8_qns8v")]
-layout_mode = 1
-scale = Vector2(0.992007, 1)
-skill = SubResource("Resource_4h2lb")
-
 [node name="pos36" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Offens"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
@@ -1287,7 +1413,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Team" type="FlowContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 40
@@ -1349,15 +1474,30 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Team/pos11" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_kji5q")
+
 [node name="pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Team"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Team/pos12" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_h7qa0")
+
 [node name="pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Team"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Team/pos13" instance=ExtResource("8_qns8v")]
+layout_mode = 1
+scale = Vector2(0.992007, 1)
+skill = SubResource("Resource_gxr3c")
 
 [node name="pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/TabContainer/Team"]
 custom_minimum_size = Vector2(128, 128)

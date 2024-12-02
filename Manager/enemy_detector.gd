@@ -2,6 +2,7 @@ extends Area2D
 class_name EnemyDetectorArea
 
 var Enemy_list : Array[EnemyBaseTemplate] = []
+var Enemy_hit_list : Array[EnemyBaseTemplate] = []
 @export var parent: PlayerProjectile
 var value : float
 var aim_bot_on : bool = false
@@ -13,7 +14,8 @@ func _enter_tree() -> void:
 
 func enemy_in_area(body: Node2D) -> void:
 	if body is EnemyBaseTemplate:
-		Enemy_list.append(body)
+		if !Enemy_hit_list.has(body):
+			Enemy_list.append(body)
 
 func enemy_out_area(body: Node2D) -> void:
 	if body is EnemyBaseTemplate:

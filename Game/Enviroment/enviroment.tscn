@@ -1520,17 +1520,17 @@ rarity = 1
 [sub_resource type="Resource" id="Resource_x3pi4"]
 script = ExtResource("5_8pt2k")
 min_value = 8
-max_value = 12
+max_value = 16
 
 [sub_resource type="Resource" id="Resource_6i0rp"]
 script = ExtResource("5_8pt2k")
-min_value = 4
-max_value = 8
+min_value = 2
+max_value = 6
 
 [sub_resource type="Resource" id="Resource_c0xtb"]
 script = ExtResource("5_8pt2k")
 min_value = 12
-max_value = 18
+max_value = 32
 
 [node name="Enviroment" type="TileMapLayer"]
 z_index = -20

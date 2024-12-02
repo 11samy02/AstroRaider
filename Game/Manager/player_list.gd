@@ -17,11 +17,12 @@ func set_players() -> void:
 			GlobalGame.Players.append(player_res)
 			
 			if !ControllerHolder.registered_controllers.is_empty():
-				player_res.player.controller_id = ControllerHolder.registered_controllers[id]
+				player_res.player.player_id = ControllerHolder.registered_controllers[id]
 				player_res.player.player_id = id
 			
 			var skill_tree : SkillTree = SKILL_TREE.instantiate()
 			skill_tree.player_res = player_res
+			skill_tree.Role
 			
 			add_child(skill_tree)
 			
@@ -44,7 +45,7 @@ func spawn_healtbars_to_players():
 
 func add_perks_to_player(id:int):
 	for player_res: PlayerResource in GlobalGame.Players:
-		if player_res.player.controller_id == id:
+		if player_res.player.player_id == id:
 			var stats = player_res.player.stats
 			for perk: Perk in stats.Perks:
 				var perk_szene = PerkData.load_perk_scene(perk.Key).instantiate()

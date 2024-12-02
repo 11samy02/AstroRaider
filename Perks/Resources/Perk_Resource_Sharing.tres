@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://bssqpen6rj8wm"]
+
+[ext_resource type="Texture2D" uid="uid://cppival7x4lys" path="res://Sprites/Perks/Resource_Sharing.png" id="1_4kfon"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_mvk6l"]
+
+[resource]
+script = ExtResource("1_mvk6l")
+image = ExtResource("1_4kfon")
+Key = 15
+perk_name = "Resource Sharing"
+level = 1
+cost = Array[int]([150, 200, 250, 300, 350, 400])
+value = Array[int]([3, 6, 9, 12, 15, 20])
+description = "Your team receives {{value}}% of the collected crystals, while you retain all the ones you’ve personally gathered."
+type = 3
+active_type = 4

@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name EnemyBaseTemplate
 
 const DIE_PARTICLE = preload("res://Particles/Enemys/small/Enemy_die_particle.tscn")
+const DAMAGE_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.tscn")
 
 @onready var sprite: Sprite2D = $sprite
 
@@ -74,8 +75,27 @@ func get_closest_target() -> Vector2:
 	
 	return global_position
 
-func applay_damage(entity: CharacterBody2D, damage: int = 1) -> void:
+func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
 	if entity == self:
+		var is_critical_hit := false
+		var random_num = randf_range(0.00,100.00)
+		var damage_part = DAMAGE_PARTICLE.instantiate()
+		
+		if random_num <= active_stats.default_crit_chance + crit_chance:
+			damage_part.text = str(damage*3)
+			damage_part.color = Color("#ff5400")
+			damage_part.global_position = self.global_position
+			get_parent().add_child(damage_part)
+			
+			is_critical_hit = true
+			active_stats.current_health -= damage * 3
+			return
+		
+		damage_part.text = str(damage)
+		damage_part.color = Color("#ffff00")
+		damage_part.global_position = self.global_position
+		get_parent().add_child(damage_part)
+		
 		active_stats.current_health -= damage
 
 func get_knockback(dir: Vector2, knockback: float = 1.0) -> void:

@@ -7,6 +7,8 @@ class_name PerkButton
 
 signal change_description
 
+func _ready() -> void:
+	skill.is_active = false
 
 func set_icon() -> void:
 	if !skill.is_active:
@@ -14,8 +16,10 @@ func set_icon() -> void:
 		disabled = !skill.player_res.Role.can_buy_skill(skill.id)
 		if disabled:
 			icon.modulate = Color("#636363")
+			texture_focused = load("res://Sprites/Perks/new_frames/new_frame_design_focus_disabled.png")
 		else:
 			icon.modulate = Color.WHITE
+			texture_focused = load("res://Sprites/Perks/new_frames/new_frame_design3.png")
 
 func _on_button_down() -> void:
 	if skill.player_res.Role.can_buy_skill(skill.id):
@@ -32,15 +36,15 @@ func _on_button_down() -> void:
 				found_similar_perk = true
 		if !found_similar_perk:
 			skill.player_res.player.stats.Perks.append(new_perk)
-		GSignals.PERK_reset_perks_from_controller_id.emit(skill.player_res.player.player_id)
+		GSignals.PERK_reset_perks_from_controller_id.emit(skill.player_res.player.controller_id)
 		set_process(false)
 		disabled = true
 		texture_disabled = load("res://Sprites/Perks/new_frames/new_frame_design1.png")
-		texture_focused = load("res://Sprites/Perks/new_frames/new_frame_design1.png")
+		texture_focused = load("res://Sprites/Perks/new_frames/new_frame_design_focus.png")
 		icon.modulate = Color.WHITE
 
 
-func _on_mouse_entered() -> void:
+func change_descibtion() -> void:
 	var perk: Perk = PerkData.load_perk_res(skill.key)
 	perk.level = skill.level
 	

@@ -1,32 +1,27 @@
 extends PerkBuild
 
-var used_shield := false
-var has_shield := false
-var active_shield : BarrierShield
 const BARRIER_SHIELD = preload("res://Objects/Perk Specials/barrier_shield.tscn")
 
-func _enter_tree() -> void:
-	GSignals.WAV_wave_endet.connect(reset_shield)
-	GSignals.PERK_barrier_shield_destroyed.connect(remove_shield)
 
-func activate_perk() -> void:
-	if !has_shield and !used_shield and !is_instance_valid(active_shield):
-		var shield_instance = BARRIER_SHIELD.instantiate()
-		has_shield = true
-		used_shield = true
-		active_shield = shield_instance
-		shield_instance.entity = Player_Res.player
-		shield_instance.global_position = Player_Res.player.global_position
-		shield_instance.Health = get_value()
-		Player_Res.player.get_parent().add_child(shield_instance)
+func _enter_tree() -> void:
+	GSignals.PERK_barrier_shield_destroyed.connect(on_shield_destroyed)
+	GSignals.WAV_wave_endet.connect(reset_shield)
+
+func activate_perk() -> void: 
+	if !Player_Res.shield_res.has_shield and !Player_Res.shield_res.used_shield_in_round:
+		Player_Res.shield_res.has_shield = true
+		Player_Res.shield_res.used_shield_in_round = true
+		
+		var new_shield = BARRIER_SHIELD.instantiate()
+		new_shield.entity = Player_Res.player
+		new_shield.global_position = Player_Res.player.global_position
+		new_shield.Health = get_value() 
+		
+		Player_Res.player.get_parent().add_child(new_shield)
+
+
+func on_shield_destroyed() -> void:
+	Player_Res.shield_res.has_shield = false
 
 func reset_shield() -> void:
-	used_shield = false
-
-func remove_shield(shield: BarrierShield) -> void:
-	if !is_instance_valid(active_shield) and shield == active_shield:
-		has_shield = false
-		active_shield = null
-
-func _exit_tree() -> void:
-	pass
+	Player_Res.shield_res.used_shield_in_round = false

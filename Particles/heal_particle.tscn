@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ci4wuxl7egoy"]
+
+[ext_resource type="Texture2D" uid="uid://8vo77bhb6ii3" path="res://Sprites/Particles/heal_particle.png" id="1_crg00"]
+[ext_resource type="Script" path="res://Particles/heal_particle.gd" id="2_hqe6y"]
+
+[sub_resource type="Curve" id="Curve_r3ms6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.269565, 1), -0.198234, -0.198234, 0, 0, Vector2(0.630435, 1), -0.332562, -0.332562, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_8jxd6"]
+offsets = PackedFloat32Array(0, 0.163366, 0.851485, 1)
+colors = PackedColorArray(0.058, 0.058, 0.058, 0, 1.5, 1.5, 1.5, 0.75, 1.5, 1.5, 1.5, 0.75, 0, 0, 0, 0)
+
+[node name="HealParticle" type="CPUParticles2D"]
+z_index = 50
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.25
+randomness = 1.0
+lifetime_randomness = 0.45
+texture = ExtResource("1_crg00")
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+linear_accel_max = 16.0
+scale_amount_curve = SubResource("Curve_r3ms6")
+color = Color(0.0367432, 0.539198, 0.0298484, 1)
+color_ramp = SubResource("Gradient_8jxd6")
+script = ExtResource("2_hqe6y")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

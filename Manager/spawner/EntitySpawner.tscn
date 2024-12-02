@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhmsjtfelgkxa"]
+[gd_scene load_steps=7 format=3 uid="uid://bhmsjtfelgkxa"]
 
 [ext_resource type="Script" path="res://Manager/spawner/EntitySpawner.gd" id="1_qqvtv"]
 [ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="2_2abb3"]
+[ext_resource type="Script" path="res://Manager/spawner/WaveTypeResource.gd" id="3_ug0s3"]
 
 [sub_resource type="Resource" id="Resource_4tqhy"]
 script = ExtResource("2_2abb3")
@@ -13,10 +14,17 @@ script = ExtResource("2_2abb3")
 min_value = 15
 max_value = 15
 
+[sub_resource type="Resource" id="Resource_4mr6s"]
+script = ExtResource("3_ug0s3")
+WaveType = 0
+WaveStart = 5
+repeatable = true
+
 [node name="EntitySpawner" type="Node"]
 script = ExtResource("1_qqvtv")
 spawn_per_round = SubResource("Resource_4tqhy")
 time_until_wave_start = SubResource("Resource_663ip")
+wave_types = Array[ExtResource("3_ug0s3")]([SubResource("Resource_4mr6s")])
 
 [node name="spawn_time" type="Timer" parent="."]
 wait_time = 0.1

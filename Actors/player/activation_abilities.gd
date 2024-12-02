@@ -24,5 +24,5 @@ func input_controll() -> void:
 				var perk_build : PerkBuild = player_res.activation_skills[player_res.activation_id]
 				if is_instance_valid(perk_build):
 					perk_build.activate_perk()
-	if !Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_Y):
+	if !Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_Y) or Input.is_action_just_released("aktivat_perk"):
 		has_pressed = false

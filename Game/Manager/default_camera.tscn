@@ -4,6 +4,11 @@
 
 [node name="DefaultCamera" type="Camera2D"]
 position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+drag_left_margin = 0.5
+drag_top_margin = 0.5
+drag_right_margin = 0.5
+drag_bottom_margin = 0.5
 script = ExtResource("1_nkrrl")
 
 [node name="pos_list" type="Node2D" parent="."]

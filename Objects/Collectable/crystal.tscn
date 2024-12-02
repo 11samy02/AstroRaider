@@ -180,7 +180,7 @@ _data = {
 light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_jawau"]
-colors = PackedColorArray(0.363773, 0.247698, 0.0909713, 1, 0.82395, 0.629323, 0.312403, 1)
+colors = PackedColorArray(0.36, 0.36, 0.36, 1, 0.82, 0.82, 0.82, 1)
 
 [node name="Crystal" instance=ExtResource("1_tfalh")]
 scale = Vector2(0.5, 0.5)
@@ -207,6 +207,7 @@ libraries = {
 }
 
 [node name="rope" type="Line2D" parent="." index="3"]
+modulate = Color(1, 0.768627, 0, 1)
 show_behind_parent = true
 z_index = -2
 material = SubResource("CanvasItemMaterial_gmry1")

@@ -53,7 +53,7 @@ func get_hit_anim() -> void:
 	tween.parallel()
 	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)
 
-func applay_damage(entity: CharacterBody2D, damage: int = 1) -> void:
+func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
 	super(entity,damage)
 	
 	if entity == self:

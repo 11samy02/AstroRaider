@@ -25,7 +25,6 @@ var has_pressed_tap_change_left := false
 @export var skill_list : Array[CharacterSkill] = []
 @export var reset_skill_list := false
 
-
 func _enter_tree() -> void:
 	GSignals.PLA_open_skill_tree.connect(open_skill_tree)
 	GSignals.UI_reset_skill_tree.connect(reset_perks)
@@ -50,12 +49,13 @@ func _process(delta: float) -> void:
 	
 
 
-
+var changed_tab := false
 
 
 func change_tap():
 	if Input.is_joy_button_pressed(player_res.player.controller_id, JOY_BUTTON_RIGHT_SHOULDER) and !has_pressed_tap_change_right:
 		has_pressed_tap_change_right = true
+		changed_tab = false
 		if tap_index + 1 <= tab_container.get_child_count() -1:
 			tap_index += 1
 		else:
@@ -65,6 +65,7 @@ func change_tap():
 	
 	if Input.is_joy_button_pressed(player_res.player.controller_id, JOY_BUTTON_LEFT_SHOULDER) and !has_pressed_tap_change_left:
 		has_pressed_tap_change_left = true
+		changed_tab = false
 		if tap_index - 1 >= 0:
 			tap_index -= 1
 		else:
@@ -79,9 +80,34 @@ func change_tap():
 	
 	tab_container.current_tab = tap_index
 	tab_bar.current_tab = tap_index
+	
+	if !changed_tab:
+		changed_tab = true
+		var button_has_focus := false
+		for pos in tab_container.get_child(tap_index).get_children():
+			for button in pos.get_children():
+				if button is PerkButton:
+					if player_res.Role.can_buy_skill(button.skill.id) and !button.skill.is_active:
+						button_has_focus = true
+						button.grab_focus()
+						break
+		
+		if !button_has_focus:
+			var selected_button : PerkButton
+			for pos in tab_container.get_child(tap_index).get_children():
+				for button in pos.get_children():
+					if button is PerkButton:
+						if is_instance_valid(selected_button):
+							if button.skill.id < selected_button.skill.id:
+								selected_button = button
+						else:
+							selected_button = button
+			selected_button.grab_focus()
 
 
 func open_skill_tree(player: Player) -> void:
+	tap_index = 0
+	changed_tab = false
 	if player == player_res.player:
 		PauseMenu.can_pause_on_screen = false
 		get_tree().paused = true

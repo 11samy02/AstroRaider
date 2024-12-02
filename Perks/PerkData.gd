@@ -15,9 +15,9 @@ enum Keys {
 	Piercing_Shot, # -> ermöglicht schüsse die gegner zu durchdringen
 	Stun_Grenade, # -> gegner werden beim treffer kurzeitig betäubt
 	Energy_Overload, # -> erhöht für eine gewissen zeitraum verschiedene stats
-	Emergency_Heal, # -> hielt dich im Notfall
+	Emergency_Heal,
 	Anti_Mine_Detection, # -> signalisiert das sich in der nähe eine Bombe befindet
-	Resource_Sharing, # -> beim einsammeln von Kristallen erhält das team auch einen Kleinen Bonus der Kristalle
+	Resource_Sharing,
 	Group_Momentum, # -> Erhöht die Bewegungsgeschwindigkeit des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Rallying_Cry, # -> Erhöht den Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Protective_Aura, # -> mindert den erlitenen Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
@@ -37,6 +37,16 @@ const Keys_scene = {
 	Keys.Barrier_Shield: "res://Perks/PerkBuild/Perk_Barrier_Shield.tscn",
 	Keys.Aim_Bot: "res://Perks/PerkBuild/Perk_Aim_Bot.tscn",
 	Keys.Extra_Health: "res://Perks/PerkBuild/Perk_Extra_Health.tscn",
+	Keys.Jet_Boost: "",
+	Keys.Piercing_Shot: "",
+	Keys.Stun_Grenade: "",
+	Keys.Energy_Overload: "",
+	Keys.Emergency_Heal: "res://Perks/PerkBuild/Perk_Emergency_Heal.tscn",
+	Keys.Anti_Mine_Detection: "",
+	Keys.Resource_Sharing: "res://Perks/PerkBuild/Perk_Resource_Sharing.tscn",
+	Keys.Group_Momentum: "",
+	Keys.Rallying_Cry: "",
+	Keys.Protective_Aura: "",
 }
 
 const Keys_res = {
@@ -49,6 +59,16 @@ const Keys_res = {
 	Keys.Barrier_Shield: "res://Perks/Resources/Perk_Barrier_Shield.tres",
 	Keys.Aim_Bot: "res://Perks/Resources/Perk_Aim_Bot.tres",
 	Keys.Extra_Health: "res://Perks/Resources/Perk_Extra_Health.tres",
+	Keys.Jet_Boost: "",
+	Keys.Piercing_Shot: "",
+	Keys.Stun_Grenade: "",
+	Keys.Energy_Overload: "",
+	Keys.Emergency_Heal: "res://Perks/Resources/Perk_Emergency_Heal.tres",
+	Keys.Anti_Mine_Detection: "",
+	Keys.Resource_Sharing: "res://Perks/Resources/Perk_Resource_Sharing.tres",
+	Keys.Group_Momentum: "",
+	Keys.Rallying_Cry: "",
+	Keys.Protective_Aura: "",
 }
 
 

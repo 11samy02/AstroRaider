@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://84vvohor50dh"]
+[gd_scene load_steps=16 format=3 uid="uid://84vvohor50dh"]
 
 [ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="1_gswfc"]
 [ext_resource type="Script" path="res://Objects/Objects/crystal_generator.gd" id="1_qydqw"]
 [ext_resource type="Texture2D" uid="uid://f37v14aimli5" path="res://Sprites/UI/in Game/generator.png" id="2_cbnsh"]
 [ext_resource type="AudioStream" uid="uid://cnwdm2llqw4lb" path="res://Sounds/CrystalCollectSound.wav" id="3_fkod7"]
 [ext_resource type="Script" path="res://UX/audio_2d.gd" id="4_hf2de"]
+[ext_resource type="PackedScene" uid="uid://b6fax3q3wk63k" path="res://Visuel Feedback Tutorial/input_info.tscn" id="6_enxi3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4jwol"]
 light_mode = 1
@@ -76,6 +77,7 @@ visible = false
 shape = SubResource("CircleShape2D_g8ix4")
 
 [node name="Sounds" type="Node2D" parent="."]
+visible = false
 
 [node name="CollectCrystal" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("3_fkod7")
@@ -90,6 +92,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPlayerNearby"]
 visible = false
 shape = SubResource("CircleShape2D_lsdkb")
+
+[node name="input info" parent="." instance=ExtResource("6_enxi3")]
+position = Vector2(0, -43)
+distance = 30
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="CheckPlayerNearby" to="." method="_on_check_player_nearby_body_entered"]

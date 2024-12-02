@@ -11,6 +11,6 @@ perk_name = "Barrier Shield"
 level = 1
 cost = Array[int]([200, 225, 250, 275, 300, 325])
 value = Array[int]([25, 50, 75, 100, 125, 150])
-description = "if your health is lower than 50% a shield appear with {{value}} Hp, you can only have one shield per wave"
+description = "if you press the Sapce key you get a Shield with {{value}} Hp, you can only have one shield per wave"
 type = 1
 active_type = 5

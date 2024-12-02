@@ -15,23 +15,28 @@ enum Ores {
 @onready var anim: AnimationPlayer = $AnimationPlayer
 
 
-var is_collected = false
+var is_collected := false
 var player_who_collected: Player = null
 
-var is_first_one = true
+var is_first_one := true
 
-var velocity = Vector2.ZERO
-var random_angle = 0.0  
+var velocity := Vector2.ZERO
+var random_angle := 0.0  
 
-var spring_constant = 20.0      # Federkonstante
-var damping_coefficient = 5.0   # Dämpfung
-var desired_distance = 35.0     # Gewünschter Abstand zum Spieler
+var spring_constant := 20.0      # Federkonstante
+var damping_coefficient := 5.0   # Dämpfung
+var desired_distance := 35.0     # Gewünschter Abstand zum Spieler
+
+var normal_distance := 35.0
+var reduce_distance := 0.0
+
 @export var mass = 1                 
 
 func _ready() -> void:
 	anim.play("Appear")
 	mass += randf_range(-0.5,0.5)
-	desired_distance += randf_range(-10,10)
+	desired_distance += randf_range(-20,20)
+	normal_distance = desired_distance
 
 func collect(body: Node2D) -> void:
 	if body is Player and !is_collected:
@@ -54,13 +59,25 @@ func _process(delta: float) -> void:
 		
 		var desired_position = player_who_collected.global_position - rotated_direction * desired_distance
 		var displacement = global_position - desired_position
-
+		
 		var spring_force = -spring_constant * displacement
 		var damping_force = -damping_coefficient * velocity
 		var total_force = spring_force + damping_force
-
+		
 		velocity += (total_force / mass) * delta
 		position += velocity * delta
+		
+		if Input.is_action_pressed("pull_collected"):
+			rope.set_modulate("#4898ff")
+			if reduce_distance >= 0:
+				reduce_distance += 25 * delta
+			else:
+				reduce_distance = 0
+		else:
+			rope.set_modulate("#ffc400")
+		
+		if desired_distance >= 5:
+			desired_distance = normal_distance - reduce_distance
 
 func destroy():
 	rope.clear_points()

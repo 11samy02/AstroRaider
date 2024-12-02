@@ -20,6 +20,10 @@ static var wave_time_stopped := true
 @export var spawn_per_round: SimplefySettingMath = SimplefySettingMath.new()
 @export var time_until_wave_start: SimplefySettingMath = SimplefySettingMath.new()
 
+@export var wave_types : Array[WaveTypeResource]
+
+
+
 func _ready() -> void:
 	reset()
 
@@ -40,7 +44,9 @@ func _on_spawn_time_timeout() -> void:
 		spawn_enemy()
 	elif wave_spawn_count <= 0:
 		if EnemyBaseTemplate.entity_list.is_empty() and wave_time.is_stopped():
-			wave_time.set_wait_time(rng.randf_range(time_until_wave_start.min_value, time_until_wave_start.max_value))
+			if !Manage_Wave_Types():
+				print("it was false")
+				wave_time.set_wait_time(rng.randf_range(time_until_wave_start.min_value, time_until_wave_start.max_value))
 			wave_time.start()
 
 func start_new_wave() -> void:
@@ -62,3 +68,21 @@ func spawn_enemy() -> void:
 func reset():
 	wave_count = 0
 	EnemyBaseTemplate.entity_list.clear()
+
+
+func Manage_Wave_Types() -> bool:
+	for wave_type_res : WaveTypeResource in wave_types:
+		if wave_type_res.repeatable:
+			if wave_count % wave_type_res.WaveStart == 0:
+				return get_wave_type(wave_type_res)
+			
+		elif wave_count == wave_type_res.WaveStart:
+			return get_wave_type(wave_type_res)
+	return false
+
+func get_wave_type(wave_type_res: WaveTypeResource) -> bool:
+	var Types = WaveTypeResource.WaveTypeEnum
+	if wave_type_res.WaveType == Types.Pause:
+		wave_time.set_wait_time(120)
+		return true
+	return false

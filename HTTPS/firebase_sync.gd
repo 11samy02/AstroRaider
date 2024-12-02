@@ -17,7 +17,8 @@ func send_highscore(player_name: String, wave: int):
 	
 	var data = {
 		"player_name": player_name,
-		"wave": wave
+		"wave": wave,
+		"time_played": GlobalGame.time_played
 	}
 	
 	var json_data = JSON.stringify(data)

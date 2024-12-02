@@ -10,6 +10,8 @@ var current_hp := max_hp
 
 var game_over := false
 
+const HEAL_PARTICLE := preload("res://Particles/heal_particle.tscn")
+
 func _enter_tree() -> void:
 	GSignals.HIT_take_Damage.connect(applay_damage)
 	GSignals.HIT_take_heal.connect(applay_heal)
@@ -48,7 +50,7 @@ func health_control():
 		GameOverScreen.game_over()
 
 
-func applay_damage(entity: Node2D, damage: int = 1):
+func applay_damage(entity: Node2D, damage: int = 1, crit : float = 1.00):
 	if entity == parent_entity:
 		if entity is not Player:
 			return
@@ -68,6 +70,8 @@ func applay_damage(entity: Node2D, damage: int = 1):
 
 func applay_heal(entity: Node2D, heal_value : int):
 	if entity == parent_entity:
+		var particle = HEAL_PARTICLE.instantiate()
+		entity.add_child(particle)
 		var tween = create_tween()
 		tween.parallel()
 		
@@ -75,6 +79,8 @@ func applay_heal(entity: Node2D, heal_value : int):
 		tween.tween_property(self, "modulate", Color("#ffffff"), 0.05)
 		tween.tween_property(self,"current_hp", current_hp + heal_value,0.2)
 		current_hp = clampi(current_hp,0, max_hp)
+		
+		
 		if current_hp > max_hp:
 			current_hp = max_hp
 		timer.start()
@@ -89,4 +95,4 @@ func increase_max_health() -> void:
 	if parent_entity is Player:
 		max_hp = parent_entity.stats.max_hp
 		var perk: Perk = PerkData.load_perk_res(PerkData.Keys.Extra_Health)
-		GSignals.HIT_take_heal.emit(perk.value)
+		GSignals.HIT_take_heal.emit(parent_entity, perk.value)

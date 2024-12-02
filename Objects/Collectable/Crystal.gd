@@ -6,20 +6,23 @@ class_name ItemCrystal
 @onready var rope: Line2D = $rope
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-@export var value = 1
+@export var value := 1
 
-var is_collected = false
+var is_collected := false
 var player_who_collected: Player = null
 
-var is_first_one = true
+var is_first_one := true
 
-var velocity = Vector2.ZERO
-var random_angle = 0.0  # Speichert den zufälligen Winkel
+var velocity := Vector2.ZERO
+var random_angle := 0.0  # Speichert den zufälligen Winkel
 
-var spring_constant = 20.0      # Federkonstante
-var damping_coefficient = 5.0   # Dämpfung
-var desired_distance = 35.0     # Gewünschter Abstand zum Spieler
-var mass = 1.0                  # Masse des Kristalls
+var spring_constant := 20.0      # Federkonstante
+var damping_coefficient := 5.0   # Dämpfung
+var desired_distance := 35.0     # Gewünschter Abstand zum Spieler
+var mass := 1.0                  # Masse des Kristalls
+
+var normal_distance := 35.0
+var reduce_distance := 0.0
 
 var default_sprite := 0
 
@@ -29,7 +32,9 @@ func _ready() -> void:
 	
 	animation_player.play("spawn")
 	mass = randf_range(0.8,2)
-	desired_distance += randf_range(-10.0, 10.0)
+	desired_distance += randf_range(-20.0, 20.0)
+	
+	normal_distance = desired_distance
 
 func set_sprite() -> void:
 	if value > 10:
@@ -42,6 +47,7 @@ func set_sprite() -> void:
 func collect(body: Node2D) -> void:
 	if body is Player and !is_collected:
 		is_collected = true
+		GSignals.PLA_collects_crystal.emit()
 		player_who_collected = body
 		
 		var max_collect_count := 50
@@ -86,6 +92,16 @@ func _process(delta: float) -> void:
 		var total_force = spring_force + damping_force
 		velocity += (total_force / mass) * delta
 		position += velocity * delta
+		
+		if GlobalGame.Player_count <= 1:
+			if Input.is_action_pressed("pull_collected"):
+				rope.set_modulate("#4898ff")
+				reduce_distance += 25 * delta
+			else:
+				rope.set_modulate("#ffc400")
+			
+			if desired_distance >= 5:
+				desired_distance = normal_distance - reduce_distance
 
 func destroy():
 	rope.clear_points()

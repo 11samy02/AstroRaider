@@ -9,5 +9,6 @@ class_name EnemyStats
 
 @export var projectile: PackedScene
 @export var ranged_attack: AttackResource = AttackResource.new()
+@export var default_crit_chance: float = 20.00
 
 var current_health: int

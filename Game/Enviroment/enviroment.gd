@@ -7,9 +7,11 @@ const GROUND_PARTICLE = preload("res://Particles/destroy_ground_particle.tscn")
 
 @export var TileDrops: Array[TileDropResource]
 
+
 @export var chunk_size: Vector2i = Vector2i(25, 25)
 @export var Map_Size: Vector2i = Vector2i(200, 200)
-@export var seed: int
+@export var Min_Enemy_Room_AREA = 20
+var seed: int
 
 var map_corner := {
 	"Left": 0,
@@ -25,11 +27,14 @@ var map_corner := {
 @export var start_area_size: SimplefySettingMath = SimplefySettingMath.new()
 @export var room_count: SimplefySettingMath = SimplefySettingMath.new()
 @export var room_size: SimplefySettingMath = SimplefySettingMath.new()
+@export var EnemyBuildingList: Array[EnemyBuildingResource]
 
 var start_area_was_created := false
 var finished_map := false
 
 var rng = RandomNumberGenerator.new()
+
+var empty_rooms: Array[Dictionary] = []
 
 signal map_was_created
 
@@ -37,12 +42,21 @@ func _enter_tree() -> void:
 	GSignals.ENV_destroy_tile.connect(destroy_tile_at)
 
 func _ready() -> void:
+	set_Enemy_building_in_list()
 	rng.randomize()
 	seed = rng.randi()
 	reset_objects()
 	room_count.min_value = ceil(3 + Map_Size.x / 20)
 	room_count.max_value = ceil(7 + Map_Size.x / 20)
 	fill_map(Vector2i(-Map_Size.x / 2, -Map_Size.y / 2), Vector2i(Map_Size.x / 2, Map_Size.y / 2))
+
+func set_Enemy_building_in_list():
+	var new_list : Array[EnemyBuildingResource] = []
+	for res: EnemyBuildingResource in EnemyBuildingList:
+		for rar in res.rarity:
+			new_list.append(res)
+	
+	EnemyBuildingList = new_list
 
 func _process(delta: float) -> void:
 	check_player_pos()
@@ -203,6 +217,7 @@ func fill_map(start_position: Vector2i, end_position: Vector2i, reverse: bool = 
 	
 	if not finished_map:
 		finished_map = true
+		spawn_enemy_buildings()
 		map_was_created.emit()
 		ScreenTransition.finished_loading.emit()
 
@@ -236,17 +251,17 @@ func create_random_rooms(area_start: Vector2i, area_end: Vector2i, max_rooms: in
 	for i in range(max_rooms):
 		var room_size_x = room_size.get_rand_value()
 		var room_size_y = room_size.get_rand_value()
-	
 		var available_width = max(chunk_max.x - chunk_min.x + 1 - room_size_x, 1)
 		var available_height = max(chunk_max.y - chunk_min.y + 1 - room_size_y, 1)
-	
 		var room_position_x = rng.randi_range(chunk_min.x, chunk_min.x + available_width - 1)
 		var room_position_y = rng.randi_range(chunk_min.y, chunk_min.y + available_height - 1)
-	
 		var room_position = Vector2i(room_position_x, room_position_y)
-	
-		create_area(Vector2i(room_size_x, room_size_y), randomness, room_position, chunk_min, chunk_max)
+		empty_rooms.append({
+			"position": room_position,
+			"size": Vector2i(room_size_x, room_size_y)
+		})
 
+		create_area(Vector2i(room_size_x, room_size_y), randomness, room_position, chunk_min, chunk_max)
 
 func create_area(size: Vector2i, randomness: float, position: Vector2i, chunk_min: Vector2i, chunk_max: Vector2i) -> void:
 	var noise := FastNoiseLite.new()
@@ -275,7 +290,14 @@ func create_area(size: Vector2i, randomness: float, position: Vector2i, chunk_mi
 	await update_surrounding_tiles_batched(modified_tiles)
 
 
+
 func create_start_area(size: Vector2i):
+	var start_position = Vector2i(0, 0)
+	empty_rooms.append({
+		"position": start_position,
+		"size": size
+	})
+
 	var modified_tiles = []
 	var radius = size.x / 2
 	var noise = FastNoiseLite.new()
@@ -344,4 +366,20 @@ func check_player_pos() -> void:
 
 func reset_objects() -> void:
 	Bomb.reset()
-	
+
+func spawn_enemy_buildings():
+	if EnemyBuildingList.is_empty():
+		return
+	for room in empty_rooms:
+		if room.size.x * room.size.y < Min_Enemy_Room_AREA:
+			continue
+		var center_position = room.position + room.size / 2
+		var building_position = Vector2i(
+			clamp(center_position.x, room.position.x, room.position.x + room.size.x - 1),
+			clamp(center_position.y, room.position.y, room.position.y + room.size.y - 1)
+		)
+		var building_resource: EnemyBuildingResource = EnemyBuildingList[rng.randi_range(0, EnemyBuildingList.size() - 1)]
+		var building_instance = building_resource.Enemy_Building.instantiate()
+		
+		building_instance.global_position = map_to_local(building_position)
+		get_parent().add_child(building_instance)

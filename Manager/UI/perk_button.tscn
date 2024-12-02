@@ -33,4 +33,5 @@ grow_vertical = 2
 stretch_mode = 5
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="focus_entered" from="." to="." method="change_descibtion"]
+[connection signal="mouse_entered" from="." to="." method="change_descibtion"]

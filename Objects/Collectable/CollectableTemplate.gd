@@ -8,4 +8,3 @@ class_name  CollectableTemplate
 
 func collect(body: Node2D) -> void:
 	pass
-

@@ -9,3 +9,6 @@ func _enter_tree() -> void:
 
 func activate_perk() -> void:
 	stats.bohrer_damage = default_bohrer_damage + get_value()
+
+func _exit_tree() -> void:
+	pass

@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh0pntcc1umpu"]
+
+[ext_resource type="Texture2D" uid="uid://dy0web74rkdn0" path="res://Sprites/UI/in Game/arrow_path.png" id="1_ct1hk"]
+[ext_resource type="Shader" path="res://Visuel Feedback Tutorial/visuel_path.gdshader" id="1_sa1ms"]
+[ext_resource type="Script" path="res://Visuel Feedback Tutorial/visuel_path.gd" id="3_2be71"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28hip"]
+shader = ExtResource("1_sa1ms")
+shader_parameter/speed = 2.0
+shader_parameter/glow_color = Color(0.0245236, 0.105903, 0.317451, 1)
+shader_parameter/glow_strength = 1.0
+shader_parameter/blur_amount = 3.0
+
+[node name="Visuel_Path" type="Line2D"]
+z_index = -50
+material = SubResource("ShaderMaterial_28hip")
+texture = ExtResource("1_ct1hk")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("3_2be71")

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://bxdox42jtqk3t"]
+
+[ext_resource type="Texture2D" uid="uid://dawcm7yirxkk5" path="res://Sprites/Perks/EmergancyHeal.png" id="1_1yns5"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_qg5lb"]
+
+[resource]
+script = ExtResource("1_qg5lb")
+image = ExtResource("1_1yns5")
+Key = 13
+perk_name = "Emergency Heal"
+level = 1
+cost = Array[int]([100, 150, 200, 250, 300, 350])
+value = Array[int]([50, 60, 70, 80, 90, 100])
+description = "If your health is low, you restore {{value}}% of your maximum health. Can be used only once every 5 rounds."
+type = 1
+active_type = 4
