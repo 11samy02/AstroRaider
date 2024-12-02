@@ -58,6 +58,7 @@ func shoot():
 	projectile.dir = (sprite.global_position - player.global_position).normalized()
 	projectile.global_position = player.global_position
 	projectile.parent = player
+	projectile.atk_resource.crit_chance = player.stats.crit_chance
 	get_parent().get_parent().add_child(projectile)
 	shoot_sound.play_sound()
 	await (get_tree().create_timer(0.2).timeout)

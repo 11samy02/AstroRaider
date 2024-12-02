@@ -260,9 +260,6 @@ collision_mask = 17
 script = ExtResource("1_ook18")
 radar_icon = ExtResource("2_fdgfk")
 landing_anim_name = Array[String](["idle", "use_item"])
-player_id = null
-controller_id = null
-character_build_id = null
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1

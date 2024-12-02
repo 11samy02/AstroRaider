@@ -238,6 +238,7 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 			var attack: AttackResource = AttackResource.new()
 			attack.damage = stats.bohrer_damage
 			attack.knockback = stats.bohrer_knockback
+			attack.crit_chance = stats.crit_chance
 			
 			area.get_hit(attack, self)
 			

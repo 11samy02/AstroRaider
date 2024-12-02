@@ -45,7 +45,6 @@ func _on_spawn_time_timeout() -> void:
 	elif wave_spawn_count <= 0:
 		if EnemyBaseTemplate.entity_list.is_empty() and wave_time.is_stopped():
 			if !Manage_Wave_Types():
-				print("it was false")
 				wave_time.set_wait_time(rng.randf_range(time_until_wave_start.min_value, time_until_wave_start.max_value))
 			wave_time.start()
 

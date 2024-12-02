@@ -21,6 +21,7 @@ enum Keys {
 	Group_Momentum, # -> Erhöht die Bewegungsgeschwindigkeit des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Rallying_Cry, # -> Erhöht den Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Protective_Aura, # -> mindert den erlitenen Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
+	Critical_Edge,
 }
 
 
@@ -47,6 +48,7 @@ const Keys_scene = {
 	Keys.Group_Momentum: "",
 	Keys.Rallying_Cry: "",
 	Keys.Protective_Aura: "",
+	Keys.Critical_Edge: "res://Perks/PerkBuild/Perk_Critical_Edge.tscn",
 }
 
 const Keys_res = {
@@ -69,6 +71,7 @@ const Keys_res = {
 	Keys.Group_Momentum: "",
 	Keys.Rallying_Cry: "",
 	Keys.Protective_Aura: "",
+	Keys.Critical_Edge: "res://Perks/Resources/Perk_Critical_Edge.tres",
 }
 
 

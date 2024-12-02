@@ -18,3 +18,4 @@ class_name Stats
 
 @export var max_hp := 100
 @export var armor := 1
+@export var crit_chance := 0

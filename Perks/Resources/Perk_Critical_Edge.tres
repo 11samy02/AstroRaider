@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://cmxqg7cabs6xc"]
+
+[ext_resource type="Texture2D" uid="uid://b57amcl0c11py" path="res://Sprites/Perks/CriticalEdge.png" id="1_s66wf"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_vkou2"]
+
+[resource]
+script = ExtResource("1_vkou2")
+image = ExtResource("1_s66wf")
+Key = 19
+perk_name = "Critical Edge"
+level = 1
+cost = Array[int]([50, 75, 100, 125, 150, 175])
+value = Array[int]([5, 10, 15, 20, 25, 30])
+description = "Increases your critical hit chance by {{value}}%. Land precise and devastating strikes to turn the tide of battle in your favor."
+type = 2
+active_type = 3
