@@ -17,6 +17,7 @@ func _physics_process(delta: float) -> void:
 	controll_state_mashine()
 
 
+
 func controll_state_mashine():
 	if knockback_time.is_stopped():
 		if global_position.distance_to(get_closest_target()) >= 300 and state != state_mashine.Ranged_Attack:
@@ -70,7 +71,7 @@ func get_hit_anim() -> void:
 	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)
 
 func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
-	super(entity,damage)
+	super(entity,damage,crit_chance)
 	
 	if entity == self:
 		get_hit_anim()

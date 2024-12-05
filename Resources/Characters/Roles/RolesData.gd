@@ -7,7 +7,7 @@ enum Role {
 }
 
 const Role_tree = {
-	Role.Trailblazer: "res://Manager/UI/skill_tree.tscn"
+	Role.Trailblazer: "res://Manager/UI/All_Skill_list/skill_tree_trailblazer.tscn"
 }
 
 const Role_res = {

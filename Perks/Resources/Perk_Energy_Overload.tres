@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://ytfn10bpquid"]
+
+[ext_resource type="Texture2D" uid="uid://cagfparp3r4dg" path="res://Sprites/Perks/Energy_Overload.png" id="1_omwa8"]
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_rpk22"]
+
+[resource]
+script = ExtResource("1_rpk22")
+image = ExtResource("1_omwa8")
+Key = 12
+perk_name = "Energy Overload"
+level = 1
+cost = Array[int]([100, 150, 200, 250, 300, 350])
+value = Array[int]([15, 30, 45, 60, 75, 90])
+description = "Boosts certain stats for {{value}} seconds and can be activated with the spacebar."
+type = 2
+active_type = 5

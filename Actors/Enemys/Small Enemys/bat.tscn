@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c5fkee3ubvyvd"]
+[gd_scene load_steps=28 format=3 uid="uid://c5fkee3ubvyvd"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_nx18g"]
 [ext_resource type="Script" path="res://Bat.gd" id="2_q52fh"]
@@ -14,95 +14,54 @@
 [ext_resource type="Texture2D" uid="uid://10cki7mqt6mb" path="res://Sprites/actors/Enemys/small/bat/bat_particle2.png" id="10_mcywg"]
 [ext_resource type="Texture2D" uid="uid://gsta6urcksvx" path="res://Sprites/actors/Enemys/small/bat/bat_particle3.png" id="11_m18u0"]
 
-[sub_resource type="Resource" id="Resource_noxau"]
+[sub_resource type="Resource" id="Resource_fqdai"]
 script = ExtResource("6_7sg3r")
 key = 0
 state = 0
 
-[sub_resource type="Resource" id="Resource_g6sb1"]
+[sub_resource type="Resource" id="Resource_luiws"]
 script = ExtResource("6_7sg3r")
 key = 1
 state = 1
 
-[sub_resource type="Resource" id="Resource_tji3d"]
+[sub_resource type="Resource" id="Resource_1443f"]
 script = ExtResource("6_7sg3r")
 key = 2
 state = 2
 
-[sub_resource type="Resource" id="Resource_apypv"]
+[sub_resource type="Resource" id="Resource_8idiu"]
+resource_local_to_scene = true
 script = ExtResource("7_sibcj")
 damage = 3
 knockback = 1.0
+crit_chance = 0.0
 
-[sub_resource type="Resource" id="Resource_mh5wc"]
-script = ExtResource("7_nrcht")
-max_health = 1
-max_Random_health_edit = 0
-attack = SubResource("Resource_apypv")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_noxau"), SubResource("Resource_g6sb1"), SubResource("Resource_tji3d")])
-speed = 100.0
-
-[sub_resource type="Resource" id="Resource_6nfx2"]
-script = ExtResource("6_7sg3r")
-key = 1
-state = 1
-
-[sub_resource type="Resource" id="Resource_4xij0"]
-script = ExtResource("6_7sg3r")
-key = 2
-state = 2
-
-[sub_resource type="Resource" id="Resource_7ev4w"]
-script = ExtResource("7_sibcj")
-damage = 3
-knockback = 1.0
-
-[sub_resource type="Resource" id="Resource_i4s8y"]
+[sub_resource type="Resource" id="Resource_7witj"]
+resource_local_to_scene = true
 script = ExtResource("7_nrcht")
 max_health = 2
 max_Random_health_edit = 0
-attack = SubResource("Resource_7ev4w")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_noxau"), SubResource("Resource_6nfx2"), SubResource("Resource_4xij0")])
-speed = 125.0
+attack = SubResource("Resource_8idiu")
+ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_fqdai"), SubResource("Resource_luiws"), SubResource("Resource_1443f")])
+speed = 100.0
+max_speed = 300.0
+default_crit_chance = 20.0
 
-[sub_resource type="Resource" id="Resource_tm5oh"]
+[sub_resource type="Resource" id="Resource_tdo6b"]
 script = ExtResource("7_sibcj")
-damage = 5
+damage = 2
 knockback = 1.0
+crit_chance = 0.0
 
-[sub_resource type="Resource" id="Resource_00d2r"]
+[sub_resource type="Resource" id="Resource_a3kia"]
 script = ExtResource("7_nrcht")
-max_health = 3
-max_Random_health_edit = 0
-attack = SubResource("Resource_tm5oh")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_noxau"), SubResource("Resource_g6sb1"), SubResource("Resource_tji3d")])
-speed = 150.0
-
-[sub_resource type="Resource" id="Resource_tuncl"]
-script = ExtResource("7_sibcj")
-damage = 7
-knockback = 1.0
-
-[sub_resource type="Resource" id="Resource_xcvgl"]
-script = ExtResource("7_nrcht")
-max_health = 4
-max_Random_health_edit = 0
-attack = SubResource("Resource_tuncl")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_noxau"), SubResource("Resource_g6sb1"), SubResource("Resource_tji3d")])
-speed = 175.0
-
-[sub_resource type="Resource" id="Resource_aryp0"]
-script = ExtResource("7_sibcj")
-damage = 10
-knockback = 1.0
-
-[sub_resource type="Resource" id="Resource_nip0v"]
-script = ExtResource("7_nrcht")
-max_health = 5
-max_Random_health_edit = 0
-attack = SubResource("Resource_aryp0")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_noxau"), SubResource("Resource_g6sb1"), SubResource("Resource_tji3d")])
-speed = 200.0
+max_health = 1
+max_Random_health_edit = 1
+attack = SubResource("Resource_tdo6b")
+ai_type_keys = Array[ExtResource("6_7sg3r")]([])
+speed = 10.0
+max_speed = 300.0
+default_crit_chance = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_32yl0"]
 radius = 5.0
@@ -164,7 +123,8 @@ radius = 6.0
 [node name="Bat" instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
-stats = Array[Object]([SubResource("Resource_mh5wc"), SubResource("Resource_i4s8y"), SubResource("Resource_00d2r"), SubResource("Resource_xcvgl"), SubResource("Resource_nip0v")])
+stats = SubResource("Resource_7witj")
+stats_upgrades = SubResource("Resource_a3kia")
 sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 die_particle_variation = Array[Texture2D]([ExtResource("9_4w8is"), ExtResource("10_mcywg"), ExtResource("11_m18u0")])
 

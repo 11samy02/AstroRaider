@@ -8,6 +8,7 @@
 script = ExtResource("2_t5f8m")
 damage = 5
 knockback = 1.0
+crit_chance = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwaew"]
 radius = 4.0

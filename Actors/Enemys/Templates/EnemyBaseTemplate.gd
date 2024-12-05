@@ -7,9 +7,9 @@ const DAMAGE_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.t
 @onready var sprite: Sprite2D = $sprite
 
 
-@export var stats: Array[EnemyStats] = [EnemyStats.new()]
+@export var stats: EnemyStats
+@export var stats_upgrades: EnemyStats
 var level := 0
-var active_stats: EnemyStats = stats[level]
 
 @export var sprite_variation: Array[Texture2D]
 @export var die_particle_variation: Array[Texture2D]
@@ -35,22 +35,20 @@ var killed_by : CharacterBody2D = null
 
 func _enter_tree() -> void:
 	GlobalGame.Enemies.append(self)
-	clamp(level, 0, stats.size() - 1)
 	GSignals.HIT_take_Damage.connect(applay_damage)
-	if level < stats.size():
-		active_stats = stats[level].duplicate()
-	else:
-		active_stats = stats[-1].duplicate()
-	active_stats.max_health += randi_range(0, active_stats.max_Random_health_edit)
-	active_stats.current_health = active_stats.max_health
+	
+	
 
 func _ready() -> void:
-	sprite.set_texture(sprite_variation.pick_random())
+	stats.update_stats(stats_upgrades, level)
+	stats.max_health += randi_range(0, stats.max_Random_health_edit)
+	stats.current_health = stats.max_health
 	load_ai_to_node()
 
 
+
 func load_ai_to_node():
-	for type_data: AiTypeKeys in active_stats.ai_type_keys:
+	for type_data: AiTypeKeys in stats.ai_type_keys:
 		var ai_init: Entity_Ai = AiEnemyData.load_ai(type_data.key).instantiate()
 		ai_init.parent = self
 		ai_init.state = type_data.state
@@ -80,15 +78,14 @@ func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float 
 		var is_critical_hit := false
 		var random_num = randf_range(0.00,100.00)
 		var damage_part = DAMAGE_PARTICLE.instantiate()
-		
-		if random_num <= active_stats.default_crit_chance + crit_chance:
+		if random_num <= stats.default_crit_chance + crit_chance:
 			damage_part.text = str(damage*3)
 			damage_part.color = Color("#ff5400")
 			damage_part.global_position = self.global_position
 			get_parent().add_child(damage_part)
 			
 			is_critical_hit = true
-			active_stats.current_health -= damage * 3
+			stats.current_health -= damage * 3
 			return
 		
 		damage_part.text = str(damage)
@@ -96,13 +93,13 @@ func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float 
 		damage_part.global_position = self.global_position
 		get_parent().add_child(damage_part)
 		
-		active_stats.current_health -= damage
+		stats.current_health -= damage
 
 func get_knockback(dir: Vector2, knockback: float = 1.0) -> void:
 	if knockback_time.is_stopped():
 		velocity = Vector2.ZERO
 		knockback_time.start()
-		velocity = dir * knockback * active_stats.speed * 2
+		velocity = dir * knockback * stats.speed * 2
 		last_state = state
 		state = state_mashine.Knockback
 
@@ -112,7 +109,7 @@ func reset_to_last_state() -> void:
 	state = last_state
 
 func check_health() -> void:
-	if active_stats.current_health <= 0 and state != state_mashine.Knockback:
+	if stats.current_health <= 0 and state != state_mashine.Knockback:
 		death()
 
 ##should be overwritten if you want any effect on death

@@ -4,6 +4,10 @@ class_name PerkButton
 
 @export var skill : CharacterSkill
 @onready var icon: TextureRect = $icon
+var is_icon_set := false
+
+@export var button_textures: Array[Texture2D] = []
+
 
 signal change_description
 
@@ -11,15 +15,19 @@ func _ready() -> void:
 	skill.is_active = false
 
 func set_icon() -> void:
-	if !skill.is_active:
-		icon.set_texture(PerkData.load_perk_res(skill.key).image)
+	if skill.is_active:
+		return
+	else:
+		if !is_icon_set:
+			is_icon_set = true
+			icon.set_texture(PerkData.load_perk_res(skill.key).image)
 		disabled = !skill.player_res.Role.can_buy_skill(skill.id)
 		if disabled:
 			icon.modulate = Color("#636363")
-			texture_focused = load("res://Sprites/Perks/new_frames/new_frame_design_focus_disabled.png")
+			texture_focused = button_textures[0]
 		else:
 			icon.modulate = Color.WHITE
-			texture_focused = load("res://Sprites/Perks/new_frames/new_frame_design3.png")
+			texture_focused = button_textures[1]
 
 func _on_button_down() -> void:
 	if skill.player_res.Role.can_buy_skill(skill.id):
@@ -39,8 +47,8 @@ func _on_button_down() -> void:
 		GSignals.PERK_reset_perks_from_controller_id.emit(skill.player_res.player.controller_id)
 		set_process(false)
 		disabled = true
-		texture_disabled = load("res://Sprites/Perks/new_frames/new_frame_design1.png")
-		texture_focused = load("res://Sprites/Perks/new_frames/new_frame_design_focus.png")
+		texture_disabled = button_textures[2]
+		texture_focused = button_textures[3]
 		icon.modulate = Color.WHITE
 
 

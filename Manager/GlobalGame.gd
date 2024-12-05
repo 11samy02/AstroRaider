@@ -10,6 +10,8 @@ var camera: MainCam
 
 var time_played := 0.00
 
+@export var wave_count_added_per_round :int = 100
+
 func _process(delta: float) -> void:
 	if Input.get_connected_joypads().size() > 0:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

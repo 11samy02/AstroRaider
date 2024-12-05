@@ -15,11 +15,11 @@ func attack() -> void:
 			if parent.global_position.distance_to(parent.get_closest_target()) < 5:
 				has_attacked = true
 			if !has_attacked:
-				parent.velocity = (parent.get_closest_target() - parent.global_position).normalized() * parent.active_stats.speed * 2
+				parent.velocity = (parent.get_closest_target() - parent.global_position).normalized() * parent.stats.speed * 2
 				if dash_time.is_stopped():
 					dash_time.start()
 			else:
-				parent.velocity = (parent.global_position - parent.get_closest_target()).normalized() * parent.active_stats.speed * 0.75
+				parent.velocity = (parent.global_position - parent.get_closest_target()).normalized() * parent.stats.speed * 0.75
 				if dash_time.is_stopped():
 					dash_time.start()
 			parent.move_and_slide()

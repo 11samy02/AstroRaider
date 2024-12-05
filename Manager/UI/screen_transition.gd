@@ -2,7 +2,6 @@ extends CanvasLayer
 
 var new_szene : PackedScene
 @onready var anim: AnimationPlayer = $anim
-
 signal finished_loading
 
 func _ready() -> void:

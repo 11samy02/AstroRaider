@@ -1,8 +1,6 @@
 extends Node2D
 class_name PlayerList
 
-const SKILL_TREE := preload("res://Manager/UI/skill_tree.tscn")
-
 func _enter_tree() -> void:
 	GSignals.PERK_reset_perks_from_controller_id.connect(reset_perk_from_player)
 
@@ -20,7 +18,7 @@ func set_players() -> void:
 				player_res.player.player_id = ControllerHolder.registered_controllers[id]
 				player_res.player.player_id = id
 			
-			var skill_tree : SkillTree = SKILL_TREE.instantiate()
+			var skill_tree : SkillTree = RolesData.load_Skill_Tree_scene(player_res.Role.Role_key).instantiate()
 			skill_tree.player_res = player_res
 			skill_tree.Role
 			

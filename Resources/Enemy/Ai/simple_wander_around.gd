@@ -11,8 +11,8 @@ func _physics_process(delta: float) -> void:
 func move(delta) -> void:
 	match parent.state:
 		state:
-			parent.velocity += dir * parent.active_stats.speed * delta
-			parent.velocity = parent.velocity.clamp(Vector2(-parent.active_stats.speed, -parent.active_stats.speed), Vector2(parent.active_stats.speed, parent.active_stats.speed))
+			parent.velocity += dir * parent.stats.speed * delta
+			parent.velocity = parent.velocity.clamp(Vector2(-parent.stats.speed, -parent.stats.speed), Vector2(parent.stats.speed, parent.stats.speed))
 			parent.move_and_slide()
 
 

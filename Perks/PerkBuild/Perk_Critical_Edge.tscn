@@ -4,3 +4,4 @@
 
 [node name="PerkCriticalEdge" type="Node"]
 script = ExtResource("1_vccpn")
+Key = 19

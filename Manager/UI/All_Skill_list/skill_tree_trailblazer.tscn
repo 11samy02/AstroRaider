@@ -1,0 +1,1297 @@
+[gd_scene load_steps=64 format=3 uid="uid://dhunrn8cm7pwf"]
+
+[ext_resource type="PackedScene" uid="uid://vxe42563otpi" path="res://Manager/UI/skill_tree.tscn" id="1_xcqks"]
+[ext_resource type="Script" path="res://Resources/Characters/script/CharacterSkill.gd" id="2_8gppc"]
+[ext_resource type="PackedScene" uid="uid://deniacf7djdsm" path="res://Manager/UI/perk_button.tscn" id="3_go7xx"]
+
+[sub_resource type="Resource" id="Resource_wvp75"]
+script = ExtResource("2_8gppc")
+id = 1
+key = 0
+level = 2
+connection_id = 0
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_e6sfx"]
+script = ExtResource("2_8gppc")
+id = 2
+key = 0
+level = 3
+connection_id = 1
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_4mwbg"]
+script = ExtResource("2_8gppc")
+id = 3
+key = 0
+level = 4
+connection_id = 2
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_6c2e0"]
+script = ExtResource("2_8gppc")
+id = 4
+key = 0
+level = 5
+connection_id = 3
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_dnuhf"]
+script = ExtResource("2_8gppc")
+id = 5
+key = 0
+level = 6
+connection_id = 4
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_tkfif"]
+script = ExtResource("2_8gppc")
+id = 0
+key = 0
+level = 1
+connection_id = 0
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_6ef3d"]
+script = ExtResource("2_8gppc")
+id = 6
+key = 5
+level = 1
+connection_id = 0
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_236vv"]
+script = ExtResource("2_8gppc")
+id = 7
+key = 5
+level = 2
+connection_id = 6
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_47sps"]
+script = ExtResource("2_8gppc")
+id = 8
+key = 5
+level = 3
+connection_id = 7
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_sk4nt"]
+script = ExtResource("2_8gppc")
+id = 9
+key = 5
+level = 4
+connection_id = 8
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_a13q7"]
+script = ExtResource("2_8gppc")
+id = 10
+key = 5
+level = 5
+connection_id = 9
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_fgv2p"]
+script = ExtResource("2_8gppc")
+id = 11
+key = 5
+level = 6
+connection_id = 10
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_5cu26"]
+script = ExtResource("2_8gppc")
+id = 13
+key = 1
+level = 2
+connection_id = 12
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_q3bib"]
+script = ExtResource("2_8gppc")
+id = 14
+key = 1
+level = 3
+connection_id = 13
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_aiqiq"]
+script = ExtResource("2_8gppc")
+id = 14
+key = 1
+level = 4
+connection_id = 13
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_oh5mh"]
+script = ExtResource("2_8gppc")
+id = 15
+key = 1
+level = 5
+connection_id = 14
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_od68i"]
+script = ExtResource("2_8gppc")
+id = 16
+key = 1
+level = 6
+connection_id = 15
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_u3wac"]
+script = ExtResource("2_8gppc")
+id = 12
+key = 1
+level = 1
+connection_id = 12
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_68tgk"]
+script = ExtResource("2_8gppc")
+id = 23
+key = 19
+level = 1
+connection_id = 12
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_o5fni"]
+script = ExtResource("2_8gppc")
+id = 24
+key = 19
+level = 2
+connection_id = 23
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_digv6"]
+script = ExtResource("2_8gppc")
+id = 25
+key = 19
+level = 3
+connection_id = 24
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_0my6d"]
+script = ExtResource("2_8gppc")
+id = 26
+key = 19
+level = 4
+connection_id = 25
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_phrpq"]
+script = ExtResource("2_8gppc")
+id = 27
+key = 19
+level = 5
+connection_id = 26
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_35ex6"]
+script = ExtResource("2_8gppc")
+id = 28
+key = 19
+level = 6
+connection_id = 27
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_tvvv4"]
+script = ExtResource("2_8gppc")
+id = 17
+key = 2
+level = 1
+connection_id = 12
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_fp27i"]
+script = ExtResource("2_8gppc")
+id = 18
+key = 2
+level = 2
+connection_id = 17
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_w33vn"]
+script = ExtResource("2_8gppc")
+id = 19
+key = 2
+level = 3
+connection_id = 18
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_luswt"]
+script = ExtResource("2_8gppc")
+id = 20
+key = 2
+level = 4
+connection_id = 19
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_n0emf"]
+script = ExtResource("2_8gppc")
+id = 21
+key = 2
+level = 5
+connection_id = 20
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_2wrc8"]
+script = ExtResource("2_8gppc")
+id = 22
+key = 2
+level = 6
+connection_id = 21
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_3cjuh"]
+script = ExtResource("2_8gppc")
+id = 30
+key = 8
+level = 2
+connection_id = 29
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_l3wdv"]
+script = ExtResource("2_8gppc")
+id = 31
+key = 8
+level = 3
+connection_id = 30
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_kvj3i"]
+script = ExtResource("2_8gppc")
+id = 32
+key = 8
+level = 4
+connection_id = 31
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_y7ns7"]
+script = ExtResource("2_8gppc")
+id = 33
+key = 8
+level = 5
+connection_id = 32
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_w2af8"]
+script = ExtResource("2_8gppc")
+id = 34
+key = 8
+level = 6
+connection_id = 33
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_rby41"]
+script = ExtResource("2_8gppc")
+id = 29
+key = 8
+level = 1
+connection_id = 29
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_kte3v"]
+script = ExtResource("2_8gppc")
+id = 35
+key = 13
+level = 1
+connection_id = 29
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_6sd5k"]
+script = ExtResource("2_8gppc")
+id = 36
+key = 13
+level = 2
+connection_id = 35
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_1678j"]
+script = ExtResource("2_8gppc")
+id = 37
+key = 13
+level = 3
+connection_id = 36
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_ovod3"]
+script = ExtResource("2_8gppc")
+id = 38
+key = 13
+level = 4
+connection_id = 37
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_53ce1"]
+script = ExtResource("2_8gppc")
+id = 39
+key = 13
+level = 5
+connection_id = 38
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_ebyel"]
+script = ExtResource("2_8gppc")
+id = 40
+key = 13
+level = 6
+connection_id = 39
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_enweq"]
+script = ExtResource("2_8gppc")
+id = 51
+key = 7
+level = 2
+connection_id = 50
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_kwmtr"]
+script = ExtResource("2_8gppc")
+id = 52
+key = 7
+level = 3
+connection_id = 51
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_i1w20"]
+script = ExtResource("2_8gppc")
+id = 53
+key = 7
+level = 4
+connection_id = 52
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_44dwo"]
+script = ExtResource("2_8gppc")
+id = 54
+key = 7
+level = 5
+connection_id = 53
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_qlqsv"]
+script = ExtResource("2_8gppc")
+id = 55
+key = 7
+level = 6
+connection_id = 54
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_wojln"]
+script = ExtResource("2_8gppc")
+id = 50
+key = 7
+level = 1
+connection_id = 50
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_jfuvh"]
+script = ExtResource("2_8gppc")
+id = 63
+key = 4
+level = 1
+connection_id = 50
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_5ajkh"]
+script = ExtResource("2_8gppc")
+id = 64
+key = 4
+level = 2
+connection_id = 63
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_6mnu5"]
+script = ExtResource("2_8gppc")
+id = 65
+key = 4
+level = 3
+connection_id = 64
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_ndtud"]
+script = ExtResource("2_8gppc")
+id = 66
+key = 4
+level = 4
+connection_id = 65
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_01fbe"]
+script = ExtResource("2_8gppc")
+id = 67
+key = 4
+level = 5
+connection_id = 66
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_b5xlq"]
+script = ExtResource("2_8gppc")
+id = 68
+key = 4
+level = 6
+connection_id = 67
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_rhv25"]
+script = ExtResource("2_8gppc")
+id = 57
+key = 3
+level = 1
+connection_id = 50
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_2vlk3"]
+script = ExtResource("2_8gppc")
+id = 58
+key = 3
+level = 2
+connection_id = 57
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_1j2bv"]
+script = ExtResource("2_8gppc")
+id = 59
+key = 3
+level = 3
+connection_id = 58
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_fvk58"]
+script = ExtResource("2_8gppc")
+id = 60
+key = 3
+level = 4
+connection_id = 59
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_72rmm"]
+script = ExtResource("2_8gppc")
+id = 61
+key = 3
+level = 5
+connection_id = 60
+is_active = false
+can_buy = false
+
+[sub_resource type="Resource" id="Resource_7j55q"]
+script = ExtResource("2_8gppc")
+id = 62
+key = 3
+level = 6
+connection_id = 61
+is_active = false
+can_buy = false
+
+[node name="SkillTree_Trailblazer" instance=ExtResource("1_xcqks")]
+skill_list = Array[ExtResource("2_8gppc")]([SubResource("Resource_wvp75"), SubResource("Resource_e6sfx"), SubResource("Resource_4mwbg"), SubResource("Resource_6c2e0"), SubResource("Resource_dnuhf"), SubResource("Resource_tkfif"), SubResource("Resource_6ef3d"), SubResource("Resource_236vv"), SubResource("Resource_47sps"), SubResource("Resource_sk4nt"), SubResource("Resource_a13q7"), SubResource("Resource_fgv2p"), SubResource("Resource_5cu26"), SubResource("Resource_q3bib"), SubResource("Resource_aiqiq"), SubResource("Resource_oh5mh"), SubResource("Resource_od68i"), SubResource("Resource_u3wac"), SubResource("Resource_68tgk"), SubResource("Resource_o5fni"), SubResource("Resource_digv6"), SubResource("Resource_0my6d"), SubResource("Resource_phrpq"), SubResource("Resource_35ex6"), SubResource("Resource_tvvv4"), SubResource("Resource_fp27i"), SubResource("Resource_w33vn"), SubResource("Resource_luswt"), SubResource("Resource_n0emf"), SubResource("Resource_2wrc8"), SubResource("Resource_3cjuh"), SubResource("Resource_l3wdv"), SubResource("Resource_kvj3i"), SubResource("Resource_y7ns7"), SubResource("Resource_w2af8"), SubResource("Resource_rby41"), SubResource("Resource_kte3v"), SubResource("Resource_6sd5k"), SubResource("Resource_1678j"), SubResource("Resource_ovod3"), SubResource("Resource_53ce1"), SubResource("Resource_ebyel"), SubResource("Resource_enweq"), SubResource("Resource_kwmtr"), SubResource("Resource_i1w20"), SubResource("Resource_44dwo"), SubResource("Resource_qlqsv"), SubResource("Resource_wojln"), SubResource("Resource_jfuvh"), SubResource("Resource_5ajkh"), SubResource("Resource_6mnu5"), SubResource("Resource_ndtud"), SubResource("Resource_01fbe"), SubResource("Resource_b5xlq"), SubResource("Resource_rhv25"), SubResource("Resource_2vlk3"), SubResource("Resource_1j2bv"), SubResource("Resource_fvk58"), SubResource("Resource_72rmm"), SubResource("Resource_7j55q")])
+skill_list_count = 60
+
+[node name="Perk_container" type="GridContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="0"]
+custom_minimum_size = Vector2(0, 415)
+layout_mode = 2
+columns = 8
+
+[node name="Pos" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos2" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos2" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_wvp75")
+
+[node name="Pos3" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos3" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_e6sfx")
+
+[node name="Pos4" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos4" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_4mwbg")
+
+[node name="Pos5" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos5" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_6c2e0")
+
+[node name="Pos6" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos6" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_dnuhf")
+
+[node name="Pos7" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos8" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="7"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos9" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="8"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos9" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 1
+grow_vertical = 1
+skill = SubResource("Resource_tkfif")
+
+[node name="Pos10" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="9"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos11" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="10"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="11"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="12"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="13"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos15" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="14"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos16" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="15"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos17" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="16"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos18" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="17"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos18" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_6ef3d")
+
+[node name="Pos19" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="18"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos19" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_236vv")
+
+[node name="Pos20" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="19"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos20" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_47sps")
+
+[node name="Pos21" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="20"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos21" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_sk4nt")
+
+[node name="Pos22" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="21"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos22" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_a13q7")
+
+[node name="Pos23" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container" index="22"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container/Pos23" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_fgv2p")
+
+[node name="ColorRect" type="ColorRect" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="1"]
+custom_minimum_size = Vector2(950, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+
+[node name="Perk_container2" type="GridContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="2"]
+custom_minimum_size = Vector2(0, 415)
+layout_mode = 2
+columns = 8
+
+[node name="Pos" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos2" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos2" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_5cu26")
+
+[node name="Pos3" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos3" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_q3bib")
+
+[node name="Pos4" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos4" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_aiqiq")
+
+[node name="Pos5" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos5" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_oh5mh")
+
+[node name="Pos6" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos6" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_od68i")
+
+[node name="Pos7" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos8" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="7"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos9" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="8"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos9" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_u3wac")
+
+[node name="Pos10" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="9"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos10" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_68tgk")
+
+[node name="Pos11" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="10"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos11" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_o5fni")
+
+[node name="Pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="11"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos12" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_digv6")
+
+[node name="Pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="12"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos13" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_0my6d")
+
+[node name="Pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="13"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos14" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_phrpq")
+
+[node name="Pos15" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="14"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos15" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_35ex6")
+
+[node name="Pos16" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="15"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos17" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="16"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos18" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="17"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos18" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_tvvv4")
+
+[node name="Pos19" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="18"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos19" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_fp27i")
+
+[node name="Pos20" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="19"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos20" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_w33vn")
+
+[node name="Pos21" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="20"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos21" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_luswt")
+
+[node name="Pos22" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="21"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos22" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_n0emf")
+
+[node name="Pos23" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2" index="22"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container2/Pos23" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_2wrc8")
+
+[node name="ColorRect2" type="ColorRect" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="3"]
+custom_minimum_size = Vector2(950, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+
+[node name="Perk_container3" type="GridContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="4"]
+custom_minimum_size = Vector2(0, 415)
+layout_mode = 2
+columns = 8
+
+[node name="Pos" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos2" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos2" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_3cjuh")
+
+[node name="Pos3" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos3" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_l3wdv")
+
+[node name="Pos4" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos4" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_kvj3i")
+
+[node name="Pos5" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos5" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_y7ns7")
+
+[node name="Pos6" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos6" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_w2af8")
+
+[node name="Pos7" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos8" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="7"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos9" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="8"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos9" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_rby41")
+
+[node name="Pos10" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="9"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos11" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="10"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="11"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="12"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="13"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos15" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="14"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos16" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="15"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos17" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="16"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos18" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="17"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos18" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_kte3v")
+
+[node name="Pos19" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="18"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos19" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_6sd5k")
+
+[node name="Pos20" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="19"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos20" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_1678j")
+
+[node name="Pos21" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="20"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos21" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_ovod3")
+
+[node name="Pos22" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="21"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos22" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_53ce1")
+
+[node name="Pos23" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3" index="22"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container3/Pos23" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_ebyel")
+
+[node name="ColorRect3" type="ColorRect" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="5"]
+custom_minimum_size = Vector2(950, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+
+[node name="Perk_container4" type="GridContainer" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer" index="6"]
+custom_minimum_size = Vector2(0, 415)
+layout_mode = 2
+columns = 8
+
+[node name="Pos" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos2" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos2" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_enweq")
+
+[node name="Pos3" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos3" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_kwmtr")
+
+[node name="Pos4" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos4" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_i1w20")
+
+[node name="Pos5" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos5" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_44dwo")
+
+[node name="Pos6" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos6" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_qlqsv")
+
+[node name="Pos7" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos8" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="7"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos9" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="8"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos9" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_wojln")
+
+[node name="Pos10" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="9"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos10" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_jfuvh")
+
+[node name="Pos11" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="10"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos11" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_5ajkh")
+
+[node name="Pos12" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="11"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos12" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_6mnu5")
+
+[node name="Pos13" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="12"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos13" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_ndtud")
+
+[node name="Pos14" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="13"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos14" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_01fbe")
+
+[node name="Pos15" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="14"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos15" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_b5xlq")
+
+[node name="Pos16" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="15"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos17" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="16"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Pos18" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="17"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos18" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_rhv25")
+
+[node name="Pos19" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="18"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos19" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_2vlk3")
+
+[node name="Pos20" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="19"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos20" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_1j2bv")
+
+[node name="Pos21" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="20"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos21" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_fvk58")
+
+[node name="Pos22" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="21"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos22" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_72rmm")
+
+[node name="Pos23" type="Control" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4" index="22"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PerkButton2" parent="Control/MarginContainer/NinePatchRect/pos/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/Perk_container4/Pos23" index="0" instance=ExtResource("3_go7xx")]
+layout_mode = 1
+skill = SubResource("Resource_7j55q")

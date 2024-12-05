@@ -14,7 +14,7 @@ enum Keys {
 	Jet_Boost, # -> gibt die möglichkeit einen Art Dash in einer richtung zu machen
 	Piercing_Shot, # -> ermöglicht schüsse die gegner zu durchdringen
 	Stun_Grenade, # -> gegner werden beim treffer kurzeitig betäubt
-	Energy_Overload, # -> erhöht für eine gewissen zeitraum verschiedene stats
+	Energy_Overload,
 	Emergency_Heal,
 	Anti_Mine_Detection, # -> signalisiert das sich in der nähe eine Bombe befindet
 	Resource_Sharing,
@@ -41,7 +41,7 @@ const Keys_scene = {
 	Keys.Jet_Boost: "",
 	Keys.Piercing_Shot: "",
 	Keys.Stun_Grenade: "",
-	Keys.Energy_Overload: "",
+	Keys.Energy_Overload: "res://Perks/PerkBuild/Perk_Energy_Overload.tscn",
 	Keys.Emergency_Heal: "res://Perks/PerkBuild/Perk_Emergency_Heal.tscn",
 	Keys.Anti_Mine_Detection: "",
 	Keys.Resource_Sharing: "res://Perks/PerkBuild/Perk_Resource_Sharing.tscn",
@@ -64,7 +64,7 @@ const Keys_res = {
 	Keys.Jet_Boost: "",
 	Keys.Piercing_Shot: "",
 	Keys.Stun_Grenade: "",
-	Keys.Energy_Overload: "",
+	Keys.Energy_Overload: "res://Perks/Resources/Perk_Energy_Overload.tres",
 	Keys.Emergency_Heal: "res://Perks/Resources/Perk_Emergency_Heal.tres",
 	Keys.Anti_Mine_Detection: "",
 	Keys.Resource_Sharing: "res://Perks/Resources/Perk_Resource_Sharing.tres",

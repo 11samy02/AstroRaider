@@ -1,6 +1,9 @@
 extends TileMapLayer
 class_name Enviroment
 
+static var max_tiles_to_generate := 0
+static var tiles_generated := 0
+
 var tiles_dict: Dictionary = {}
 
 const GROUND_PARTICLE = preload("res://Particles/destroy_ground_particle.tscn")
@@ -8,7 +11,7 @@ const GROUND_PARTICLE = preload("res://Particles/destroy_ground_particle.tscn")
 @export var TileDrops: Array[TileDropResource]
 
 
-@export var chunk_size: Vector2i = Vector2i(25, 25)
+@export var chunk_size: Vector2i = Vector2i(50, 50)
 @export var Map_Size: Vector2i = Vector2i(200, 200)
 @export var Min_Enemy_Room_AREA = 20
 var seed: int
@@ -20,7 +23,7 @@ var map_corner := {
 	"Up": 0
 }
 
-@export var threshold := Vector2i(25,20)
+@export var threshold := Vector2i(50,40)
 @export var batch_size := 200
 
 @export_group("Rooms Settings")
@@ -42,12 +45,14 @@ func _enter_tree() -> void:
 	GSignals.ENV_destroy_tile.connect(destroy_tile_at)
 
 func _ready() -> void:
+	tiles_generated = 0
 	set_Enemy_building_in_list()
 	rng.randomize()
 	seed = rng.randi()
 	reset_objects()
 	room_count.min_value = ceil(3 + Map_Size.x / 20)
 	room_count.max_value = ceil(7 + Map_Size.x / 20)
+	max_tiles_to_generate = Map_Size.x * Map_Size.y
 	fill_map(Vector2i(-Map_Size.x / 2, -Map_Size.y / 2), Vector2i(Map_Size.x / 2, Map_Size.y / 2))
 
 func set_Enemy_building_in_list():
@@ -192,7 +197,7 @@ func fill_map(start_position: Vector2i, end_position: Vector2i, reverse: bool = 
 	
 	var all_tiles = []
 	var edge_tiles = []
-	var chunk_batch_size = 100
+	var chunk_batch_size = 50  # Smaller batch size
 	
 	for chunk_x in range(chunk_count_x):
 		for chunk_y in range(chunk_count_y):
@@ -204,8 +209,8 @@ func fill_map(start_position: Vector2i, end_position: Vector2i, reverse: bool = 
 			edge_tiles.append_array(get_edge_tiles(chunk_start, chunk_end))
 	
 			if int(chunk_x * chunk_count_y + chunk_y) % chunk_batch_size == 0:
-				await get_tree().process_frame
-	
+				await get_tree().process_frame  # Async processing
+
 	if not start_area_was_created:
 		start_area_was_created = true
 		create_start_area(Vector2i(start_area_size.get_rand_value() + GlobalGame.Player_count, start_area_size.get_rand_value()))
@@ -222,6 +227,7 @@ func fill_map(start_position: Vector2i, end_position: Vector2i, reverse: bool = 
 		ScreenTransition.finished_loading.emit()
 
 
+
 func fill_chunk(chunk_start: Vector2i, chunk_end: Vector2i) -> Array:
 	var tile_positions = []
 	for x in range(chunk_start.x, chunk_end.x + 1):
@@ -229,8 +235,9 @@ func fill_chunk(chunk_start: Vector2i, chunk_end: Vector2i) -> Array:
 			var tile_position = Vector2i(x, y)
 			set_cell(tile_position, 0, Vector2i(0, 0), 0)
 			tile_positions.append(tile_position)
+			tiles_generated += 1
+			
 	return tile_positions
-
 
 
 

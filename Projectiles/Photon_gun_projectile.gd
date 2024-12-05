@@ -13,6 +13,7 @@ class_name PlayerProjectile
 
 func _ready() -> void:
 	look_at(dir)
+	atk_resource.crit_chance = parent.stats.crit_chance
 	animation_player.play("appearing")
 
 func _on_area_entered(area: Area2D) -> void:

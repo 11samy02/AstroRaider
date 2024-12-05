@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://deniacf7djdsm"]
+[gd_scene load_steps=8 format=3 uid="uid://deniacf7djdsm"]
 
 [ext_resource type="Texture2D" uid="uid://3sr8we51k6o7" path="res://Sprites/Perks/new_frames/new_frame_design2.png" id="1_ofqmc"]
 [ext_resource type="Texture2D" uid="uid://c8qy75batm08p" path="res://Sprites/Perks/new_frames/new_frame_design3.png" id="2_8cerm"]
 [ext_resource type="Texture2D" uid="uid://dbkuxe7t2om3w" path="res://Sprites/Perks/new_frames/new_frame_design4.png" id="3_0hgmw"]
 [ext_resource type="Script" path="res://Manager/UI/perk_button.gd" id="4_ly8wx"]
+[ext_resource type="Texture2D" uid="uid://wkl4gwijfdq5" path="res://Sprites/Perks/new_frames/new_frame_design_focus_disabled.png" id="5_qpfde"]
+[ext_resource type="Texture2D" uid="uid://rrl7uwra8t3u" path="res://Sprites/Perks/new_frames/new_frame_design1.png" id="6_wwcyj"]
+[ext_resource type="Texture2D" uid="uid://5qm7sxfc0v02" path="res://Sprites/Perks/new_frames/new_frame_design_focus.png" id="7_pgnqw"]
 
-[node name="PerkButton" type="TextureButton"]
+[node name="PerkButton" type="TextureButton" groups=["PerkButton"]]
 custom_minimum_size = Vector2(128, 128)
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +24,7 @@ texture_disabled = ExtResource("3_0hgmw")
 texture_focused = ExtResource("2_8cerm")
 stretch_mode = 5
 script = ExtResource("4_ly8wx")
+button_textures = Array[Texture2D]([ExtResource("5_qpfde"), ExtResource("2_8cerm"), ExtResource("6_wwcyj"), ExtResource("7_pgnqw")])
 
 [node name="icon" type="TextureRect" parent="."]
 modulate = Color(0.389287, 0.389287, 0.389287, 1)

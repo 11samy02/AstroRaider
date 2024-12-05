@@ -50,7 +50,7 @@ func _on_spawn_time_timeout() -> void:
 
 func start_new_wave() -> void:
 	GSignals.WAV_wave_endet.emit()
-	wave_count += 1
+	wave_count += GlobalGame.wave_count_added_per_round
 	wave_spawn_count = rng.randi_range(spawn_per_round.min_value + wave_count + GlobalGame.Players.size(), spawn_per_round.max_value + wave_count + GlobalGame.Players.size())
 	spawn_time.start()
 
