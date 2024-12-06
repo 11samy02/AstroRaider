@@ -1,12 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://deniacf7djdsm"]
+[gd_scene load_steps=16 format=3 uid="uid://deniacf7djdsm"]
 
-[ext_resource type="Texture2D" uid="uid://3sr8we51k6o7" path="res://Sprites/Perks/new_frames/new_frame_design2.png" id="1_ofqmc"]
-[ext_resource type="Texture2D" uid="uid://c8qy75batm08p" path="res://Sprites/Perks/new_frames/new_frame_design3.png" id="2_8cerm"]
-[ext_resource type="Texture2D" uid="uid://dbkuxe7t2om3w" path="res://Sprites/Perks/new_frames/new_frame_design4.png" id="3_0hgmw"]
+[ext_resource type="Texture2D" uid="uid://dqus8c46qwn38" path="res://Sprites/Perks/new_frames/frame_normal1.png" id="1_sfjgn"]
+[ext_resource type="Texture2D" uid="uid://c0eol7ask10ni" path="res://Sprites/Perks/new_frames/frame_normal2.png" id="2_idd62"]
+[ext_resource type="Texture2D" uid="uid://cy32lgcchcx2p" path="res://Sprites/Perks/new_frames/frame_disabled1.png" id="3_bg1u0"]
 [ext_resource type="Script" path="res://Manager/UI/perk_button.gd" id="4_ly8wx"]
-[ext_resource type="Texture2D" uid="uid://wkl4gwijfdq5" path="res://Sprites/Perks/new_frames/new_frame_design_focus_disabled.png" id="5_qpfde"]
-[ext_resource type="Texture2D" uid="uid://rrl7uwra8t3u" path="res://Sprites/Perks/new_frames/new_frame_design1.png" id="6_wwcyj"]
-[ext_resource type="Texture2D" uid="uid://5qm7sxfc0v02" path="res://Sprites/Perks/new_frames/new_frame_design_focus.png" id="7_pgnqw"]
+[ext_resource type="Texture2D" uid="uid://dfhtk2imq31dh" path="res://Sprites/Perks/new_frames/frame_disabled2.png" id="5_1oble"]
+[ext_resource type="Texture2D" uid="uid://cpgq85gxv4wvm" path="res://Sprites/Perks/new_frames/frame_movement1.png" id="6_fojc2"]
+[ext_resource type="Texture2D" uid="uid://dktajwqhda1r6" path="res://Sprites/Perks/new_frames/frame_movement2.png" id="7_seytq"]
+[ext_resource type="Texture2D" uid="uid://cskiit8a3pmqy" path="res://Sprites/Perks/new_frames/frame_attack1.png" id="8_xo13n"]
+[ext_resource type="Texture2D" uid="uid://bsqf2xka02ojy" path="res://Sprites/Perks/new_frames/frame_attack2.png" id="9_txpeo"]
+[ext_resource type="Texture2D" uid="uid://3t3yf5msc0sk" path="res://Sprites/Perks/new_frames/frame_defense1.png" id="10_05pfh"]
+[ext_resource type="Texture2D" uid="uid://dqy28c8mj48e3" path="res://Sprites/Perks/new_frames/frame_defense2.png" id="11_ix383"]
+[ext_resource type="Texture2D" uid="uid://bi0nj0h6mnqro" path="res://Sprites/Perks/new_frames/frame_team1.png" id="12_7tw2k"]
+[ext_resource type="Texture2D" uid="uid://dfqw7funuss8y" path="res://Sprites/Perks/new_frames/frame_team2.png" id="13_wrb4v"]
+[ext_resource type="Texture2D" uid="uid://bs5uplv0nlgow" path="res://Sprites/Perks/new_frames/frame_mining1.png" id="14_jeno3"]
+[ext_resource type="Texture2D" uid="uid://cjik020wivmbx" path="res://Sprites/Perks/new_frames/frame_mining2.png" id="15_mplln"]
 
 [node name="PerkButton" type="TextureButton" groups=["PerkButton"]]
 custom_minimum_size = Vector2(128, 128)
@@ -18,13 +26,13 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 disabled = true
-texture_normal = ExtResource("1_ofqmc")
-texture_hover = ExtResource("2_8cerm")
-texture_disabled = ExtResource("3_0hgmw")
-texture_focused = ExtResource("2_8cerm")
+texture_normal = ExtResource("1_sfjgn")
+texture_hover = ExtResource("2_idd62")
+texture_disabled = ExtResource("3_bg1u0")
+texture_focused = ExtResource("2_idd62")
 stretch_mode = 5
 script = ExtResource("4_ly8wx")
-button_textures = Array[Texture2D]([ExtResource("5_qpfde"), ExtResource("2_8cerm"), ExtResource("6_wwcyj"), ExtResource("7_pgnqw")])
+button_textures = Array[Texture2D]([ExtResource("5_1oble"), ExtResource("2_idd62"), ExtResource("6_fojc2"), ExtResource("7_seytq"), ExtResource("8_xo13n"), ExtResource("9_txpeo"), ExtResource("10_05pfh"), ExtResource("11_ix383"), ExtResource("12_7tw2k"), ExtResource("13_wrb4v"), ExtResource("14_jeno3"), ExtResource("15_mplln")])
 
 [node name="icon" type="TextureRect" parent="."]
 modulate = Color(0.389287, 0.389287, 0.389287, 1)

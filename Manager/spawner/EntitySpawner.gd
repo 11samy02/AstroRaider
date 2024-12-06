@@ -1,10 +1,7 @@
 extends Node
 class_name EntitySpawner
 
-const ENEMY = [
-	preload("res://Actors/Enemys/Small Enemys/bat.tscn"),
-	preload("res://Actors/Enemys/Small Enemys/DemonEye.tscn")
-]
+@export var ENEMY : Array[EnemySpawnResource]
 
 @onready var spawn_time: Timer = $spawn_time
 @onready var wave_time: Timer = $wave_time
@@ -16,11 +13,13 @@ static var wave_count := 0
 static var wave_time_to_next := 0.00
 static var wave_time_max_time := 0.00
 static var wave_time_stopped := true
+static var pause_time := 120
 
 @export var spawn_per_round: SimplefySettingMath = SimplefySettingMath.new()
 @export var time_until_wave_start: SimplefySettingMath = SimplefySettingMath.new()
 
 @export var wave_types : Array[WaveTypeResource]
+
 
 
 
@@ -57,7 +56,13 @@ func start_new_wave() -> void:
 func spawn_enemy() -> void:
 	randomize()
 	var spawn_pos: Vector2 = GlobalGame.camera.get_pos_out_of_cam()
-	var enemy = ENEMY.pick_random().instantiate()
+	var enemy_list : Array[PackedScene] = []
+	
+	for enemy_res in ENEMY:
+		for i in enemy_res.rarity:
+			enemy_list.append(enemy_res.Entity)
+	
+	var enemy = enemy_list.pick_random().instantiate()
 	enemy.global_position = spawn_pos
 	enemy.level = floori(wave_count/10)
 	get_parent().add_child(enemy)
@@ -82,6 +87,6 @@ func Manage_Wave_Types() -> bool:
 func get_wave_type(wave_type_res: WaveTypeResource) -> bool:
 	var Types = WaveTypeResource.WaveTypeEnum
 	if wave_type_res.WaveType == Types.Pause:
-		wave_time.set_wait_time(120)
+		wave_time.set_wait_time(pause_time)
 		return true
 	return false

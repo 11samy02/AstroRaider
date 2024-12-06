@@ -12,5 +12,5 @@ level = 1
 cost = Array[int]([50, 100, 150, 200, 250, 300])
 value = Array[int]([10, 20, 30, 40, 50, 60])
 description = "After each Round you Heal {{value}}% of your max "
-type = 2
+type = 1
 active_type = 3

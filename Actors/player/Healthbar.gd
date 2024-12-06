@@ -67,6 +67,7 @@ func applay_damage(entity: Node2D, damage: int = 1, crit : float = 1.00):
 		tween.tween_property(self,"current_hp", current_hp - damage,0.2)
 		current_hp = clampi(current_hp,0, max_hp)
 		timer.start()
+		print(damage)
 
 func applay_heal(entity: Node2D, heal_value : int):
 	if entity == parent_entity:

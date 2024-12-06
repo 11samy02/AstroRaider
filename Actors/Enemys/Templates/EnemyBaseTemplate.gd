@@ -44,6 +44,7 @@ func _ready() -> void:
 	stats.max_health += randi_range(0, stats.max_Random_health_edit)
 	stats.current_health = stats.max_health
 	load_ai_to_node()
+	sprite.texture = sprite_variation.pick_random()
 
 
 

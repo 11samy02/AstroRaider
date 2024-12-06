@@ -12,5 +12,5 @@ level = 1
 cost = Array[int]([25, 50, 75, 100, 125, 150])
 value = Array[int]([50, 75, 100, 125, 150, 175])
 description = "the varnuable time after you get hit increases by {{value}}%"
-type = 2
+type = 1
 active_type = 0
