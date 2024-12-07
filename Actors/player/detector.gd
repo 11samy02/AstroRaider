@@ -6,6 +6,8 @@ extends Node2D
 var grid_size := 16
 @export var detector_count := 3
 
+var can_destroy := true
+
 func _enter_tree() -> void:
 	GSignals.ENV_check_detection_tile.connect(check_for_tile_points)
 
@@ -22,6 +24,7 @@ func _process(delta: float) -> void:
 		var offset = Vector2(grid_size * start_x, grid_size * start_y)
 		i.global_position = (player.global_position + offset).snapped(Vector2(grid_size/2, grid_size/2))
 		index += 1
+	
 
 func check_for_tile_points(pla: Player, damage: int = 1):
 	if is_instance_valid(pla):
@@ -32,5 +35,15 @@ func check_for_tile_points(pla: Player, damage: int = 1):
 				if i.has_detected:
 					all_collision_pos.append(i.global_position)
 			
-			GSignals.ENV_destroy_tile.emit(all_collision_pos, damage)
+			if can_destroy:
+				GSignals.ENV_destroy_tile.emit(all_collision_pos, damage)
+			elif player.stats.Perks.has(PerkData.load_perk_res(PerkData.Keys.Anti_Mine_Detection)):
+				GSignals.PERK_show_items_behind_wall.emit(all_collision_pos)
 	
+
+func reset_detector() -> void:
+	for i in get_children():
+		i.queue_free()
+	for i in detector_count * detector_count:
+		var detector_instance = detector.instantiate()
+		add_child(detector_instance)

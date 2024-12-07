@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dd8s7nwmnq0ud"]
 
-[ext_resource type="Script" path="res://Objects/Collectable/ore_template.gd" id="1_xd3ej"]
+[ext_resource type="Script" path="res://Collectable/ore_template.gd" id="1_xd3ej"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4b5bt"]
 light_mode = 1

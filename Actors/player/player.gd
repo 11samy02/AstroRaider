@@ -221,12 +221,11 @@ var shader_value = 0
 func get_hit_anim() -> void:
 	var tween = create_tween()
 	shader_value = 1
-	sprite.scale = Vector2(1.25,1.25)
+	sprite.scale = Vector2(1.5,1.5)
 	
 	damage_sound.play_sound()
 	tween.tween_property(self, "shader_value", 0, 0.2)
-	tween.parallel()
-	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)
+	tween.parallel().tween_property(sprite, "scale", Vector2(1,1), 0.2)
 	
 	sprite_anim.play("damaged", -1, stats.invincibility_frame)
 

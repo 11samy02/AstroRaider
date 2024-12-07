@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr3wnqk3gk4tu"]
+
+[ext_resource type="Texture2D" uid="uid://dffqsxjstmde0" path="res://Sprites/actors/Enemys/small/Bomb/Bomb.png" id="1_21axw"]
+[ext_resource type="Script" path="res://Visuel Feedback Tutorial/item_in_wall_notification.gd" id="2_dpjac"]
+
+[node name="item_in_wall_notification" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.4)
+z_index = 100
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("1_21axw")
+hframes = 2
+script = ExtResource("2_dpjac")

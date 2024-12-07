@@ -60,25 +60,21 @@ func applay_damage(entity: Node2D, damage: int = 1, crit : float = 1.00):
 				return
 		parent_entity.get_hit_anim()
 		var tween = create_tween()
-		tween.parallel()
 		
 		timer.stop()
 		tween.tween_property(self, "modulate", Color("#ffffff"), 0.05)
-		tween.tween_property(self,"current_hp", current_hp - damage,0.2)
+		tween.parallel().tween_property(self,"current_hp", current_hp - damage,0.2)
 		current_hp = clampi(current_hp,0, max_hp)
 		timer.start()
-		print(damage)
 
 func applay_heal(entity: Node2D, heal_value : int):
 	if entity == parent_entity:
 		var particle = HEAL_PARTICLE.instantiate()
 		entity.add_child(particle)
-		var tween = create_tween()
-		tween.parallel()
-		
+		var tween = create_tween()		
 		timer.stop()
 		tween.tween_property(self, "modulate", Color("#ffffff"), 0.05)
-		tween.tween_property(self,"current_hp", current_hp + heal_value,0.2)
+		tween.parallel().tween_property(self,"current_hp", current_hp + heal_value,0.2)
 		current_hp = clampi(current_hp,0, max_hp)
 		
 		

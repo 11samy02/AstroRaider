@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://px3hh4atnj78" path="res://Sprites/enviroment/walls2.png" id="3_fg037"]
 [ext_resource type="Script" path="res://Resources/Enviroment/Destroyable Tiles/TileDropResource.gd" id="4_wu72t"]
 [ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="5_8pt2k"]
+[ext_resource type="Resource" uid="uid://5qhwa21b0wtf" path="res://Resources/Enviroment/Destroyable Tiles/DropsRes/Drop_Crystal.tres" id="6_3omu5"]
+[ext_resource type="Resource" uid="uid://dbvrjirt22173" path="res://Resources/Enviroment/Destroyable Tiles/DropsRes/Drop_Iron.tres" id="7_gptyy"]
+[ext_resource type="Resource" uid="uid://bwx4cf4sf3p3h" path="res://Resources/Enviroment/Destroyable Tiles/DropsRes/Drop_Copper.tres" id="8_vxnqt"]
+[ext_resource type="Resource" uid="uid://bua0xqq0iv016" path="res://Resources/Enviroment/Destroyable Tiles/DropsRes/Drop_Gold.tres" id="9_4m86y"]
+[ext_resource type="Resource" uid="uid://day2khwohpbwi" path="res://Resources/Enviroment/Destroyable Tiles/DropsRes/Drop_Bomb.tres" id="10_asj2k"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xieh5"]
 polygon = PackedVector2Array(-4, -4, 4, -4, 4, 8, -4, 8)
@@ -1482,41 +1487,6 @@ sources/0 = SubResource("TileSetAtlasSource_ncg6w")
 sources/1 = SubResource("TileSetAtlasSource_usi5d")
 sources/3 = SubResource("TileSetAtlasSource_d0sxc")
 
-[sub_resource type="Resource" id="Resource_eij58"]
-script = ExtResource("4_wu72t")
-Drop_path = "res://Objects/Collectable/crystal.tscn"
-min_amount = 0
-max_amount = 2
-rarity = 80
-
-[sub_resource type="Resource" id="Resource_x8itx"]
-script = ExtResource("4_wu72t")
-Drop_path = "res://Actors/Enemys/Enviroment/bomb.tscn"
-min_amount = 1
-max_amount = 1
-rarity = 5
-
-[sub_resource type="Resource" id="Resource_khkbr"]
-script = ExtResource("4_wu72t")
-Drop_path = "res://Objects/Collectable/iron_ore.tscn"
-min_amount = 1
-max_amount = 1
-rarity = 3
-
-[sub_resource type="Resource" id="Resource_ooggv"]
-script = ExtResource("4_wu72t")
-Drop_path = "res://Objects/Collectable/Copper_Ore.tscn"
-min_amount = 1
-max_amount = 1
-rarity = 2
-
-[sub_resource type="Resource" id="Resource_3cukr"]
-script = ExtResource("4_wu72t")
-Drop_path = "res://Objects/Collectable/Gold_ore.tscn"
-min_amount = 1
-max_amount = 1
-rarity = 1
-
 [sub_resource type="Resource" id="Resource_x3pi4"]
 script = ExtResource("5_8pt2k")
 min_value = 8
@@ -1536,7 +1506,8 @@ max_value = 32
 z_index = -20
 tile_set = SubResource("TileSet_53qbr")
 script = ExtResource("2_ytm3t")
-TileDrops = Array[ExtResource("4_wu72t")]([SubResource("Resource_eij58"), SubResource("Resource_x8itx"), SubResource("Resource_khkbr"), SubResource("Resource_ooggv"), SubResource("Resource_3cukr")])
+TileDrops = Array[ExtResource("4_wu72t")]([ExtResource("6_3omu5"), ExtResource("7_gptyy"), ExtResource("8_vxnqt"), ExtResource("9_4m86y"), ExtResource("10_asj2k")])
+Map_Size = Vector2i(150, 150)
 start_area_size = SubResource("Resource_x3pi4")
 room_count = SubResource("Resource_6i0rp")
 room_size = SubResource("Resource_c0xtb")

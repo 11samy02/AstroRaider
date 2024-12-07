@@ -1,8 +1,67 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1j1bd7ma1q07"]
+[gd_scene load_steps=21 format=3 uid="uid://d1j1bd7ma1q07"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_j57v1"]
 [ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="2_8iqur"]
+[ext_resource type="Script" path="res://Actors/Enemys/Small Enemys/glimblob.gd" id="2_82sf1"]
 [ext_resource type="Texture2D" uid="uid://y0uee18n5ynf" path="res://Sprites/actors/Enemys/small/Glimblob/Glimblob.png" id="2_onj4g"]
+[ext_resource type="Script" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="3_die81"]
+[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="4_tv15v"]
+[ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="5_hrj2a"]
+[ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="5_ldoh3"]
+
+[sub_resource type="Resource" id="Resource_6iokw"]
+script = ExtResource("3_die81")
+key = 0
+state = 0
+
+[sub_resource type="Resource" id="Resource_jp2f4"]
+script = ExtResource("3_die81")
+key = 1
+state = 1
+
+[sub_resource type="Resource" id="Resource_oasmq"]
+script = ExtResource("3_die81")
+key = 2
+state = 2
+
+[sub_resource type="Resource" id="Resource_e365i"]
+resource_local_to_scene = true
+script = ExtResource("4_tv15v")
+damage = 5
+knockback = 1.0
+crit_chance = 0.0
+
+[sub_resource type="Resource" id="Resource_57a5t"]
+resource_local_to_scene = true
+script = ExtResource("5_hrj2a")
+max_health = 5
+max_Random_health_edit = 0
+attack = SubResource("Resource_e365i")
+ai_type_keys = Array[ExtResource("3_die81")]([SubResource("Resource_6iokw"), SubResource("Resource_jp2f4"), SubResource("Resource_oasmq")])
+speed = 50.0
+max_speed = 150.0
+default_crit_chance = 20.0
+
+[sub_resource type="Resource" id="Resource_bdwum"]
+resource_local_to_scene = true
+script = ExtResource("4_tv15v")
+damage = 5
+knockback = 1.0
+crit_chance = 0.0
+
+[sub_resource type="Resource" id="Resource_auds6"]
+resource_local_to_scene = true
+script = ExtResource("5_hrj2a")
+max_health = 5
+max_Random_health_edit = 0
+attack = SubResource("Resource_bdwum")
+ai_type_keys = Array[ExtResource("3_die81")]([])
+speed = 10.0
+max_speed = 300.0
+default_crit_chance = 20.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhm8i"]
+radius = 12.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_usxby"]
 resource_local_to_scene = true
@@ -12,27 +71,6 @@ shader_parameter/r = 1.0
 shader_parameter/g = null
 shader_parameter/b = null
 shader_parameter/mix_color = null
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhm8i"]
-radius = 12.0
-
-[sub_resource type="Animation" id="Animation_54vgy"]
-resource_name = "idle"
-length = 0.6
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 0]
-}
 
 [sub_resource type="Animation" id="Animation_redl5"]
 length = 0.001
@@ -49,6 +87,24 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_54vgy"]
+resource_name = "idle"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x03m5"]
 _data = {
 "RESET": SubResource("Animation_redl5"),
@@ -56,7 +112,15 @@ _data = {
 }
 
 [node name="Glimblob" instance=ExtResource("1_j57v1")]
+script = ExtResource("2_82sf1")
+stats = SubResource("Resource_57a5t")
+stats_upgrades = SubResource("Resource_auds6")
 sprite_variation = Array[Texture2D]([ExtResource("2_onj4g")])
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
+position = Vector2(0, -3)
+shape = SubResource("CapsuleShape2D_fhm8i")
 
 [node name="sprite" parent="." index="1"]
 material = SubResource("ShaderMaterial_usxby")
@@ -65,15 +129,40 @@ hframes = 3
 vframes = 3
 
 [node name="CollisionShape2D" parent="." index="2"]
+visible = false
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_fhm8i")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="4"]
+visible = false
 position = Vector2(0.499999, -4.5)
 scale = Vector2(1.35, 1.65)
+
+[node name="Death" parent="Sounds" index="0"]
+min_random_pitch = 0.5
+max_random_pitch = 0.8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_x03m5")
 }
 autoplay = "idle"
+
+[node name="Timer" type="Node" parent="." index="7"]
+
+[node name="wander_time" type="Timer" parent="Timer" index="0"]
+one_shot = true
+
+[node name="follow_time" type="Timer" parent="Timer" index="1"]
+wait_time = 2.0
+one_shot = true
+
+[node name="AttackBox" parent="." index="8" node_paths=PackedStringArray("owner_entity") instance=ExtResource("5_ldoh3")]
+owner_entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0"]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_fhm8i")
+
+[connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

@@ -10,7 +10,6 @@ const GROUND_PARTICLE = preload("res://Particles/destroy_ground_particle.tscn")
 
 @export var TileDrops: Array[TileDropResource]
 
-
 @export var chunk_size: Vector2i = Vector2i(50, 50)
 @export var Map_Size: Vector2i = Vector2i(200, 200)
 @export var Min_Enemy_Room_AREA = 20
@@ -43,6 +42,7 @@ signal map_was_created
 
 func _enter_tree() -> void:
 	GSignals.ENV_destroy_tile.connect(destroy_tile_at)
+	GSignals.PERK_show_items_behind_wall.connect(show_items_behind_wall)
 
 func _ready() -> void:
 	tiles_generated = 0
@@ -76,7 +76,7 @@ func set_live_to_tiles(tiles_to_process: Array = []) -> void:
 		var tile_Res := DestroyableTileResource.new()
 		var tile_drop := get_random_drop()
 		tile_Res.pos = tile_pos
-		tile_Res.drop_path = tile_drop.Drop_path
+		tile_Res.key = tile_drop.key
 		tile_Res.drop_count.min_value = tile_drop.min_amount
 		tile_Res.drop_count.max_value = tile_drop.max_amount
 		tiles_dict[tile_pos] = tile_Res
@@ -163,7 +163,7 @@ func update_surrounding_tiles_batched(tile_positions: Array, batch_size: int = 5
 func drop_items(tile: DestroyableTileResource) -> void:
 	var drop_count = rng.randi_range(tile.drop_count.min_value, tile.drop_count.max_value)
 	for i in range(drop_count):
-		var item = load(tile.drop_path).instantiate()
+		var item = DropData.load_drop_szene(tile.key).instantiate()
 		if item is CollectableTemplate:
 			item.global_position = map_to_local(tile.pos)
 			item.global_position += Vector2(rng.randi_range(-4, 4), rng.randi_range(-4, 4))
@@ -390,3 +390,20 @@ func spawn_enemy_buildings():
 		
 		building_instance.global_position = map_to_local(building_position)
 		get_parent().add_child(building_instance)
+
+
+
+#has to be changed
+const ITEM_IN_WALL_NOTIFICATION = preload("res://Visuel Feedback Tutorial/item_in_wall_notification.tscn")
+
+func show_items_behind_wall(pos: Array[Vector2]) -> void:
+	for i in pos:
+		var tile_pos = local_to_map(i)
+		tile_pos = Vector2i(tile_pos)
+		if tiles_dict.has(tile_pos):
+			var tile = tiles_dict[tile_pos]
+			
+			if tile.key == DropData.Keys.Bomb_key:
+				var notication = ITEM_IN_WALL_NOTIFICATION.instantiate()
+				notication.global_position = i
+				get_parent().add_child(notication)

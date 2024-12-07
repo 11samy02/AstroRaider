@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbax3fkng4f7n"]
 
-[ext_resource type="PackedScene" uid="uid://dd8s7nwmnq0ud" path="res://Objects/Collectable/ore_template.tscn" id="1_jaebk"]
+[ext_resource type="PackedScene" uid="uid://dd8s7nwmnq0ud" path="res://Collectable/ore_template.tscn" id="1_jaebk"]
 [ext_resource type="Texture2D" uid="uid://wwu4lio5gwqa" path="res://Sprites/Items/Ores/iron_ore.png" id="2_02qvw"]
 
 [sub_resource type="Gradient" id="Gradient_jnu7a"]

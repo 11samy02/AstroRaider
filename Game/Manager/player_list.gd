@@ -66,3 +66,9 @@ func spawn_detector_to_player() -> void:
 		var detector = preload("res://Actors/player/detector.tscn").instantiate()
 		detector.player = player_res.player
 		add_child(detector)
+		
+		var detector2 = preload("res://Actors/player/detector.tscn").instantiate()
+		detector2.player = player_res.player
+		detector2.can_destroy = false
+		detector2.detector_count = 9
+		add_child(detector2)

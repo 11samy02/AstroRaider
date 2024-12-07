@@ -6,16 +6,13 @@ class_name DemonEye
 @onready var follow_time: Timer = $Timer/follow_time
 @onready var shoot_delay: Timer = $Timer/shoot_delay
 
-var shader_value:float = 0.0
 
 static var kill_count: int = 0
 
 func _physics_process(delta: float) -> void:
 	check_health()
-	look_direction()
 	shader_effects()
 	controll_state_mashine()
-
 
 
 func controll_state_mashine():
@@ -61,14 +58,6 @@ func _on_wander_time_timeout() -> void:
 func shader_effects() -> void:
 	sprite.material.set_shader_parameter("mix_color", shader_value)
 
-func get_hit_anim() -> void:
-	var tween = create_tween()
-	shader_value = 1
-	sprite.scale = Vector2(1.25,1.25)
-	
-	tween.tween_property(self, "shader_value", 0, 0.2)
-	tween.parallel()
-	tween.tween_property(sprite, "scale", Vector2(1,1), 0.2)
 
 func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
 	super(entity,damage,crit_chance)
@@ -77,13 +66,6 @@ func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float 
 		get_hit_anim()
 		
 	
-
-func look_direction():
-	if get_closest_target().x < global_position.x:
-		sprite.flip_h = true
-	else:
-		sprite.flip_h = false
-
 
 func death() -> void:
 	kill_count += 1

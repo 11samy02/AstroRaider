@@ -74,7 +74,7 @@ func open_skill_tree(player: Player) -> void:
 		
 
 
-var delay := 0.5
+var delay := 0.2
 
 func close_skill_tree(delta) -> void:
 	if Input.is_joy_button_pressed(player_res.player.controller_id, JOY_BUTTON_Y) and delay <= 0 or Input.is_action_pressed("interact") and delay <= 0:
@@ -84,7 +84,7 @@ func close_skill_tree(delta) -> void:
 	elif Input.is_joy_button_pressed(player_res.player.controller_id, JOY_BUTTON_Y) or Input.is_action_pressed("interact"):
 		delay -= delta
 	else:
-		delay = 0.5
+		delay = 0.2
 	
 
 

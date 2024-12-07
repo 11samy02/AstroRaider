@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhmvhsrfsgk2j"]
+[gd_scene load_steps=4 format=3 uid="uid://bhmvhsrfsgk2j"]
 
 [ext_resource type="Script" path="res://Objects/Buildings/building_template.gd" id="1_kya05"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_av1se"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_3jlwf"]
+colors = PackedColorArray(0.36, 0.36, 0.36, 1, 0.82, 0.82, 0.82, 1)
 
 [node name="Building" type="Area2D"]
 z_index = -5
@@ -9,5 +15,13 @@ script = ExtResource("1_kya05")
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 
 [node name="collision" type="CollisionShape2D" parent="."]
+
+[node name="rope" type="Line2D" parent="."]
+modulate = Color(1, 0.768627, 0, 1)
+show_behind_parent = true
+z_index = -2
+material = SubResource("CanvasItemMaterial_av1se")
+width = 1.0
+gradient = SubResource("Gradient_3jlwf")
 
 [connection signal="area_entered" from="." to="." method="_collect_fuel"]

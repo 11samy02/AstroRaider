@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TileDropResource" load_steps=2 format=3 uid="uid://dbvrjirt22173"]
+
+[ext_resource type="Script" path="res://Resources/Enviroment/Destroyable Tiles/TileDropResource.gd" id="1_kd6g3"]
+
+[resource]
+script = ExtResource("1_kd6g3")
+key = 1
+min_amount = 1
+max_amount = 1
+rarity = 5

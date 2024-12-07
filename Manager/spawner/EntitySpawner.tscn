@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhmsjtfelgkxa"]
+[gd_scene load_steps=14 format=3 uid="uid://bhmsjtfelgkxa"]
 
 [ext_resource type="Script" path="res://Manager/spawner/EntitySpawner.gd" id="1_qqvtv"]
 [ext_resource type="Script" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="2_2abb3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Manager/spawner/EnemySpawnResource.gd" id="2_t0nq5"]
 [ext_resource type="PackedScene" uid="uid://d2r6ecatdtqut" path="res://Actors/Enemys/Small Enemys/DemonEye.tscn" id="3_h83o2"]
 [ext_resource type="Script" path="res://Manager/spawner/WaveTypeResource.gd" id="3_ug0s3"]
+[ext_resource type="PackedScene" uid="uid://d1j1bd7ma1q07" path="res://Actors/Enemys/Small Enemys/glimblob.tscn" id="5_ypiin"]
 
 [sub_resource type="Resource" id="Resource_mmijs"]
 script = ExtResource("2_t0nq5")
@@ -15,6 +16,11 @@ rarity = 5
 [sub_resource type="Resource" id="Resource_wpfis"]
 script = ExtResource("2_t0nq5")
 Entity = ExtResource("3_h83o2")
+rarity = 3
+
+[sub_resource type="Resource" id="Resource_hvwmm"]
+script = ExtResource("2_t0nq5")
+Entity = ExtResource("5_ypiin")
 rarity = 1
 
 [sub_resource type="Resource" id="Resource_4tqhy"]
@@ -35,7 +41,7 @@ repeatable = true
 
 [node name="EntitySpawner" type="Node"]
 script = ExtResource("1_qqvtv")
-ENEMY = Array[ExtResource("2_t0nq5")]([SubResource("Resource_mmijs"), SubResource("Resource_wpfis")])
+ENEMY = Array[ExtResource("2_t0nq5")]([SubResource("Resource_mmijs"), SubResource("Resource_wpfis"), SubResource("Resource_hvwmm")])
 spawn_per_round = SubResource("Resource_4tqhy")
 time_until_wave_start = SubResource("Resource_663ip")
 wave_types = Array[ExtResource("3_ug0s3")]([SubResource("Resource_4mr6s")])

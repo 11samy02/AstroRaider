@@ -1,5 +1,5 @@
 extends EnemyBaseTemplate
-class_name Bat
+class_name Glimblob
 
 
 @onready var wander_time: Timer = $Timer/wander_time
@@ -43,13 +43,13 @@ func shader_effects() -> void:
 	sprite.material.set_shader_parameter("mix_color", shader_value)
 
 
+
 func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
 	super(entity,damage,crit_chance)
 	
 	if entity == self:
 		get_hit_anim()
-		
-	
+
 
 func death() -> void:
 	kill_count += 1

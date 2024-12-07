@@ -32,6 +32,7 @@ static var max_entitys_on_screen = 60
 static var entity_list: Array[EnemyBaseTemplate]
 
 var killed_by : CharacterBody2D = null
+var shader_value: float = 0.0
 
 func _enter_tree() -> void:
 	GlobalGame.Enemies.append(self)
@@ -46,6 +47,8 @@ func _ready() -> void:
 	load_ai_to_node()
 	sprite.texture = sprite_variation.pick_random()
 
+func _process(delta: float) -> void:
+	look_direction()
 
 
 func load_ai_to_node():
@@ -138,3 +141,18 @@ func _exit_tree() -> void:
 static func reset() -> void:
 	entity_list.clear()
 	GlobalGame.Players.clear()
+
+
+func look_direction():
+	if get_closest_target().x < global_position.x:
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+
+func get_hit_anim() -> void:
+	var tween = create_tween()
+	shader_value = 1
+	sprite.scale = Vector2(1.5,1.5)
+	
+	tween.tween_property(self, "shader_value", 0, 0.2)
+	tween.parallel().tween_property(sprite, "scale", Vector2(1,1), 0.2)
