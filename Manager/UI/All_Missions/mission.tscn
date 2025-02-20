@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://v4xkyysptm8o"]
+
+[ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_mno8v"]
+[ext_resource type="Script" path="res://Manager/UI/All_Missions/mission.gd" id="2_axok7"]
+
+[sub_resource type="Gradient" id="Gradient_yape1"]
+colors = PackedColorArray(0.690196, 1, 0, 1, 0.690196, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0ivnp"]
+gradient = SubResource("Gradient_yape1")
+
+[sub_resource type="Animation" id="Animation_tuujs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/mission:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/mission/TextureProgressBar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jueft"]
+resource_name = "mission cleared"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HBoxContainer/mission:theme_override_font_sizes/font_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, -5, 1),
+"update": 0,
+"values": [24, 34, 24]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HBoxContainer/mission/TextureProgressBar:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ao2w5"]
+_data = {
+"RESET": SubResource("Animation_tuujs"),
+"mission cleared": SubResource("Animation_jueft")
+}
+
+[node name="mission" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_mno8v")
+script = ExtResource("2_axok7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="mission" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_mno8v")
+theme_override_font_sizes/font_size = 24
+text = "this is a test mission
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HBoxContainer/mission"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.01
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_0ivnp")
+texture_progress_offset = Vector2(0, -2)
+
+[node name="anim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ao2w5")
+}

@@ -42,11 +42,11 @@ func _on_button_down() -> void:
 		var found_similar_perk := false
 		for perk in skill.player_res.player.stats.Perks:
 			if perk.Key == skill.key:
-				perk.level + 1
+				perk.level += 1
 				found_similar_perk = true
 		if !found_similar_perk:
 			skill.player_res.player.stats.Perks.append(new_perk)
-		GSignals.PERK_reset_perks_from_controller_id.emit(skill.player_res.player.controller_id)
+		GSignals.PERK_reset_perks_from_controller_id.emit(skill.player_res.player.player_id)
 		set_process(false)
 		disabled = true
 		set_type_frame()

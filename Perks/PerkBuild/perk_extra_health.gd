@@ -3,6 +3,7 @@ extends PerkBuild
 var default_health = 50
 
 func _enter_tree() -> void:
+	default_health = stats.max_hp
 	super()
 
 func activate_perk() -> void:

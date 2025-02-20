@@ -1,0 +1,234 @@
+[gd_scene load_steps=21 format=3 uid="uid://dmy85k63uu857"]
+
+[ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_vniow"]
+[ext_resource type="Script" path="res://Objects/Buildings/barrier_shield_genrator.gd" id="2_inbv3"]
+[ext_resource type="Texture2D" uid="uid://08stp6wdb86w" path="res://Sprites/Buildings/ShieldGenerator.png" id="3_sip4c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mexuv"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udks4"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfrpe"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr1ui"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vet3r"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66w1a"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxfh1"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b87p0"]
+atlas = ExtResource("3_sip4c")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ms6kj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mexuv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udks4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfrpe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr1ui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vet3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66w1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxfh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b87p0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Shader" id="Shader_dhseu"]
+code = "shader_type canvas_item;
+uniform float opacity;
+uniform float r;
+uniform float g;
+uniform float b;
+uniform float mix_color;
+render_mode unshaded;
+
+void vertex() {
+    // Called for every vertex the material is visible on.
+}
+
+void fragment() {
+    // Called for every pixel the material is visible on.
+    vec4 texture_color = texture(TEXTURE, UV);
+    if (texture_color.a != 0.0) {
+        COLOR = vec4(mix(texture_color.rgb, vec3(r, g, b), mix_color), opacity);
+    }
+}
+
+void light() {
+    // Called for every pixel for every light affecting the CanvasItem.
+    float cNdotL = max(1.0, dot(NORMAL, LIGHT_DIRECTION));
+    LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * cNdotL, LIGHT_COLOR.a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0c8jf"]
+resource_local_to_scene = true
+shader = SubResource("Shader_dhseu")
+shader_parameter/opacity = 0.0
+shader_parameter/r = 1.0
+shader_parameter/g = 1.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lxji3"]
+radius = 15.0333
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6xw28"]
+radius = 15.0333
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncyn2"]
+size = Vector2(32, 32)
+
+[sub_resource type="Animation" id="Animation_j2l2c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("damage_shader:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage_shader:material:shader_parameter/mix_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage_shader:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j5olj"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("damage_shader:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage_shader:material:shader_parameter/mix_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage_shader:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5sfde"]
+_data = {
+"RESET": SubResource("Animation_j2l2c"),
+"hit": SubResource("Animation_j5olj")
+}
+
+[node name="BarrierShieldGenrator" instance=ExtResource("1_vniow")]
+script = ExtResource("2_inbv3")
+
+[node name="sprite" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ms6kj")
+autoplay = "default"
+frame_progress = 0.246794
+
+[node name="damage_shader" parent="." index="1"]
+material = SubResource("ShaderMaterial_0c8jf")
+sprite_frames = SubResource("SpriteFrames_ms6kj")
+animation = &"default"
+
+[node name="collision" parent="." index="2"]
+visible = false
+shape = SubResource("CircleShape2D_lxji3")
+
+[node name="BuildingHitbox" parent="." index="4" node_paths=PackedStringArray("entity")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0"]
+visible = false
+shape = SubResource("CircleShape2D_6xw28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0"]
+visible = false
+shape = SubResource("RectangleShape2D_ncyn2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_5sfde")
+}

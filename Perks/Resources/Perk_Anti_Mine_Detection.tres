@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://d1xi8663u5a58"]
+
+[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_imtpo"]
+[ext_resource type="Texture2D" uid="uid://cyf57mq2heppo" path="res://Sprites/Perks/Anti_Mine_Detection.png" id="1_yovnp"]
+
+[resource]
+script = ExtResource("1_imtpo")
+image = ExtResource("1_yovnp")
+Key = 14
+perk_name = "Anti Mine Detection"
+level = 1
+cost = Array[int]([100, 150, 200, 250, 300, 350])
+value = Array[int]([9, 11, 13, 15, 17, 19])
+description = "It allows you to detect hidden objects within walls, such as bombs or ores, within a range of {{value}} meters."
+type = 4
+active_type = 4

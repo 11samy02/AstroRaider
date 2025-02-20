@@ -1,12 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr3wnqk3gk4tu"]
+[gd_scene load_steps=5 format=3 uid="uid://cr3wnqk3gk4tu"]
 
-[ext_resource type="Texture2D" uid="uid://dffqsxjstmde0" path="res://Sprites/actors/Enemys/small/Bomb/Bomb.png" id="1_21axw"]
+[ext_resource type="Texture2D" uid="uid://ultyblvm67we" path="res://Sprites/UI/icons/drops_icon.png" id="1_j2rhs"]
+[ext_resource type="Shader" path="res://Visuel Feedback Tutorial/item_in_wall_notification.gdshader" id="1_me2lh"]
 [ext_resource type="Script" path="res://Visuel Feedback Tutorial/item_in_wall_notification.gd" id="2_dpjac"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71kmc"]
+resource_local_to_scene = true
+shader = ExtResource("1_me2lh")
+shader_parameter/hologram_tint = Vector4(0, 0.75, 1, 1)
+shader_parameter/line_frequency = 10.0
+shader_parameter/line_intensity = 0.5
+shader_parameter/distortion_strength = 0.0
+shader_parameter/glow_intensity = 0.6
+shader_parameter/time_speed = 5.0
+shader_parameter/alpha = 0.05
+
 [node name="item_in_wall_notification" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0.4)
 z_index = 100
-scale = Vector2(0.9, 0.9)
-texture = ExtResource("1_21axw")
+material = SubResource("ShaderMaterial_71kmc")
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_j2rhs")
 hframes = 2
+vframes = 2
 script = ExtResource("2_dpjac")

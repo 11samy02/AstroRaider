@@ -132,6 +132,7 @@ one_shot = true
 autostart = true
 
 [node name="particle" type="GPUParticles2D" parent="."]
+z_index = 1
 material = SubResource("CanvasItemMaterial_x50bl")
 amount = 256
 process_material = SubResource("ParticleProcessMaterial_kfn24")

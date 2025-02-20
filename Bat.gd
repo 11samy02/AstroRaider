@@ -48,7 +48,6 @@ func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float 
 	
 	if entity == self:
 		get_hit_anim()
-		
 	
 
 func death() -> void:

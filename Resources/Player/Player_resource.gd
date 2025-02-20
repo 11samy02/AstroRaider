@@ -2,7 +2,7 @@ extends Resource
 class_name PlayerResource
 
 var player : Player
-var crystal_count := 0
+var player_hand : PlayerHand
 var max_health := 150
 var current_health := 150
 
@@ -14,6 +14,10 @@ var activation_id := 0
 var Role : CharacterRole = RolesData.load_Role_res(RolesData.Role.Trailblazer)
 
 var shield_res : HasShieldRes = HasShieldRes.new()
+
+var crystal_count := 0
+var Ores : Dictionary = {}
+
 
 func add_activation_skill(perk: Perk) -> void:
 	if perk.active_type == perk.Active_type_keys.Activation:

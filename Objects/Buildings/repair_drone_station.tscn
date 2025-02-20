@@ -1,0 +1,272 @@
+[gd_scene load_steps=22 format=3 uid="uid://7yiganp1qkve"]
+
+[ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_ppc7q"]
+[ext_resource type="Script" path="res://Objects/Buildings/repair_drone_station.gd" id="2_042wi"]
+[ext_resource type="Texture2D" uid="uid://cusoxrf3wnsdl" path="res://Sprites/Buildings/RebairDronesStation.png" id="3_h7pcl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ft3sh"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31yae"]
+atlas = ExtResource("3_h7pcl")
+region = Rect2(0, 0, 34, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8dyq"]
+atlas = ExtResource("3_h7pcl")
+region = Rect2(34, 0, 34, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjoh8"]
+atlas = ExtResource("3_h7pcl")
+region = Rect2(0, 30, 34, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1clu"]
+atlas = ExtResource("3_h7pcl")
+region = Rect2(34, 30, 34, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e67ad"]
+atlas = ExtResource("3_h7pcl")
+region = Rect2(0, 30, 34, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og2sw"]
+atlas = ExtResource("3_h7pcl")
+region = Rect2(34, 0, 34, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0w0uv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31yae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8dyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjoh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1clu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e67ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og2sw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="Shader" id="Shader_dhseu"]
+code = "shader_type canvas_item;
+uniform float opacity;
+uniform float r;
+uniform float g;
+uniform float b;
+uniform float mix_color;
+render_mode unshaded;
+
+void vertex() {
+    // Called for every vertex the material is visible on.
+}
+
+void fragment() {
+    // Called for every pixel the material is visible on.
+    vec4 texture_color = texture(TEXTURE, UV);
+    if (texture_color.a != 0.0) {
+        COLOR = vec4(mix(texture_color.rgb, vec3(r, g, b), mix_color), opacity);
+    }
+}
+
+void light() {
+    // Called for every pixel for every light affecting the CanvasItem.
+    float cNdotL = max(1.0, dot(NORMAL, LIGHT_DIRECTION));
+    LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * cNdotL, LIGHT_COLOR.a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0k8i"]
+resource_local_to_scene = true
+shader = SubResource("Shader_dhseu")
+shader_parameter/opacity = 0.0
+shader_parameter/r = 1.0
+shader_parameter/g = 1.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qnqx3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31yae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8dyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjoh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1clu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e67ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og2sw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lrnd8"]
+radius = 12.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_67172"]
+radius = 12.0
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fktbe"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_clhhr"]
+
+[sub_resource type="Animation" id="Animation_6lxsu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("damage_shader:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage_shader:material:shader_parameter/mix_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage_shader:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rja5g"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("damage_shader:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, -1.5, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage_shader:material:shader_parameter/mix_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, -1.5, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage_shader:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, -2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ricgk"]
+_data = {
+"RESET": SubResource("Animation_6lxsu"),
+"hit": SubResource("Animation_rja5g")
+}
+
+[node name="RepairDroneStation" instance=ExtResource("1_ppc7q")]
+script = ExtResource("2_042wi")
+max_drones_count = 3
+max_range = 500.0
+has_health = true
+
+[node name="sprite" parent="." index="0"]
+material = SubResource("CanvasItemMaterial_ft3sh")
+sprite_frames = SubResource("SpriteFrames_0w0uv")
+autoplay = "default"
+frame_progress = 0.48943
+
+[node name="damage_shader" parent="." index="1"]
+material = SubResource("ShaderMaterial_n0k8i")
+sprite_frames = SubResource("SpriteFrames_qnqx3")
+animation = &"default"
+autoplay = "default"
+frame = 4
+frame_progress = 0.360884
+
+[node name="collision" parent="." index="2"]
+visible = false
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_lrnd8")
+
+[node name="BuildingHitbox" parent="." index="4" node_paths=PackedStringArray("entity")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0"]
+visible = false
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_67172")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0"]
+visible = false
+shape = SubResource("RectangleShape2D_fktbe")
+
+[node name="BuildingDetector" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingDetector" index="0"]
+shape = SubResource("CircleShape2D_clhhr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+libraries = {
+"": SubResource("AnimationLibrary_ricgk")
+}
+
+[connection signal="area_entered" from="BuildingDetector" to="." method="_on_building_detector_area_entered"]
+[connection signal="area_exited" from="BuildingDetector" to="." method="_on_building_detector_area_exited"]

@@ -43,7 +43,7 @@ const Keys_scene = {
 	Keys.Stun_Grenade: "",
 	Keys.Energy_Overload: "res://Perks/PerkBuild/Perk_Energy_Overload.tscn",
 	Keys.Emergency_Heal: "res://Perks/PerkBuild/Perk_Emergency_Heal.tscn",
-	Keys.Anti_Mine_Detection: "",
+	Keys.Anti_Mine_Detection: "res://Perks/PerkBuild/Perk_Anti_Mine_Detection.tscn",
 	Keys.Resource_Sharing: "res://Perks/PerkBuild/Perk_Resource_Sharing.tscn",
 	Keys.Group_Momentum: "",
 	Keys.Rallying_Cry: "",
@@ -66,7 +66,7 @@ const Keys_res = {
 	Keys.Stun_Grenade: "",
 	Keys.Energy_Overload: "res://Perks/Resources/Perk_Energy_Overload.tres",
 	Keys.Emergency_Heal: "res://Perks/Resources/Perk_Emergency_Heal.tres",
-	Keys.Anti_Mine_Detection: "",
+	Keys.Anti_Mine_Detection: "res://Perks/Resources/Perk_Anti_Mine_Detection.tres",
 	Keys.Resource_Sharing: "res://Perks/Resources/Perk_Resource_Sharing.tres",
 	Keys.Group_Momentum: "",
 	Keys.Rallying_Cry: "",
@@ -76,8 +76,8 @@ const Keys_res = {
 
 
 static func load_perk_scene(key : Keys) -> PackedScene:
-	return load(Keys_scene.get(key))
+	return load(Keys_scene.get(key)).duplicate()
 
 
 static func load_perk_res(key: Keys) -> Perk:
-	return load(Keys_res.get(key))
+	return load(Keys_res.get(key)).duplicate()

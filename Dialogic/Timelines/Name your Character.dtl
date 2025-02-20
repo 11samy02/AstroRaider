@@ -1,0 +1,5 @@
+Unknown: Mmm...now i am far away...i think i can start a new life
+Unknown: i think i have to choose a new name...which one should i pick
+[text_input text="" var="player-name" placeholder="Enter Name"]
+player: test
+join  center

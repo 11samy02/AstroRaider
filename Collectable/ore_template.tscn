@@ -1,9 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://dd8s7nwmnq0ud"]
+[gd_scene load_steps=12 format=3 uid="uid://dd8s7nwmnq0ud"]
 
 [ext_resource type="Script" path="res://Collectable/ore_template.gd" id="1_xd3ej"]
+[ext_resource type="Shader" path="res://Shader/item_shimmer.gdshader" id="2_o3ycm"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4b5bt"]
 light_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjqmy"]
+resource_local_to_scene = true
+shader = ExtResource("2_o3ycm")
+shader_parameter/hologram_tint = Vector4(1, 1, 1, 1)
+shader_parameter/line_frequency = 3.0
+shader_parameter/line_intensity = 0.6
+shader_parameter/distortion_strength = 0.0
+shader_parameter/glow_intensity = 0.6
+shader_parameter/time_speed = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ig0dg"]
 radius = 40.0
@@ -114,7 +125,7 @@ collision_mask = 2
 script = ExtResource("1_xd3ej")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-use_parent_material = true
+material = SubResource("ShaderMaterial_gjqmy")
 scale = Vector2(0.75, 0.75)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=46 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -14,6 +14,12 @@
 [ext_resource type="AudioStream" uid="uid://dlo0yu1a81ksu" path="res://Sounds/damage.wav" id="11_bdp4b"]
 [ext_resource type="AudioStream" uid="uid://nf0618xwf4nf" path="res://Sounds/BohrerSound.wav" id="12_purh8"]
 [ext_resource type="Script" path="res://Actors/player/activation_abilities.gd" id="14_0hd48"]
+[ext_resource type="Script" path="res://Actors/player/movement.gd" id="15_dawng"]
+[ext_resource type="Script" path="res://Actors/player/mining.gd" id="16_lr051"]
+[ext_resource type="Script" path="res://Actors/player/build.gd" id="17_a2dyr"]
+[ext_resource type="Script" path="res://Actors/player/symbol.gd" id="18_lmggw"]
+[ext_resource type="Texture2D" uid="uid://cpaen3t2e175p" path="res://Sprites/UI/Building Ui/gear_symbol.png" id="19_rplw8"]
+[ext_resource type="Texture2D" uid="uid://dcsm7k8td3g0" path="res://Sprites/UI/Building Ui/hammer_symbol.png" id="20_mmiwy"]
 
 [sub_resource type="Animation" id="Animation_b8c3x"]
 length = 0.001
@@ -253,6 +259,95 @@ height = 13.0
 radius = 7.5
 height = 20.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4cyff"]
+light_mode = 1
+
+[sub_resource type="Animation" id="Animation_t4lul"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GearSymbol:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HammerSymbol:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HammerSymbol:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2.66667, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_ec8vi"]
+resource_name = "build_symbol"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GearSymbol:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.53786]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HammerSymbol:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 0.785398]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HammerSymbol:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(-2.66667, -8), Vector2(0.666666, -4.66666)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lpgm"]
+_data = {
+"RESET": SubResource("Animation_t4lul"),
+"build_symbol": SubResource("Animation_ec8vi")
+}
+
 [node name="Player" type="CharacterBody2D"]
 process_mode = 1
 collision_layer = 2
@@ -260,6 +355,24 @@ collision_mask = 17
 script = ExtResource("1_ook18")
 radar_icon = ExtResource("2_fdgfk")
 landing_anim_name = Array[String](["idle", "use_item"])
+
+[node name="Script" type="Node" parent="."]
+
+[node name="Movement" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+script = ExtResource("15_dawng")
+player = NodePath("../..")
+
+[node name="Mining" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+script = ExtResource("16_lr051")
+player = NodePath("../..")
+
+[node name="Build" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+script = ExtResource("17_a2dyr")
+player = NodePath("../..")
+
+[node name="Activation_abilities" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+script = ExtResource("14_0hd48")
+player = NodePath("../..")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
@@ -363,9 +476,32 @@ script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 0.75
 
-[node name="Activation_abilities" type="Node" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("14_0hd48")
+[node name="Symbol" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+modulate = Color(1.5, 1.5, 1.5, 1)
+material = SubResource("CanvasItemMaterial_4cyff")
+script = ExtResource("18_lmggw")
 player = NodePath("..")
 
-[connection signal="area_entered" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_entered"]
-[connection signal="area_exited" from="BohrerHitBox" to="." method="_on_bohrer_hit_box_area_exited"]
+[node name="Building_Symbol" type="Node2D" parent="Symbol"]
+use_parent_material = true
+position = Vector2(0, -13)
+scale = Vector2(0.4, 0.4)
+
+[node name="GearSymbol" type="Sprite2D" parent="Symbol/Building_Symbol"]
+use_parent_material = true
+position = Vector2(9.33334, 2)
+texture = ExtResource("19_rplw8")
+
+[node name="HammerSymbol" type="Sprite2D" parent="Symbol/Building_Symbol"]
+use_parent_material = true
+position = Vector2(-2.66667, -8)
+texture = ExtResource("20_mmiwy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Symbol/Building_Symbol"]
+libraries = {
+"": SubResource("AnimationLibrary_0lpgm")
+}
+autoplay = "build_symbol"
+
+[connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
+[connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]

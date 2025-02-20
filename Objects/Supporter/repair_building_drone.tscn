@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://cotcwq1468kvu"]
+
+[ext_resource type="Script" path="res://Objects/Supporter/repair_building_drone.gd" id="1_sq6yu"]
+[ext_resource type="Texture2D" uid="uid://lv2eu3em5mo1" path="res://Sprites/Buildings/RebairDrones.png" id="1_vgro4"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0papc"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8eg1"]
+atlas = ExtResource("1_vgro4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hx36"]
+atlas = ExtResource("1_vgro4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjudn"]
+atlas = ExtResource("1_vgro4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnv6k"]
+atlas = ExtResource("1_vgro4")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgy71"]
+atlas = ExtResource("1_vgro4")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q3xy"]
+atlas = ExtResource("1_vgro4")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8jgbp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8eg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hx36")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjudn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xnv6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgy71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q3xy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3g8fx"]
+radius = 5.0
+
+[node name="RepairBuildingDrone" type="Area2D"]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_sq6yu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_0papc")
+sprite_frames = SubResource("SpriteFrames_8jgbp")
+autoplay = "default"
+frame_progress = 0.3655
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3g8fx")
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

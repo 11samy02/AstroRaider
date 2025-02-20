@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="BluePrintResource" load_steps=5 format=3 uid="uid://cc5ujc1dc164u"]
+
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_qbbi5"]
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintResource.gd" id="2_7yknd"]
+[ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="3_1h41w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_feo1b"]
+atlas = ExtResource("3_1h41w")
+region = Rect2(0, 0, 48, 48)
+
+[resource]
+script = ExtResource("2_7yknd")
+Key = 0
+cost = Array[ExtResource("1_qbbi5")]([])
+size = Vector2i(3, 3)
+texture = SubResource("AtlasTexture_feo1b")
+can_build_fast = false

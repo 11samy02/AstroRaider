@@ -1,6 +1,8 @@
 extends Node2D
 class_name PlayerList
 
+const PLAYER_HAND = preload("res://Actors/player/player_hand.tscn")
+
 func _enter_tree() -> void:
 	GSignals.PERK_reset_perks_from_controller_id.connect(reset_perk_from_player)
 
@@ -12,6 +14,12 @@ func set_players() -> void:
 			var player_res : PlayerResource = PlayerResource.new()
 			player_res.player = player
 			player_res.Role = load("res://Resources/Characters/Roles/Role_Trailblazer.tres")
+			
+			var player_hand = PLAYER_HAND.instantiate()
+			player_hand.player_res = player_res
+			add_child(player_hand)
+			player_res.player_hand = player_hand
+			
 			GlobalGame.Players.append(player_res)
 			
 			if !ControllerHolder.registered_controllers.is_empty():
@@ -23,6 +31,7 @@ func set_players() -> void:
 			skill_tree.Role
 			
 			add_child(skill_tree)
+			
 			
 			id += 1
 			
@@ -56,7 +65,7 @@ func add_perks_to_player(id:int):
 func reset_perk_from_player(id:int) -> void:
 	for perk_build in get_children():
 		if perk_build is PerkBuild:
-			if perk_build.Player_Res.player.controller_id == id:
+			if perk_build.Player_Res.player.player_id == id:
 				perk_build.queue_free()
 	
 	add_perks_to_player(id)

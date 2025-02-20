@@ -16,7 +16,7 @@ var is_first_one := true
 var velocity := Vector2.ZERO
 var random_angle := 0.0  # Speichert den zufälligen Winkel
 
-var spring_constant := 20.0      # Federkonstante
+var spring_constant := 25.0      # Federkonstante
 var damping_coefficient := 5.0   # Dämpfung
 var desired_distance := 35.0     # Gewünschter Abstand zum Spieler
 var mass := 1.0                  # Masse des Kristalls
@@ -33,6 +33,8 @@ func _ready() -> void:
 	animation_player.play("spawn")
 	mass = randf_range(0.8,2)
 	desired_distance += randf_range(-20.0, 20.0)
+	spring_constant += randf_range(-10,10)
+	damping_coefficient += randf_range(-2,5)
 	
 	normal_distance = desired_distance
 
@@ -94,13 +96,22 @@ func _process(delta: float) -> void:
 		position += velocity * delta
 		
 		if GlobalGame.Player_count <= 1:
-			if Input.is_action_pressed("pull_collected"):
+			if Input.is_action_pressed("pull_collected") or Input.is_joy_button_pressed(player_who_collected.controller_id, JOY_BUTTON_LEFT_SHOULDER):
 				rope.set_modulate("#4898ff")
 				reduce_distance += 25 * delta
 			else:
 				rope.set_modulate("#ffc400")
 			
-			if desired_distance >= 5:
+			if desired_distance >= 2:
+				desired_distance = normal_distance - reduce_distance
+		else:
+			if Input.is_joy_button_pressed(player_who_collected.controller_id, JOY_BUTTON_LEFT_SHOULDER):
+				rope.set_modulate("#4898ff")
+				reduce_distance += 25 * delta
+			else:
+				rope.set_modulate("#ffc400")
+			
+			if desired_distance >= 2:
 				desired_distance = normal_distance - reduce_distance
 
 func destroy():

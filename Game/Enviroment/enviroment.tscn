@@ -1507,7 +1507,6 @@ z_index = -20
 tile_set = SubResource("TileSet_53qbr")
 script = ExtResource("2_ytm3t")
 TileDrops = Array[ExtResource("4_wu72t")]([ExtResource("6_3omu5"), ExtResource("7_gptyy"), ExtResource("8_vxnqt"), ExtResource("9_4m86y"), ExtResource("10_asj2k")])
-Map_Size = Vector2i(150, 150)
 start_area_size = SubResource("Resource_x3pi4")
 room_count = SubResource("Resource_6i0rp")
 room_size = SubResource("Resource_c0xtb")

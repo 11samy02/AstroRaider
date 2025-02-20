@@ -5,13 +5,14 @@ extends Node
 var has_pressed := false
 
 func _process(delta: float) -> void:
-	for player_res: PlayerResource in GlobalGame.Players:
-		if player_res.player == player:
-			for perk: Perk in player_res.player.stats.Perks:
-				if perk.active_type == perk.Active_type_keys.Activation:
-					player_res.add_activation_skill(perk)
-	
-	input_controll()
+	if player.current_state == player.states.Default:
+		for player_res: PlayerResource in GlobalGame.Players:
+			if player_res.player == player:
+				for perk: Perk in player_res.player.stats.Perks:
+					if perk.active_type == perk.Active_type_keys.Activation:
+						player_res.add_activation_skill(perk)
+		
+		input_controll()
 
 
 func input_controll() -> void:

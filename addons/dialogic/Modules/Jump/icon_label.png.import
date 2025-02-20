@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rc4wjwgym4o6"
-path="res://.godot/imported/bg1.png-7cdd33e5f2d739a393b2aa96bced0115.ctex"
+uid="uid://c53yjrxmhmgh"
+path="res://.godot/imported/icon_label.png-3923bd1131990c8869923c838ffdb9ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/Background/bg1.png"
-dest_files=["res://.godot/imported/bg1.png-7cdd33e5f2d739a393b2aa96bced0115.ctex"]
+source_file="res://addons/dialogic/Modules/Jump/icon_label.png"
+dest_files=["res://.godot/imported/icon_label.png-3923bd1131990c8869923c838ffdb9ae.ctex"]
 
 [params]
 

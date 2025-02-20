@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BluePrintResource" load_steps=7 format=3 uid="uid://djet4n61tuuok"]
+
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_xvsim"]
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintResource.gd" id="2_kh4tq"]
+[ext_resource type="Texture2D" uid="uid://cusoxrf3wnsdl" path="res://Sprites/Buildings/RebairDronesStation.png" id="3_npste"]
+
+[sub_resource type="Resource" id="Resource_yjuk7"]
+script = ExtResource("1_xvsim")
+Ore = 0
+cost = 3
+
+[sub_resource type="Resource" id="Resource_26vvo"]
+script = ExtResource("1_xvsim")
+Ore = 2
+cost = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lowpl"]
+atlas = ExtResource("3_npste")
+region = Rect2(0, 0, 34, 30)
+
+[resource]
+script = ExtResource("2_kh4tq")
+Key = 3
+cost = Array[ExtResource("1_xvsim")]([SubResource("Resource_yjuk7"), SubResource("Resource_26vvo")])
+size = Vector2i(2, 2)
+texture = SubResource("AtlasTexture_lowpl")
+can_build_fast = false

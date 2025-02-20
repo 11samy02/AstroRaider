@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://fr7k6omm32ub"]
+
+[ext_resource type="Script" path="res://Actors/player/single_detector_building.gd" id="1_yxkld"]
+[ext_resource type="Texture2D" uid="uid://eevenfvay3m" path="res://Sprites/actors/items/check_Area.png" id="2_x0bhp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxgq8"]
+size = Vector2(8, 8)
+
+[node name="Detector" type="Area2D"]
+collision_layer = 0
+collision_mask = 19
+script = ExtResource("1_yxkld")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_x0bhp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gxgq8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

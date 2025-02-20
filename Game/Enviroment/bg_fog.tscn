@@ -1,0 +1,53 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqbjjcoeesyrx"]
+
+[ext_resource type="Shader" path="res://Game/Enviroment/bg_fog.gdshader" id="1_6fw1n"]
+[ext_resource type="Script" path="res://Game/Enviroment/bg_fog.gd" id="1_6grx2"]
+[ext_resource type="Texture2D" uid="uid://7jcrk46scb5o" path="res://icon.svg" id="2_807xq"]
+
+[sub_resource type="Gradient" id="Gradient_2ya1f"]
+offsets = PackedFloat32Array(0, 0.10929, 0.251366, 0.371585, 0.73224)
+colors = PackedColorArray(2.55695e-08, 0.114097, 0.0568415, 0.392157, 0.0771869, 0.221453, 0.107682, 0.392157, 0.180146, 0.292875, 0.099409, 0.392157, 0.381013, 0.503046, 0.13985, 0.392157, 0.636397, 0.840558, 0.347345, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aq1df"]
+gradient = SubResource("Gradient_2ya1f")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ce46t"]
+frequency = 0.0348
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kw54y"]
+seamless = true
+noise = SubResource("FastNoiseLite_ce46t")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ta1wg"]
+frequency = 0.0072
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x7qes"]
+seamless = true
+noise = SubResource("FastNoiseLite_ta1wg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nbn4x"]
+frequency = 0.0034
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nr1ak"]
+seamless = true
+noise = SubResource("FastNoiseLite_nbn4x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o2fat"]
+resource_local_to_scene = true
+shader = ExtResource("1_6fw1n")
+shader_parameter/offset = Vector2(0.002, 0.002)
+shader_parameter/offset2 = Vector2(0.004, 0.004)
+shader_parameter/offset3 = Vector2(0.02, -0.01)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_kw54y")
+shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_x7qes")
+shader_parameter/noise_tex3 = SubResource("NoiseTexture2D_nr1ak")
+shader_parameter/color_ramp = SubResource("GradientTexture2D_aq1df")
+
+[node name="Bg_Fog" type="CanvasLayer"]
+script = ExtResource("1_6grx2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_o2fat")
+position = Vector2(968, 552)
+scale = Vector2(15.125, 8.625)
+texture = ExtResource("2_807xq")

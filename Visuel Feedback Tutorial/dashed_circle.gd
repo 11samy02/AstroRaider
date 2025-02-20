@@ -15,7 +15,7 @@ func draw_dashed_circle():
 	var total_length = dash_length + dash_gap
 	var segment_angle = TAU / segments
 	var current_angle = 0.0
-
+	
 	while current_angle < TAU:
 		var start_point = Vector2(cos(current_angle), sin(current_angle)) * radius
 		current_angle += dash_length / (radius * TAU)

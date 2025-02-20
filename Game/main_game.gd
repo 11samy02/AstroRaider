@@ -35,7 +35,18 @@ func start_Game() -> void:
 	
 	player_list.set_players()
 	entity_spawner.start_wave()
+	save_game()
 
 
 func _process(delta: float) -> void:
 	GlobalGame.time_played += delta
+
+
+##muss geändert werden
+func save_game():
+	enviroment.Map_Size = Vector2.ZERO
+	var game_file = PackedScene.new()
+	game_file.pack(self)
+	if not FileAccess.file_exists("user://saves"):
+		DirAccess.make_dir_absolute("user://saves")
+	ResourceSaver.save(game_file, "user://saves/game_1.tscn")

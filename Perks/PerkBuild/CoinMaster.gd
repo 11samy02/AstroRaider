@@ -2,7 +2,7 @@ extends PerkBuild
 
 var math : SimplefySettingMath = SimplefySettingMath.new()
 
-const ITEM_CRYSTAL = preload("res://Objects/Collectable/crystal.tscn")
+const ITEM_CRYSTAL = preload("res://Collectable/crystal.tscn")
 
 func _ready() -> void:
 	GSignals.PERK_event_collect_crystal.connect(spawn_more_coins)

@@ -2,8 +2,7 @@ extends Building
 class_name CrystalGenerator
 
 @onready var collect_crystal: AudioStreamPlayer2D = $Sounds/CollectCrystal
-
-var Ores: Dictionary = {}
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var player_list : Array[Player] = []
 
@@ -32,11 +31,14 @@ func _on_area_entered(area: Area2D) -> void:
 		collect_crystal.play()
 	
 	if area is OreTemplate:
-		if Ores.has(area.Ore_type):
-			Ores[area.Ore_type] += 1
-		else:
-			Ores.get_or_add(area.Ore_type, 0)
-			Ores[area.Ore_type] += 1
+		for player_res : PlayerResource in GlobalGame.Players:
+			if player_res.player == area.player_who_collected:
+				var ore_name = area.Ores.keys()[area.Ore_type]
+				if player_res.Ores.has(ore_name):
+					player_res.Ores[ore_name] += 1
+				else:
+					player_res.Ores.get_or_add(ore_name, 0)
+					player_res.Ores[ore_name] += 1
 		area.destroy()
 		collect_crystal.play()
 
@@ -51,6 +53,7 @@ func _on_check_player_nearby_body_exited(body: Node2D) -> void:
 		player_list.erase(body)
 
 func _process(delta: float) -> void:
+	super(delta)
 	check_player_input()
 
 
@@ -68,3 +71,16 @@ func check_if_player_has_crstal() -> void:
 			visuel_path.to_obj = self
 			get_parent().add_child(visuel_path)
 			player_res.has_a_path = true
+
+func death():
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_BOUNCE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "scale", Vector2(0.1,0.1), 0.3)
+	await(tween.finished)
+	queue_free()
+
+func get_hit():
+	GSignals.CAM_shake_effect.emit(randf_range(8.0, 12.0),3)
+	animation_player.play("hit")
+	await (animation_player.animation_finished)

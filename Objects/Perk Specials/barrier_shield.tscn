@@ -11,6 +11,7 @@ light_mode = 1
 script = ExtResource("2_a3fp7")
 damage = 1
 knockback = 3.0
+crit_chance = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cewf6"]
 atlas = ExtResource("2_api35")

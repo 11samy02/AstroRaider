@@ -45,15 +45,20 @@ func _enter_tree() -> void:
 	GSignals.PERK_show_items_behind_wall.connect(show_items_behind_wall)
 
 func _ready() -> void:
-	tiles_generated = 0
-	set_Enemy_building_in_list()
-	rng.randomize()
-	seed = rng.randi()
-	reset_objects()
-	room_count.min_value = ceil(3 + Map_Size.x / 20)
-	room_count.max_value = ceil(7 + Map_Size.x / 20)
-	max_tiles_to_generate = Map_Size.x * Map_Size.y
-	fill_map(Vector2i(-Map_Size.x / 2, -Map_Size.y / 2), Vector2i(Map_Size.x / 2, Map_Size.y / 2))
+	if Map_Size.x > 0 and Map_Size.y > 0:
+		tiles_generated = 0
+		set_Enemy_building_in_list()
+		rng.randomize()
+		seed = rng.randi()
+		reset_objects()
+		room_count.min_value = ceil(3 + Map_Size.x / 20)
+		room_count.max_value = ceil(7 + Map_Size.x / 20)
+		max_tiles_to_generate = Map_Size.x * Map_Size.y
+		fill_map(Vector2i(-Map_Size.x / 2, -Map_Size.y / 2), Vector2i(Map_Size.x / 2, Map_Size.y / 2))
+	else:
+		finished_map = true
+		map_was_created.emit()
+		ScreenTransition.finished_loading.emit()
 
 func set_Enemy_building_in_list():
 	var new_list : Array[EnemyBuildingResource] = []
@@ -135,7 +140,7 @@ func update_surrounding_tiles(tile_positions: Array) -> void:
 		set_cells_terrain_connect(batch, 0, 0)
 	set_live_to_tiles(tiles_to_process)
 
-func update_surrounding_tiles_batched(tile_positions: Array, batch_size: int = 50) -> void:
+func update_surrounding_tiles_batched(tile_positions: Array, batch_size: int = 25) -> void:
 	var unique_cells = {}
 	for pos in tile_positions:
 		var surrounding_cells = get_custom_surrounding_cells(pos)
@@ -149,6 +154,8 @@ func update_surrounding_tiles_batched(tile_positions: Array, batch_size: int = 5
 		return
 	var index = 0
 	var total = to_update.size()
+	
+	var all_cells_from_all_batches := []
 	while index < total:
 		var batch = to_update.slice(index, index + batch_size)
 		for cell in batch:
@@ -209,8 +216,8 @@ func fill_map(start_position: Vector2i, end_position: Vector2i, reverse: bool = 
 			edge_tiles.append_array(get_edge_tiles(chunk_start, chunk_end))
 	
 			if int(chunk_x * chunk_count_y + chunk_y) % chunk_batch_size == 0:
-				await get_tree().process_frame  # Async processing
-
+				await get_tree().process_frame
+	
 	if not start_area_was_created:
 		start_area_was_created = true
 		create_start_area(Vector2i(start_area_size.get_rand_value() + GlobalGame.Player_count, start_area_size.get_rand_value()))
@@ -396,14 +403,17 @@ func spawn_enemy_buildings():
 #has to be changed
 const ITEM_IN_WALL_NOTIFICATION = preload("res://Visuel Feedback Tutorial/item_in_wall_notification.tscn")
 
+##has to be changed, makes performance issues
 func show_items_behind_wall(pos: Array[Vector2]) -> void:
+	return
 	for i in pos:
 		var tile_pos = local_to_map(i)
 		tile_pos = Vector2i(tile_pos)
 		if tiles_dict.has(tile_pos):
 			var tile = tiles_dict[tile_pos]
 			
-			if tile.key == DropData.Keys.Bomb_key:
-				var notication = ITEM_IN_WALL_NOTIFICATION.instantiate()
-				notication.global_position = i
-				get_parent().add_child(notication)
+			if tile.key != DropData.Keys.Crystal:
+				var notification = ITEM_IN_WALL_NOTIFICATION.instantiate()
+				notification.global_position = i
+				notification._set_icon(tile.key)
+				get_parent().add_child(notification)

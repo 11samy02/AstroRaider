@@ -28,6 +28,11 @@ func update_camera(delta: float) -> void:
 		var pos = player_res.player.global_position
 		min_pos = min_pos.min(pos)
 		max_pos = max_pos.max(pos)
+		
+	for player_res: PlayerResource in GlobalGame.Players:
+		var pos = player_res.player_hand.global_position
+		min_pos = min_pos.min(pos)
+		max_pos = max_pos.max(pos)
 
 	var center_pos = (min_pos + max_pos) / 2.0
 	global_position = center_pos

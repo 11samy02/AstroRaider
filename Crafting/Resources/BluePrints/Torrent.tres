@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="BluePrintResource" load_steps=8 format=3 uid="uid://2i6tgbvmj2vl"]
+
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_jqusc"]
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintResource.gd" id="1_ueyjx"]
+[ext_resource type="Texture2D" uid="uid://njsnttqo3qtt" path="res://Sprites/Buildings/Torrent.png" id="3_ei7ai"]
+
+[sub_resource type="Resource" id="Resource_usu3w"]
+script = ExtResource("1_jqusc")
+Ore = 0
+cost = 4
+
+[sub_resource type="Resource" id="Resource_hjidy"]
+script = ExtResource("1_jqusc")
+Ore = 2
+cost = 1
+
+[sub_resource type="Resource" id="Resource_xum0k"]
+script = ExtResource("1_jqusc")
+Ore = 1
+cost = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_puy4b"]
+atlas = ExtResource("3_ei7ai")
+region = Rect2(96, 0, 48, 48)
+
+[resource]
+script = ExtResource("1_ueyjx")
+Key = 1
+cost = Array[ExtResource("1_jqusc")]([SubResource("Resource_usu3w"), SubResource("Resource_hjidy"), SubResource("Resource_xum0k")])
+size = Vector2i(3, 2)
+texture = SubResource("AtlasTexture_puy4b")
+can_build_fast = false

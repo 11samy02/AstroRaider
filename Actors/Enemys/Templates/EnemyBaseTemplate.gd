@@ -65,6 +65,11 @@ func get_closest_target() -> Vector2:
 		for player_res: PlayerResource in GlobalGame.Players:
 			player_pos.append(player_res.player.global_position)
 		
+		if !GlobalGame.Buildings.is_empty():
+			for build: Building in GlobalGame.Buildings:
+				if build.has_health:
+					player_pos.append(build.global_position)
+		
 		var closest_distance := global_position.distance_to(player_pos[0])
 		var current_pos := player_pos[0]
 		

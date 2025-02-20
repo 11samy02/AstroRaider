@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="BluePrintResource" load_steps=8 format=3 uid="uid://djcu4nqt44485"]
+
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_kbe0c"]
+[ext_resource type="Script" path="res://Crafting/Resources/BluePrintResource.gd" id="2_atswl"]
+[ext_resource type="Texture2D" uid="uid://08stp6wdb86w" path="res://Sprites/Buildings/ShieldGenerator.png" id="3_1e31n"]
+
+[sub_resource type="Resource" id="Resource_0i8on"]
+script = ExtResource("1_kbe0c")
+Ore = 0
+cost = 2
+
+[sub_resource type="Resource" id="Resource_h3pt3"]
+script = ExtResource("1_kbe0c")
+Ore = 2
+cost = 4
+
+[sub_resource type="Resource" id="Resource_0cji8"]
+script = ExtResource("1_kbe0c")
+Ore = 1
+cost = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw377"]
+atlas = ExtResource("3_1e31n")
+region = Rect2(0, 0, 48, 48)
+
+[resource]
+script = ExtResource("2_atswl")
+Key = 4
+cost = Array[ExtResource("1_kbe0c")]([SubResource("Resource_0i8on"), SubResource("Resource_h3pt3"), SubResource("Resource_0cji8")])
+size = Vector2i(2, 2)
+texture = SubResource("AtlasTexture_kw377")
+can_build_fast = false

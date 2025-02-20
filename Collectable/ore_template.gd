@@ -67,17 +67,24 @@ func _process(delta: float) -> void:
 		velocity += (total_force / mass) * delta
 		position += velocity * delta
 		
-		if Input.is_action_pressed("pull_collected"):
-			rope.set_modulate("#4898ff")
-			if reduce_distance >= 0:
+		if GlobalGame.Player_count <= 1:
+			if Input.is_action_pressed("pull_collected") or Input.is_joy_button_pressed(player_who_collected.controller_id, JOY_BUTTON_LEFT_SHOULDER):
+				rope.set_modulate("#4898ff")
 				reduce_distance += 25 * delta
 			else:
-				reduce_distance = 0
+				rope.set_modulate("#ffc400")
+			
+			if desired_distance >= 2:
+				desired_distance = normal_distance - reduce_distance
 		else:
-			rope.set_modulate("#ffc400")
-		
-		if desired_distance >= 5:
-			desired_distance = normal_distance - reduce_distance
+			if Input.is_joy_button_pressed(player_who_collected.controller_id, JOY_BUTTON_LEFT_SHOULDER):
+				rope.set_modulate("#4898ff")
+				reduce_distance += 25 * delta
+			else:
+				rope.set_modulate("#ffc400")
+			
+			if desired_distance >= 2:
+				desired_distance = normal_distance - reduce_distance
 
 func destroy():
 	rope.clear_points()

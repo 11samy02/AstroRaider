@@ -38,7 +38,6 @@ func _process(delta: float) -> void:
 		return
 	
 	close_skill_tree(delta)
-	
 	if player_res != null:
 		owned_money.set_text(str(player_res.crystal_count) + "$")
 	else:

@@ -1,15 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://dv6htoe1tv4yu"]
+[gd_scene load_steps=13 format=3 uid="uid://dv6htoe1tv4yu"]
 
 [ext_resource type="PackedScene" uid="uid://cqfioe138kr8o" path="res://Collectable/collectable_template.tscn" id="1_tfalh"]
 [ext_resource type="Script" path="res://Collectable/Crystal.gd" id="2_ttcpk"]
 [ext_resource type="Texture2D" uid="uid://b2wttn85cre2k" path="res://Sprites/Items/Ores/Cristals.png" id="3_d8oh4"]
+[ext_resource type="Shader" path="res://Shader/item_shimmer.gdshader" id="3_gwyhe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_27kij"]
 resource_local_to_scene = true
 radius = 60.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8pqmx"]
-light_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqh4p"]
+shader = ExtResource("3_gwyhe")
+shader_parameter/hologram_tint = Vector4(1, 1, 1, 1)
+shader_parameter/line_frequency = 3.0
+shader_parameter/line_intensity = 0.6
+shader_parameter/distortion_strength = 0.0
+shader_parameter/glow_intensity = 0.5
+shader_parameter/time_speed = 2.0
 
 [sub_resource type="Animation" id="Animation_2rv1v"]
 resource_name = "Collect"
@@ -195,8 +202,8 @@ shape = SubResource("CircleShape2D_27kij")
 disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
-self_modulate = Color(1.25, 1.25, 1.25, 1)
-material = SubResource("CanvasItemMaterial_8pqmx")
+self_modulate = Color(1.5, 1.5, 1.5, 1)
+material = SubResource("ShaderMaterial_lqh4p")
 texture = ExtResource("3_d8oh4")
 hframes = 5
 vframes = 3

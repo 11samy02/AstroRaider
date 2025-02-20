@@ -1,6 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhmvhsrfsgk2j"]
+[gd_scene load_steps=8 format=3 uid="uid://bhmvhsrfsgk2j"]
 
 [ext_resource type="Script" path="res://Objects/Buildings/building_template.gd" id="1_kya05"]
+[ext_resource type="Script" path="res://Manager/building_hitbox.gd" id="2_g1weh"]
+
+[sub_resource type="Shader" id="Shader_dhseu"]
+code = "shader_type canvas_item;
+uniform float opacity;
+uniform float r;
+uniform float g;
+uniform float b;
+uniform float mix_color;
+render_mode unshaded;
+
+void vertex() {
+    // Called for every vertex the material is visible on.
+}
+
+void fragment() {
+    // Called for every pixel the material is visible on.
+    vec4 texture_color = texture(TEXTURE, UV);
+    if (texture_color.a != 0.0) {
+        COLOR = vec4(mix(texture_color.rgb, vec3(r, g, b), mix_color), opacity);
+    }
+}
+
+void light() {
+    // Called for every pixel for every light affecting the CanvasItem.
+    float cNdotL = max(1.0, dot(NORMAL, LIGHT_DIRECTION));
+    LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * cNdotL, LIGHT_COLOR.a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r6qvv"]
+resource_local_to_scene = true
+shader = SubResource("Shader_dhseu")
+shader_parameter/opacity = 0.0
+shader_parameter/r = 1.0
+shader_parameter/g = 1.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sye1p"]
+animations = []
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_av1se"]
 light_mode = 1
@@ -10,9 +51,16 @@ colors = PackedColorArray(0.36, 0.36, 0.36, 1, 0.82, 0.82, 0.82, 1)
 
 [node name="Building" type="Area2D"]
 z_index = -5
+collision_layer = 64
+collision_mask = 0
 script = ExtResource("1_kya05")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
+
+[node name="damage_shader" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_r6qvv")
+sprite_frames = SubResource("SpriteFrames_sye1p")
+animation = &""
 
 [node name="collision" type="CollisionShape2D" parent="."]
 
@@ -23,5 +71,14 @@ z_index = -2
 material = SubResource("CanvasItemMaterial_av1se")
 width = 1.0
 gradient = SubResource("Gradient_3jlwf")
+
+[node name="BuildingHitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_g1weh")
+
+[node name="BuildingPlacedColl" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
 
 [connection signal="area_entered" from="." to="." method="_collect_fuel"]

@@ -47,6 +47,7 @@ _data = {
 }
 
 [node name="input info" type="Node2D"]
+z_index = 50
 script = ExtResource("1_e48fv")
 
 [node name="SpeakingBublle" type="Sprite2D" parent="."]

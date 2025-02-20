@@ -8,6 +8,7 @@ const EXPLOSION = preload("res://Actors/Enemys/Enviroment/bomb_explosion.tscn")
 
 @onready var explosion_sound: Audio2D = $ExplosionSound
 @onready var tiles_detector: Node2D = $TilesDetector
+@onready var explosion_indikator: Line2D = $explosion_indikator
 
 var grid_size := 16
 @export var detector_count := 7
@@ -39,6 +40,10 @@ func _process(delta: float) -> void:
 		index += 1
 	
 	if hp <= 0:
+		explosion_indikator.draw_dashed_circle()
+		await(get_tree().create_timer(explosion_indikator.time_delay).timeout)
+		if explosion_indikator.visible:
+			return
 		check_for_tile_points()
 		await get_tree().process_frame
 		death()

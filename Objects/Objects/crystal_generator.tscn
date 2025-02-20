@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://84vvohor50dh"]
+[gd_scene load_steps=24 format=3 uid="uid://84vvohor50dh"]
 
 [ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="1_gswfc"]
 [ext_resource type="Script" path="res://Objects/Objects/crystal_generator.gd" id="1_qydqw"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cnwdm2llqw4lb" path="res://Sounds/CrystalCollectSound.wav" id="3_fkod7"]
 [ext_resource type="Script" path="res://UX/audio_2d.gd" id="4_hf2de"]
 [ext_resource type="PackedScene" uid="uid://b6fax3q3wk63k" path="res://Visuel Feedback Tutorial/input_info.tscn" id="6_enxi3"]
+[ext_resource type="Script" path="res://Manager/building_hitbox.gd" id="7_p8wcm"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4jwol"]
 light_mode = 1
@@ -53,18 +54,150 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Shader" id="Shader_e6ov2"]
+code = "shader_type canvas_item;
+uniform float opacity;
+uniform float r;
+uniform float g;
+uniform float b;
+uniform float mix_color;
+render_mode unshaded;
+
+void vertex() {
+    // Called for every vertex the material is visible on.
+}
+
+void fragment() {
+    // Called for every pixel the material is visible on.
+    vec4 texture_color = texture(TEXTURE, UV);
+    if (texture_color.a != 0.0) {
+        COLOR = vec4(mix(texture_color.rgb, vec3(r, g, b), mix_color), opacity);
+    }
+}
+
+void light() {
+    // Called for every pixel for every light affecting the CanvasItem.
+    float cNdotL = max(1.0, dot(NORMAL, LIGHT_DIRECTION));
+    LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY * cNdotL, LIGHT_COLOR.a);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3letp"]
+resource_local_to_scene = true
+shader = SubResource("Shader_e6ov2")
+shader_parameter/opacity = 0.0
+shader_parameter/r = 1.0
+shader_parameter/g = 1.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_g8ix4"]
 radius = 14.0357
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lsdkb"]
 radius = 30.1496
 
+[sub_resource type="Animation" id="Animation_j2l2c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("damage_shader:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage_shader:material:shader_parameter/mix_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage_shader:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j5olj"]
+resource_name = "hit"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("damage_shader:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("damage_shader:material:shader_parameter/mix_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("damage_shader:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5sfde"]
+_data = {
+"RESET": SubResource("Animation_j2l2c"),
+"hit": SubResource("Animation_j5olj")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7diee"]
+radius = 15.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4idp"]
+size = Vector2(32, 32)
+
 [node name="CrystalGenerator" type="Area2D"]
 z_index = -20
-collision_layer = 0
+collision_layer = 64
 collision_mask = 32
 script = ExtResource("1_qydqw")
 radar_icon = ExtResource("2_cbnsh")
+has_health = true
+max_health = 500
+current_health = 500
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_4jwol")
@@ -72,8 +205,13 @@ sprite_frames = SubResource("SpriteFrames_6xngr")
 autoplay = "default"
 frame_progress = 0.0931071
 
+[node name="damage_shader" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_3letp")
+sprite_frames = SubResource("SpriteFrames_6xngr")
+autoplay = "default"
+frame_progress = 0.0931071
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_g8ix4")
 
 [node name="Sounds" type="Node2D" parent="."]
@@ -96,6 +234,27 @@ shape = SubResource("CircleShape2D_lsdkb")
 [node name="input info" parent="." instance=ExtResource("6_enxi3")]
 position = Vector2(0, -43)
 distance = 30
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5sfde")
+}
+
+[node name="BuildingHitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("7_p8wcm")
+entity = NodePath("..")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BuildingHitbox"]
+shape = SubResource("CircleShape2D_7diee")
+
+[node name="BuildingPlacedColl" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl"]
+shape = SubResource("RectangleShape2D_d4idp")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="CheckPlayerNearby" to="." method="_on_check_player_nearby_body_entered"]
