@@ -27,9 +27,9 @@ func _process(delta: float) -> void:
 		index += 1
 	
 
-func check_for_tile_points(pla: Player, damage: int = 1):
+func check_for_tile_points(pla: PlayerResource, damage: int = 1):
 	if is_instance_valid(pla):
-		if pla == player:
+		if pla.player == player:
 			var all_collision_pos :Array[Vector2]= []
 			
 			for i:SingleDetector in get_children():
@@ -39,14 +39,7 @@ func check_for_tile_points(pla: Player, damage: int = 1):
 			if can_destroy:
 				GSignals.ENV_destroy_tile.emit(all_collision_pos, damage)
 			
-			var has_perk := false
-			
-			for perk:Perk in player.stats.Perks:
-				if perk.Key == PerkData.load_perk_res(PerkData.Keys.Anti_Mine_Detection).Key:
-					has_perk = true
-					break
-			
-			if has_perk:
+			if pla.has_perk_anti_mine_det:
 				GSignals.PERK_show_items_behind_wall.emit(all_collision_pos)
 
 func reset_detector(pla_res : PlayerResource, value: int) -> void:

@@ -14,6 +14,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	var perk_res: Perk = PerkData.load_perk_res(Key)
+	set_process(false)
 	
 	if perk_res.active_type == perk_res.Active_type_keys.Start:
 		activate_perk()

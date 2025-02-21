@@ -13,4 +13,4 @@ cost = Array[int]([100, 150, 200, 250, 300, 350])
 value = Array[int]([9, 11, 13, 15, 17, 19])
 description = "It allows you to detect hidden objects within walls, such as bombs or ores, within a range of {{value}} meters."
 type = 4
-active_type = 4
+active_type = 0

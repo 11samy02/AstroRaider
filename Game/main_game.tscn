@@ -44,14 +44,14 @@ adjustment_contrast = 1.25
 adjustment_saturation = 1.3
 
 [sub_resource type="Gradient" id="Gradient_levrl"]
-offsets = PackedFloat32Array(0, 0.10929, 0.259259, 0.371585, 0.73224)
-colors = PackedColorArray(0.0555753, 0.0907172, 0.143283, 0.392157, 0.169239, 0.179747, 0.258019, 0.392157, 0.230916, 0.243609, 0.355228, 0.0980392, 0.466901, 0.422852, 0.594006, 0.392157, 0.735175, 0.747081, 0.916787, 0.392157)
+offsets = PackedFloat32Array(0, 0.155556, 0.259259, 0.371585, 0.614815)
+colors = PackedColorArray(0.0555753, 0.0907172, 0.143283, 0.392157, 0.1716, 0.181913, 0.26, 0.784314, 0.234, 0.2466, 0.36, 0.294118, 0.466901, 0.422852, 0.594006, 0.392157, 0.735175, 0.747081, 0.916787, 0.392157)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dodui"]
 gradient = SubResource("Gradient_levrl")
 
 [sub_resource type="Gradient" id="Gradient_68ska"]
-offsets = PackedFloat32Array(0.133333, 0.237037, 0.385185, 0.650273)
+offsets = PackedFloat32Array(0.17037, 0.22963, 0.333333, 0.451852)
 colors = PackedColorArray(0.3337, 0.376862, 0.47, 0, 0.332844, 0.375515, 0.471122, 0.196078, 0.595757, 0.531541, 0.705759, 0.0980392, 0.70673, 0.686655, 0.850489, 0.0980392)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qynml"]
@@ -65,15 +65,15 @@ color_ramp_bg = SubResource("GradientTexture2D_dodui")
 color_ramp_fg = SubResource("GradientTexture2D_qynml")
 
 [sub_resource type="Gradient" id="Gradient_ky278"]
-offsets = PackedFloat32Array(0.0222222, 0.214815, 0.407407, 0.614815, 0.792593)
-colors = PackedColorArray(0.186658, 0.00437505, 0.0789144, 0.0980392, 0.25, 0.0925, 0.025, 0.392157, 0.31, 0.102403, 0.0558, 0.415686, 0.84, 0.0588, 0.17598, 0.572549, 1, 0, 0.15, 0.196078)
+offsets = PackedFloat32Array(0.0222222, 0.185185, 0.311111, 0.451852, 0.562963)
+colors = PackedColorArray(0.186658, 0.00437505, 0.0789144, 0.0980392, 0.25, 0.0925, 0.025, 0.6, 0.31, 0.102403, 0.0558, 0.666667, 0.84, 0.0588, 0.17598, 0.572549, 0.849773, 0.374214, 0.0902275, 0.196078)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a8gso"]
 gradient = SubResource("Gradient_ky278")
 
 [sub_resource type="Gradient" id="Gradient_x2v41"]
-offsets = PackedFloat32Array(0.133333, 0.214815, 0.362963, 0.650273)
-colors = PackedColorArray(0.66, 0.1584, 0.242, 0, 0.659786, 0.158265, 0.243355, 0.196078, 0.905323, 0.375572, 0.281799, 0.0980392, 0.971735, 0.594727, 0.508447, 0.0980392)
+offsets = PackedFloat32Array(0.251852, 0.333333, 0.42963, 0.555556)
+colors = PackedColorArray(0.66, 0.1584, 0.242, 0, 0.71, 0.213, 0.1775, 0.105882, 0.727746, 0.528493, 0.0794832, 0.0980392, 0.971735, 0.594727, 0.508447, 0.0980392)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4uimg"]
 gradient = SubResource("Gradient_x2v41")
@@ -93,7 +93,7 @@ colors = PackedColorArray(0.136979, 0.0379441, 0.169497, 0.392157, 0.0874275, 0.
 gradient = SubResource("Gradient_i1wbv")
 
 [sub_resource type="Gradient" id="Gradient_w1x5i"]
-offsets = PackedFloat32Array(0.0592593, 0.0888889, 0.289617, 0.650273)
+offsets = PackedFloat32Array(0.125926, 0.155556, 0.244444, 0.362963)
 colors = PackedColorArray(0.1806, 0.43, 0.363493, 0, 0.180251, 0.427603, 0.361178, 0.196078, 0.289983, 0.576231, 0.908882, 0.0980392, 0.807938, 0.635023, 0.872913, 0.0980392)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jtmic"]
@@ -114,7 +114,7 @@ colors = PackedColorArray(0.0221268, 0.0802433, 0.208105, 0.392157, 0.130614, 0.
 gradient = SubResource("Gradient_23j40")
 
 [sub_resource type="Gradient" id="Gradient_xaig7"]
-offsets = PackedFloat32Array(0.0592593, 0.0888889, 0.289617, 0.650273)
+offsets = PackedFloat32Array(0.0888889, 0.148148, 0.259259, 0.42963)
 colors = PackedColorArray(0.3948, 0.45416, 0.84, 0, 0.39861, 0.456775, 0.842061, 0.196078, 0.4992, 0.77568, 0.96, 0.0980392, 0.723877, 0.861001, 0.918189, 0.0980392)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_he4dt"]
@@ -135,7 +135,7 @@ colors = PackedColorArray(0.0555753, 0.0907172, 0.143283, 0.392157, 0.169239, 0.
 gradient = SubResource("Gradient_84w8x")
 
 [sub_resource type="Gradient" id="Gradient_6sf4x"]
-offsets = PackedFloat32Array(0.111111, 0.17037, 0.289617, 0.650273)
+offsets = PackedFloat32Array(0.111111, 0.17037, 0.289617, 0.474074)
 colors = PackedColorArray(0.3337, 0.376862, 0.47, 0, 0.332844, 0.375515, 0.471122, 0.196078, 0.595757, 0.531541, 0.705759, 0.0980392, 0.70673, 0.686655, 0.850489, 0.0980392)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_leyrg"]
@@ -156,8 +156,8 @@ colors = PackedColorArray(0.0198045, 0.110547, 0.0567159, 0.392157, 0.0989579, 0
 gradient = SubResource("Gradient_2x5ci")
 
 [sub_resource type="Gradient" id="Gradient_jwwft"]
-offsets = PackedFloat32Array(0.140741, 0.237037, 0.385185, 0.6)
-colors = PackedColorArray(0.575, 0.69, 0, 0, 0.575, 0.69, 0, 0.0980392, 0.62196, 0.71, 0.2698, 0, 0.69464, 0.76, 0.4332, 0.0980392)
+offsets = PackedFloat32Array(0.118519, 0.2, 0.288889, 0.42963)
+colors = PackedColorArray(0.575, 0.69, 0, 0, 0.575, 0.69, 0, 0.0980392, 0.62196, 0.71, 0.2698, 0, 0.810272, 0.726924, 0.156335, 0.0980392)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_d42ia"]
 gradient = SubResource("Gradient_jwwft")
@@ -205,6 +205,7 @@ script = ExtResource("4_pq065")
 backgrounds = Array[ExtResource("5_1tp0s")]([SubResource("Resource_sj2y8"), SubResource("Resource_ad6c7"), SubResource("Resource_xveht"), SubResource("Resource_yjdjc"), SubResource("Resource_o1oln"), SubResource("Resource_jprgx")])
 bg_fog = NodePath("../Bg_Fog")
 fg_fog = NodePath("../fg_fog")
+background_id = 1
 
 [node name="TextureRect" type="TextureRect" parent="Backgrounds"]
 modulate = Color(0.197937, 0.197937, 0.197937, 1)

@@ -5,12 +5,16 @@ extends CanvasLayer
 @export var bg_fog: EnviromentBgFog
 @export var fg_fog: EnviromentFgFog
 
-
+@export var background_id := 0
 
 func _ready() -> void:
 	await (get_tree().create_timer(0.1).timeout)
 	randomize()
-	var bg_res : BackgroundRes = backgrounds.pick_random()
+	var bg_res : BackgroundRes
+	if is_instance_valid(backgrounds[background_id]):
+		bg_res = backgrounds[background_id]
+	else:
+		bg_res = backgrounds.pick_random()
 	texture_rect.texture = bg_res.texture
 	texture_rect.modulate = bg_res.color
 	if is_instance_valid(bg_fog):

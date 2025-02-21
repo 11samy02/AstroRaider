@@ -405,7 +405,6 @@ const ITEM_IN_WALL_NOTIFICATION = preload("res://Visuel Feedback Tutorial/item_i
 
 ##has to be changed, makes performance issues
 func show_items_behind_wall(pos: Array[Vector2]) -> void:
-	return
 	for i in pos:
 		var tile_pos = local_to_map(i)
 		tile_pos = Vector2i(tile_pos)

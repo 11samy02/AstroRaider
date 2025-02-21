@@ -1,6 +1,13 @@
 extends Node
 
 @export var player: Player
+var player_res : PlayerResource
+
+func _ready() -> void:
+	await(get_tree().create_timer(0.1).timeout)
+	for pla_res : PlayerResource in GlobalGame.Players:
+		if pla_res.player == player:
+			player_res = pla_res
 
 func _physics_process(delta: float) -> void:
 	if player.current_state == player.states.Default:
@@ -55,7 +62,7 @@ func destroy_ground() -> void:
 	if player.bohrer_holder.modulate.a >= 0.99:
 		if !player.bohrer_sound.playing:
 			player.bohrer_sound.play_sound()
-		GSignals.ENV_check_detection_tile.emit(player, player.stats.bohrer_damage)
+		GSignals.ENV_check_detection_tile.emit(player_res, player.stats.bohrer_damage)
 	else:
 		player.bohrer_sound.stop()
 
