@@ -54,13 +54,7 @@ func _on_check_player_nearby_body_exited(body: Node2D) -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-	check_player_input()
 
-
-func check_player_input() -> void:
-	for player in player_list:
-		if Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_Y) or Input.is_action_just_pressed("interact"):
-			GSignals.PLA_open_skill_tree.emit(player)
 
 
 func check_if_player_has_crstal() -> void:

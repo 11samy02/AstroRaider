@@ -65,7 +65,9 @@ func destroy_ground() -> void:
 	if player.bohrer_holder.modulate.a >= 0.99:
 		if !player.bohrer_sound.playing:
 			player.bohrer_sound.play_sound()
-		GSignals.ENV_check_detection_tile.emit(player_res, player.stats.bohrer_damage)
+		
+		var bohrer_damage := player.stats.bohrer_damage + player.stats.added_bohrer_damage
+		GSignals.ENV_check_detection_tile.emit(player_res, bohrer_damage)
 	else:
 		player.bohrer_sound.stop()
 
@@ -89,9 +91,9 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate:
 			var attack: AttackResource = AttackResource.new()
-			attack.damage = player.stats.bohrer_damage
-			attack.knockback = player.stats.bohrer_knockback
-			attack.crit_chance = player.stats.crit_chance
+			attack.damage = player.stats.bohrer_damage + player.stats.added_bohrer_damage
+			attack.knockback = player.stats.bohrer_knockback + player.stats.added_bohrer_knockback
+			attack.crit_chance = player.stats.crit_chance + player.stats.added_crit_chance
 			
 			area.get_hit(attack, player)
 			
@@ -114,7 +116,7 @@ func bohrer_damage_on_static_hit() -> void:
 		return
 	
 	var attack: AttackResource = AttackResource.new()
-	attack.damage = player.stats.bohrer_damage
+	attack.damage = player.stats.bohrer_damage + player.stats.added_bohrer_damage
 	for area in static_hit_list:
 		if is_instance_valid(area.entity):
 			await area.get_hit(attack, player)

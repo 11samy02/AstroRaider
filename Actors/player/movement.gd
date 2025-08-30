@@ -28,7 +28,8 @@ func apply_gravity(delta: float) -> void:
 			player.anim.play("idle")
 		
 		player.velocity = Vector2.ZERO
-	player.velocity = player.velocity.clamp(Vector2(-player.stats.max_speed, -player.stats.max_speed), Vector2(player.stats.max_speed, player.stats.max_speed))
+	var max_speed : Vector2 = Vector2(player.stats.max_speed + player.stats.added_max_speed, player.stats.max_speed + player.stats.added_max_speed)
+	player.velocity = player.velocity.clamp(-max_speed, max_speed)
 
 
 

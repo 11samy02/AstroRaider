@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=51 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" uid="uid://51515mx05mrs" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -21,6 +21,10 @@
 [ext_resource type="AudioStream" uid="uid://b5osrmg72oei1" path="res://Sounds/live_indikator.wav" id="19_02ndh"]
 [ext_resource type="Texture2D" uid="uid://cpaen3t2e175p" path="res://Sprites/UI/Building Ui/gear_symbol.png" id="19_rplw8"]
 [ext_resource type="Texture2D" uid="uid://dcsm7k8td3g0" path="res://Sprites/UI/Building Ui/hammer_symbol.png" id="20_mmiwy"]
+[ext_resource type="PackedScene" uid="uid://har1jftqgoco" path="res://Perks/PerkBuild/Perk_speed_it_up.tscn" id="22_8v5l4"]
+[ext_resource type="PackedScene" uid="uid://b5xnojapesv2" path="res://Perks/PerkBuild/Perk_construction_expert.tscn" id="23_02ndh"]
+[ext_resource type="PackedScene" uid="uid://ctvvb73lloi12" path="res://Perks/PerkBuild/Perk_Aim_Bot.tscn" id="24_pa3sa"]
+[ext_resource type="PackedScene" uid="uid://dcx3r6ucqwu7j" path="res://Perks/PerkBuild/Perk_Anti_Mine_Detection.tscn" id="25_38jmy"]
 
 [sub_resource type="Animation" id="Animation_b8c3x"]
 length = 0.001
@@ -510,6 +514,24 @@ libraries = {
 &"": SubResource("AnimationLibrary_0lpgm")
 }
 autoplay = "build_symbol"
+
+[node name="Perks" type="Node" parent="."]
+
+[node name="Speed_It_Up" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("22_8v5l4")]
+player = NodePath("../..")
+has_unlocked = true
+
+[node name="Construction_expert" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("23_02ndh")]
+player = NodePath("../..")
+has_unlocked = true
+
+[node name="AimBot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
+player = NodePath("../..")
+has_unlocked = true
+
+[node name="PerkAntiMineDetection" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("25_38jmy")]
+player = NodePath("../..")
+has_unlocked = true
 
 [connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]
