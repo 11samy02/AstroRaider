@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6mtv7mi4iiyk"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_1xiil"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/perk_emergency_heal.gd" id="2_s8t13"]
+[ext_resource type="Script" uid="uid://bpymdhut20ucq" path="res://Perks/PerkBuild/perk_emergency_heal.gd" id="2_s8t13"]
 
 [node name="Emergency_Heal" instance=ExtResource("1_1xiil")]
 script = ExtResource("2_s8t13")

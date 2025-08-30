@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://du11x1vvembyj"]
 
-[ext_resource type="Script" path="res://Resources/Enemy/Ai/simple_wander_around.gd" id="1_qae8p"]
+[ext_resource type="Script" uid="uid://cs4ntvcma4hwl" path="res://Resources/Enemy/Ai/simple_wander_around.gd" id="1_qae8p"]
 
 [node name="Simple_Wander_Around" type="Node"]
 script = ExtResource("1_qae8p")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://djgofvqfirgee"]
 
 [ext_resource type="Texture2D" uid="uid://b81tkcbnqcdis" path="res://Sprites/actors/Enemys/small/bat/bat_particle.png" id="1_1uudw"]
-[ext_resource type="Script" path="res://Particles/Enemys/small/Enemy_die_particle.gd" id="2_i1lmh"]
+[ext_resource type="Script" uid="uid://cpguskqe4gb8c" path="res://Particles/Enemys/small/Enemy_die_particle.gd" id="2_i1lmh"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nwymu"]
 light_mode = 1

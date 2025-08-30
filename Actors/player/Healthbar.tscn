@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dkfyi2yu36ioh" path="res://Sprites/UI/bars/live_bar_frame.png" id="1_4t3oe"]
 [ext_resource type="Texture2D" uid="uid://cunwsolh8fo86" path="res://Sprites/UI/bars/live_bar_fill.png" id="2_vpo8i"]
-[ext_resource type="Script" path="res://Actors/player/Healthbar.gd" id="3_628qs"]
+[ext_resource type="Script" uid="uid://tow8x0acfv4b" path="res://Actors/player/Healthbar.gd" id="3_628qs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t8gss"]
 light_mode = 1

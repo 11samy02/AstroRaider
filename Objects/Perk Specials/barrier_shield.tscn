@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=3 uid="uid://byl3b28jf16ly"]
 
-[ext_resource type="Script" path="res://Barrier shield.gd" id="1_iqax3"]
-[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_a3fp7"]
+[ext_resource type="Script" uid="uid://ywssf541w5qw" path="res://Barrier shield.gd" id="1_iqax3"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="2_a3fp7"]
 [ext_resource type="Texture2D" uid="uid://eyxyeinfb8we" path="res://Sprites/actors/items/Barrier_shield.png" id="2_api35"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qngd0"]
@@ -166,8 +166,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cgfiu"]
 _data = {
-"RESET": SubResource("Animation_cy651"),
-"destroy": SubResource("Animation_f07mn")
+&"RESET": SubResource("Animation_cy651"),
+&"destroy": SubResource("Animation_f07mn")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4q4xn"]

@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dqus8c46qwn38" path="res://Sprites/Perks/new_frames/frame_normal1.png" id="1_sfjgn"]
 [ext_resource type="Texture2D" uid="uid://c0eol7ask10ni" path="res://Sprites/Perks/new_frames/frame_normal2.png" id="2_idd62"]
 [ext_resource type="Texture2D" uid="uid://cy32lgcchcx2p" path="res://Sprites/Perks/new_frames/frame_disabled1.png" id="3_bg1u0"]
-[ext_resource type="Script" path="res://Manager/UI/perk_button.gd" id="4_ly8wx"]
+[ext_resource type="Script" uid="uid://dpcp0wow06k7x" path="res://Manager/UI/perk_button.gd" id="4_ly8wx"]
 [ext_resource type="Texture2D" uid="uid://dfhtk2imq31dh" path="res://Sprites/Perks/new_frames/frame_disabled2.png" id="5_1oble"]
 [ext_resource type="Texture2D" uid="uid://cpgq85gxv4wvm" path="res://Sprites/Perks/new_frames/frame_movement1.png" id="6_fojc2"]
 [ext_resource type="Texture2D" uid="uid://dktajwqhda1r6" path="res://Sprites/Perks/new_frames/frame_movement2.png" id="7_seytq"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://duc2exjltf0pn"]
 
-[ext_resource type="Script" path="res://UI/ScreenScaller/screen_scaler.gd" id="1_g6ln8"]
+[ext_resource type="Script" uid="uid://0nkvlydfbccp" path="res://UI/ScreenScaller/screen_scaler.gd" id="1_g6ln8"]
 
 [node name="ScreenScaler" type="HBoxContainer"]
 anchors_preset = 15

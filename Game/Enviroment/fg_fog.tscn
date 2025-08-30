@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cpw54eux7rlse"]
 
 [ext_resource type="Texture2D" uid="uid://7jcrk46scb5o" path="res://icon.svg" id="1_rnmm5"]
-[ext_resource type="Script" path="res://Game/Enviroment/fg_fog.gd" id="1_tdfhf"]
+[ext_resource type="Script" uid="uid://dku36078nj60y" path="res://Game/Enviroment/fg_fog.gd" id="1_tdfhf"]
 
 [sub_resource type="Shader" id="Shader_bm14a"]
 resource_local_to_scene = true
@@ -53,10 +53,10 @@ noise = SubResource("FastNoiseLite_3ytpg")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1eo70"]
 resource_local_to_scene = true
 shader = SubResource("Shader_bm14a")
-shader_parameter/offset = Vector2(0.04, 0)
-shader_parameter/offset2 = Vector2(0.05, -0.05)
 shader_parameter/noise_tex = SubResource("NoiseTexture2D_6rapv")
 shader_parameter/noise_tex2 = SubResource("NoiseTexture2D_c1fon")
+shader_parameter/offset = Vector2(0.04, 0)
+shader_parameter/offset2 = Vector2(0.05, -0.05)
 shader_parameter/color_ramp = SubResource("GradientTexture2D_kprxk")
 
 [node name="fg_fog" type="CanvasLayer"]

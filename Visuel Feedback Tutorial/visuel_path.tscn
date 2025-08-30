@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dh0pntcc1umpu"]
 
 [ext_resource type="Texture2D" uid="uid://dy0web74rkdn0" path="res://Sprites/UI/in Game/arrow_path.png" id="1_ct1hk"]
-[ext_resource type="Shader" path="res://Visuel Feedback Tutorial/visuel_path.gdshader" id="1_sa1ms"]
-[ext_resource type="Script" path="res://Visuel Feedback Tutorial/visuel_path.gd" id="3_2be71"]
+[ext_resource type="Shader" uid="uid://qo4fouygeboj" path="res://Visuel Feedback Tutorial/visuel_path.gdshader" id="1_sa1ms"]
+[ext_resource type="Script" uid="uid://blgicsfds51lu" path="res://Visuel Feedback Tutorial/visuel_path.gd" id="3_2be71"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_28hip"]
 shader = ExtResource("1_sa1ms")

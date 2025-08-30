@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://v4xkyysptm8o"]
 
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_mno8v"]
-[ext_resource type="Script" path="res://Manager/UI/All_Missions/mission.gd" id="2_axok7"]
+[ext_resource type="Script" uid="uid://bmx8l6wav0mws" path="res://Manager/UI/All_Missions/mission.gd" id="2_axok7"]
 
 [sub_resource type="Gradient" id="Gradient_yape1"]
 colors = PackedColorArray(0.690196, 1, 0, 1, 0.690196, 1, 0, 1)
@@ -66,8 +66,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ao2w5"]
 _data = {
-"RESET": SubResource("Animation_tuujs"),
-"mission cleared": SubResource("Animation_jueft")
+&"RESET": SubResource("Animation_tuujs"),
+&"mission cleared": SubResource("Animation_jueft")
 }
 
 [node name="mission" type="Control"]

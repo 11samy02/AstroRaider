@@ -1,7 +1,7 @@
 [gd_scene load_steps=76 format=3 uid="uid://dhunrn8cm7pwf"]
 
 [ext_resource type="PackedScene" uid="uid://vxe42563otpi" path="res://Manager/UI/skill_tree.tscn" id="1_xcqks"]
-[ext_resource type="Script" path="res://Resources/Characters/script/CharacterSkill.gd" id="2_8gppc"]
+[ext_resource type="Script" uid="uid://sbs4g1r1gybn" path="res://Resources/Characters/script/CharacterSkill.gd" id="2_8gppc"]
 [ext_resource type="PackedScene" uid="uid://deniacf7djdsm" path="res://Manager/UI/perk_button.tscn" id="3_go7xx"]
 
 [sub_resource type="Resource" id="Resource_wvp75"]

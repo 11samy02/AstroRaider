@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b6fax3q3wk63k"]
 
-[ext_resource type="Script" path="res://Visuel Feedback Tutorial/input_info.gd" id="1_e48fv"]
+[ext_resource type="Script" uid="uid://cfonlloc1763h" path="res://Visuel Feedback Tutorial/input_info.gd" id="1_e48fv"]
 [ext_resource type="Texture2D" uid="uid://dqx0swo5i3nqc" path="res://Sprites/UI/icons/speaking_bublle.png" id="1_ls3uu"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="2_16h80"]
 
@@ -42,8 +42,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jc26c"]
 _data = {
-"RESET": SubResource("Animation_osguj"),
-"start": SubResource("Animation_0t63n")
+&"RESET": SubResource("Animation_osguj"),
+&"start": SubResource("Animation_0t63n")
 }
 
 [node name="input info" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bcmf2abm1rjmp"]
 
-[ext_resource type="Script" path="res://Visuel Feedback Tutorial/dashed_circle.gd" id="1_h5dun"]
+[ext_resource type="Script" uid="uid://g30w6m3sxsug" path="res://Visuel Feedback Tutorial/dashed_circle.gd" id="1_h5dun"]
 
 [sub_resource type="Gradient" id="Gradient_cdaix"]
 interpolation_mode = 1
@@ -44,8 +44,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_owhcm"]
 _data = {
-"RESET": SubResource("Animation_wixqa"),
-"colored_anim": SubResource("Animation_syrft")
+&"RESET": SubResource("Animation_wixqa"),
+&"colored_anim": SubResource("Animation_syrft")
 }
 
 [node name="DashedCircle" type="Line2D"]

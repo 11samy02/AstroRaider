@@ -1,13 +1,13 @@
 [gd_scene load_steps=31 format=3 uid="uid://dsqtnel040hel"]
 
 [ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_ri5sr"]
-[ext_resource type="Script" path="res://Objects/Buildings/torrent.gd" id="2_d2g3u"]
+[ext_resource type="Script" uid="uid://digju80nfbw0a" path="res://Objects/Buildings/torrent.gd" id="2_d2g3u"]
 [ext_resource type="Texture2D" uid="uid://njsnttqo3qtt" path="res://Sprites/Buildings/Torrent.png" id="3_2r018"]
-[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="3_c3c0x"]
-[ext_resource type="Script" path="res://Manager/enemy_detector.gd" id="4_lwr6g"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="3_c3c0x"]
+[ext_resource type="Script" uid="uid://b31rxhp2hd877" path="res://Manager/enemy_detector.gd" id="4_lwr6g"]
 [ext_resource type="Texture2D" uid="uid://crxlehp0st2v6" path="res://Sprites/UI/in Game/torrent.png" id="4_vgx3k"]
 [ext_resource type="AudioStream" uid="uid://dhq4tomopgolt" path="res://Sounds/LaserSound.wav" id="5_cqh6p"]
-[ext_resource type="Script" path="res://UX/audio_2d.gd" id="6_q54f1"]
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="6_q54f1"]
 
 [sub_resource type="Resource" id="Resource_ntmmc"]
 script = ExtResource("3_c3c0x")
@@ -248,8 +248,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cx17e"]
 _data = {
-"RESET": SubResource("Animation_lthtt"),
-"hit": SubResource("Animation_bxxsq")
+&"RESET": SubResource("Animation_lthtt"),
+&"hit": SubResource("Animation_bxxsq")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yn4l"]
@@ -268,8 +268,6 @@ current_health = 250
 material = SubResource("CanvasItemMaterial_s06gm")
 sprite_frames = SubResource("SpriteFrames_hobbd")
 autoplay = "default"
-frame = 7
-frame_progress = 0.392141
 
 [node name="damage_shader" parent="." index="1"]
 material = SubResource("ShaderMaterial_ey4yk")
@@ -307,7 +305,7 @@ shape = SubResource("CapsuleShape2D_th3tk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
-"": SubResource("AnimationLibrary_cx17e")
+&"": SubResource("AnimationLibrary_cx17e")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0"]

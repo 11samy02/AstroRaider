@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://vxe42563otpi"]
 
-[ext_resource type="Script" path="res://Manager/UI/skill_tree.gd" id="1_hpmon"]
+[ext_resource type="Script" uid="uid://c7fwdlbn48yrl" path="res://Manager/UI/skill_tree.gd" id="1_hpmon"]
 [ext_resource type="Texture2D" uid="uid://cxer7mwrg8vwh" path="res://Sprites/UI/scale_able_container.png" id="1_kthid"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="3_k1lub"]
 

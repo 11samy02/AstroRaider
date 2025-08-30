@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://ch8wd7u2vdpo2"]
 
-[ext_resource type="Script" path="res://Actors/player/player_hand.gd" id="1_al0dq"]
+[ext_resource type="Script" uid="uid://hkryu6wwbf78" path="res://Actors/player/player_hand.gd" id="1_al0dq"]
 [ext_resource type="Texture2D" uid="uid://drk1wmxapptaf" path="res://Sprites/UI/Building Ui/hand.png" id="2_ahkjf"]
 [ext_resource type="Resource" uid="uid://cc5ujc1dc164u" path="res://Crafting/Resources/BluePrints/Generator.tres" id="2_d1nkh"]
-[ext_resource type="Script" path="res://Actors/player/check_ground.gd" id="4_3sp5y"]
+[ext_resource type="Script" uid="uid://gfxhu1sfynq6" path="res://Actors/player/check_ground.gd" id="4_3sp5y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4i2vg"]
 size = Vector2(1, 1)

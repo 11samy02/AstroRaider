@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://du71etym3o4r"]
 
-[ext_resource type="Script" path="res://UI/ControllerSetup/player_card.gd" id="2_4pmx7"]
+[ext_resource type="Script" uid="uid://djr7rvr3sose3" path="res://UI/ControllerSetup/player_card.gd" id="2_4pmx7"]
 [ext_resource type="Texture2D" uid="uid://oiip5a3yjyxy" path="res://Sprites/UI/ControllerSelect/controller_inaktiv.png" id="3_g0r2y"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="4_fnqb8"]
 

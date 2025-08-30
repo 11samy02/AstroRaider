@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_10djh"]
 [ext_resource type="Texture2D" uid="uid://dq3hnxb5we00g" path="res://Sprites/Buildings/Dekoration/ground.png" id="2_02ifi"]
-[ext_resource type="Script" path="res://Objects/Buildings/metal_ground.gd" id="2_dvvsg"]
+[ext_resource type="Script" uid="uid://bg4n4x5hfla0v" path="res://Objects/Buildings/metal_ground.gd" id="2_dvvsg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3pstw"]
 light_mode = 1

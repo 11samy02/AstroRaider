@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://udaftnd6pgtc"]
+
+[ext_resource type="Texture2D" uid="uid://ryp7lcatkfq4" path="res://Sprites/Planets/Fenaris-3x/Fenaris-3x1.png" id="1_4kpdq"]
+[ext_resource type="Texture2D" uid="uid://c88vocaaxqxll" path="res://Sprites/Planets/Fenaris-3x/Fenaris-3x3.png" id="2_2v5cj"]
+[ext_resource type="Texture2D" uid="uid://cokw24sbnoopq" path="res://Sprites/Planets/Fenaris-3x/Fenaris-3x2.png" id="3_u3bne"]
+[ext_resource type="Texture2D" uid="uid://circm76sthl7x" path="res://Sprites/Planets/Fenaris-3x/Fenaris-3x4.png" id="4_6i60w"]
+
+[sub_resource type="Environment" id="Environment_4kpdq"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.4
+glow_strength = 0.5
+glow_bloom = 0.5
+glow_blend_mode = 1
+
+[node name="Planet" type="Control"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureButton" type="TextureButton" parent="."]
+self_modulate = Color(1.25, 1.25, 1.25, 1)
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_4kpdq")
+texture_pressed = ExtResource("2_2v5cj")
+texture_hover = ExtResource("3_u3bne")
+texture_disabled = ExtResource("4_6i60w")
+stretch_mode = 5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4kpdq")

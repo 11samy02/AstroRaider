@@ -49,10 +49,12 @@ func input_movement(event: InputEvent) ->void:
 	else:
 		if Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_X) < -player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_LEFT):
 			player.sprite.flip_h = true
+			player.sprite_outline.flip_h = true
 			player.bohrer_holder.get_child(0).flip_h = true
 			change_gravity(Vector2.LEFT)
 		elif Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_X) > player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_RIGHT):
 			player.sprite.flip_h = false
+			player.sprite_outline.flip_h = false
 			player.bohrer_holder.get_child(0).flip_h = false
 			change_gravity(Vector2.RIGHT)
 		elif Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_Y) < -player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_UP):

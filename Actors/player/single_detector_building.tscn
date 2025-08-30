@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://fr7k6omm32ub"]
 
-[ext_resource type="Script" path="res://Actors/player/single_detector_building.gd" id="1_yxkld"]
+[ext_resource type="Script" uid="uid://f5dl1qxftm0h" path="res://Actors/player/single_detector_building.gd" id="1_yxkld"]
 [ext_resource type="Texture2D" uid="uid://eevenfvay3m" path="res://Sprites/actors/items/check_Area.png" id="2_x0bhp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxgq8"]

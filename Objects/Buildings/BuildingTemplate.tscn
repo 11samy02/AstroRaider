@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bhmvhsrfsgk2j"]
 
-[ext_resource type="Script" path="res://Objects/Buildings/building_template.gd" id="1_kya05"]
-[ext_resource type="Script" path="res://Manager/building_hitbox.gd" id="2_g1weh"]
+[ext_resource type="Script" uid="uid://bh103i622g8mn" path="res://Objects/Buildings/building_template.gd" id="1_kya05"]
+[ext_resource type="Script" uid="uid://htadlvo0gee" path="res://Manager/building_hitbox.gd" id="2_g1weh"]
 
 [sub_resource type="Shader" id="Shader_dhseu"]
 code = "shader_type canvas_item;

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d3hm7di5du4m"]
 
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_8lq8x"]
-[ext_resource type="Script" path="res://UI/pause_menu.gd" id="1_t2frn"]
+[ext_resource type="Script" uid="uid://qxkl7yjneqi2" path="res://UI/pause_menu.gd" id="1_t2frn"]
 [ext_resource type="Texture2D" uid="uid://t8h74uusbxr7" path="res://Sprites/UI/button_container_vertical.png" id="2_v720i"]
 
 [node name="Pause Menu" type="CanvasLayer"]

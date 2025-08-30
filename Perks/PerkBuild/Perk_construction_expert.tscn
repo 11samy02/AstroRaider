@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5xnojapesv2"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_ix0r8"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/Construction_expert.gd" id="2_xcq6c"]
+[ext_resource type="Script" uid="uid://bihxc38wo1nw6" path="res://Perks/PerkBuild/Construction_expert.gd" id="2_xcq6c"]
 
 [node name="Construction_expert" instance=ExtResource("1_ix0r8")]
 script = ExtResource("2_xcq6c")

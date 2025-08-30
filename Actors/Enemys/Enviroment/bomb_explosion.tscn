@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxws2mlpf26mt"]
 
-[ext_resource type="Script" path="res://Actors/Enemys/Enviroment/bomb_explosion.gd" id="1_2qx2q"]
+[ext_resource type="Script" uid="uid://c00hce7k57cvt" path="res://Actors/Enemys/Enviroment/bomb_explosion.gd" id="1_2qx2q"]
 [ext_resource type="Texture2D" uid="uid://b3mpkn3jvacv1" path="res://Sprites/Projectiles/Fireball.png" id="1_w5xmk"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_12530"]

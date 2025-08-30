@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://mhgxa18ikbht"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_accch"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/perk_vampire_bite.gd" id="2_hsxyd"]
+[ext_resource type="Script" uid="uid://bcgqaufs51sm8" path="res://Perks/PerkBuild/perk_vampire_bite.gd" id="2_hsxyd"]
 
 [node name="VampireBite" instance=ExtResource("1_accch")]
 script = ExtResource("2_hsxyd")

@@ -17,6 +17,7 @@ var shield_res : HasShieldRes = HasShieldRes.new()
 var has_perk_anti_mine_det := false
 
 var crystal_count := 0
+var fake_crystal_count := 0
 var Ores : Dictionary = {}
 
 

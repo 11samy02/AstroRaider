@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dx2duij3kymp"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_lsi7k"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/perk_energy_overload.gd" id="2_n2x7w"]
+[ext_resource type="Script" uid="uid://buewcfh3xxvqv" path="res://Perks/PerkBuild/perk_energy_overload.gd" id="2_n2x7w"]
 
 [node name="Energy_Overload" instance=ExtResource("1_lsi7k")]
 script = ExtResource("2_n2x7w")

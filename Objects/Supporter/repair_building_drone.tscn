@@ -1,55 +1,54 @@
 [gd_scene load_steps=12 format=3 uid="uid://cotcwq1468kvu"]
 
-[ext_resource type="Script" path="res://Objects/Supporter/repair_building_drone.gd" id="1_sq6yu"]
+[ext_resource type="Script" uid="uid://mg4ls7w6uidg" path="res://Objects/Supporter/repair_building_drone.gd" id="1_sq6yu"]
 [ext_resource type="Texture2D" uid="uid://lv2eu3em5mo1" path="res://Sprites/Buildings/RebairDrones.png" id="1_vgro4"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0papc"]
-light_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j18m1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e8eg1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8n0a"]
 atlas = ExtResource("1_vgro4")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(0, 0, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5hx36"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4041a"]
 atlas = ExtResource("1_vgro4")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(36, 0, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kjudn"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kklc"]
 atlas = ExtResource("1_vgro4")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(0, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xnv6k"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpyao"]
 atlas = ExtResource("1_vgro4")
-region = Rect2(32, 32, 32, 32)
+region = Rect2(36, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jgy71"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4m4xc"]
 atlas = ExtResource("1_vgro4")
-region = Rect2(0, 32, 32, 32)
+region = Rect2(0, 36, 36, 36)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2q3xy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_blyu4"]
 atlas = ExtResource("1_vgro4")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(36, 0, 36, 36)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8jgbp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e8eg1")
+"texture": SubResource("AtlasTexture_w8n0a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5hx36")
+"texture": SubResource("AtlasTexture_4041a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kjudn")
+"texture": SubResource("AtlasTexture_1kklc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xnv6k")
+"texture": SubResource("AtlasTexture_cpyao")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jgy71")
+"texture": SubResource("AtlasTexture_4m4xc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2q3xy")
+"texture": SubResource("AtlasTexture_blyu4")
 }],
 "loop": true,
 "name": &"default",
@@ -60,14 +59,15 @@ animations = [{
 radius = 5.0
 
 [node name="RepairBuildingDrone" type="Area2D"]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_sq6yu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_0papc")
+material = SubResource("ShaderMaterial_j18m1")
 sprite_frames = SubResource("SpriteFrames_8jgbp")
 autoplay = "default"
-frame_progress = 0.3655
+frame = 3
+frame_progress = 0.209902
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

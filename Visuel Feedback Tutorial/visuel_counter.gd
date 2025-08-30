@@ -19,6 +19,6 @@ func animate_label() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", end_position, duration)
 	tween.parallel().tween_property(self, "modulate:a", 0, duration)
-	tween.parallel().tween_property(self, "scale", 0.5, duration)
+	tween.parallel().tween_property(self, "scale", Vector2(0.5,0.5), duration)
 	await(tween.finished)
 	queue_free()

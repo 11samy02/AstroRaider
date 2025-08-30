@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://cy8yxobay3dcf"]
 
-[ext_resource type="Script" path="res://UI/game_ui.gd" id="1_wtiqs"]
+[ext_resource type="Script" uid="uid://duka3raic6aqi" path="res://UI/game_ui.gd" id="1_wtiqs"]
 [ext_resource type="Texture2D" uid="uid://cs2r8sf0sho7k" path="res://Sprites/UI/bars/UI/Cyrcle_frame.png" id="2_3eumv"]
 [ext_resource type="Texture2D" uid="uid://b4b0t7mavsko" path="res://Sprites/UI/bars/UI/Cyrcle_proced.png" id="3_4kgck"]
 [ext_resource type="Texture2D" uid="uid://cupjbn6mvtim6" path="res://Sprites/UI/in Game/Rader.png" id="4_3aifi"]
 [ext_resource type="Texture2D" uid="uid://mgiqy8g1uvqr" path="res://Sprites/UI/in Game/Rader_curser1.png" id="5_dkflf"]
-[ext_resource type="Script" path="res://UI/rader.gd" id="5_fm8ch"]
+[ext_resource type="Script" uid="uid://coa0alkfyrpl3" path="res://UI/rader.gd" id="5_fm8ch"]
 
 [sub_resource type="SystemFont" id="SystemFont_4dhts"]
 font_names = PackedStringArray("November")
@@ -51,8 +51,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ldl3m"]
 _data = {
-"RESET": SubResource("Animation_jf4q8"),
-"wave effect": SubResource("Animation_butib")
+&"RESET": SubResource("Animation_jf4q8"),
+&"wave effect": SubResource("Animation_butib")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2fda"]
@@ -118,8 +118,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dchpr"]
 _data = {
-"RESET": SubResource("Animation_hnooe"),
-"rotate": SubResource("Animation_6r258")
+&"RESET": SubResource("Animation_hnooe"),
+&"rotate": SubResource("Animation_6r258")
 }
 
 [node name="GameUI" type="CanvasLayer"]

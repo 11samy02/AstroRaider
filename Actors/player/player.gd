@@ -17,7 +17,6 @@ var current_state := states.Default
 
 @onready var hitbox: Hitbox = $Hitbox
 @onready var sprite: Sprite2D = $Sprite
-
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var sprite_anim: AnimationPlayer = $Sprite/sprite_anim
 @onready var bohrer_holder: Node2D = $bohrer_holder
@@ -25,7 +24,7 @@ var current_state := states.Default
 
 @onready var damage_sound: Audio2D = $Sounds/Damage
 @onready var bohrer_sound: Audio2D = $Sounds/BohrerSound
-
+@onready var live_indikator: Audio2D = $Sounds/LiveIndikator
 
 @export var landing_anim_name : Array[String]
 

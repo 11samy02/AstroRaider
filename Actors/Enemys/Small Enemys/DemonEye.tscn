@@ -1,19 +1,19 @@
 [gd_scene load_steps=32 format=3 uid="uid://d2r6ecatdtqut"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_400u0"]
-[ext_resource type="Script" path="res://Actors/Enemys/Small Enemys/DemonEye.gd" id="2_xjylt"]
+[ext_resource type="Script" uid="uid://bknn74j4cgscf" path="res://Actors/Enemys/Small Enemys/DemonEye.gd" id="2_xjylt"]
 [ext_resource type="PackedScene" uid="uid://b7mdapvgvv4d4" path="res://Projectiles/fire_ball.tscn" id="5_4325e"]
-[ext_resource type="Script" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_ra7ad"]
+[ext_resource type="Script" uid="uid://bs2i61l25dpft" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_ra7ad"]
 [ext_resource type="Texture2D" uid="uid://chj2k1h3hk3xq" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye.png" id="7_1k81c"]
-[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="7_jiem3"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="7_jiem3"]
 [ext_resource type="Texture2D" uid="uid://drw5se8c5e33u" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye2.png" id="8_hpmga"]
-[ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="8_yj8bj"]
-[ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="9_u1xt7"]
+[ext_resource type="Script" uid="uid://bjpdimde5m5yi" path="res://Resources/Enemy/EnemyStats.gd" id="8_yj8bj"]
+[ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://Actors/player/player.gdshader" id="9_u1xt7"]
 [ext_resource type="Texture2D" uid="uid://b81tkcbnqcdis" path="res://Sprites/actors/Enemys/small/bat/bat_particle.png" id="9_w3rug"]
 [ext_resource type="Texture2D" uid="uid://gsta6urcksvx" path="res://Sprites/actors/Enemys/small/bat/bat_particle3.png" id="10_ilnne"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="10_jwp4k"]
 [ext_resource type="AudioStream" uid="uid://ctshalo85y3xo" path="res://Sounds/LaserEnemy.wav" id="10_qctm1"]
-[ext_resource type="Script" path="res://UX/audio_2d.gd" id="11_kusyn"]
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="11_kusyn"]
 
 [sub_resource type="Resource" id="Resource_nvx3s"]
 script = ExtResource("6_ra7ad")
@@ -96,9 +96,9 @@ resource_local_to_scene = true
 shader = ExtResource("9_u1xt7")
 shader_parameter/opacity = 1.0
 shader_parameter/r = 1.0
-shader_parameter/g = null
-shader_parameter/b = null
-shader_parameter/mix_color = null
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
 
 [sub_resource type="Animation" id="Animation_ryi04"]
 length = 0.001
@@ -135,8 +135,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_61fje"]
 _data = {
-"RESET": SubResource("Animation_ryi04"),
-"flying": SubResource("Animation_chyg6")
+&"RESET": SubResource("Animation_ryi04"),
+&"flying": SubResource("Animation_chyg6")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d84vw"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://x01efb40ajoj"]
 
-[ext_resource type="Script" path="res://Visuel Feedback Tutorial/visuel_counter.gd" id="1_4ugk8"]
+[ext_resource type="Script" uid="uid://hux7j7482iem" path="res://Visuel Feedback Tutorial/visuel_counter.gd" id="1_4ugk8"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_5mxgf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ayjws"]

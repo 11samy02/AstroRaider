@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0yvjpl4foiva"]
 
-[ext_resource type="Script" path="res://Objects/EnemyBuildings/enemy_building.gd" id="1_1kk87"]
+[ext_resource type="Script" uid="uid://esjpm7itrxsc" path="res://Objects/EnemyBuildings/enemy_building.gd" id="1_1kk87"]
 [ext_resource type="Texture2D" uid="uid://co4oc6shb8yme" path="res://Sprites/Buildings/Enemy/Generator.png" id="1_484tu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8ubf"]

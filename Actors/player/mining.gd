@@ -3,6 +3,9 @@ extends Node
 @export var player: Player
 var player_res : PlayerResource
 
+var static_hit_list : Array[Area2D] = []
+
+
 func _ready() -> void:
 	await(get_tree().create_timer(0.1).timeout)
 	for pla_res : PlayerResource in GlobalGame.Players:
@@ -81,7 +84,6 @@ func use_bohrer_anim() -> void:
 			player.anim.stop()
 			player.anim.play("use_item")
 
-var static_hit_list : Array[StaticHitbox] = []
 
 func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
@@ -101,8 +103,11 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 		
 
 func _on_bohrer_hit_box_area_exited(area: Area2D) -> void:
-	if static_hit_list.has(area):
-		static_hit_list.erase(area)
+	if !is_instance_valid(area):
+		return
+	if area is StaticHitbox:
+		if static_hit_list.has(area):
+			static_hit_list.erase(area)
 
 func bohrer_damage_on_static_hit() -> void:
 	if static_hit_list.is_empty():

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccvfhyajro5fq"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_dx3i7"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/perk_resource_sharing.gd" id="2_qsfin"]
+[ext_resource type="Script" uid="uid://bn1p1luijbf51" path="res://Perks/PerkBuild/perk_resource_sharing.gd" id="2_qsfin"]
 
 [node name="ResuorceSharing" instance=ExtResource("1_dx3i7")]
 script = ExtResource("2_qsfin")

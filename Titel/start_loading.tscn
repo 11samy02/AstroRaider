@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dakj0is30rwsr"]
 
 [ext_resource type="Texture2D" uid="uid://b0u0niqk1q5ov" path="res://Images/titel.png" id="1_4ichx"]
-[ext_resource type="Script" path="res://Titel/start_loading.gd" id="1_7kjhf"]
+[ext_resource type="Script" uid="uid://ditdpq1mff4tb" path="res://Titel/start_loading.gd" id="1_7kjhf"]
 [ext_resource type="Texture2D" uid="uid://625atfatdtwl" path="res://Images/Godot_icon.svg" id="2_fsvmp"]
 [ext_resource type="Texture2D" uid="uid://c8t2yd5yo4sct" path="res://Images/logo.svg" id="3_cn1o3"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="4_o0jvk"]
@@ -113,8 +113,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkeof"]
 _data = {
-"RESET": SubResource("Animation_si33c"),
-"show_godot_logo": SubResource("Animation_yy0x6")
+&"RESET": SubResource("Animation_si33c"),
+&"show_godot_logo": SubResource("Animation_yy0x6")
 }
 
 [node name="Start_loading" type="Control"]

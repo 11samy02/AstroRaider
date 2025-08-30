@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpu5ag6xorgc1"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_qies3"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/Perk_Resilience.gd" id="2_24ils"]
+[ext_resource type="Script" uid="uid://bhbkadim8mlpw" path="res://Perks/PerkBuild/Perk_Resilience.gd" id="2_24ils"]
 
 [node name="Resilience" instance=ExtResource("1_qies3")]
 script = ExtResource("2_24ils")

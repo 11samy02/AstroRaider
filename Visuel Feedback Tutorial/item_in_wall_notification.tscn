@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cr3wnqk3gk4tu"]
 
 [ext_resource type="Texture2D" uid="uid://ultyblvm67we" path="res://Sprites/UI/icons/drops_icon.png" id="1_j2rhs"]
-[ext_resource type="Shader" path="res://Visuel Feedback Tutorial/item_in_wall_notification.gdshader" id="1_me2lh"]
-[ext_resource type="Script" path="res://Visuel Feedback Tutorial/item_in_wall_notification.gd" id="2_dpjac"]
+[ext_resource type="Shader" uid="uid://7fy3x64bfqow" path="res://Visuel Feedback Tutorial/item_in_wall_notification.gdshader" id="1_me2lh"]
+[ext_resource type="Script" uid="uid://dwx5x7s7a70fj" path="res://Visuel Feedback Tutorial/item_in_wall_notification.gd" id="2_dpjac"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71kmc"]
 resource_local_to_scene = true

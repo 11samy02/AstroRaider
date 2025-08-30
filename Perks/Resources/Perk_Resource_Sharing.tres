@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://bssqpen6rj8wm"]
 
 [ext_resource type="Texture2D" uid="uid://cppival7x4lys" path="res://Sprites/Perks/Resource_Sharing.png" id="1_4kfon"]
-[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_mvk6l"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="1_mvk6l"]
 
 [resource]
 script = ExtResource("1_mvk6l")

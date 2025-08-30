@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dd8s7nwmnq0ud"]
 
-[ext_resource type="Script" path="res://Collectable/ore_template.gd" id="1_xd3ej"]
-[ext_resource type="Shader" path="res://Shader/item_shimmer.gdshader" id="2_o3ycm"]
+[ext_resource type="Script" uid="uid://crr1w3lux1f7t" path="res://Collectable/ore_template.gd" id="1_xd3ej"]
+[ext_resource type="Shader" uid="uid://b06ow7jpp56ql" path="res://Shader/item_shimmer.gdshader" id="2_o3ycm"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4b5bt"]
 light_mode = 1
@@ -112,9 +112,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0q48s"]
 _data = {
-"Appear": SubResource("Animation_70wes"),
-"Clear": SubResource("Animation_18wj3"),
-"RESET": SubResource("Animation_32g7m")
+&"Appear": SubResource("Animation_70wes"),
+&"Clear": SubResource("Animation_18wj3"),
+&"RESET": SubResource("Animation_32g7m")
 }
 
 [node name="OreTemplate" type="Area2D"]

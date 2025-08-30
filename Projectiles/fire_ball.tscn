@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://b7mdapvgvv4d4"]
 
-[ext_resource type="Script" path="res://Projectiles/fire_ball.gd" id="1_tdq83"]
+[ext_resource type="Script" uid="uid://6dll7od0pdvi" path="res://Projectiles/fire_ball.gd" id="1_tdq83"]
 [ext_resource type="Texture2D" uid="uid://bypxtb1t4uu87" path="res://Sprites/Projectiles/energy_ball_green.png" id="1_xyj5b"]
-[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_t5f8m"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="2_t5f8m"]
 
 [sub_resource type="Resource" id="Resource_1d2w3"]
 script = ExtResource("2_t5f8m")
@@ -32,7 +32,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_3j0tr"]
 resource_name = "hit"
 length = 0.1
-step = 0.015
+step = 0.1
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "method": &"spawn_explosion"
 }, {
 "args": [],
-"method": &"queue_free"
+"method": &"_destroy"
 }]
 }
 tracks/1/type = "value"
@@ -65,8 +65,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fp201"]
 _data = {
-"RESET": SubResource("Animation_5lcwe"),
-"hit": SubResource("Animation_3j0tr")
+&"RESET": SubResource("Animation_5lcwe"),
+&"hit": SubResource("Animation_3j0tr")
 }
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x50bl"]
@@ -123,7 +123,7 @@ shape = SubResource("CapsuleShape2D_iwaew")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fp201")
+&"": SubResource("AnimationLibrary_fp201")
 }
 
 [node name="lifetime" type="Timer" parent="."]
@@ -135,13 +135,13 @@ autostart = true
 z_index = 1
 material = SubResource("CanvasItemMaterial_x50bl")
 amount = 256
-process_material = SubResource("ParticleProcessMaterial_kfn24")
 texture = ExtResource("1_xyj5b")
 lifetime = 0.75
 speed_scale = 2.0
 fixed_fps = 0
 fract_delta = false
 draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_kfn24")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-16, 0)

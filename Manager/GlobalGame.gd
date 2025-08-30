@@ -10,7 +10,7 @@ var camera: MainCam
 
 var time_played := 0.00
 
-var wave_count_added_per_round :int = 1
+
 
 func _process(delta: float) -> void:
 	if Input.get_connected_joypads().size() > 0:

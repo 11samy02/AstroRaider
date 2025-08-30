@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BluePrintResource" load_steps=8 format=3 uid="uid://djcu4nqt44485"]
 
-[ext_resource type="Script" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_kbe0c"]
-[ext_resource type="Script" path="res://Crafting/Resources/BluePrintResource.gd" id="2_atswl"]
+[ext_resource type="Script" uid="uid://d3nu3r61lypu2" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_kbe0c"]
+[ext_resource type="Script" uid="uid://crukqjhvhpjlt" path="res://Crafting/Resources/BluePrintResource.gd" id="2_atswl"]
 [ext_resource type="Texture2D" uid="uid://08stp6wdb86w" path="res://Sprites/Buildings/ShieldGenerator.png" id="3_1e31n"]
 
 [sub_resource type="Resource" id="Resource_0i8on"]

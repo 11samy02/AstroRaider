@@ -51,7 +51,7 @@ func movement(delta: float) -> void:
 	var friction := 4000.0
 	var input_dir = Vector2.ZERO
 	var player : Player = player_res.player
-
+	
 	if player.controller_id == 0 and Input.get_connected_joypads().size() == 0:
 		input_dir = Vector2(
 			Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
@@ -129,8 +129,6 @@ func select_building() -> void:
 		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.Torrent)
 	elif Input.is_key_pressed(KEY_3):
 		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.RepairDroneStation)
-	elif Input.is_key_pressed(KEY_4):
-		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.BarrierShieldGenerator)
 	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		building_res = null
 

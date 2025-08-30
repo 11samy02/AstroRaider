@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://xae054wq8w45"]
 
-[ext_resource type="Script" path="res://Manager/UI/screen_transition.gd" id="1_336kf"]
-[ext_resource type="Shader" path="res://Shader/StarShader.gdshader" id="1_atgp0"]
+[ext_resource type="Script" uid="uid://dso12d2suih8m" path="res://Manager/UI/screen_transition.gd" id="1_336kf"]
+[ext_resource type="Shader" uid="uid://bwlh04x568xmq" path="res://Shader/StarShader.gdshader" id="1_atgp0"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="3_fpgdc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gci7h"]
@@ -211,10 +211,10 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gxtx2"]
 _data = {
-"RESET": SubResource("Animation_usiso"),
-"Transition": SubResource("Animation_s81sc"),
-"Transition_and_wait": SubResource("Animation_u8gve"),
-"fade_out": SubResource("Animation_xv0xf")
+&"RESET": SubResource("Animation_usiso"),
+&"Transition": SubResource("Animation_s81sc"),
+&"Transition_and_wait": SubResource("Animation_u8gve"),
+&"fade_out": SubResource("Animation_xv0xf")
 }
 
 [sub_resource type="Animation" id="Animation_hp4ag"]
@@ -252,8 +252,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1wc7i"]
 _data = {
-"RESET": SubResource("Animation_hp4ag"),
-"loading": SubResource("Animation_6s0fn")
+&"RESET": SubResource("Animation_hp4ag"),
+&"loading": SubResource("Animation_6s0fn")
 }
 
 [node name="ScreenTransition" type="CanvasLayer"]

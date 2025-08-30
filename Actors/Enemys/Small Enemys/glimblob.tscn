@@ -1,12 +1,12 @@
 [gd_scene load_steps=21 format=3 uid="uid://d1j1bd7ma1q07"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_j57v1"]
-[ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="2_8iqur"]
-[ext_resource type="Script" path="res://Actors/Enemys/Small Enemys/glimblob.gd" id="2_82sf1"]
+[ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://Actors/player/player.gdshader" id="2_8iqur"]
+[ext_resource type="Script" uid="uid://dw0f8k60qgvhb" path="res://Actors/Enemys/Small Enemys/glimblob.gd" id="2_82sf1"]
 [ext_resource type="Texture2D" uid="uid://y0uee18n5ynf" path="res://Sprites/actors/Enemys/small/Glimblob/Glimblob.png" id="2_onj4g"]
-[ext_resource type="Script" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="3_die81"]
-[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="4_tv15v"]
-[ext_resource type="Script" path="res://Resources/Enemy/EnemyStats.gd" id="5_hrj2a"]
+[ext_resource type="Script" uid="uid://bs2i61l25dpft" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="3_die81"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="4_tv15v"]
+[ext_resource type="Script" uid="uid://bjpdimde5m5yi" path="res://Resources/Enemy/EnemyStats.gd" id="5_hrj2a"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="5_ldoh3"]
 
 [sub_resource type="Resource" id="Resource_6iokw"]
@@ -68,9 +68,9 @@ resource_local_to_scene = true
 shader = ExtResource("2_8iqur")
 shader_parameter/opacity = 1.0
 shader_parameter/r = 1.0
-shader_parameter/g = null
-shader_parameter/b = null
-shader_parameter/mix_color = null
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
 
 [sub_resource type="Animation" id="Animation_redl5"]
 length = 0.001
@@ -107,8 +107,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x03m5"]
 _data = {
-"RESET": SubResource("Animation_redl5"),
-"idle": SubResource("Animation_54vgy")
+&"RESET": SubResource("Animation_redl5"),
+&"idle": SubResource("Animation_54vgy")
 }
 
 [node name="Glimblob" instance=ExtResource("1_j57v1")]

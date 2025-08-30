@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TileDropResource" load_steps=2 format=3 uid="uid://bwx4cf4sf3p3h"]
 
-[ext_resource type="Script" path="res://Resources/Enviroment/Destroyable Tiles/TileDropResource.gd" id="1_urank"]
+[ext_resource type="Script" uid="uid://bakms4ewp88rp" path="res://Resources/Enviroment/Destroyable Tiles/TileDropResource.gd" id="1_urank"]
 
 [resource]
 script = ExtResource("1_urank")

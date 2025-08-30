@@ -1,48 +1,34 @@
 shader_type canvas_item;
+render_mode unshaded;
 
-uniform vec4 outline_color : source_color = vec4(1.0);
-uniform float outline_width : hint_range(0, 10) = 1.0;
-uniform int outline_pattern : hint_range(0, 2) = 0; // diamond, circle, square
-uniform bool outline_inside = false;
-
-bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
-    for (float i = -ceil(outline_width); i <= ceil(outline_width); i++) {
-        float x = abs(i) > outline_width ? outline_width * sign(i) : i;
-        float offset;
-
-        if (outline_pattern == 0) {
-            offset = outline_width - abs(x);
-        } else if (outline_pattern == 1) {
-            offset = floor(sqrt(pow(outline_width + 0.5, 2) - x * x));
-        } else if (outline_pattern == 2) {
-            offset = outline_width;
-        }
-
-        for (float j = -ceil(offset); j <= ceil(offset); j++) {
-            float y = abs(j) > offset ? offset * sign(j) : j;
-            vec2 xy = uv + texture_pixel_size * vec2(x, y);
-
-            if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == outline_inside) {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
+uniform int outline_size : hint_range(1,10) = 1;
+uniform vec4 outline_color : source_color = vec4(1.0, 0.0, 0.0, 1.0);
 
 void fragment() {
-    vec2 uv = UV;
-    vec2 texture_pixel_size = TEXTURE_PIXEL_SIZE;
-
-    vec4 texColor = texture(TEXTURE, uv);
-    bool is_inside = texColor.a > 0.0;
-
-    if (is_inside) {
-        COLOR = texColor;
-    } else if (hasContraryNeighbour(uv, texture_pixel_size, TEXTURE)) {
-        COLOR = outline_color;
-    } else {
-        COLOR = vec4(0.0);
-    }
+	vec4 tex_color = texture(TEXTURE, UV);
+	if(tex_color.a < 0.1) {
+		vec2 pixel_size = 1.0 / vec2(textureSize(TEXTURE, 0));
+		bool found = false;
+		for (int x = -outline_size; x <= outline_size; x++) {
+			for (int y = -outline_size; y <= outline_size; y++) {
+				if((x == 0 && y == 0) || (x != 0 && y != 0))
+					continue;
+				vec2 offset = vec2(float(x), float(y)) * pixel_size;
+				vec4 neighbor = texture(TEXTURE, UV + offset);
+				if(neighbor.a > 0.1) {
+					found = true;
+					break;
+				}
+			}
+			if(found)
+				break;
+		}
+		if(found) {
+			COLOR = outline_color;
+		} else {
+			discard;
+		}
+	} else {
+		COLOR = tex_color;
+	}
 }

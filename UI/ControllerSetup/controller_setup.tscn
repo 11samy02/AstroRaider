@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://6rl8pdv2bcpq"]
 
-[ext_resource type="Script" path="res://UI/ControllerSetup/controller_setup.gd" id="1_exe5l"]
+[ext_resource type="Script" uid="uid://bc6jx0nu5hmxd" path="res://UI/ControllerSetup/controller_setup.gd" id="1_exe5l"]
 [ext_resource type="Texture2D" uid="uid://dxxnahylhuout" path="res://Images/Background/nutral_bg.png" id="1_ktqf7"]
 [ext_resource type="Texture2D" uid="uid://cxer7mwrg8vwh" path="res://Sprites/UI/scale_able_container.png" id="2_yjypr"]
-[ext_resource type="Script" path="res://UI/ControllerSetup/Controller_holder.gd" id="4_axdbk"]
+[ext_resource type="Script" uid="uid://cgkw2cqjl4gsu" path="res://UI/ControllerSetup/Controller_holder.gd" id="4_axdbk"]
 
 [node name="ControllerSetup" type="Control"]
 layout_mode = 3

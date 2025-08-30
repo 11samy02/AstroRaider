@@ -1,20 +1,20 @@
 [gd_scene load_steps=8 format=3 uid="uid://6mo722gvco50"]
 
-[ext_resource type="Script" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.gd" id="1_di2us"]
+[ext_resource type="Script" uid="uid://p1e241kbpv0m" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.gd" id="1_di2us"]
 [ext_resource type="Texture2D" uid="uid://bu4sqb1ogjxvj" path="res://Sprites/UI/in Game/rader_points.png" id="2_4ri1a"]
-[ext_resource type="Shader" path="res://Actors/player/player.gdshader" id="3_21iy6"]
+[ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://Actors/player/player.gdshader" id="3_21iy6"]
 [ext_resource type="AudioStream" uid="uid://bedq6k2r4i0qw" path="res://Sounds/AlienDeathSound.wav" id="3_ggwx2"]
-[ext_resource type="Script" path="res://UX/audio_2d.gd" id="4_clgxi"]
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="4_clgxi"]
 [ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="4_dx01d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o7ydl"]
 resource_local_to_scene = true
 shader = ExtResource("3_21iy6")
-shader_parameter/opacity = null
+shader_parameter/opacity = 0.0
 shader_parameter/r = 1.0
-shader_parameter/g = null
-shader_parameter/b = null
-shader_parameter/mix_color = null
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
 
 [node name="EnemyBaseTemplate" type="CharacterBody2D"]
 modulate = Color(1, 1, 0, 1)

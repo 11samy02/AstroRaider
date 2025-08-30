@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://7yiganp1qkve"]
 
 [ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_ppc7q"]
-[ext_resource type="Script" path="res://Objects/Buildings/repair_drone_station.gd" id="2_042wi"]
+[ext_resource type="Script" uid="uid://drx1bhjkgqu8a" path="res://Objects/Buildings/repair_drone_station.gd" id="2_042wi"]
 [ext_resource type="Texture2D" uid="uid://cusoxrf3wnsdl" path="res://Sprites/Buildings/RebairDronesStation.png" id="3_h7pcl"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ft3sh"]
@@ -215,8 +215,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ricgk"]
 _data = {
-"RESET": SubResource("Animation_6lxsu"),
-"hit": SubResource("Animation_rja5g")
+&"RESET": SubResource("Animation_6lxsu"),
+&"hit": SubResource("Animation_rja5g")
 }
 
 [node name="RepairDroneStation" instance=ExtResource("1_ppc7q")]
@@ -265,7 +265,7 @@ shape = SubResource("CircleShape2D_clhhr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 libraries = {
-"": SubResource("AnimationLibrary_ricgk")
+&"": SubResource("AnimationLibrary_ricgk")
 }
 
 [connection signal="area_entered" from="BuildingDetector" to="." method="_on_building_detector_area_entered"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8p6a3a2srdcx"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_tj7ts"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/CoinMaster.gd" id="2_bj7uf"]
+[ext_resource type="Script" uid="uid://cp16f4tc038rx" path="res://Perks/PerkBuild/CoinMaster.gd" id="2_bj7uf"]
 
 [node name="CoinMaster" instance=ExtResource("1_tj7ts")]
 script = ExtResource("2_bj7uf")

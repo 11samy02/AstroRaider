@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HoldingItem" load_steps=3 format=3 uid="uid://bkxks318tx6hh"]
 
-[ext_resource type="Script" path="res://Resources/Holding_items/Holding_Item_resource.gd" id="1_7hg41"]
+[ext_resource type="Script" uid="uid://br5bghavq3sin" path="res://Resources/Holding_items/Holding_Item_resource.gd" id="1_7hg41"]
 [ext_resource type="Texture2D" uid="uid://devw02cvoiikl" path="res://Sprites/Items/Icons/Proton Gun.png" id="2_povoe"]
 
 [resource]

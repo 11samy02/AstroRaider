@@ -1,28 +1,30 @@
-[gd_scene load_steps=46 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=47 format=3 uid="uid://bvxpu0ufiyfmj"]
 
-[ext_resource type="Script" path="res://Actors/player/player.gd" id="1_ook18"]
+[ext_resource type="Script" uid="uid://51515mx05mrs" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
 [ext_resource type="Texture2D" uid="uid://ljcb6idc5om" path="res://Sprites/UI/in Game/player.png" id="2_fdgfk"]
 [ext_resource type="Texture2D" uid="uid://btfu52hwbu668" path="res://Sprites/actors/Player/Player1.png" id="2_xfvlm"]
 [ext_resource type="Texture2D" uid="uid://bu8pq2ln3ys4r" path="res://Objects/Lights/sphere_light.png" id="3_fk0u8"]
 [ext_resource type="Texture2D" uid="uid://h7tvg3phhnw4" path="res://Sprites/actors/items/thriler.png" id="5_l8fgy"]
 [ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="5_qr1wl"]
-[ext_resource type="Script" path="res://Actors/player/Crosshair.gd" id="7_pdl7m"]
+[ext_resource type="Script" uid="uid://b7vdsffck7gup" path="res://Actors/player/Crosshair.gd" id="7_pdl7m"]
 [ext_resource type="Texture2D" uid="uid://c3v5coeuuf6c6" path="res://Sprites/actors/items/crosshair.png" id="7_vmm8m"]
 [ext_resource type="AudioStream" uid="uid://dhq4tomopgolt" path="res://Sounds/LaserSound.wav" id="9_51d1q"]
-[ext_resource type="Script" path="res://UX/audio_2d.gd" id="10_pasbu"]
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="10_pasbu"]
 [ext_resource type="AudioStream" uid="uid://dlo0yu1a81ksu" path="res://Sounds/damage.wav" id="11_bdp4b"]
 [ext_resource type="AudioStream" uid="uid://nf0618xwf4nf" path="res://Sounds/BohrerSound.wav" id="12_purh8"]
-[ext_resource type="Script" path="res://Actors/player/activation_abilities.gd" id="14_0hd48"]
-[ext_resource type="Script" path="res://Actors/player/movement.gd" id="15_dawng"]
-[ext_resource type="Script" path="res://Actors/player/mining.gd" id="16_lr051"]
-[ext_resource type="Script" path="res://Actors/player/build.gd" id="17_a2dyr"]
-[ext_resource type="Script" path="res://Actors/player/symbol.gd" id="18_lmggw"]
+[ext_resource type="Script" uid="uid://dr5h0bbygnmr4" path="res://Actors/player/activation_abilities.gd" id="14_0hd48"]
+[ext_resource type="Script" uid="uid://bkcw1yt3fekbj" path="res://Actors/player/movement.gd" id="15_dawng"]
+[ext_resource type="Script" uid="uid://c1a3e8t6ydw5l" path="res://Actors/player/mining.gd" id="16_lr051"]
+[ext_resource type="Script" uid="uid://o7r0y2ebfg87" path="res://Actors/player/build.gd" id="17_a2dyr"]
+[ext_resource type="Script" uid="uid://d305cmitaaf0h" path="res://Actors/player/symbol.gd" id="18_lmggw"]
+[ext_resource type="AudioStream" uid="uid://b5osrmg72oei1" path="res://Sounds/live_indikator.wav" id="19_02ndh"]
 [ext_resource type="Texture2D" uid="uid://cpaen3t2e175p" path="res://Sprites/UI/Building Ui/gear_symbol.png" id="19_rplw8"]
 [ext_resource type="Texture2D" uid="uid://dcsm7k8td3g0" path="res://Sprites/UI/Building Ui/hammer_symbol.png" id="20_mmiwy"]
 
 [sub_resource type="Animation" id="Animation_b8c3x"]
 length = 0.001
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -77,8 +79,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sefct"]
 _data = {
-"RESET": SubResource("Animation_b8c3x"),
-"damaged": SubResource("Animation_lepmk")
+&"RESET": SubResource("Animation_b8c3x"),
+&"damaged": SubResource("Animation_lepmk")
 }
 
 [sub_resource type="Animation" id="Animation_ev3cy"]
@@ -112,6 +114,7 @@ tracks/1/keys = {
 resource_name = "fling"
 length = 0.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -174,10 +177,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t64nr"]
 _data = {
-"RESET": SubResource("Animation_ev3cy"),
-"fling": SubResource("Animation_41xe3"),
-"idle": SubResource("Animation_aoyaw"),
-"use_item": SubResource("Animation_bodas")
+&"RESET": SubResource("Animation_ev3cy"),
+&"fling": SubResource("Animation_41xe3"),
+&"idle": SubResource("Animation_aoyaw"),
+&"use_item": SubResource("Animation_bodas")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xxfga"]
@@ -344,8 +347,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0lpgm"]
 _data = {
-"RESET": SubResource("Animation_t4lul"),
-"build_symbol": SubResource("Animation_ec8vi")
+&"RESET": SubResource("Animation_t4lul"),
+&"build_symbol": SubResource("Animation_ec8vi")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -383,12 +386,12 @@ vframes = 3
 
 [node name="sprite_anim" type="AnimationPlayer" parent="Sprite"]
 libraries = {
-"": SubResource("AnimationLibrary_sefct")
+&"": SubResource("AnimationLibrary_sefct")
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_t64nr")
+&"": SubResource("AnimationLibrary_t64nr")
 }
 autoplay = "fling"
 
@@ -476,6 +479,11 @@ script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 0.75
 
+[node name="LiveIndikator" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("19_02ndh")
+script = ExtResource("10_pasbu")
+metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
+
 [node name="Symbol" type="Node2D" parent="." node_paths=PackedStringArray("player")]
 modulate = Color(1.5, 1.5, 1.5, 1)
 material = SubResource("CanvasItemMaterial_4cyff")
@@ -499,7 +507,7 @@ texture = ExtResource("20_mmiwy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Symbol/Building_Symbol"]
 libraries = {
-"": SubResource("AnimationLibrary_0lpgm")
+&"": SubResource("AnimationLibrary_0lpgm")
 }
 autoplay = "build_symbol"
 

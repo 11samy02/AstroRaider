@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dh7y0847euy2m"]
 
-[ext_resource type="Script" path="res://Manager/static_attack_box.gd" id="1_ae47a"]
+[ext_resource type="Script" uid="uid://cw3stp4nklm4j" path="res://Manager/static_attack_box.gd" id="1_ae47a"]
 
 [node name="AttackBox" type="Area2D"]
 collision_layer = 0

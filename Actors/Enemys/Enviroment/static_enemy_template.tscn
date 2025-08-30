@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://v6x4i77p8tfl"]
 
-[ext_resource type="Script" path="res://Actors/Enemys/Enviroment/static_enemy_template.gd" id="1_78n37"]
+[ext_resource type="Script" uid="uid://ntxl5wyvi7kv" path="res://Actors/Enemys/Enviroment/static_enemy_template.gd" id="1_78n37"]
 
 [node name="StaticEnemyTemplate" type="StaticBody2D"]
 script = ExtResource("1_78n37")

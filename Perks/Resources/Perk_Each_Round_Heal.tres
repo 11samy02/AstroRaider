@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://brbcy124mswp1"]
 
 [ext_resource type="Texture2D" uid="uid://df8ns1fyykf0m" path="res://Sprites/Perks/EachRoundHeal.png" id="1_fa71l"]
-[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="2_joykj"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="2_joykj"]
 
 [resource]
 script = ExtResource("2_joykj")

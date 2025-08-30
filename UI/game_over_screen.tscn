@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bdw8cgfs4k3s0"]
 
-[ext_resource type="Script" path="res://UI/game_over_screen.gd" id="1_j8g0j"]
+[ext_resource type="Script" uid="uid://cnnh7m723j360" path="res://UI/game_over_screen.gd" id="1_j8g0j"]
 [ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="1_k85x5"]
 [ext_resource type="Texture2D" uid="uid://t8h74uusbxr7" path="res://Sprites/UI/button_container_vertical.png" id="2_jd5dt"]
 [ext_resource type="PackedScene" uid="uid://0h7fesak0yyv" path="res://UI/score_player.tscn" id="4_qbnb8"]
@@ -142,8 +142,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6w5cw"]
 _data = {
-"RESET": SubResource("Animation_nhacj"),
-"Show": SubResource("Animation_1llw6")
+&"RESET": SubResource("Animation_nhacj"),
+&"Show": SubResource("Animation_1llw6")
 }
 
 [node name="Game Over Screen" type="CanvasLayer"]

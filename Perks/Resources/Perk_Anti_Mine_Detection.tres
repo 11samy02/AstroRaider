@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://d1xi8663u5a58"]
 
-[ext_resource type="Script" path="res://Perks/Resources/Perk_Resource.gd" id="1_imtpo"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="1_imtpo"]
 [ext_resource type="Texture2D" uid="uid://cyf57mq2heppo" path="res://Sprites/Perks/Anti_Mine_Detection.png" id="1_yovnp"]
 
 [resource]

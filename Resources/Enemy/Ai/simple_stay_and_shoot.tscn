@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://jq6omfqd433n"]
 
-[ext_resource type="Script" path="res://Resources/Enemy/Ai/simple_stay_and_shoot.gd" id="1_rlmln"]
+[ext_resource type="Script" uid="uid://77mcwwye5hxk" path="res://Resources/Enemy/Ai/simple_stay_and_shoot.gd" id="1_rlmln"]
 
 [node name="Simple_stay_and_shoot" type="Node"]
 script = ExtResource("1_rlmln")

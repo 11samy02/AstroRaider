@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 	
 	close_skill_tree(delta)
 	if player_res != null:
-		owned_money.set_text(str(player_res.crystal_count) + "$")
+		owned_money.set_text(str(player_res.fake_crystal_count) + "$")
 	else:
 		queue_free()
 	
@@ -51,6 +51,7 @@ func open_skill_tree(player: Player) -> void:
 		PauseMenu.can_pause_on_screen = false
 		get_tree().paused = true
 		show()
+		player_res.fake_crystal_count = player_res.crystal_count
 		for button:PerkButton in get_tree().get_nodes_in_group("PerkButton"):
 			button.skill.player_res = player_res
 			if !button.change_description.is_connected(change_description):
@@ -108,3 +109,10 @@ func reset_perks():
 		for button:PerkButton in get_tree().get_nodes_in_group("PerkButton"):
 			button.skill.player_res = player_res
 			button.set_icon()
+		change_money()
+
+func change_money() -> void:
+	if player_res.fake_crystal_count != player_res.crystal_count:
+		var tween = create_tween()
+		tween.tween_property(player_res,"fake_crystal_count", player_res.crystal_count, 1)
+		await (tween.finished)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmva5ec4ilagl"]
 
 [ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://Perks/PerkBuild/perk_build.tscn" id="1_3xbvp"]
-[ext_resource type="Script" path="res://Perks/PerkBuild/perk_extra_health.gd" id="2_4oabf"]
+[ext_resource type="Script" uid="uid://v0yme2yj233h" path="res://Perks/PerkBuild/perk_extra_health.gd" id="2_4oabf"]
 
 [node name="Extra_Health" instance=ExtResource("1_3xbvp")]
 script = ExtResource("2_4oabf")

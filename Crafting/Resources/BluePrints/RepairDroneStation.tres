@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BluePrintResource" load_steps=7 format=3 uid="uid://djet4n61tuuok"]
 
-[ext_resource type="Script" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_xvsim"]
-[ext_resource type="Script" path="res://Crafting/Resources/BluePrintResource.gd" id="2_kh4tq"]
+[ext_resource type="Script" uid="uid://d3nu3r61lypu2" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_xvsim"]
+[ext_resource type="Script" uid="uid://crukqjhvhpjlt" path="res://Crafting/Resources/BluePrintResource.gd" id="2_kh4tq"]
 [ext_resource type="Texture2D" uid="uid://cusoxrf3wnsdl" path="res://Sprites/Buildings/RebairDronesStation.png" id="3_npste"]
 
 [sub_resource type="Resource" id="Resource_yjuk7"]

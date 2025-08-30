@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dfxuwbhwgn0pd"]
 
-[ext_resource type="Script" path="res://Perks/PerkBuild/Perk_Barrier_Shield.gd" id="1_fugwd"]
+[ext_resource type="Script" uid="uid://b6as7gi3814ra" path="res://Perks/PerkBuild/Perk_Barrier_Shield.gd" id="1_fugwd"]
 
 [node name="BarrierShield" type="Node"]
 script = ExtResource("1_fugwd")

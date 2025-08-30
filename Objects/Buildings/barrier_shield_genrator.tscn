@@ -1,8 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://dmy85k63uu857"]
+[gd_scene load_steps=34 format=3 uid="uid://dmy85k63uu857"]
 
 [ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_vniow"]
-[ext_resource type="Script" path="res://Objects/Buildings/barrier_shield_genrator.gd" id="2_inbv3"]
+[ext_resource type="Script" uid="uid://bxw6paic2u2mg" path="res://Objects/Buildings/barrier_shield_genrator.gd" id="2_inbv3"]
 [ext_resource type="Texture2D" uid="uid://08stp6wdb86w" path="res://Sprites/Buildings/ShieldGenerator.png" id="3_sip4c"]
+[ext_resource type="Shader" uid="uid://djhj1cia4mpeb" path="res://Objects/Buildings/barrier_shield_genrator.gdshader" id="4_mgdif"]
+[ext_resource type="Texture2D" uid="uid://benxve3mkompk" path="res://Sprites/Mask/Round_mask.png" id="5_6tc0m"]
+[ext_resource type="Shader" uid="uid://b87b5b6p51lbf" path="res://Objects/Buildings/barrier_shield_genrator_color.gdshader" id="6_gqqkm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mexuv"]
 atlas = ExtResource("3_sip4c")
@@ -196,9 +199,52 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5sfde"]
 _data = {
-"RESET": SubResource("Animation_j2l2c"),
-"hit": SubResource("Animation_j5olj")
+&"RESET": SubResource("Animation_j2l2c"),
+&"hit": SubResource("Animation_j5olj")
 }
+
+[sub_resource type="Gradient" id="Gradient_w8dld"]
+offsets = PackedFloat32Array(0.0218579, 0.2, 0.4, 0.6, 0.7, 0.8)
+colors = PackedColorArray(0.0462352, 0.116801, 0.156023, 1, 0.0268701, 0.0763779, 0.152633, 1, 0.0186374, 0.0779146, 0.154604, 1, 0.0483123, 0.106345, 0.220303, 1, 0.00835176, 0.0404483, 0.135094, 1, 0.0679992, 0.0349043, 0.164212, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dh8yf"]
+gradient = SubResource("Gradient_w8dld")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ougmf"]
+frequency = 0.0041
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fj56o"]
+seamless = true
+noise = SubResource("FastNoiseLite_ougmf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4yr7l"]
+shader = ExtResource("6_gqqkm")
+shader_parameter/mask = ExtResource("5_6tc0m")
+shader_parameter/noise = SubResource("NoiseTexture2D_fj56o")
+shader_parameter/gradiant_tex = SubResource("GradientTexture2D_dh8yf")
+shader_parameter/offset_1 = Vector2(0.04, 0.01)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_odge8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3br58"]
+seamless = true
+noise = SubResource("FastNoiseLite_odge8")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rj1is"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_knu8a"]
+noise = SubResource("FastNoiseLite_rj1is")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57shv"]
+shader = ExtResource("4_mgdif")
+shader_parameter/mask = ExtResource("5_6tc0m")
+shader_parameter/noise_1 = SubResource("NoiseTexture2D_3br58")
+shader_parameter/noise_2 = SubResource("NoiseTexture2D_knu8a")
+shader_parameter/offset_1 = Vector2(-0.1, 0)
+shader_parameter/offset_2 = Vector2(-0.2, 0)
+shader_parameter/disortion_strength = 0.01
 
 [node name="BarrierShieldGenrator" instance=ExtResource("1_vniow")]
 script = ExtResource("2_inbv3")
@@ -232,3 +278,15 @@ shape = SubResource("RectangleShape2D_ncyn2")
 libraries = {
 "": SubResource("AnimationLibrary_5sfde")
 }
+
+[node name="color_shader" type="Sprite2D" parent="." index="7"]
+z_index = 10
+material = SubResource("ShaderMaterial_4yr7l")
+texture = ExtResource("5_6tc0m")
+
+[node name="disortion_shader" type="Sprite2D" parent="." index="8"]
+visible = false
+z_index = 10
+material = SubResource("ShaderMaterial_57shv")
+scale = Vector2(1.01, 1.01)
+texture = ExtResource("5_6tc0m")

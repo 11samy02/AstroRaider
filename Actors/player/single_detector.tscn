@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://58thecdy1yjh"]
 
 [ext_resource type="Texture2D" uid="uid://eevenfvay3m" path="res://Sprites/actors/items/check_Area.png" id="1_1b685"]
-[ext_resource type="Script" path="res://Actors/player/single_detector.gd" id="1_ydgif"]
+[ext_resource type="Script" uid="uid://r2ybfgvtsbh4" path="res://Actors/player/single_detector.gd" id="1_ydgif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxgq8"]
 size = Vector2(8, 8)

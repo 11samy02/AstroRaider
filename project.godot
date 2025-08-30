@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Gravity Changer"
+config/name="Astro Raider"
 run/main_scene="res://Titel/start_loading.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://Images/icon.png"
@@ -31,6 +31,11 @@ AiEnemyData="*res://Resources/Enemy/AiEnemyData.gd"
 GameOverScreen="*res://UI/game_over_screen.tscn"
 FirebaseSync="*res://Https/firebase_sync.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
+gdscript/warnings/unused_parameter=0
 
 [dialogic]
 
@@ -73,7 +78,6 @@ text/autopauses={}
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=4
 window/size/extend_to_title=true
 window/stretch/mode="viewport"
 window/per_pixel_transparency/allowed=true
@@ -197,7 +201,6 @@ locale/translation_remaps={}
 
 [physics]
 
-2d/run_on_separate_thread=true
 common/max_physics_steps_per_frame=16
 2d/physics_engine="GodotPhysics2D"
 2d/sleep_threshold_linear=0.5

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://70v4d2478xol"]
 
-[ext_resource type="Script" path="res://Manager/static_hitbox.gd" id="1_ln84p"]
+[ext_resource type="Script" uid="uid://b38ju551dnxhn" path="res://Manager/static_hitbox.gd" id="1_ln84p"]
 
 [node name="StaticHitbox" type="Area2D"]
 collision_layer = 8

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cpt1v4qubwff7"]
 
 [ext_resource type="Texture2D" uid="uid://v8jt5iabgfid" path="res://Sprites/Particles/ground_destroyed_particle.png" id="1_yqijk"]
-[ext_resource type="Script" path="res://Particles/destroy_ground_particle.gd" id="2_s7f8p"]
+[ext_resource type="Script" uid="uid://bju0muidd3hm0" path="res://Particles/destroy_ground_particle.gd" id="2_s7f8p"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yqcbj"]
 particles_animation = true

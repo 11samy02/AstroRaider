@@ -44,3 +44,6 @@ func spawn_explosion() -> void:
 	explode.global_position = global_position
 	explode.emitting = true
 	get_parent().add_child(explode)
+
+func _destroy() -> void:
+	call_deferred("queue_free")

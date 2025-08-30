@@ -13,7 +13,9 @@ static var wave_count := 0
 static var wave_time_to_next := 0.00
 static var wave_time_max_time := 0.00
 static var wave_time_stopped := true
-static var pause_time := 120
+static var pause_time := 30
+static var wave_count_added_per_round : int = 1
+static var enemy_levels_after : int = 5
 
 @export var spawn_per_round: SimplefySettingMath = SimplefySettingMath.new()
 @export var time_until_wave_start: SimplefySettingMath = SimplefySettingMath.new()
@@ -49,7 +51,7 @@ func _on_spawn_time_timeout() -> void:
 
 func start_new_wave() -> void:
 	GSignals.WAV_wave_endet.emit()
-	wave_count += GlobalGame.wave_count_added_per_round
+	wave_count += wave_count_added_per_round
 	wave_spawn_count = rng.randi_range(spawn_per_round.min_value + wave_count + GlobalGame.Players.size(), spawn_per_round.max_value + wave_count + GlobalGame.Players.size())
 	spawn_time.start()
 
@@ -64,7 +66,7 @@ func spawn_enemy() -> void:
 	
 	var enemy = enemy_list.pick_random().instantiate()
 	enemy.global_position = spawn_pos
-	enemy.level = floori(wave_count/10)
+	enemy.level = floori(wave_count/enemy_levels_after)
 	get_parent().add_child(enemy)
 	EnemyBaseTemplate.entity_list.append(enemy)
 	wave_spawn_count -= 1

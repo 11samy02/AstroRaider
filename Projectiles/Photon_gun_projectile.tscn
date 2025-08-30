@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://cwi0qr43hj35l"]
 
-[ext_resource type="Script" path="res://Projectiles/Photon_gun_projectile.gd" id="1_08njn"]
-[ext_resource type="Script" path="res://Resources/Attack/AttackResource.gd" id="2_8acic"]
+[ext_resource type="Script" uid="uid://iqgdis0gh0mk" path="res://Projectiles/Photon_gun_projectile.gd" id="1_08njn"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="2_8acic"]
 [ext_resource type="Texture2D" uid="uid://betk3rgbaluts" path="res://Sprites/Projectiles/energy_ball_blue.png" id="3_3sbgt"]
-[ext_resource type="Script" path="res://Manager/enemy_detector.gd" id="4_ibkb1"]
+[ext_resource type="Script" uid="uid://b31rxhp2hd877" path="res://Manager/enemy_detector.gd" id="4_ibkb1"]
 
 [sub_resource type="Resource" id="Resource_y1juh"]
 script = ExtResource("2_8acic")
@@ -70,12 +70,9 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.075, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"spawn_explosion"
-}, {
 "args": [],
 "method": &"queue_free"
 }]
@@ -95,9 +92,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fp201"]
 _data = {
-"RESET": SubResource("Animation_5lcwe"),
-"appearing": SubResource("Animation_pv78o"),
-"hit": SubResource("Animation_3j0tr")
+&"RESET": SubResource("Animation_5lcwe"),
+&"appearing": SubResource("Animation_pv78o"),
+&"hit": SubResource("Animation_3j0tr")
 }
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x50bl"]
@@ -158,7 +155,7 @@ shape = SubResource("CapsuleShape2D_iwaew")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fp201")
+&"": SubResource("AnimationLibrary_fp201")
 }
 
 [node name="lifetime" type="Timer" parent="."]
@@ -169,11 +166,11 @@ autostart = true
 [node name="particle" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_x50bl")
 amount = 256
-process_material = SubResource("ParticleProcessMaterial_hcrm6")
 texture = ExtResource("3_3sbgt")
 lifetime = 0.3
 fixed_fps = 0
 draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_hcrm6")
 
 [node name="EnemyDetectorArea" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
 collision_layer = 0
