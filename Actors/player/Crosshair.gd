@@ -58,7 +58,7 @@ func shoot():
 	var projectile: PlayerProjectile = ItemConfig.get_item_scene(holding_item.key).instantiate()
 	projectile.dir = (sprite.global_position - player.global_position).normalized()
 	projectile.global_position = player.global_position
-	projectile.parent = player
+	projectile.player = player
 	get_parent().get_parent().add_child(projectile)
 	shoot_sound.play_sound()
 	await (get_tree().create_timer(0.2).timeout)

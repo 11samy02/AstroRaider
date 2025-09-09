@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://ljbj6v65dae3"]
+
+[ext_resource type="Texture2D" uid="uid://dr6y4gfg31vyj" path="res://Sprites/Perks/Stun_Grenade.png" id="1_4uteb"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="1_634y5"]
+
+[resource]
+script = ExtResource("1_634y5")
+image = ExtResource("1_4uteb")
+Key = 11
+perk_name = "Stun Grenade"
+level = 1
+cost = Array[int]([200, 350, 500, 650, 800, 950])
+value = Array[int]([1, 2, 3, 4, 5, 6])
+description = "Enemies hit by your projectile are stunned for {{value}} by default, but the duration can be shortened if they resist stuns."
+type = 2
+active_type = 3
+metadata/_custom_type_script = "uid://bfd0euualynf6"

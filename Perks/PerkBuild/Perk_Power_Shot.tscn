@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdmepqdd1dym4"]
+
+[ext_resource type="Script" uid="uid://ckb13dbxsnkb" path="res://Perks/PerkBuild/perk_power_shot.gd" id="1_tyk38"]
+
+[node name="PerkPowerShot" type="Node"]
+script = ExtResource("1_tyk38")
+Key = 20
+metadata/_custom_type_script = "uid://b3gr0cwnvudut"

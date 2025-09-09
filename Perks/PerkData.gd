@@ -16,12 +16,13 @@ enum Keys {
 	Stun_Grenade, # -> gegner werden beim treffer kurzeitig betäubt
 	Energy_Overload,
 	Emergency_Heal,
-	Anti_Mine_Detection, # -> signalisiert das sich in der nähe eine Bombe befindet
+	Anti_Mine_Detection,
 	Resource_Sharing,
 	Group_Momentum, # -> Erhöht die Bewegungsgeschwindigkeit des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Rallying_Cry, # -> Erhöht den Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Protective_Aura, # -> mindert den erlitenen Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Critical_Edge,
+	Power_Shot,
 }
 
 
@@ -39,8 +40,8 @@ const Keys_scene = {
 	Keys.Aim_Bot: "res://Perks/PerkBuild/Perk_Aim_Bot.tscn",
 	Keys.Extra_Health: "res://Perks/PerkBuild/Perk_Extra_Health.tscn",
 	Keys.Jet_Boost: "",
-	Keys.Piercing_Shot: "",
-	Keys.Stun_Grenade: "",
+	Keys.Piercing_Shot: "res://Perks/PerkBuild/Perk_Piercing_Shot.tscn",
+	Keys.Stun_Grenade: "res://Perks/PerkBuild/Perk_Stun_Grenade.tscn",
 	Keys.Energy_Overload: "res://Perks/PerkBuild/Perk_Energy_Overload.tscn",
 	Keys.Emergency_Heal: "res://Perks/PerkBuild/Perk_Emergency_Heal.tscn",
 	Keys.Anti_Mine_Detection: "res://Perks/PerkBuild/Perk_Anti_Mine_Detection.tscn",
@@ -49,6 +50,7 @@ const Keys_scene = {
 	Keys.Rallying_Cry: "",
 	Keys.Protective_Aura: "",
 	Keys.Critical_Edge: "res://Perks/PerkBuild/Perk_Critical_Edge.tscn",
+	Keys.Power_Shot: "res://Perks/PerkBuild/Perk_Power_Shot.tscn",
 }
 
 const Keys_res = {
@@ -62,8 +64,8 @@ const Keys_res = {
 	Keys.Aim_Bot: "res://Perks/Resources/Perk_Aim_Bot.tres",
 	Keys.Extra_Health: "res://Perks/Resources/Perk_Extra_Health.tres",
 	Keys.Jet_Boost: "",
-	Keys.Piercing_Shot: "",
-	Keys.Stun_Grenade: "",
+	Keys.Piercing_Shot: "res://Perks/Resources/Perk_Piercing_Shot.tres",
+	Keys.Stun_Grenade: "res://Perks/Resources/Perk_Stun_Grenade.tres",
 	Keys.Energy_Overload: "res://Perks/Resources/Perk_Energy_Overload.tres",
 	Keys.Emergency_Heal: "res://Perks/Resources/Perk_Emergency_Heal.tres",
 	Keys.Anti_Mine_Detection: "res://Perks/Resources/Perk_Anti_Mine_Detection.tres",
@@ -72,6 +74,7 @@ const Keys_res = {
 	Keys.Rallying_Cry: "",
 	Keys.Protective_Aura: "",
 	Keys.Critical_Edge: "res://Perks/Resources/Perk_Critical_Edge.tres",
+	Keys.Power_Shot: "res://Perks/Resources/Perk_Power_Shot.tres",
 }
 
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8htdvtno1tme"]
+
+[ext_resource type="Script" uid="uid://dl6weiwt5jxu7" path="res://Perks/PerkBuild/perk_piercing_shot.gd" id="1_gkgy8"]
+
+[node name="PerkPiercingShot" type="Node"]
+script = ExtResource("1_gkgy8")
+Key = 10
+metadata/_custom_type_script = "uid://b3gr0cwnvudut"

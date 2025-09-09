@@ -42,6 +42,7 @@ func check_for_tile_points(pla: PlayerResource, damage: int = 1):
 			if pla.has_perk_anti_mine_det:
 				GSignals.PERK_show_items_behind_wall.emit(all_collision_pos)
 
+
 func reset_detector(ply : Player, value: int) -> void:
 	if !can_destroy:
 		if ply == player:

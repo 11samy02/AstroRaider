@@ -4,7 +4,9 @@ class_name Enviroment
 static var max_tiles_to_generate = 0
 static var tiles_generated = 0
 
-var tiles_dict: Dictionary = {} # { Vector2i: DestroyableTileResource }
+var wall_notification : Array[Vector2i]
+
+var tiles_dict: Dictionary = {}
 
 const GROUND_PARTICLE = preload("res://Particles/destroy_ground_particle.tscn")
 const ITEM_IN_WALL_NOTIFICATION = preload("res://Visuel Feedback Tutorial/item_in_wall_notification.tscn")
@@ -37,6 +39,7 @@ signal map_was_created
 func _enter_tree() -> void:
 	GSignals.ENV_destroy_tile.connect(destroy_tile_at)
 	GSignals.PERK_show_items_behind_wall.connect(show_items_behind_wall)
+	GSignals.ENV_remove_tile_from_wall.connect(remove_tile_from_wall)
 
 func _ready() -> void:
 	if Map_Size.x > 0 and Map_Size.y > 0:
@@ -396,12 +399,17 @@ func show_items_behind_wall(pos: Array[Vector2]) -> void:
 	for i in pos:
 		var tile_pos = Vector2i(local_to_map(i))
 		if tiles_dict.has(tile_pos):
-			var tile: DestroyableTileResource = tiles_dict[tile_pos]
-			if tile.key != DropData.Keys.Crystal:
-				var notification = ITEM_IN_WALL_NOTIFICATION.instantiate()
-				notification.global_position = i
-				notification._set_icon(tile.key)
-				get_parent().add_child(notification)
+			if !wall_notification.has(tile_pos):
+				var tile: DestroyableTileResource = tiles_dict[tile_pos]
+				if tile.key != DropData.Keys.Crystal:
+					var notification = ITEM_IN_WALL_NOTIFICATION.instantiate()
+					notification.global_position = i
+					notification._set_icon(tile.key)
+					wall_notification.append(tile_pos)
+					notification.pos = tile_pos
+					get_parent().add_child(notification)
+			else:
+				GSignals.ENV_reset_timer_for_wall_notification.emit(tile_pos)
 
 func get_generation_percent() -> int:
 	if finished_map:
@@ -410,3 +418,7 @@ func get_generation_percent() -> int:
 		return 0
 	var ratio := float(tiles_generated) / float(max_tiles_to_generate)
 	return clamp(int(ratio * 99.0), 0, 99)
+
+func remove_tile_from_wall(pos_tile: Vector2i) -> void:
+	if wall_notification.has(pos_tile):
+		wall_notification.erase(pos_tile)

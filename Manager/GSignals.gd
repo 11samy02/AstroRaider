@@ -3,6 +3,8 @@ extends Node
 #Enviroment
 signal ENV_destroy_tile
 signal ENV_check_detection_tile
+signal ENV_remove_tile_from_wall
+signal ENV_reset_timer_for_wall_notification
 
 #Hitbox
 signal HIT_take_Damage

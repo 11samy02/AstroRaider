@@ -1,10 +1,12 @@
-[gd_scene load_steps=51 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=64 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" uid="uid://51515mx05mrs" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
 [ext_resource type="Texture2D" uid="uid://ljcb6idc5om" path="res://Sprites/UI/in Game/player.png" id="2_fdgfk"]
 [ext_resource type="Texture2D" uid="uid://btfu52hwbu668" path="res://Sprites/actors/Player/Player1.png" id="2_xfvlm"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="3_f6m2n"]
 [ext_resource type="Texture2D" uid="uid://bu8pq2ln3ys4r" path="res://Objects/Lights/sphere_light.png" id="3_fk0u8"]
+[ext_resource type="Script" uid="uid://plag5btfsk1b" path="res://Actors/player/Stats.gd" id="4_m4e5o"]
 [ext_resource type="Texture2D" uid="uid://h7tvg3phhnw4" path="res://Sprites/actors/items/thriler.png" id="5_l8fgy"]
 [ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://Manager/hitbox.tscn" id="5_qr1wl"]
 [ext_resource type="Script" uid="uid://b7vdsffck7gup" path="res://Actors/player/Crosshair.gd" id="7_pdl7m"]
@@ -13,7 +15,6 @@
 [ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="10_pasbu"]
 [ext_resource type="AudioStream" uid="uid://dlo0yu1a81ksu" path="res://Sounds/damage.wav" id="11_bdp4b"]
 [ext_resource type="AudioStream" uid="uid://nf0618xwf4nf" path="res://Sounds/BohrerSound.wav" id="12_purh8"]
-[ext_resource type="Script" uid="uid://dr5h0bbygnmr4" path="res://Actors/player/activation_abilities.gd" id="14_0hd48"]
 [ext_resource type="Script" uid="uid://bkcw1yt3fekbj" path="res://Actors/player/movement.gd" id="15_dawng"]
 [ext_resource type="Script" uid="uid://c1a3e8t6ydw5l" path="res://Actors/player/mining.gd" id="16_lr051"]
 [ext_resource type="Script" uid="uid://o7r0y2ebfg87" path="res://Actors/player/build.gd" id="17_a2dyr"]
@@ -21,10 +22,52 @@
 [ext_resource type="AudioStream" uid="uid://b5osrmg72oei1" path="res://Sounds/live_indikator.wav" id="19_02ndh"]
 [ext_resource type="Texture2D" uid="uid://cpaen3t2e175p" path="res://Sprites/UI/Building Ui/gear_symbol.png" id="19_rplw8"]
 [ext_resource type="Texture2D" uid="uid://dcsm7k8td3g0" path="res://Sprites/UI/Building Ui/hammer_symbol.png" id="20_mmiwy"]
+[ext_resource type="Script" uid="uid://cvdesp1b077hv" path="res://Actors/player/perks_manager.gd" id="21_05ltf"]
 [ext_resource type="PackedScene" uid="uid://har1jftqgoco" path="res://Perks/PerkBuild/Perk_speed_it_up.tscn" id="22_8v5l4"]
 [ext_resource type="PackedScene" uid="uid://b5xnojapesv2" path="res://Perks/PerkBuild/Perk_construction_expert.tscn" id="23_02ndh"]
 [ext_resource type="PackedScene" uid="uid://ctvvb73lloi12" path="res://Perks/PerkBuild/Perk_Aim_Bot.tscn" id="24_pa3sa"]
 [ext_resource type="PackedScene" uid="uid://dcx3r6ucqwu7j" path="res://Perks/PerkBuild/Perk_Anti_Mine_Detection.tscn" id="25_38jmy"]
+[ext_resource type="PackedScene" uid="uid://b8p6a3a2srdcx" path="res://Perks/PerkBuild/Perk_CoinMaster.tscn" id="26_3sfd7"]
+[ext_resource type="PackedScene" uid="uid://dfxuwbhwgn0pd" path="res://Perks/PerkBuild/Perk_Barrier_Shield.tscn" id="26_wpgrq"]
+[ext_resource type="PackedScene" uid="uid://brn651v5wm1ly" path="res://Perks/PerkBuild/Perk_Critical_Edge.tscn" id="27_3sfd7"]
+[ext_resource type="PackedScene" uid="uid://c8i2b2poxaa2q" path="res://Perks/PerkBuild/Perk_Each_Round_Heal.tscn" id="28_dis4x"]
+[ext_resource type="PackedScene" uid="uid://b6mtv7mi4iiyk" path="res://Perks/PerkBuild/Perk_Emergency_Heal.tscn" id="29_fs83k"]
+[ext_resource type="PackedScene" uid="uid://cmva5ec4ilagl" path="res://Perks/PerkBuild/Perk_Extra_Health.tscn" id="30_6ll5j"]
+[ext_resource type="PackedScene" uid="uid://cpu5ag6xorgc1" path="res://Perks/PerkBuild/Perk_Resilience.tscn" id="31_ds0h7"]
+[ext_resource type="PackedScene" uid="uid://bdmepqdd1dym4" path="res://Perks/PerkBuild/Perk_Power_Shot.tscn" id="35_m4e5o"]
+[ext_resource type="PackedScene" uid="uid://b8htdvtno1tme" path="res://Perks/PerkBuild/Perk_Piercing_Shot.tscn" id="36_f7306"]
+[ext_resource type="PackedScene" uid="uid://d3qlfpiy00se4" path="res://Perks/PerkBuild/Perk_Stun_Grenade.tscn" id="37_4hqgc"]
+
+[sub_resource type="Resource" id="Resource_f7306"]
+script = ExtResource("4_m4e5o")
+gravity_strength = 200.0
+gravity_break = 2.0
+max_speed = 250.0
+slowness_energy = 100.0
+bohrer_damage = 1.0
+bohrer_knockback = 3.0
+invincibility_frame = 2.0
+rotation_speed = 10.0
+max_hp = 100
+armor = 1.0
+crit_chance = 0.0
+added_gravity_strength = 0.0
+added_gravity_break = 0.0
+added_max_speed = 0.0
+added_slowness_energy = 0.0
+added_bohrer_damage = 0.0
+added_bohrer_knockback = 0.0
+added_invincibility_frame = 0.0
+added_rotation_speed = 0.0
+added_max_hp = 0
+added_armor = 0.0
+added_crit_chance = 0.0
+added_projectile_damage = 0.0
+Perks = Array[ExtResource("3_f6m2n")]([])
+added_Projectile_lives = 0.0
+has_stun_active = false
+stun_strength = 0.0
+metadata/_custom_type_script = "uid://plag5btfsk1b"
 
 [sub_resource type="Animation" id="Animation_b8c3x"]
 length = 0.001
@@ -362,6 +405,7 @@ collision_mask = 17
 script = ExtResource("1_ook18")
 radar_icon = ExtResource("2_fdgfk")
 landing_anim_name = Array[String](["idle", "use_item"])
+stats = SubResource("Resource_f7306")
 
 [node name="Script" type="Node" parent="."]
 
@@ -375,10 +419,6 @@ player = NodePath("../..")
 
 [node name="Build" type="Node" parent="Script" node_paths=PackedStringArray("player")]
 script = ExtResource("17_a2dyr")
-player = NodePath("../..")
-
-[node name="Activation_abilities" type="Node" parent="Script" node_paths=PackedStringArray("player")]
-script = ExtResource("14_0hd48")
 player = NodePath("../..")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -515,23 +555,76 @@ libraries = {
 }
 autoplay = "build_symbol"
 
-[node name="Perks" type="Node" parent="."]
+[node name="Perks" type="Node" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("21_05ltf")
+player = NodePath("..")
 
 [node name="Speed_It_Up" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("22_8v5l4")]
 player = NodePath("../..")
+Level = 6
 has_unlocked = true
 
 [node name="Construction_expert" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("23_02ndh")]
 player = NodePath("../..")
+Level = 6
 has_unlocked = true
 
 [node name="AimBot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
 player = NodePath("../..")
+Level = 6
 has_unlocked = true
 
 [node name="PerkAntiMineDetection" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("25_38jmy")]
 player = NodePath("../..")
+Level = 6
 has_unlocked = true
+
+[node name="BarrierShield" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("26_wpgrq")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="CoinMaster" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("26_3sfd7")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="PerkCriticalEdge" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("27_3sfd7")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="Each_Round_Heal" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("28_dis4x")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="Emergency_Heal" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("29_fs83k")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="Extra_Health" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("30_6ll5j")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="Resilience" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("31_ds0h7")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="PerkPowerShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("35_m4e5o")]
+player = NodePath("../..")
+has_unlocked = true
+
+[node name="PerkPiercingShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("36_f7306")]
+player = NodePath("../..")
+Level = 6
+has_unlocked = true
+
+[node name="PerkStunGrenade" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("37_4hqgc")]
+player = NodePath("../..")
 
 [connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]

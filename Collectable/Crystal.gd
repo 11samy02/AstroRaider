@@ -52,14 +52,14 @@ func collect(body: Node2D) -> void:
 		GSignals.PLA_collects_crystal.emit()
 		player_who_collected = body
 		
-		var max_collect_count := 50
+		var max_collect_count := 25
 		
 		if GlobalGame.Players.size() <= 2:
-			max_collect_count = 50
-		elif GlobalGame.Players.size() <= 4:
-			max_collect_count = 30
-		else:
 			max_collect_count = 20
+		elif GlobalGame.Players.size() <= 4:
+			max_collect_count = 15
+		else:
+			max_collect_count = 10
 		
 		if player_who_collected.collected_crystals.size() < max_collect_count:
 			player_who_collected.collected_crystals.push_back(self)

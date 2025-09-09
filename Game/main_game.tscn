@@ -195,7 +195,6 @@ enviroment = NodePath("default")
 [node name="Audio2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("15_oaiby")
-autoplay = true
 max_distance = 1e+11
 parameters/looping = true
 script = ExtResource("16_ky8iu")

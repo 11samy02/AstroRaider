@@ -23,9 +23,13 @@ class_name Stats
 @export var added_bohrer_knockback := 0.0
 @export var added_invincibility_frame : float = 0.0
 @export var added_rotation_speed := 0.0
-@export var added_max_hp := 0.0
+@export var added_max_hp := 0
 @export var added_armor := 0.0
 @export var added_crit_chance := 0.0
+@export var added_projectile_damage := 0.0
 
 @export_group("Perks")
 @export var Perks : Array[Perk] = []
+@export var added_Projectile_lives := 0.0
+@export var has_stun_active := false
+@export var stun_strength := 0.0

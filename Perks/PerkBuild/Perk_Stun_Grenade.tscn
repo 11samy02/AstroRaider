@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3qlfpiy00se4"]
+
+[ext_resource type="Script" uid="uid://c6nmuvdcprg8s" path="res://Perks/PerkBuild/perk_stun_grenade.gd" id="1_hccwb"]
+
+[node name="PerkStunGrenade" type="Node"]
+script = ExtResource("1_hccwb")
+Key = 11
+metadata/_custom_type_script = "uid://b3gr0cwnvudut"

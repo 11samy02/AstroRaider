@@ -137,7 +137,7 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jacb"]
-radius = 128.0
+radius = 256.0
 
 [node name="PhotoGunProjectile" type="Area2D"]
 process_mode = 1

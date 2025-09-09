@@ -8,12 +8,12 @@
 resource_local_to_scene = true
 shader = ExtResource("1_me2lh")
 shader_parameter/hologram_tint = Vector4(0, 0.75, 1, 1)
-shader_parameter/line_frequency = 10.0
+shader_parameter/line_frequency = 5.0
 shader_parameter/line_intensity = 0.5
 shader_parameter/distortion_strength = 0.0
 shader_parameter/glow_intensity = 0.6
-shader_parameter/time_speed = 5.0
-shader_parameter/alpha = 0.05
+shader_parameter/time_speed = 3.0
+shader_parameter/alpha = 0.5
 
 [node name="item_in_wall_notification" type="Sprite2D"]
 z_index = 100
@@ -23,3 +23,9 @@ texture = ExtResource("1_j2rhs")
 hframes = 2
 vframes = 2
 script = ExtResource("2_dpjac")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

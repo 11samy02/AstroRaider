@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://rqbb438dmoqi"]
+
+[ext_resource type="Texture2D" uid="uid://dt6s4nvj8a5a1" path="res://Sprites/Perks/Piercing_Shot.png" id="1_jhrqu"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="1_jv8nx"]
+
+[resource]
+script = ExtResource("1_jv8nx")
+image = ExtResource("1_jhrqu")
+Key = 10
+perk_name = "Piercing Shot"
+level = 1
+cost = Array[int]([50, 150, 250, 350, 450, 550])
+value = Array[int]([1, 2, 3, 4, 5, 6])
+description = "Projectiles can pierce through up to {{value}} enemies before breaking."
+type = 2
+active_type = 3
+metadata/_custom_type_script = "uid://bfd0euualynf6"

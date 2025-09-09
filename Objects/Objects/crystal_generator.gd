@@ -28,7 +28,7 @@ func _on_area_entered(area: Area2D) -> void:
 		counter_part.distance = randi_range(30,50)
 		get_parent().add_child(counter_part)
 		area.destroy()
-		collect_crystal.play()
+		collect_crystal.play_sound()
 	
 	if area is OreTemplate:
 		for player_res : PlayerResource in GlobalGame.Players:
@@ -40,7 +40,7 @@ func _on_area_entered(area: Area2D) -> void:
 					player_res.Ores.get_or_add(ore_name, 0)
 					player_res.Ores[ore_name] += 1
 		area.destroy()
-		collect_crystal.play()
+		collect_crystal.play_sound()
 
 
 func _on_check_player_nearby_body_entered(body: Node2D) -> void:

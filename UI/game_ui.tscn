@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cy8yxobay3dcf"]
+[gd_scene load_steps=17 format=3 uid="uid://cy8yxobay3dcf"]
 
 [ext_resource type="Script" uid="uid://duka3raic6aqi" path="res://UI/game_ui.gd" id="1_wtiqs"]
 [ext_resource type="Texture2D" uid="uid://cs2r8sf0sho7k" path="res://Sprites/UI/bars/UI/Cyrcle_frame.png" id="2_3eumv"]
@@ -54,6 +54,13 @@ _data = {
 &"RESET": SubResource("Animation_jf4q8"),
 &"wave effect": SubResource("Animation_butib")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_fy64h"]
+font = SubResource("SystemFont_4dhts")
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+outline_size = 16
+outline_color = Color(0.690196, 1, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k2fda"]
 atlas = ExtResource("4_3aifi")
@@ -147,7 +154,13 @@ theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
 
-[node name="Label" type="Label" parent="Control/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -158,13 +171,14 @@ label_settings = SubResource("LabelSettings_bhj6w")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="label_anim" type="AnimationPlayer" parent="Control/MarginContainer/Label"]
+[node name="label_anim" type="AnimationPlayer" parent="Control/MarginContainer/VBoxContainer/Label"]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_ldl3m")
+&"": SubResource("AnimationLibrary_ldl3m")
 }
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/MarginContainer/Label"]
+[node name="wave_progress" type="TextureProgressBar" parent="Control/MarginContainer/VBoxContainer/Label"]
+unique_name_in_owner = true
 modulate = Color(0.690196, 1, 0, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -183,6 +197,17 @@ value = 26.42
 fill_mode = 4
 texture_under = ExtResource("2_3eumv")
 texture_progress = ExtResource("3_4kgck")
+
+[node name="fps_label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "1"
+label_settings = SubResource("LabelSettings_fy64h")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Rader" type="TextureRect" parent="Control/MarginContainer"]
 custom_minimum_size = Vector2(200, 200)
@@ -205,6 +230,6 @@ texture = ExtResource("5_dkflf")
 
 [node name="anim" type="AnimationPlayer" parent="Control/MarginContainer/Rader"]
 libraries = {
-"": SubResource("AnimationLibrary_dchpr")
+&"": SubResource("AnimationLibrary_dchpr")
 }
 autoplay = "rotate"

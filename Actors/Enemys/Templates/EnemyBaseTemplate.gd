@@ -5,6 +5,8 @@ const DIE_PARTICLE = preload("res://Particles/Enemys/small/Enemy_die_particle.ts
 const DAMAGE_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.tscn")
 
 @onready var sprite: Sprite2D = $sprite
+@onready var stun_sprite: Sprite2D = %stun_sprite
+@onready var stun_timer: Timer = %Stun_Timer
 
 
 @export var stats: EnemyStats
@@ -28,17 +30,19 @@ var state_mashine := AiEnemyData.state_mashine
 
 var last_state := state
 
-static var max_entitys_on_screen = 60
+static var max_entitys_on_screen = 50
 static var entity_list: Array[EnemyBaseTemplate]
 
 var killed_by : CharacterBody2D = null
 var shader_value: float = 0.0
 
+@export_category("Perks Disadventage")
+@export var stun_resistence := 1.0
+var is_stunned := false
+
 func _enter_tree() -> void:
 	GlobalGame.Enemies.append(self)
 	GSignals.HIT_take_Damage.connect(applay_damage)
-	
-	
 
 func _ready() -> void:
 	stats.update_stats(stats_upgrades, level)
@@ -46,9 +50,11 @@ func _ready() -> void:
 	stats.current_health = stats.max_health
 	load_ai_to_node()
 	sprite.texture = sprite_variation.pick_random()
+	stun_timer.timeout.connect(remove_stun)
 
 func _process(delta: float) -> void:
 	look_direction()
+	check_if_stunned()
 
 
 func load_ai_to_node():
@@ -161,3 +167,20 @@ func get_hit_anim() -> void:
 	
 	tween.tween_property(self, "shader_value", 0, 0.2)
 	tween.parallel().tween_property(sprite, "scale", Vector2(1,1), 0.2)
+
+func check_if_stunned() -> void:
+	if is_stunned:
+		velocity = Vector2.ZERO
+		stun_sprite.show()
+	else:
+		stun_sprite.hide()
+
+func stun_activated(atk_res: AttackResource) -> void:
+	if atk_res.has_stun:
+		if !is_stunned:
+			is_stunned = true
+			stun_timer.set_wait_time(atk_res.stun_strength / stun_resistence)
+			stun_timer.start()
+
+func remove_stun() -> void:
+	is_stunned = false

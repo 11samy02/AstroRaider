@@ -217,6 +217,7 @@ shape = SubResource("CircleShape2D_g8ix4")
 visible = false
 
 [node name="CollectCrystal" type="AudioStreamPlayer2D" parent="Sounds"]
+visible = false
 stream = ExtResource("3_fkod7")
 script = ExtResource("4_hf2de")
 min_random_pitch = 0.75

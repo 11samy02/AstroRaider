@@ -38,7 +38,7 @@ var is_bohrer_active := false
 
 var deadzone := 0.25
 
-var stats: Stats = Stats.new()
+@export var stats: Stats
 
 var collected_crystals : Array[ItemCrystal] = []
 
@@ -67,7 +67,7 @@ func get_hit_anim() -> void:
 	tween.tween_property(self, "shader_value", 0, 0.2)
 	tween.parallel().tween_property(sprite, "scale", Vector2(1,1), 0.2)
 	
-	sprite_anim.play("damaged", -1, stats.invincibility_frame)
+	sprite_anim.play("damaged", -1, stats.invincibility_frame - stats.added_invincibility_frame)
 
 
 func shader_effects() -> void:

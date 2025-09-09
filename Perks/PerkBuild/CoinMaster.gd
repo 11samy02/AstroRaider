@@ -6,6 +6,7 @@ const ITEM_CRYSTAL = preload("res://Collectable/crystal.tscn")
 
 func _ready() -> void:
 	GSignals.PERK_event_collect_crystal.connect(spawn_more_coins)
+	super()
 
 
 func spawn_more_coins(pos: Vector2) -> void:
@@ -19,7 +20,4 @@ func spawn_more_coins(pos: Vector2) -> void:
 	new_crystal.value += rand
 	new_crystal.is_first_one = false
 	new_crystal.mass += rand / 10.0
-	get_parent().add_child(new_crystal)
-
-func _exit_tree() -> void:
-	pass
+	get_parent().call_deferred("add_child", new_crystal)
