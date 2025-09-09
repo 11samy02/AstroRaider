@@ -5,6 +5,8 @@ class_name PlayerProjectile
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var particle: GPUParticles2D = $particle
 
+
+@export var enemy_detector_area : EnemyDetectorArea
 @export var atk_resource: AttackResource = AttackResource.new()
 @export var speed := 500
 @export var dir := Vector2.ZERO
@@ -30,6 +32,8 @@ func _on_area_entered(area: Area2D) -> void:
 				new_atk_resource.stun_strength = player.stats.stun_strength
 				
 			area.get_hit(new_atk_resource, player)
+			enemy_detector_area.mark_enemy_as_hit(area.entity)
+			
 			hp -= 1
 			if hp <= 0:
 				set_physics_process(false)

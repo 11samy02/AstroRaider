@@ -10,6 +10,8 @@ script = ExtResource("2_8acic")
 damage = 1
 knockback = 2.0
 crit_chance = 0.0
+has_stun = false
+stun_strength = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwaew"]
 radius = 6.0
@@ -139,12 +141,13 @@ anim_speed_max = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jacb"]
 radius = 256.0
 
-[node name="PhotoGunProjectile" type="Area2D"]
+[node name="PhotoGunProjectile" type="Area2D" node_paths=PackedStringArray("enemy_detector_area")]
 process_mode = 1
 modulate = Color(1, 1, 1, 0)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_08njn")
+enemy_detector_area = NodePath("EnemyDetectorArea")
 atk_resource = SubResource("Resource_y1juh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

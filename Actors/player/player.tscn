@@ -616,6 +616,7 @@ has_unlocked = true
 
 [node name="PerkPowerShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("35_m4e5o")]
 player = NodePath("../..")
+Level = 6
 has_unlocked = true
 
 [node name="PerkPiercingShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("36_f7306")]
@@ -625,6 +626,8 @@ has_unlocked = true
 
 [node name="PerkStunGrenade" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("37_4hqgc")]
 player = NodePath("../..")
+Level = 6
+has_unlocked = true
 
 [connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]

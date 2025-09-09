@@ -69,13 +69,12 @@ func aim_to_target() -> void:
 
 ## Marks an enemy as hit, removes it from tracking, and locks flight direction (no further tracking)
 func mark_enemy_as_hit(enemy: EnemyBaseTemplate) -> void:
-	if enemy is EnemyBaseTemplate:
-		if !Enemy_hit_list.has(enemy):
-			Enemy_hit_list.append(enemy)
-		if Enemy_list.has(enemy):
-			Enemy_list.erase(enemy)
-	if !aim_locked:
+	if enemy == null:
+		return
+	if !Enemy_hit_list.has(enemy):
+		Enemy_hit_list.append(enemy)
+	if Enemy_list.has(enemy):
+		Enemy_list.erase(enemy)
+	if Enemy_list.is_empty():
 		locked_dir = parent.dir.normalized()
 		aim_locked = true
-		aim_bot_on = false
-		Enemy_list.clear()
