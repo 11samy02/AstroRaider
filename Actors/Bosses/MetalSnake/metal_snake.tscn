@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://dpfkx1h80sg14"]
+
+[ext_resource type="Texture2D" uid="uid://c6jkhyq2l8t1s" path="res://Sprites/actors/Bosses/Snake_boss/snake_head.png" id="1_2oo48"]
+[ext_resource type="Texture2D" uid="uid://dun0qv4walaek" path="res://Sprites/actors/Bosses/Snake_boss/body_part.png" id="2_oefqe"]
+[ext_resource type="Texture2D" uid="uid://bfk7dh1xjql6u" path="res://Sprites/actors/Bosses/Snake_boss/end_part.png" id="3_usiol"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c74e8"]
+atlas = ExtResource("1_2oo48")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bigr8"]
+atlas = ExtResource("1_2oo48")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3co8"]
+atlas = ExtResource("1_2oo48")
+region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_45i1a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c74e8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bigr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3co8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bigr8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="MetalSnake" type="CharacterBody2D"]
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Head" type="AnimatedSprite2D" parent="Sprites"]
+sprite_frames = SubResource("SpriteFrames_45i1a")
+frame_progress = 0.287559
+
+[node name="BodyPart" type="Sprite2D" parent="Sprites"]
+position = Vector2(-57, 0)
+texture = ExtResource("2_oefqe")
+
+[node name="BodyPart2" type="Sprite2D" parent="Sprites"]
+position = Vector2(-90, 0)
+texture = ExtResource("2_oefqe")
+
+[node name="BodyPart3" type="Sprite2D" parent="Sprites"]
+position = Vector2(-123, 0)
+texture = ExtResource("2_oefqe")
+
+[node name="BodyPart4" type="Sprite2D" parent="Sprites"]
+position = Vector2(-156, 0)
+texture = ExtResource("2_oefqe")
+
+[node name="BodyPart5" type="Sprite2D" parent="Sprites"]
+position = Vector2(-189, 0)
+texture = ExtResource("2_oefqe")
+
+[node name="BodyPart6" type="Sprite2D" parent="Sprites"]
+position = Vector2(-222, 0)
+texture = ExtResource("2_oefqe")
+
+[node name="BodyPart7" type="Sprite2D" parent="Sprites"]
+position = Vector2(-268, 0)
+texture = ExtResource("3_usiol")
