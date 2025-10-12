@@ -1,0 +1,166 @@
+[gd_scene load_steps=11 format=3 uid="uid://dqvic8vigvy6m"]
+
+[ext_resource type="Texture2D" uid="uid://0f2fj0rwhl2w" path="res://Sprites/UI/PerkContainer.png" id="1_35bf7"]
+[ext_resource type="Script" uid="uid://bo6dd46mlpe2x" path="res://UI/perk_selector.gd" id="1_qleum"]
+[ext_resource type="Texture2D" uid="uid://dqus8c46qwn38" path="res://Sprites/Perks/new_frames/frame_normal1.png" id="2_31xl4"]
+[ext_resource type="Texture2D" uid="uid://c0eol7ask10ni" path="res://Sprites/Perks/new_frames/frame_normal2.png" id="3_qleum"]
+[ext_resource type="Texture2D" uid="uid://bi0eqctd27ykj" path="res://Sprites/Perks/MaxHeal.png" id="4_31xl4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_himrj"]
+texture = ExtResource("1_35bf7")
+
+[sub_resource type="LabelSettings" id="LabelSettings_vg7di"]
+font_size = 40
+font_color = Color(0, 0.898039, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mh7c4"]
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x724k"]
+bg_color = Color(0.0121799, 0.0414216, 0.128231, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_imtuh"]
+bg_color = Color(0.438801, 0.492975, 0.686489, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="PerkSelector" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qleum")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 100
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_himrj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 539)
+layout_mode = 2
+theme_override_constants/margin_left = 175
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 175
+theme_override_constants/margin_bottom = 100
+
+[node name="PerkList" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="Perk" type="TextureButton" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/PerkList"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("2_31xl4")
+texture_hover = ExtResource("3_qleum")
+stretch_mode = 5
+
+[node name="perk_tex1" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/PerkList/Perk"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_31xl4")
+stretch_mode = 5
+
+[node name="Perk2" type="TextureButton" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/PerkList"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("2_31xl4")
+texture_hover = ExtResource("3_qleum")
+stretch_mode = 5
+
+[node name="perk_tex2" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/PerkList/Perk2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_31xl4")
+stretch_mode = 5
+
+[node name="Perk3" type="TextureButton" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/PerkList"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("2_31xl4")
+texture_hover = ExtResource("3_qleum")
+stretch_mode = 5
+
+[node name="perk_tex3" type="TextureRect" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer/PerkList/Perk3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_31xl4")
+stretch_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 275
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 275
+theme_override_constants/margin_bottom = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="titel" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Titel"
+label_settings = SubResource("LabelSettings_vg7di")
+horizontal_alignment = 1
+
+[node name="description" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enemies hit by your projectile are stunned for {{value}} by default, but the duration can be shortened if they resist stuns."
+label_settings = SubResource("LabelSettings_mh7c4")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/PanelContainer/VBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_x724k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_imtuh")
+value = 50.0

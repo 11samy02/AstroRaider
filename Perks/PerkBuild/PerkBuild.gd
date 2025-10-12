@@ -10,6 +10,7 @@ var stats: Stats
 var has_pressed := false
 var perk_res: Perk
 
+
 func _ready() -> void:
 	if !is_instance_valid(player):
 		printerr("Player Must be selected: ", self.name)

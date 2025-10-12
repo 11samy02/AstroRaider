@@ -3,6 +3,7 @@ extends Node
 @export var enviroment : Enviroment
 
 @onready var entity_spawner: EntitySpawner = $EntitySpawner
+@onready var tutorial: CanvasLayer = $Tutorial
 
 const PLAYER = preload("res://Actors/player/player.tscn")
 
@@ -11,6 +12,9 @@ func _enter_tree() -> void:
 	enviroment.map_was_created.connect(start_Game)
 	GlobalGame.time_played = 0
 
+func _input(event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_B) and is_instance_valid(tutorial):
+		tutorial.queue_free()
 
 func start_Game() -> void:
 	var player_list = PlayerList.new()

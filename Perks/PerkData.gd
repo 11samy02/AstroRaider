@@ -12,12 +12,12 @@ enum Keys {
 	Aim_Bot,
 	Extra_Health,
 	Jet_Boost, # -> gibt die möglichkeit einen Art Dash in einer richtung zu machen
-	Piercing_Shot, # -> ermöglicht schüsse die gegner zu durchdringen
-	Stun_Grenade, # -> gegner werden beim treffer kurzeitig betäubt
-	Energy_Overload,
+	Piercing_Shot,
+	Stun_Grenade,
+	Energy_Overload, # -> muss mir was überlegen
 	Emergency_Heal,
 	Anti_Mine_Detection,
-	Resource_Sharing,
+	Resource_Sharing, # -> ermöglichht es resourcen zu teilen
 	Group_Momentum, # -> Erhöht die Bewegungsgeschwindigkeit des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Rallying_Cry, # -> Erhöht den Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
 	Protective_Aura, # -> mindert den erlitenen Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden

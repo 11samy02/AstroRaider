@@ -1,6 +1,10 @@
 extends Node
 
+signal show_perk_selection_ui(perks: Array[PerkBuild])
+
 @export var player: Player
+@onready var perk_selector: Control = %PerkSelector
+
 
 var perks_list: Array[PerkBuild] = []
 var last_selected_perks: Array[PerkBuild] = []
@@ -23,19 +27,6 @@ func _process(_delta: float) -> void:
 		_resolve_player_res()
 	if _can_start_selection():
 		_start_selection()
-
-## Handle perk selection via key input
-func _unhandled_input(event: InputEvent) -> void:
-	if not is_selecting:
-		return
-	if event is InputEventKey and event.pressed and not event.echo:
-		match event.keycode:
-			KEY_1:
-				await _select_by_index(0)
-			KEY_2:
-				await _select_by_index(1)
-			KEY_3:
-				await _select_by_index(2)
 
 ## Collect perks from children nodes
 func _init_perks_from_children() -> void:
@@ -89,6 +80,7 @@ func _build_offer() -> void:
 	print("--- Neue Auswahl ---")
 	for i in perks_to_choose_from.size():
 		print(str(i + 1) + ": " + str(perks_to_choose_from[i].name))
+	show_perk_selection_ui.emit(perks_to_choose_from)
 
 ## Get available perks (not maxed)
 func _get_available_perks() -> Array:

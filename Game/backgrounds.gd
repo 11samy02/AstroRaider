@@ -11,6 +11,7 @@ func _ready() -> void:
 	await (get_tree().create_timer(0.1).timeout)
 	randomize()
 	var bg_res : BackgroundRes
+	background_id = randi_range(0,backgrounds.size()-1)
 	if is_instance_valid(backgrounds[background_id]):
 		bg_res = backgrounds[background_id]
 	else:

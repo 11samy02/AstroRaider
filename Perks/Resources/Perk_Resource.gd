@@ -44,8 +44,8 @@ enum Type_keys {
 @export var type : Type_keys
 @export var active_type : Active_type_keys
 
-func get_description() -> String:
-	return(description.replace("{{value}}", str(value[level-1])))
+func get_description(custom_level: int = 1) -> String:
+	return(description.replace("{{value}}", str(value[custom_level-1])))
 
 func get_cost() -> int:
 	return(cost[level-1])
