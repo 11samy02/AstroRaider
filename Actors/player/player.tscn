@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene load_steps=66 format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" uid="uid://51515mx05mrs" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -38,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://b8htdvtno1tme" path="res://Perks/PerkBuild/Perk_Piercing_Shot.tscn" id="36_f7306"]
 [ext_resource type="PackedScene" uid="uid://d3qlfpiy00se4" path="res://Perks/PerkBuild/Perk_Stun_Grenade.tscn" id="37_4hqgc"]
 [ext_resource type="PackedScene" uid="uid://dqvic8vigvy6m" path="res://UI/perk_selector.tscn" id="38_wsf62"]
+[ext_resource type="PackedScene" uid="uid://bmk2oxwuquwjp" path="res://UI/Player Personal Ui/building_ui.tscn" id="39_8tjx6"]
 
 [sub_resource type="Resource" id="Resource_f7306"]
 script = ExtResource("4_m4e5o")
@@ -510,8 +511,8 @@ player = NodePath("..")
 
 [node name="Building_Symbol" type="Node2D" parent="Symbol"]
 use_parent_material = true
-position = Vector2(0, -13)
-scale = Vector2(0.4, 0.4)
+position = Vector2(0, -15)
+scale = Vector2(0.6, 0.6)
 
 [node name="GearSymbol" type="Sprite2D" parent="Symbol/Building_Symbol"]
 use_parent_material = true
@@ -584,7 +585,22 @@ layer = 100
 unique_name_in_owner = true
 visible = false
 
+[node name="Building UI" parent="Ui" instance=ExtResource("39_8tjx6")]
+unique_name_in_owner = true
+visible = false
+
+[node name="OreCounterLabel" parent="Ui/Building UI/MarginContainer/VBoxContainer" index="0" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../..")
+
+[node name="OreCounterLabel2" parent="Ui/Building UI/MarginContainer/VBoxContainer" index="1" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../..")
+
+[node name="OreCounterLabel3" parent="Ui/Building UI/MarginContainer/VBoxContainer" index="2" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../..")
+
 [connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]
 [connection signal="show_perk_selection_ui" from="Perks" to="Ui/PerkSelector" method="set_perk_details"]
 [connection signal="select_perk_by_index" from="Ui/PerkSelector" to="Perks" method="_select_by_index"]
+
+[editable path="Ui/Building UI"]
