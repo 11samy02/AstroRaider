@@ -1,6 +1,14 @@
 extends TileMapLayer
 class_name Enviroment
 
+@export_enum("Disabled", "GenerateAndSave", "LoadSaved", "LoadRandom")
+var persistence_mode: int = 0
+
+@export var saved_dir: String = "res://Levels/level1"
+@export var saved_file_prefix: String = "generated_level_"
+@export var use_seed_in_filename: bool = true
+
+
 static var max_tiles_to_generate = 0
 static var tiles_generated = 0
 
@@ -26,8 +34,8 @@ var noise = FastNoiseLite.new()
 @export var room_count: SimplefySettingMath = SimplefySettingMath.new()
 @export var room_size: SimplefySettingMath = SimplefySettingMath.new()
 
-@export var terrain_set_id = 0
-@export var terrain_id = 0
+@export var terrain_set_id: int = 0
+@export var terrain_id: int = 0
 
 var start_area_was_created = false
 var finished_map = false
@@ -35,6 +43,8 @@ var is_generating := false
 
 var rng = RandomNumberGenerator.new()
 var empty_rooms: Array[Dictionary] = []
+
+
 
 signal map_was_created
 
@@ -45,7 +55,15 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
+	if terrain_set_id == null:
+		terrain_set_id = 0
+	if terrain_id == null:
+		terrain_id = 0
+	
 	if Map_Size.x > 0 and Map_Size.y > 0:
+		if await _try_load_saved_level():
+			return
+
 		is_generating = true
 		rng.randomize()
 		seed = rng.randi()
@@ -54,6 +72,7 @@ func _ready() -> void:
 		room_count.max_value = ceil(7 + Map_Size.x / 20.0)
 		await generate_map()
 
+
 func generate_map() -> void:
 	var start_pos := Vector2i(-Map_Size.x / 2, -Map_Size.y / 2)
 	var end_pos   := Vector2i( Map_Size.x / 2,  Map_Size.y / 2)
@@ -61,8 +80,13 @@ func generate_map() -> void:
 	await force_refresh_all()
 	finished_map = true
 	is_generating = false
+	
+	if persistence_mode == 1:
+		_save_current_level_scene()
+
 	map_was_created.emit()
 	ScreenTransition.finished_loading.emit()
+
 
 func force_refresh_all() -> void:
 	var used := get_used_cells()
@@ -420,3 +444,183 @@ func get_generation_percent() -> int:
 func remove_tile_from_wall(pos_tile: Vector2i) -> void:
 	if wall_notification.has(pos_tile):
 		wall_notification.erase(pos_tile)
+
+
+func _try_load_saved_level() -> bool:
+	if persistence_mode != 2 and persistence_mode != 3:
+		return false
+	
+	var path: String
+	if persistence_mode == 3:
+		path = _get_random_saved_scene_path()
+	else:
+		path = _get_latest_saved_scene_path()
+	
+	
+	if path == "":
+		return false
+
+	var packed := load(path)
+	if packed == null:
+		return false
+	var wrapper = packed.instantiate()
+	if wrapper == null:
+		return false
+
+	var loaded_env := _find_first_env(wrapper)
+	if loaded_env == null and (wrapper is Enviroment):
+		loaded_env = wrapper
+	if loaded_env == null:
+		return false
+
+	# --- WICHTIG: in DIESES Enviroment kopieren, nicht ersetzen ---
+	await _apply_loaded_env_to_self(loaded_env)
+
+	# Fertig signalisieren (auf DIESEM Node, damit Listener greifen)
+	finished_map = true
+	is_generating = false
+	map_was_created.emit()
+	ScreenTransition.finished_loading.emit()
+	
+	wrapper.free()
+	return true
+
+
+
+
+func _save_current_level_scene() -> void:
+	DirAccess.make_dir_recursive_absolute(saved_dir)
+	
+	var wrapper := Node2D.new()
+	wrapper.name = "LevelRoot"
+	
+	var cloned := duplicate(true)
+	cloned.name = name
+	wrapper.add_child(cloned)
+	
+	_set_owner_recursive(wrapper, cloned)
+	
+	var ps := PackedScene.new()
+	var pack_err := ps.pack(wrapper)
+	if pack_err != OK:
+		push_error("Packing failed with error: %s" % str(pack_err))
+		return
+	
+	var file_name := ""
+	if use_seed_in_filename:
+		file_name = "%s%s.tscn" % [saved_file_prefix, str(seed)]
+	else:
+		file_name = "%s%s.tscn" % [saved_file_prefix, "static"]
+	
+	var full_path := "%s/%s" % [saved_dir, file_name]
+	var save_err := ResourceSaver.save(ps, full_path)
+	if save_err != OK:
+		push_error("Saving failed with error: %s" % str(save_err))
+
+
+
+func _get_latest_saved_scene_path() -> String:
+	if use_seed_in_filename:
+		var try_path := "%s/%s%s.tscn" % [saved_dir, saved_file_prefix, str(seed)]
+		if FileAccess.file_exists(try_path):
+			return try_path
+	
+	var dir := DirAccess.open(saved_dir)
+	if dir == null:
+		return ""
+	dir.list_dir_begin()
+	var best_path := ""
+	var best_time := -1
+	while true:
+		var f := dir.get_next()
+		if f == "":
+			break
+		if dir.current_is_dir():
+			continue
+		if not f.ends_with(".tscn"):
+			continue
+		if not f.begins_with(saved_file_prefix):
+			continue
+		var candidate := "%s/%s" % [saved_dir, f]
+		var mt := FileAccess.get_modified_time(candidate)
+		if mt > best_time:
+			best_time = mt
+			best_path = candidate
+	dir.list_dir_end()
+	return best_path
+
+
+func _find_first_env(n: Node) -> Enviroment:
+	if n is Enviroment:
+		return n
+	for c in n.get_children():
+		var r := _find_first_env(c)
+		if r != null:
+			return r
+	return null
+
+func _get_random_saved_scene_path() -> String:
+	var dir := DirAccess.open(saved_dir)
+	if dir == null:
+		return ""
+	dir.list_dir_begin()
+	var candidates: Array[String] = []
+	while true:
+		var f := dir.get_next()
+		if f == "":
+			break
+		if dir.current_is_dir():
+			continue
+		if not f.ends_with(".tscn"):
+			continue
+		if not f.begins_with(saved_file_prefix):
+			continue
+		candidates.append("%s/%s" % [saved_dir, f])
+	dir.list_dir_end()
+	
+	if candidates.is_empty():
+		return ""
+	
+	var local_rng := RandomNumberGenerator.new()
+	local_rng.randomize()
+	return candidates[local_rng.randi_range(0, candidates.size() - 1)]
+
+func _set_owner_recursive(root: Node, node: Node) -> void:
+	node.owner = root
+	for c in node.get_children():
+		_set_owner_recursive(root, c)
+
+func _apply_loaded_env_to_self(src: Enviroment) -> void:
+	# Relevante Settings übernehmen (optional)
+	seed = src.seed
+	Map_Size = src.Map_Size
+	terrain_set_id = src.terrain_set_id
+	terrain_id = src.terrain_id
+
+	# Tiles übernehmen
+	clear()
+
+	var used := src.get_used_cells()
+	if used.is_empty():
+		return
+
+	var i := 0
+	for cell in used:
+		var sid := src.get_cell_source_id(cell)
+		if sid == -1:
+			continue
+		var ac := src.get_cell_atlas_coords(cell)
+		var alt := src.get_cell_alternative_tile(cell)
+		# exakte Zelle setzen
+		set_cell(cell, sid, ac, alt)
+
+		i += 1
+		if i % batch_size == 0:
+			await get_tree().process_frame
+
+	# Autotile-Connects herstellen (idempotent)
+	await get_tree().process_frame
+	set_cells_terrain_connect(used, terrain_set_id, terrain_id)
+
+	# Laufzeitdaten neu aufbauen (Drops/Health in tiles_dict)
+	set_live_to_tiles(used)

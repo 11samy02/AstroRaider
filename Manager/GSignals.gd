@@ -37,6 +37,8 @@ signal PLA_collects_crystal
 #UI
 signal UI_reset_skill_tree
 signal UI_mission_finished
+signal UI_selected_blueprint
+
 
 #Buildings
 signal BUI_generator_gets_hit

@@ -285,7 +285,7 @@ color = Color(0.0237182, 0.0623325, 0.0835872, 1)
 
 [node name="anim" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_gxtx2")
+&"": SubResource("AnimationLibrary_gxtx2")
 }
 
 [node name="Loading" type="Control" parent="."]
@@ -320,6 +320,6 @@ uppercase = true
 
 [node name="anim" type="AnimationPlayer" parent="Loading"]
 libraries = {
-"": SubResource("AnimationLibrary_1wc7i")
+&"": SubResource("AnimationLibrary_1wc7i")
 }
 autoplay = "loading"

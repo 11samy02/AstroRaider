@@ -125,12 +125,17 @@ func _deduct_building_cost() -> void:
 func select_building() -> void:
 	if Input.is_key_pressed(KEY_1):
 		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.MetalGround)
+		GSignals.UI_selected_blueprint.emit(building_res)
 	elif Input.is_key_pressed(KEY_2):
 		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.Torrent)
+		GSignals.UI_selected_blueprint.emit(building_res)
 	elif Input.is_key_pressed(KEY_3):
 		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.RepairDroneStation)
+		GSignals.UI_selected_blueprint.emit(building_res)
 	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		building_res = null
+		GSignals.UI_selected_blueprint.emit(building_res)
+
 
 func _on_check_ground_area_entered(area: Area2D) -> void:
 	building_list.append(area)

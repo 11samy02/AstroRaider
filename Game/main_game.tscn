@@ -271,6 +271,9 @@ max_zoom = 1.5
 [node name="tileMap Holder" type="Node2D" parent="."]
 
 [node name="default" parent="." instance=ExtResource("1_wfgm1")]
+persistence_mode = 3
+saved_dir = "res://Levels/level1/"
+saved_file_prefix = "new_planet_"
 Map_Size = Vector2i(120, 64)
 start_area_size = SubResource("Resource_udiv6")
 room_count = SubResource("Resource_0po0n")

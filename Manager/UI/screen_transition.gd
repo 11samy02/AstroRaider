@@ -25,5 +25,6 @@ func _transition_wait():
 	get_tree().change_scene_to_packed(new_szene)
 
 func fade_out():
+	await get_tree().create_timer(0.5).timeout
 	anim.play("fade_out")
 	PauseMenu.can_pause_on_screen = true

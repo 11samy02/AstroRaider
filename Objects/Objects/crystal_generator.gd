@@ -9,9 +9,20 @@ var player_list : Array[Player] = []
 const VISUEL_PATH = preload("res://Visuel Feedback Tutorial/visuel_path.tscn")
 const COUNTER_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.tscn")
 
+
 func _enter_tree() -> void:
 	GSignals.PLA_collects_crystal.connect(check_if_player_has_crstal)
 	GlobalGame.Buildings.append(self)
+
+func _ready() -> void:
+	ensure_all_players_have_all_ores()
+
+func ensure_all_players_have_all_ores() -> void:
+	for player_res: PlayerResource in GlobalGame.Players:
+		for ore_name in OreTemplate.Ores.keys():
+			if not player_res.Ores.has(ore_name):
+				player_res.Ores[ore_name] = 0
+
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is ItemCrystal:

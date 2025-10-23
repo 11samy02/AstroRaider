@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2do3o7hdmldv"]
+[gd_scene load_steps=5 format=3 uid="uid://c2do3o7hdmldv"]
 
 [ext_resource type="Texture2D" uid="uid://couxge5p5egvg" path="res://Sprites/Items/Ores/gold_ore.png" id="1_37mg2"]
 [ext_resource type="Script" uid="uid://dj2elx6y68ii" path="res://UI/Player Personal Ui/ore_counter_label.gd" id="1_e5tv1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3rbid"]
+font_size = 28
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.50980395)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5tv1"]
 font_size = 28
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.50980395)
@@ -20,7 +25,16 @@ texture = ExtResource("1_37mg2")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
+[node name="count" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
-text = "99999"
+text = "0"
 label_settings = SubResource("LabelSettings_3rbid")
+
+[node name="cost-indikator" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.9012536, 0, 0.17598619, 1)
+layout_mode = 2
+text = "-0"
+label_settings = SubResource("LabelSettings_e5tv1")
