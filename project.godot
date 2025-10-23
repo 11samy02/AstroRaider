@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Astro Raider"
 run/main_scene="res://Titel/start_loading.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://Images/icon.png"
@@ -78,7 +78,6 @@ text/autopauses={}
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/size/extend_to_title=true
 window/stretch/mode="viewport"
 window/per_pixel_transparency/allowed=true

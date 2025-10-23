@@ -10,8 +10,5 @@ region = Rect2(0, 0, 48, 48)
 
 [resource]
 script = ExtResource("2_7yknd")
-Key = 0
-cost = Array[ExtResource("1_qbbi5")]([])
 size = Vector2i(3, 3)
 texture = SubResource("AtlasTexture_feo1b")
-can_build_fast = false

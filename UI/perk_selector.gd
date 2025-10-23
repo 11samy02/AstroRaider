@@ -56,9 +56,13 @@ func set_perk_details(list: Array[PerkBuild]) -> void:
 
 func _on_perk_mouse_entered(id: int) -> void:
 	if id < temp_list.size() and is_instance_valid(temp_list[id]):
+		var perk = temp_list[id]
 		var res = temp_list[id].perk_res
+		if !perk.has_unlocked:
+			description.text = res.get_description(temp_list[id].Level)
+		else:
+			description.text = res.get_description(temp_list[id].Level + 1)
 		titel.text = res.perk_name
-		description.text = res.get_description(temp_list[id].Level)
 
 
 func _on_perk_button_down(id: int) -> void:

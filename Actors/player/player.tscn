@@ -41,33 +41,6 @@
 
 [sub_resource type="Resource" id="Resource_f7306"]
 script = ExtResource("4_m4e5o")
-gravity_strength = 200.0
-gravity_break = 2.0
-max_speed = 250.0
-slowness_energy = 100.0
-bohrer_damage = 1.0
-bohrer_knockback = 3.0
-invincibility_frame = 2.0
-rotation_speed = 10.0
-max_hp = 100
-armor = 1.0
-crit_chance = 0.0
-added_gravity_strength = 0.0
-added_gravity_break = 0.0
-added_max_speed = 0.0
-added_slowness_energy = 0.0
-added_bohrer_damage = 0.0
-added_bohrer_knockback = 0.0
-added_invincibility_frame = 0.0
-added_rotation_speed = 0.0
-added_max_hp = 0
-added_armor = 0.0
-added_crit_chance = 0.0
-added_projectile_damage = 0.0
-Perks = Array[ExtResource("3_f6m2n")]([])
-added_Projectile_lives = 0.0
-has_stun_active = false
-stun_strength = 0.0
 metadata/_custom_type_script = "uid://plag5btfsk1b"
 
 [sub_resource type="Animation" id="Animation_b8c3x"]

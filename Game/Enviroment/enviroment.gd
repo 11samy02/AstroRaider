@@ -16,8 +16,10 @@ const ITEM_IN_WALL_NOTIFICATION = preload("res://Visuel Feedback Tutorial/item_i
 @export var chunk_size: Vector2i = Vector2i(50, 50)
 @export var Map_Size: Vector2i = Vector2i(200, 200)
 var seed: int
+var noise = FastNoiseLite.new()
 
-@export var batch_size = 200
+
+@export var batch_size = 400
 
 @export_group("Rooms Settings")
 @export var start_area_size: SimplefySettingMath = SimplefySettingMath.new()
@@ -42,6 +44,7 @@ func _enter_tree() -> void:
 	GSignals.ENV_remove_tile_from_wall.connect(remove_tile_from_wall)
 
 func _ready() -> void:
+	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	if Map_Size.x > 0 and Map_Size.y > 0:
 		is_generating = true
 		rng.randomize()
@@ -55,7 +58,6 @@ func generate_map() -> void:
 	var start_pos := Vector2i(-Map_Size.x / 2, -Map_Size.y / 2)
 	var end_pos   := Vector2i( Map_Size.x / 2,  Map_Size.y / 2)
 	await fill_map(start_pos, end_pos)
-	await force_refresh_all()
 	await force_refresh_all()
 	finished_map = true
 	is_generating = false
@@ -264,11 +266,9 @@ func fill_chunk(chunk_start: Vector2i, chunk_end: Vector2i) -> Array:
 			tiles_generated += 1
 	if positions.size() > 0:
 		set_cells_terrain_connect(positions, terrain_set_id, terrain_id)
-		# --- NEU ---
-		# Update die Kanten direkt nach dem Setzen
-		var edge_tiles = get_edge_tiles(chunk_start, chunk_end)
-		update_surrounding_tiles(edge_tiles)
+		# edge_tiles-Update HIER entfernen
 	return positions
+
 
 # ---- Räume & Startbereich ----
 func create_random_rooms(area_start: Vector2i, area_end: Vector2i, max_rooms: int, randomness: float, chunk_min: Vector2i, chunk_max: Vector2i) -> void:
@@ -285,8 +285,6 @@ func create_random_rooms(area_start: Vector2i, area_end: Vector2i, max_rooms: in
 		await create_area(Vector2i(room_size_x, room_size_y), randomness, room_position, chunk_min, chunk_max)
 
 func create_area(size: Vector2i, randomness: float, position: Vector2i, chunk_min: Vector2i, chunk_max: Vector2i) -> void:
-	var noise = FastNoiseLite.new()
-	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.frequency = rng.randf_range(0.05, 0.1)
 	noise.seed = seed
 
