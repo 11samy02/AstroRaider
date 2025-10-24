@@ -12,15 +12,21 @@ class_name PlayerHand
 
 var can_place_building : bool = true
 var building_list : Array[Area2D] = []
+var place_building_is_locked : bool = false
 
 
 var velocity: Vector2 = Vector2.ZERO
 
+func _enter_tree() -> void:
+	GSignals.BUI_BUILDING_select_building.connect(select_building)
+	GSignals.BUI_allow_to_place.connect(set_place_building_locked)
 
 func check_button_pressed() -> void:
 	if player_res.player.current_state == player_res.player.states.Build:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !place_building_is_locked:
 			place_building()
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+			building_res = null
 
 func show_texture() -> void:
 	if is_instance_valid(building_res):
@@ -39,7 +45,6 @@ func _process(delta: float) -> void:
 		enforce_max_distance()
 		show_texture()
 		check_button_pressed()
-		select_building()
 		can_place_building = _can_buy_building() and building_list.is_empty()
 	else:
 		hide()
@@ -122,19 +127,14 @@ func _deduct_building_cost() -> void:
 			if player_res.Ores.has(first_ore):
 				player_res.Ores[first_ore] -= ore.cost
 
-func select_building() -> void:
-	if Input.is_key_pressed(KEY_1):
-		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.MetalGround)
-		GSignals.UI_selected_blueprint.emit(building_res)
-	elif Input.is_key_pressed(KEY_2):
-		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.Torrent)
-		GSignals.UI_selected_blueprint.emit(building_res)
-	elif Input.is_key_pressed(KEY_3):
-		building_res = BluePrintData.load_Building_res(BluePrintData.Keys.RepairDroneStation)
-		GSignals.UI_selected_blueprint.emit(building_res)
-	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
-		building_res = null
-		GSignals.UI_selected_blueprint.emit(building_res)
+func select_building(key: BluePrintData.Keys) -> void:
+	if is_instance_valid(building_res):
+		if building_res.Key == BluePrintData.Keys.Generator:
+			return
+	
+	building_res = BluePrintData.load_Building_res(key)
+	GSignals.UI_selected_blueprint.emit(building_res)
+
 
 
 func _on_check_ground_area_entered(area: Area2D) -> void:
@@ -143,3 +143,6 @@ func _on_check_ground_area_entered(area: Area2D) -> void:
 
 func _on_check_ground_area_exited(area: Area2D) -> void:
 	building_list.erase(area)
+
+func set_place_building_locked(value : bool) -> void:
+	place_building_is_locked = value

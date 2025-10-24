@@ -24,8 +24,25 @@ const building_res = {
 	Keys.BarrierShieldGenerator: "res://Crafting/Resources/BluePrints/BarrierShieldGenerator.tres",
 }
 
-static func load_Building_tres(key : Keys) -> PackedScene:
-	return load(building_tres.get(key))
+static var _tres_cache := {}
+static var _res_cache := {}
 
-static func load_Building_res(key : Keys) -> BluePrintResource:
-	return load(building_res.get(key))
+static func load_Building_tres(key: Keys) -> PackedScene:
+	if _tres_cache.has(key):
+		return _tres_cache[key]
+	var path = building_tres.get(key)
+	if path == null:
+		return null
+	var ps: PackedScene = load(path)
+	_tres_cache[key] = ps
+	return ps
+
+static func load_Building_res(key: Keys) -> BluePrintResource:
+	if _res_cache.has(key):
+		return _res_cache[key]
+	var path = building_res.get(key)
+	if path == null:
+		return null
+	var res: BluePrintResource = load(path)
+	_res_cache[key] = res
+	return res

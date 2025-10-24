@@ -42,3 +42,5 @@ signal UI_selected_blueprint
 
 #Buildings
 signal BUI_generator_gets_hit
+signal BUI_BUILDING_select_building
+signal BUI_allow_to_place

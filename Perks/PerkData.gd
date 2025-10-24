@@ -1,6 +1,5 @@
 extends Node
 
-
 enum Keys {
 	Speed_It_Up,
 	Construction_Expert,
@@ -11,23 +10,19 @@ enum Keys {
 	Barrier_Shield,
 	Aim_Bot,
 	Extra_Health,
-	Jet_Boost, # -> gibt die möglichkeit einen Art Dash in einer richtung zu machen
+	Jet_Boost,
 	Piercing_Shot,
 	Stun_Grenade,
-	Energy_Overload, # -> muss mir was überlegen
+	Energy_Overload,
 	Emergency_Heal,
 	Anti_Mine_Detection,
-	Resource_Sharing, # -> ermöglichht es resourcen zu teilen
-	Group_Momentum, # -> Erhöht die Bewegungsgeschwindigkeit des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
-	Rallying_Cry, # -> Erhöht den Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
-	Protective_Aura, # -> mindert den erlitenen Schaden des Teams leicht, wenn sich andere Teammitglieder in der Nähe befinden
+	Resource_Sharing,
+	Group_Momentum,
+	Rallying_Cry,
+	Protective_Aura,
 	Critical_Edge,
 	Power_Shot,
 }
-
-
-
-
 
 const Keys_scene = {
 	Keys.Speed_It_Up:  "res://Perks/PerkBuild/Perk_speed_it_up.tscn",
@@ -77,10 +72,25 @@ const Keys_res = {
 	Keys.Power_Shot: "res://Perks/Resources/Perk_Power_Shot.tres",
 }
 
+static var _scene_cache := {}
+static var _res_cache := {}
 
-static func load_perk_scene(key : Keys) -> PackedScene:
-	return load(Keys_scene.get(key)).duplicate()
-
+static func load_perk_scene(key: Keys) -> PackedScene:
+	var path = Keys_scene.get(key)
+	if path == null or path == "":
+		return null
+	if _scene_cache.has(key):
+		return _scene_cache[key].duplicate()
+	var scene: PackedScene = load(path)
+	_scene_cache[key] = scene
+	return scene.duplicate()
 
 static func load_perk_res(key: Keys) -> Perk:
-	return load(Keys_res.get(key)).duplicate()
+	var path = Keys_res.get(key)
+	if path == null or path == "":
+		return null
+	if _res_cache.has(key):
+		return _res_cache[key].duplicate()
+	var res: Perk = load(path)
+	_res_cache[key] = res
+	return res.duplicate()

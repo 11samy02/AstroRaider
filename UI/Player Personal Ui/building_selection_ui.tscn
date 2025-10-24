@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=3 uid="uid://behmtpbygd027"]
+
+[ext_resource type="Script" uid="uid://c345uefglvoct" path="res://UI/Player Personal Ui/building_selection_ui.gd" id="1_lo4te"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lo4te"]
+bg_color = Color(0.14509805, 0.14509805, 0.2, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05ebs"]
+bg_color = Color(0.14509805, 0.14509805, 0.2, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_kbwof"]
+font_size = 28
+
+[node name="building-selection-ui" type="Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+script = ExtResource("1_lo4te")
+
+[node name="Building-selection-ui" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_lo4te")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lo4te")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lo4te")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_lo4te")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lo4te")
+
+[node name="MarginContainer" type="MarginContainer" parent="Building-selection-ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="TextureRect" type="TextureRect" parent="Building-selection-ui/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="Building-selection-ui"]
+custom_minimum_size = Vector2(90, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -19.0
+offset_right = 25.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_05ebs")
+
+[node name="keybind_label" type="Label" parent="Building-selection-ui/Panel"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_kbwof")
+horizontal_alignment = 1
+vertical_alignment = 1

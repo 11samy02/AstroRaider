@@ -24,9 +24,25 @@ const drop_res = {
 	Keys.Bomb_key: "",
 }
 
-static func load_drop_szene(key: Keys) -> PackedScene:
-	return load(drop_szene.get(key))
+static var _szene_cache := {}
+static var _res_cache := {}
 
+static func load_drop_szene(key: Keys) -> PackedScene:
+	var path = drop_szene.get(key)
+	if path == null or path == "":
+		return null
+	if _szene_cache.has(key):
+		return _szene_cache[key]
+	var scene: PackedScene = load(path)
+	_szene_cache[key] = scene
+	return scene
 
 static func load_drop_res(key: Keys) -> TileDropResource:
-	return load(drop_res.get(key))
+	var path = drop_res.get(key)
+	if path == null or path == "":
+		return null
+	if _res_cache.has(key):
+		return _res_cache[key]
+	var res: TileDropResource = load(path)
+	_res_cache[key] = res
+	return res
