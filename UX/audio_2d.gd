@@ -4,9 +4,9 @@ class_name Audio2D
 @export_enum("Music","Sound Effect") var type = "Sound Effect"
 
 static var Music_volume := 0.00
-static var Music_audio_on := false
+static var Music_audio_on := true
 static var Sound_volume := 0.00
-static var Sound_audio_on := false
+static var Sound_audio_on := true
 
 @export var min_random_pitch : float = 1.00
 @export var max_random_pitch : float = 1.00

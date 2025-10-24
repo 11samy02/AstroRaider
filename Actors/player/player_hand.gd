@@ -25,8 +25,9 @@ func check_button_pressed() -> void:
 	if player_res.player.current_state == player_res.player.states.Build:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !place_building_is_locked:
 			place_building()
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and is_instance_valid(building_res):
 			building_res = null
+			GSignals.BUI_hide_resource_cost.emit()
 
 func show_texture() -> void:
 	if is_instance_valid(building_res):

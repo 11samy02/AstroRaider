@@ -8,7 +8,7 @@ var inner_default_pos: Vector2
 @export var texture: Texture2D
 @export var label_text: int
 @export var key : BluePrintData.Keys
-@export var shortcode : Key = Key.KEY_NONE
+@export var shortcut : Key = Key.KEY_NONE
 @export var texture_margin: Vector4
 
 @onready var texture_rect: TextureRect = $"Building-selection-ui/MarginContainer/TextureRect"
@@ -25,8 +25,10 @@ func _ready() -> void:
 	connect_signals()
 
 func _input(event: InputEvent) -> void:
-	if Input.is_key_pressed(shortcode):
-		_on_pressed()
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == shortcut:
+			_on_pressed()
+
 
 func connect_signals() -> void:
 	building_selection_ui.connect("mouse_entered", _on_mouse_entered)

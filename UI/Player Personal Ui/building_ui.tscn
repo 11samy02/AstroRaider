@@ -67,7 +67,7 @@ layout_mode = 2
 texture = ExtResource("3_7vtmn")
 label_text = 1
 key = 2
-shortcode = 4194439
+shortcut = 49
 texture_margin = Vector4(15, 15, 40, 15)
 
 [node name="Building-selection-ui2" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_1usw3")]
@@ -75,7 +75,7 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_ujvfe")
 label_text = 2
 key = 1
-shortcode = 4194440
+shortcut = 50
 texture_margin = Vector4(5, 5, 20, 5)
 
 [node name="Building-selection-ui3" parent="MarginContainer/HBoxContainer" instance=ExtResource("2_1usw3")]
@@ -83,5 +83,5 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_k56vi")
 label_text = 3
 key = 3
-shortcode = 4194441
+shortcut = 51
 texture_margin = Vector4(5, 10, 30, 5)

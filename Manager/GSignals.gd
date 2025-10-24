@@ -38,9 +38,11 @@ signal PLA_collects_crystal
 signal UI_reset_skill_tree
 signal UI_mission_finished
 signal UI_selected_blueprint
+signal UI_show_only_PerkSelector
 
 
 #Buildings
 signal BUI_generator_gets_hit
 signal BUI_BUILDING_select_building
 signal BUI_allow_to_place
+signal BUI_hide_resource_cost

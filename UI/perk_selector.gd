@@ -52,6 +52,7 @@ func set_perk_details(list: Array[PerkBuild]) -> void:
 			perk_button.hide()
 	if !visible:
 		show()
+		GSignals.UI_show_only_PerkSelector.emit()
 		get_tree().paused = true
 
 func _on_perk_mouse_entered(id: int) -> void:

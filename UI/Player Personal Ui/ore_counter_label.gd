@@ -17,6 +17,7 @@ const textures: Dictionary = {
 
 func _ready() -> void:
 	GSignals.UI_selected_blueprint.connect(_show_cost)
+	GSignals.BUI_hide_resource_cost.connect(_show_cost)
 	_update_texture()
 	for pla_res: PlayerResource in GlobalGame.Players:
 		if pla_res.player == player:
@@ -53,7 +54,7 @@ func _update_label() -> void:
 		count.text = "0"
 		visible = true
 
-func _show_cost(res: BluePrintResource) -> void:
+func _show_cost(res: BluePrintResource = null) -> void:
 	cost_indikator.hide()
 	if !is_instance_valid(res) or res == null:
 		print("Invalid or null resource, returning")
