@@ -245,6 +245,30 @@ func get_random_drop() -> TileDropResource:
 	if list.is_empty():
 		return null
 	return list[rng.randi_range(0, list.size() - 1)]
+	
+
+# Normalisiert Einträge aus DirAccess:
+# akzeptiert *.tscn und *.tscn.remap, gibt IMMER den .tscn-Pfad zurück (ohne .remap)
+func _normalize_scene_path(dir_path: String, fname: String) -> String:
+	if fname.ends_with(".tscn.remap"):
+		return dir_path + "/" + fname.replace(".tscn.remap", ".tscn")
+	elif fname.ends_with(".tscn"):
+		return dir_path + "/" + fname
+	return ""
+
+# Existenz-Check über ResourceLoader (kennt Remaps)
+func _resource_exists_scene(path_tscn: String) -> bool:
+	return ResourceLoader.exists(path_tscn)
+
+# Modified-Time für .tscn ODER .tscn.remap
+func _get_modified_time_any(path_tscn: String) -> int:
+	if FileAccess.file_exists(path_tscn):
+		return FileAccess.get_modified_time(path_tscn)
+	var remap := path_tscn + ".remap"
+	if FileAccess.file_exists(remap):
+		return FileAccess.get_modified_time(remap)
+	return -1
+
 
 # ---- Map-Generierung (streamend, ohne Hänger) ----
 func fill_map(start_position: Vector2i, end_position: Vector2i, _reverse: bool = false) -> void:
@@ -460,7 +484,7 @@ func _try_load_saved_level() -> bool:
 	if path == "":
 		return false
 
-	var packed := load(path)
+	var packed := ResourceLoader.load(path)
 	if packed == null:
 		return false
 	var wrapper = packed.instantiate()
@@ -518,16 +542,16 @@ func _save_current_level_scene() -> void:
 		push_error("Saving failed with error: %s" % str(save_err))
 
 
-
 func _get_latest_saved_scene_path() -> String:
 	if use_seed_in_filename:
 		var try_path := "%s/%s%s.tscn" % [saved_dir, saved_file_prefix, str(seed)]
-		if FileAccess.file_exists(try_path):
+		if _resource_exists_scene(try_path):
 			return try_path
 	
 	var dir := DirAccess.open(saved_dir)
 	if dir == null:
 		return ""
+	
 	dir.list_dir_begin()
 	var best_path := ""
 	var best_time := -1
@@ -537,17 +561,21 @@ func _get_latest_saved_scene_path() -> String:
 			break
 		if dir.current_is_dir():
 			continue
-		if not f.ends_with(".tscn"):
+		# WICHTIG: sowohl .tscn als auch .tscn.remap akzeptieren
+		if !(f.ends_with(".tscn") or f.ends_with(".tscn.remap")):
 			continue
 		if not f.begins_with(saved_file_prefix):
 			continue
-		var candidate := "%s/%s" % [saved_dir, f]
-		var mt := FileAccess.get_modified_time(candidate)
+		var normalized := _normalize_scene_path(saved_dir, f)
+		if !_resource_exists_scene(normalized):
+			continue
+		var mt := _get_modified_time_any(normalized)
 		if mt > best_time:
 			best_time = mt
-			best_path = candidate
+			best_path = normalized
 	dir.list_dir_end()
 	return best_path
+
 
 
 func _find_first_env(n: Node) -> Enviroment:
@@ -571,19 +599,20 @@ func _get_random_saved_scene_path() -> String:
 			break
 		if dir.current_is_dir():
 			continue
-		if not f.ends_with(".tscn"):
+		if !(f.ends_with(".tscn") or f.ends_with(".tscn.remap")):
 			continue
 		if not f.begins_with(saved_file_prefix):
 			continue
-		candidates.append("%s/%s" % [saved_dir, f])
+		var normalized := _normalize_scene_path(saved_dir, f)
+		if _resource_exists_scene(normalized):
+			candidates.append(normalized)
 	dir.list_dir_end()
-	
 	if candidates.is_empty():
 		return ""
-	
 	var local_rng := RandomNumberGenerator.new()
 	local_rng.randomize()
 	return candidates[local_rng.randi_range(0, candidates.size() - 1)]
+
 
 func _set_owner_recursive(root: Node, node: Node) -> void:
 	node.owner = root
