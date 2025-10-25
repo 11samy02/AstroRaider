@@ -9,6 +9,7 @@ extends Control
 @onready var options: Button = $MarginContainer/TextureRect/HBoxContainer/options
 @onready var perks: Button = $MarginContainer/TextureRect/HBoxContainer/perks
 @onready var exit: Button = $MarginContainer/TextureRect/HBoxContainer/Exit
+@onready var animation_player_2: AnimationPlayer = $AnimationPlayer2
 
 @onready var game_szene = preload("res://Game/main_game.tscn")
 
@@ -46,6 +47,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	options.disabled = false
 	perks.disabled = false
 	exit.disabled = false
+	animation_player_2.play("loop")
 
 
 func _on_exit_pressed() -> void:

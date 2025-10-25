@@ -273,7 +273,7 @@ max_zoom = 1.5
 [node name="default" parent="." instance=ExtResource("1_wfgm1")]
 persistence_mode = 3
 saved_dir = "res://Levels/level1/"
-saved_file_prefix = "new_planet_"
+saved_file_prefix = "Samy_"
 chunk_size = Vector2i(100, 100)
 Map_Size = Vector2i(120, 64)
 start_area_size = SubResource("Resource_udiv6")
