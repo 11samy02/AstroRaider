@@ -16,8 +16,6 @@
 
 [sub_resource type="Resource" id="Resource_fqdai"]
 script = ExtResource("6_7sg3r")
-key = 0
-state = 0
 
 [sub_resource type="Resource" id="Resource_luiws"]
 script = ExtResource("6_7sg3r")
@@ -33,38 +31,26 @@ state = 2
 resource_local_to_scene = true
 script = ExtResource("7_sibcj")
 damage = 3
-knockback = 1.0
-crit_chance = 0.0
-has_stun = false
-stun_strength = 1
 
 [sub_resource type="Resource" id="Resource_7witj"]
 resource_local_to_scene = true
 script = ExtResource("7_nrcht")
 max_health = 2
-max_Random_health_edit = 0
 attack = SubResource("Resource_8idiu")
 ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_fqdai"), SubResource("Resource_luiws"), SubResource("Resource_1443f")])
 speed = 100.0
-max_speed = 300.0
-default_crit_chance = 20.0
+max_speed = 200.0
 
 [sub_resource type="Resource" id="Resource_tdo6b"]
 script = ExtResource("7_sibcj")
 damage = 2
-knockback = 1.0
-crit_chance = 0.0
-has_stun = false
-stun_strength = 1
 
 [sub_resource type="Resource" id="Resource_a3kia"]
 script = ExtResource("7_nrcht")
 max_health = 1
 max_Random_health_edit = 1
 attack = SubResource("Resource_tdo6b")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([])
 speed = 10.0
-max_speed = 300.0
 default_crit_chance = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_32yl0"]
@@ -170,6 +156,9 @@ one_shot = true
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_g3y2r")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="7"]
+visible = false
 
 [node name="Death" parent="Sounds" index="0"]
 min_random_pitch = 2.0

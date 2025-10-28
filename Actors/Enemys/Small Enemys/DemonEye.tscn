@@ -17,8 +17,6 @@
 
 [sub_resource type="Resource" id="Resource_nvx3s"]
 script = ExtResource("6_ra7ad")
-key = 0
-state = 0
 
 [sub_resource type="Resource" id="Resource_n7l1v"]
 script = ExtResource("6_ra7ad")
@@ -38,51 +36,37 @@ state = 5
 [sub_resource type="Resource" id="Resource_jsdpb"]
 resource_local_to_scene = true
 script = ExtResource("7_jiem3")
-damage = 1
-knockback = 1.0
-crit_chance = 0.0
 
 [sub_resource type="Resource" id="Resource_fo0lb"]
 resource_local_to_scene = true
 script = ExtResource("7_jiem3")
 damage = 5
-knockback = 1.0
-crit_chance = 0.0
 
 [sub_resource type="Resource" id="Resource_x2fwd"]
 resource_local_to_scene = true
 script = ExtResource("8_yj8bj")
 max_health = 1
-max_Random_health_edit = 0
 attack = SubResource("Resource_jsdpb")
 ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_nvx3s"), SubResource("Resource_n7l1v"), SubResource("Resource_pxb53"), SubResource("Resource_y5jrm")])
 speed = 60.0
-max_speed = 200.0
+max_speed = 120.0
 projectile = ExtResource("5_4325e")
 ranged_attack = SubResource("Resource_fo0lb")
-default_crit_chance = 20.0
 
 [sub_resource type="Resource" id="Resource_b3csn"]
 script = ExtResource("7_jiem3")
-damage = 1
-knockback = 1.0
-crit_chance = 0.0
 
 [sub_resource type="Resource" id="Resource_nckro"]
 resource_local_to_scene = true
 script = ExtResource("7_jiem3")
 damage = 5
-knockback = 1.0
-crit_chance = 0.0
 
 [sub_resource type="Resource" id="Resource_044xy"]
 script = ExtResource("8_yj8bj")
 max_health = 1
 max_Random_health_edit = 1
 attack = SubResource("Resource_b3csn")
-ai_type_keys = Array[ExtResource("6_ra7ad")]([])
 speed = 10.0
-max_speed = 300.0
 projectile = ExtResource("5_4325e")
 ranged_attack = SubResource("Resource_nckro")
 default_crit_chance = 0.0
@@ -157,6 +141,7 @@ die_particle_variation = Array[Texture2D]([ExtResource("9_w3rug"), ExtResource("
 Shoot_sound = NodePath("Sounds/ShootSound")
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
 position = Vector2(1, 7)
 shape = SubResource("CapsuleShape2D_3cst2")
 
@@ -169,7 +154,7 @@ vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
 libraries = {
-"": SubResource("AnimationLibrary_61fje")
+&"": SubResource("AnimationLibrary_61fje")
 }
 autoplay = "flying"
 
@@ -200,6 +185,7 @@ position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_q2vyc")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="7"]
+visible = false
 rect = Rect2(-10, -10, 20, 40)
 
 [node name="Death" parent="Sounds" index="0"]

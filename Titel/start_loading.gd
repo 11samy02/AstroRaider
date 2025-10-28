@@ -37,17 +37,18 @@ func _input(event: InputEvent) -> void:
 
 
 func new_game_pressed() -> void:
-	PauseMenu.can_pause_on_screen = true
-	ScreenTransition.change_scene_and_wait(game_szene)
+	if animation_player_2.is_playing():
+		PauseMenu.can_pause_on_screen = true
+		ScreenTransition.change_scene_and_wait(game_szene)
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	animation_player_2.play("loop")
 	continue_button.disabled = false
 	new_game.disabled = false
 	options.disabled = false
 	perks.disabled = false
 	exit.disabled = false
-	animation_player_2.play("loop")
 
 
 func _on_exit_pressed() -> void:

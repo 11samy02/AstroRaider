@@ -12,16 +12,6 @@ func _enter_tree() -> void:
 	enviroment.map_was_created.connect(start_Game)
 	GlobalGame.time_played = 0
 
-func _ready():
-	var dir := "res://Levels/level1"
-	if DirAccess.dir_exists_absolute(dir):
-		var files := DirAccess.get_files_at(dir)  # Godot 4
-		print("Files in level1:", files)
-		print("Exists test:", ResourceLoader.exists(dir + "/new_planet_85956716.tscn"))
-	else:
-		print("Dir missing:", dir)
-
-
 func _input(event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_B) and is_instance_valid(tutorial):
 		tutorial.queue_free()

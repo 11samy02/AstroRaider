@@ -11,9 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_ntmmc"]
 script = ExtResource("3_c3c0x")
-damage = 1
-knockback = 1.0
-crit_chance = 0.0
+damage = 5
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s06gm"]
 light_mode = 1
@@ -261,8 +259,8 @@ script = ExtResource("2_d2g3u")
 atk_res = SubResource("Resource_ntmmc")
 radar_icon = ExtResource("4_vgx3k")
 has_health = true
-max_health = 250
-current_health = 250
+max_health = 500
+current_health = 500
 
 [node name="sprite" parent="." index="0"]
 material = SubResource("CanvasItemMaterial_s06gm")
@@ -284,6 +282,7 @@ visible = false
 shape = SubResource("CircleShape2D_6xjr8")
 
 [node name="shoot_time" type="Timer" parent="." index="3"]
+wait_time = 0.5
 autostart = true
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="." index="4"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3e2wukowerev"]
+
+[ext_resource type="Texture2D" uid="uid://dwk5euihon04r" path="res://Sprites/UI/bars/Boss-bar-health.png" id="1_hp4dq"]
+[ext_resource type="Script" uid="uid://coq3cuwvt7xvk" path="res://UI/Boss/bossbar.gd" id="1_pgojx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgojx"]
+atlas = ExtResource("1_hp4dq")
+region = Rect2(0, 153, 290, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4ix2"]
+atlas = ExtResource("1_hp4dq")
+region = Rect2(0, 51, 290, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ravbd"]
+atlas = ExtResource("1_hp4dq")
+region = Rect2(0, 102, 290, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iraqf"]
+atlas = ExtResource("1_hp4dq")
+region = Rect2(123, 0, 44, 34)
+
+[node name="Bossbar" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+script = ExtResource("1_pgojx")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(870, 51)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+value = 78.0
+fill_mode = 6
+nine_patch_stretch = true
+stretch_margin_left = 15
+stretch_margin_top = 34
+stretch_margin_right = 16
+stretch_margin_bottom = 12
+texture_under = SubResource("AtlasTexture_pgojx")
+texture_over = SubResource("AtlasTexture_p4ix2")
+texture_progress = SubResource("AtlasTexture_ravbd")
+
+[node name="TextureRect" type="TextureRect" parent="TextureProgressBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -885.0
+offset_right = 885.0
+offset_bottom = 34.0
+grow_horizontal = 2
+size_flags_vertical = 8
+texture = SubResource("AtlasTexture_iraqf")
+stretch_mode = 3

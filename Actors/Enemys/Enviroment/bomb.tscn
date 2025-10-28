@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbf58whxftfq3"]
+[gd_scene load_steps=13 format=3 uid="uid://bbf58whxftfq3"]
 
 [ext_resource type="Script" uid="uid://cdmemd88qibh4" path="res://Actors/Enemys/Enviroment/bomb.gd" id="1_4jhmr"]
 [ext_resource type="Texture2D" uid="uid://dffqsxjstmde0" path="res://Sprites/actors/Enemys/small/Bomb/Bomb.png" id="1_esvsy"]
-[ext_resource type="PackedScene" uid="uid://58thecdy1yjh" path="res://Actors/player/single_detector.tscn" id="2_bkor8"]
 [ext_resource type="PackedScene" uid="uid://70v4d2478xol" path="res://Manager/static_hitbox.tscn" id="3_oj0tp"]
 [ext_resource type="AudioStream" uid="uid://gco2mrp5n4nt" path="res://Sounds/Explosion.wav" id="4_i0o46"]
 [ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="5_05reu"]
@@ -41,7 +40,6 @@ radius = 7.0
 collision_mask = 0
 script = ExtResource("1_4jhmr")
 damage = 25
-detector = ExtResource("2_bkor8")
 valnuable_time = 0.2
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
@@ -74,9 +72,6 @@ max_random_pitch = 1.5
 [node name="initiate_time" type="Timer" parent="."]
 one_shot = true
 autostart = true
-
-[node name="TilesDetector" type="Node2D" parent="."]
-visible = false
 
 [node name="DashedCircle" parent="." instance=ExtResource("7_pwacc")]
 

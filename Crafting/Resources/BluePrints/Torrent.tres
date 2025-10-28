@@ -6,7 +6,6 @@
 
 [sub_resource type="Resource" id="Resource_usu3w"]
 script = ExtResource("1_jqusc")
-Ore = 0
 cost = 4
 
 [sub_resource type="Resource" id="Resource_hjidy"]
@@ -29,4 +28,3 @@ Key = 1
 cost = Array[ExtResource("1_jqusc")]([SubResource("Resource_usu3w"), SubResource("Resource_hjidy"), SubResource("Resource_xum0k")])
 size = Vector2i(3, 2)
 texture = SubResource("AtlasTexture_puy4b")
-can_build_fast = false

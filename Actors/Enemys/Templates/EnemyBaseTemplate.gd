@@ -36,9 +36,7 @@ static var entity_list: Array[EnemyBaseTemplate]
 var killed_by : CharacterBody2D = null
 var shader_value: float = 0.0
 
-@export_category("Perks Disadventage")
-@export var stun_resistence := 1.0
-var is_stunned := false
+
 
 func _enter_tree() -> void:
 	GlobalGame.Enemies.append(self)
@@ -169,7 +167,7 @@ func get_hit_anim() -> void:
 	tween.parallel().tween_property(sprite, "scale", Vector2(1,1), 0.2)
 
 func check_if_stunned() -> void:
-	if is_stunned:
+	if stats.is_stunned:
 		velocity = Vector2.ZERO
 		stun_sprite.show()
 	else:
@@ -177,10 +175,10 @@ func check_if_stunned() -> void:
 
 func stun_activated(atk_res: AttackResource) -> void:
 	if atk_res.has_stun:
-		if !is_stunned:
-			is_stunned = true
-			stun_timer.set_wait_time(atk_res.stun_strength / stun_resistence)
+		if !stats.is_stunned:
+			stats.is_stunned = true
+			stun_timer.set_wait_time(atk_res.stun_strength / stats.stun_resistence)
 			stun_timer.start()
 
 func remove_stun() -> void:
-	is_stunned = false
+	stats.is_stunned = false

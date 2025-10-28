@@ -14,6 +14,10 @@ class_name EnemyStats
 
 var current_health: int
 
+@export_category("Perks Disadventage")
+@export var stun_resistence := 1.0
+var is_stunned := false
+
 func update_stats(upgrades: EnemyStats, level: int):
 	max_health += upgrades.max_health * level
 	max_Random_health_edit += upgrades.max_Random_health_edit * level

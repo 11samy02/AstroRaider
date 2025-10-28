@@ -54,6 +54,7 @@ func _enter_tree() -> void:
 	GSignals.ENV_remove_tile_from_wall.connect(remove_tile_from_wall)
 
 func _ready() -> void:
+	randomize()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	if terrain_set_id == null:
 		terrain_set_id = 0
@@ -128,34 +129,74 @@ func set_live_to_tiles(tiles_to_process: Array = []) -> void:
 			tr.health = 3
 		tiles_dict[tile_pos] = tr
 
-# ---- Abbau & Drops ----
+# ---- Abbau & Drops (batched, border-only refresh, budgets) ----
 func destroy_tile_at(pos: Array[Vector2], damage: int = 1) -> void:
-	var to_remove: Array[Vector2i] = []
-	var to_update: Array[Vector2i] = []
-	for i in pos:
-		var tile_pos: Vector2i = Vector2i(local_to_map(i))
-		if tiles_dict.has(tile_pos):
-			var tile: DestroyableTileResource = tiles_dict[tile_pos]
-			tile.health -= damage
-			if tile.health <= 0:
-				var particle = GROUND_PARTICLE.instantiate()
-				particle.global_position = map_to_local(tile_pos)
-				get_parent().add_child(particle)
-				drop_items(tile)
-				to_remove.append(tile_pos)
-				erase_cell(tile_pos)
-				to_update.append(tile_pos)
-	for tp in to_remove:
-		tiles_dict.erase(tp)
-
-	if to_update.is_empty():
+	if pos.is_empty():
 		return
 
-	# Nachbarn refreshen (Autotile), gebatcht gegen Hänger
-	if to_update.size() > 10:
-		await update_surrounding_tiles_batched(to_update, 64)
-	else:
-		update_surrounding_tiles(to_update)
+	# 1) World->Map deduplizieren (verhindert doppelte Arbeit bei Überlappung)
+	var uniq := {}
+	for w in pos:
+		uniq[Vector2i(local_to_map(w))] = true
+	var all_pos: Array[Vector2i] = []
+	for k in uniq.keys():
+		all_pos.append(k)
+	# Budgets pro Batch (einfach; später gern pro Frame auslagern)
+	var PARTICLE_BUDGET_PER_BATCH := 60
+	var DROP_BUDGET_PER_BATCH := 35
+
+	var i := 0
+	while i < all_pos.size():
+		var end = min(i + batch_size, all_pos.size())
+		var removed: Array[Vector2i] = []
+		var particles_used := 0
+		var drops_used := 0
+
+		# 2) Tiles in diesem Batch verarbeiten
+		for j in range(i, end):
+			var tile_pos := all_pos[j]
+			if tiles_dict.has(tile_pos):
+				var tile: DestroyableTileResource = tiles_dict[tile_pos]
+				tile.health -= damage
+				if tile.health <= 0:
+					# Partikel (budgetiert)
+					if particles_used < PARTICLE_BUDGET_PER_BATCH:
+						var particle = GROUND_PARTICLE.instantiate()
+						particle.global_position = map_to_local(tile_pos)
+						get_parent().add_child(particle)
+						particles_used += 1
+
+					# Drops (budgetiert)
+					if drops_used < DROP_BUDGET_PER_BATCH:
+						drop_items(tile)
+						drops_used += 1
+
+					erase_cell(tile_pos)
+					tiles_dict.erase(tile_pos)
+					removed.append(tile_pos)
+
+		# 3) Nur Border-Zellen updaten (Grenzen der entfernten Zellen)
+		if not removed.is_empty():
+			var remset := {}
+			for p in removed:
+				remset[p] = true
+
+			var border: Array[Vector2i] = []
+			for p in removed:
+				for n in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
+					var q = p + n
+					if not remset.has(q) and get_cell_source_id(q) != -1:
+						border.append(q)
+
+			if not border.is_empty():
+				if border.size() > 64:
+					await update_surrounding_tiles_batched(border, 128) # größerer Refresh-Batch
+				else:
+					update_surrounding_tiles(border)
+
+		# 4) Frame freigeben → flüssig bei vielen Bomben
+		await get_tree().process_frame
+		i = end
 
 func drop_items(tile: DestroyableTileResource) -> void:
 	var dc = rng.randi_range(tile.drop_count.min_value, tile.drop_count.max_value)

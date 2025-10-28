@@ -537,73 +537,45 @@ player = NodePath("..")
 
 [node name="Speed_It_Up" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("22_8v5l4")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="Construction_expert" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("23_02ndh")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="AimBot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="PerkAntiMineDetection" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("25_38jmy")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="BarrierShield" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("26_wpgrq")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="CoinMaster" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("26_3sfd7")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="PerkCriticalEdge" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("27_3sfd7")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="Each_Round_Heal" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("28_dis4x")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="Emergency_Heal" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("29_fs83k")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="Extra_Health" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("30_6ll5j")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="Resilience" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("31_ds0h7")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="PerkPowerShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("35_m4e5o")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="PerkPiercingShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("36_f7306")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="PerkStunGrenade" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("37_4hqgc")]
 player = NodePath("../..")
-Level = 6
-has_unlocked = true
 
 [node name="Ui" type="CanvasLayer" parent="."]
 process_mode = 3

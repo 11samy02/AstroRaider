@@ -16,6 +16,8 @@ const textures: Dictionary = {
 }
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	GSignals.UI_selected_blueprint.connect(_show_cost)
 	GSignals.BUI_hide_resource_cost.connect(_show_cost)
 	_update_texture()

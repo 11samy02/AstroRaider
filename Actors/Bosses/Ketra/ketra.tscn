@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckxcmvvk1pewr"]
+
+[ext_resource type="Script" uid="uid://m38elp5r4reg" path="res://Actors/Bosses/Ketra/ketra.gd" id="1_sujut"]
+[ext_resource type="Script" uid="uid://i71iok7xek37" path="res://Resources/Enemy/BossStats.gd" id="2_coqm4"]
+
+[sub_resource type="Resource" id="Resource_7lg3g"]
+script = ExtResource("2_coqm4")
+Boss_Name = "Keth’ra"
+Description = "From the depths of the sublunar nebula rises Keth'ra, an ancient entity that existed long before the first space colonies. It is said that it is not a living being in the conventional sense, but rather a fragment of a forgotten consciousness – the remnant of a species that viewed the cosmos itself as a source of nourishment. Its sole purpose: to see – and devour what it sees."
+metadata/_custom_type_script = "uid://i71iok7xek37"
+
+[node name="Ketra" type="Node2D"]
+script = ExtResource("1_sujut")
+stats = SubResource("Resource_7lg3g")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
