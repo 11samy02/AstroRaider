@@ -24,9 +24,6 @@ region = Rect2(0, 204, 290, 51)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iraqf"]
 shader = ExtResource("4_ravbd")
 shader_parameter/glow_intensity = 0.0
-shader_parameter/crit_active = false
-shader_parameter/crit_intensity = 0.0
-shader_parameter/crit_color = Color(1, 0.271, 0.2, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bwrv"]
 atlas = ExtResource("1_hp4dq")

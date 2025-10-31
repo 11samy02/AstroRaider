@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3e2wukowerev"]
+[gd_scene load_steps=10 format=3 uid="uid://c3e2wukowerev"]
 
 [ext_resource type="Texture2D" uid="uid://dwk5euihon04r" path="res://Sprites/UI/bars/Boss-bar-health.png" id="1_hp4dq"]
 [ext_resource type="Script" uid="uid://coq3cuwvt7xvk" path="res://UI/Boss/bossbar.gd" id="1_pgojx"]
 [ext_resource type="Script" uid="uid://i71iok7xek37" path="res://Resources/Enemy/BossStats.gd" id="2_p4ix2"]
-[ext_resource type="Shader" uid="uid://bacc40ajix2rt" path="res://UI/Boss/bossbar.gdshader" id="4_ravbd"]
 
 [sub_resource type="Resource" id="Resource_ravbd"]
 script = ExtResource("2_p4ix2")
@@ -20,13 +19,6 @@ region = Rect2(0, 51, 290, 51)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ravbd"]
 atlas = ExtResource("1_hp4dq")
 region = Rect2(0, 204, 290, 51)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iraqf"]
-shader = ExtResource("4_ravbd")
-shader_parameter/glow_intensity = 0.0
-shader_parameter/crit_active = false
-shader_parameter/crit_intensity = 0.0
-shader_parameter/crit_color = Color(1, 0.271, 0.2, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bwrv"]
 atlas = ExtResource("1_hp4dq")
@@ -69,7 +61,6 @@ texture_over = SubResource("AtlasTexture_p4ix2")
 texture_progress = SubResource("AtlasTexture_ravbd")
 
 [node name="real_bar" type="TextureProgressBar" parent="."]
-material = SubResource("ShaderMaterial_iraqf")
 custom_minimum_size = Vector2(1024, 51)
 layout_mode = 2
 size_flags_horizontal = 4

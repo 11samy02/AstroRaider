@@ -18,6 +18,7 @@ static var _mask_cache := {}
 func _ready() -> void:
 	can_take_damage = false
 	hp += randi_range(-2, 2)
+	explosion_radius += randi_range(0,2) * 2
 
 	# --- Radius/Position SOFORT setzen ---
 	var r_tiles := int(ceil(explosion_radius / 2.0))
