@@ -1,9 +1,13 @@
 extends PerkBuild
 
-var default_value := 2.00
-
-
-
+## Passive: reduces invincibility frame duration (faster recovery)
 func activate_perk() -> void:
-	await (get_tree().create_timer(0.1).timeout)
-	stats.added_invincibility_frame = clampf(stats.invincibility_frame - get_value()/100,0.01, stats.invincibility_frame)
+	super()
+	stats.added_invincibility_frame = clampf(
+		stats.invincibility_frame - get_value() / 100.0,
+		0.01,
+		stats.invincibility_frame
+	)
+
+func _reset_stats() -> void:
+	stats.added_invincibility_frame = 0.0

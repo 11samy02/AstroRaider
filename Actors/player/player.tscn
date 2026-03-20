@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bvxpu0ufiyfmj"]
+[gd_scene format=3 uid="uid://bvxpu0ufiyfmj"]
 
 [ext_resource type="Script" uid="uid://51515mx05mrs" path="res://Actors/player/player.gd" id="1_ook18"]
 [ext_resource type="Material" uid="uid://dnhkbe7awyc5j" path="res://Materials/Damage.material" id="2_0osdd"]
@@ -22,11 +22,14 @@
 [ext_resource type="AudioStream" uid="uid://b5osrmg72oei1" path="res://Sounds/live_indikator.wav" id="19_02ndh"]
 [ext_resource type="Texture2D" uid="uid://cpaen3t2e175p" path="res://Sprites/UI/Building Ui/gear_symbol.png" id="19_rplw8"]
 [ext_resource type="Texture2D" uid="uid://dcsm7k8td3g0" path="res://Sprites/UI/Building Ui/hammer_symbol.png" id="20_mmiwy"]
+[ext_resource type="AudioStream" uid="uid://dpyvc3ufqiv61" path="res://Sounds/error.wav" id="20_pg3yl"]
 [ext_resource type="Script" uid="uid://cvdesp1b077hv" path="res://Actors/player/perks_manager.gd" id="21_05ltf"]
 [ext_resource type="PackedScene" uid="uid://har1jftqgoco" path="res://Perks/PerkBuild/Perk_speed_it_up.tscn" id="22_8v5l4"]
 [ext_resource type="PackedScene" uid="uid://b5xnojapesv2" path="res://Perks/PerkBuild/Perk_construction_expert.tscn" id="23_02ndh"]
+[ext_resource type="Script" uid="uid://0q5q2xmsq3ov" path="res://Actors/player/perk_selection.gd" id="24_6gd3v"]
 [ext_resource type="PackedScene" uid="uid://ctvvb73lloi12" path="res://Perks/PerkBuild/Perk_Aim_Bot.tscn" id="24_pa3sa"]
 [ext_resource type="PackedScene" uid="uid://dcx3r6ucqwu7j" path="res://Perks/PerkBuild/Perk_Anti_Mine_Detection.tscn" id="25_38jmy"]
+[ext_resource type="Script" uid="uid://fhgob73dc8ew" path="res://Actors/player/perk_slots.gd" id="25_pg3yl"]
 [ext_resource type="PackedScene" uid="uid://b8p6a3a2srdcx" path="res://Perks/PerkBuild/Perk_CoinMaster.tscn" id="26_3sfd7"]
 [ext_resource type="PackedScene" uid="uid://dfxuwbhwgn0pd" path="res://Perks/PerkBuild/Perk_Barrier_Shield.tscn" id="26_wpgrq"]
 [ext_resource type="PackedScene" uid="uid://brn651v5wm1ly" path="res://Perks/PerkBuild/Perk_Critical_Edge.tscn" id="27_3sfd7"]
@@ -373,7 +376,7 @@ _data = {
 &"build_symbol": SubResource("Animation_ec8vi")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=182532903]
 process_mode = 1
 collision_layer = 2
 collision_mask = 17
@@ -382,215 +385,232 @@ radar_icon = ExtResource("2_fdgfk")
 landing_anim_name = Array[String](["idle", "use_item"])
 stats = SubResource("Resource_f7306")
 
-[node name="Script" type="Node" parent="."]
+[node name="Script" type="Node" parent="." unique_id=179333978]
 
-[node name="Movement" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+[node name="Movement" type="Node" parent="Script" unique_id=1414373503 node_paths=PackedStringArray("player")]
 script = ExtResource("15_dawng")
 player = NodePath("../..")
 
-[node name="Mining" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+[node name="Mining" type="Node" parent="Script" unique_id=2029625213 node_paths=PackedStringArray("player")]
 script = ExtResource("16_lr051")
 player = NodePath("../..")
 
-[node name="Build" type="Node" parent="Script" node_paths=PackedStringArray("player")]
+[node name="Build" type="Node" parent="Script" unique_id=1039448481 node_paths=PackedStringArray("player")]
 script = ExtResource("17_a2dyr")
 player = NodePath("../..")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=446006153]
 z_index = 1
 material = ExtResource("2_0osdd")
 texture = ExtResource("2_xfvlm")
 hframes = 4
 vframes = 3
 
-[node name="sprite_anim" type="AnimationPlayer" parent="Sprite"]
-libraries = {
-&"": SubResource("AnimationLibrary_sefct")
-}
+[node name="sprite_anim" type="AnimationPlayer" parent="Sprite" unique_id=533549951]
+libraries/ = SubResource("AnimationLibrary_sefct")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_t64nr")
-}
-autoplay = "fling"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1819091065]
+libraries/ = SubResource("AnimationLibrary_t64nr")
+autoplay = &"fling"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=252945942]
 visible = false
 z_index = 1
 shape = SubResource("CapsuleShape2D_xxfga")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=437509579]
 energy = 1.5
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("3_fk0u8")
 texture_scale = 1.5
 
-[node name="bohrer_holder" type="Node2D" parent="."]
+[node name="bohrer_holder" type="Node2D" parent="." unique_id=467809558]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, 11)
 
-[node name="item_sprite" type="AnimatedSprite2D" parent="bohrer_holder"]
+[node name="item_sprite" type="AnimatedSprite2D" parent="bohrer_holder" unique_id=1462395087]
 material = SubResource("CanvasItemMaterial_bg3jk")
 sprite_frames = SubResource("SpriteFrames_4pxcq")
 animation = &"use_item"
 autoplay = "use_item"
 frame_progress = 0.2695
 
-[node name="Rays" type="Node2D" parent="."]
+[node name="Rays" type="Node2D" parent="." unique_id=1563812714]
 
-[node name="check_for_ground" type="ShapeCast2D" parent="Rays"]
+[node name="check_for_ground" type="ShapeCast2D" parent="Rays" unique_id=1716983062]
 shape = SubResource("CapsuleShape2D_mru7q")
 target_position = Vector2(0, 2)
 max_results = 4
 
-[node name="check_for_destroyable_ground" type="ShapeCast2D" parent="Rays"]
+[node name="check_for_destroyable_ground" type="ShapeCast2D" parent="Rays" unique_id=2057027523]
 shape = SubResource("CapsuleShape2D_mru7q")
 target_position = Vector2(0, 2)
 max_results = 4
 
-[node name="Hitbox" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]
+[node name="Hitbox" parent="." unique_id=29441199 node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]
 entity = NodePath("..")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox" unique_id=781214013]
 visible = false
 shape = SubResource("CapsuleShape2D_mru7q")
 
-[node name="BohrerHitBox" type="Area2D" parent="."]
+[node name="BohrerHitBox" type="Area2D" parent="." unique_id=386333529]
 collision_layer = 0
 collision_mask = 8
 
-[node name="bohrer_hit_coll" type="CollisionShape2D" parent="BohrerHitBox"]
+[node name="bohrer_hit_coll" type="CollisionShape2D" parent="BohrerHitBox" unique_id=659313151]
 visible = false
 position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_4eg5x")
 
-[node name="Crosshair" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="Crosshair" type="Node2D" parent="." unique_id=1047968572 node_paths=PackedStringArray("player")]
 top_level = true
 script = ExtResource("7_pdl7m")
 player = NodePath("..")
 
-[node name="sprite" type="Sprite2D" parent="Crosshair"]
+[node name="sprite" type="Sprite2D" parent="Crosshair" unique_id=1118446385]
 position = Vector2(50, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_vmm8m")
 
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="Crosshair"]
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Crosshair" unique_id=568386698]
 stream = ExtResource("9_51d1q")
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 1.5
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=98072370]
 remote_path = NodePath("../Crosshair")
 update_rotation = false
 
-[node name="Sounds" type="Node2D" parent="."]
+[node name="Sounds" type="Node2D" parent="." unique_id=475641787]
 
-[node name="Damage" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="Damage" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1089492862]
 stream = ExtResource("11_bdp4b")
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.4
 
-[node name="BohrerSound" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="BohrerSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=661693454]
 stream = ExtResource("12_purh8")
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 0.75
 
-[node name="LiveIndikator" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="LiveIndikator" type="AudioStreamPlayer2D" parent="Sounds" unique_id=287317411]
 stream = ExtResource("19_02ndh")
 script = ExtResource("10_pasbu")
 metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
 
-[node name="Symbol" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="ErrorSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=670081951]
+stream = ExtResource("20_pg3yl")
+volume_db = 10.0
+script = ExtResource("10_pasbu")
+metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
+
+[node name="Symbol" type="Node2D" parent="." unique_id=752856294 node_paths=PackedStringArray("player")]
 modulate = Color(1.5, 1.5, 1.5, 1)
 material = SubResource("CanvasItemMaterial_4cyff")
 script = ExtResource("18_lmggw")
 player = NodePath("..")
 
-[node name="Building_Symbol" type="Node2D" parent="Symbol"]
+[node name="Building_Symbol" type="Node2D" parent="Symbol" unique_id=1866773359]
 use_parent_material = true
 position = Vector2(0, -15)
 scale = Vector2(0.6, 0.6)
 
-[node name="GearSymbol" type="Sprite2D" parent="Symbol/Building_Symbol"]
+[node name="GearSymbol" type="Sprite2D" parent="Symbol/Building_Symbol" unique_id=1463311624]
 use_parent_material = true
 position = Vector2(9.33334, 2)
 texture = ExtResource("19_rplw8")
 
-[node name="HammerSymbol" type="Sprite2D" parent="Symbol/Building_Symbol"]
+[node name="HammerSymbol" type="Sprite2D" parent="Symbol/Building_Symbol" unique_id=140981485]
 use_parent_material = true
 position = Vector2(-2.66667, -8)
 texture = ExtResource("20_mmiwy")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Symbol/Building_Symbol"]
-libraries = {
-&"": SubResource("AnimationLibrary_0lpgm")
-}
-autoplay = "build_symbol"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Symbol/Building_Symbol" unique_id=467244832]
+libraries/ = SubResource("AnimationLibrary_0lpgm")
+autoplay = &"build_symbol"
 
-[node name="Perks" type="Node" parent="." node_paths=PackedStringArray("player")]
+[node name="PerkManager" type="Node" parent="." unique_id=668604466 node_paths=PackedStringArray("player", "perk_selector", "selection", "slots", "perks_node")]
 process_mode = 3
 script = ExtResource("21_05ltf")
 player = NodePath("..")
+perk_selector = NodePath("../Ui/PerkSelector")
+selection = NodePath("---Scripts---/PerkSelection")
+slots = NodePath("---Scripts---/PerkSlots")
+perks_node = NodePath("Perks")
 
-[node name="Speed_It_Up" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("22_8v5l4")]
-player = NodePath("../..")
+[node name="---Scripts---" type="Node" parent="PerkManager" unique_id=1523925065]
 
-[node name="Construction_expert" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("23_02ndh")]
-player = NodePath("../..")
+[node name="PerkSelection" type="Node" parent="PerkManager/---Scripts---" unique_id=1606841212 node_paths=PackedStringArray("manager")]
+script = ExtResource("24_6gd3v")
+manager = NodePath("../..")
 
-[node name="AimBot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
-player = NodePath("../..")
+[node name="PerkSlots" type="Node" parent="PerkManager/---Scripts---" unique_id=614116422 node_paths=PackedStringArray("manager")]
+script = ExtResource("25_pg3yl")
+manager = NodePath("../..")
 
-[node name="PerkAntiMineDetection" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("25_38jmy")]
-player = NodePath("../..")
+[node name="Perks" type="Node" parent="PerkManager" unique_id=308913183]
 
-[node name="BarrierShield" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("26_wpgrq")]
-player = NodePath("../..")
+[node name="Speed_It_Up" parent="PerkManager/Perks" unique_id=1932687981 node_paths=PackedStringArray("player") instance=ExtResource("22_8v5l4")]
+player = NodePath("../../..")
 
-[node name="CoinMaster" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("26_3sfd7")]
-player = NodePath("../..")
+[node name="Construction_expert" parent="PerkManager/Perks" unique_id=914926845 node_paths=PackedStringArray("player") instance=ExtResource("23_02ndh")]
+player = NodePath("../../..")
 
-[node name="PerkCriticalEdge" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("27_3sfd7")]
-player = NodePath("../..")
+[node name="AimBot" parent="PerkManager/Perks" unique_id=1063151400 node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
+player = NodePath("../../..")
 
-[node name="Each_Round_Heal" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("28_dis4x")]
-player = NodePath("../..")
+[node name="PerkAntiMineDetection" parent="PerkManager/Perks" unique_id=1856133259 node_paths=PackedStringArray("player") instance=ExtResource("25_38jmy")]
+player = NodePath("../../..")
 
-[node name="Emergency_Heal" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("29_fs83k")]
-player = NodePath("../..")
+[node name="BarrierShield" parent="PerkManager/Perks" unique_id=1121491132 node_paths=PackedStringArray("player") instance=ExtResource("26_wpgrq")]
+player = NodePath("../../..")
 
-[node name="Extra_Health" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("30_6ll5j")]
-player = NodePath("../..")
+[node name="CoinMaster" parent="PerkManager/Perks" unique_id=842886800 node_paths=PackedStringArray("player") instance=ExtResource("26_3sfd7")]
+player = NodePath("../../..")
 
-[node name="Resilience" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("31_ds0h7")]
-player = NodePath("../..")
+[node name="PerkCriticalEdge" parent="PerkManager/Perks" unique_id=490348910 node_paths=PackedStringArray("player") instance=ExtResource("27_3sfd7")]
+player = NodePath("../../..")
 
-[node name="PerkPowerShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("35_m4e5o")]
-player = NodePath("../..")
+[node name="Each_Round_Heal" parent="PerkManager/Perks" unique_id=1437008909 node_paths=PackedStringArray("player") instance=ExtResource("28_dis4x")]
+player = NodePath("../../..")
 
-[node name="PerkPiercingShot" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("36_f7306")]
-player = NodePath("../..")
+[node name="Emergency_Heal" parent="PerkManager/Perks" unique_id=1684271770 node_paths=PackedStringArray("player") instance=ExtResource("29_fs83k")]
+player = NodePath("../../..")
 
-[node name="PerkStunGrenade" parent="Perks" node_paths=PackedStringArray("player") instance=ExtResource("37_4hqgc")]
-player = NodePath("../..")
+[node name="Extra_Health" parent="PerkManager/Perks" unique_id=218607484 node_paths=PackedStringArray("player") instance=ExtResource("30_6ll5j")]
+player = NodePath("../../..")
 
-[node name="Ui" type="CanvasLayer" parent="."]
+[node name="Resilience" parent="PerkManager/Perks" unique_id=1904476207 node_paths=PackedStringArray("player") instance=ExtResource("31_ds0h7")]
+player = NodePath("../../..")
+
+[node name="PerkPowerShot" parent="PerkManager/Perks" unique_id=1298049131 node_paths=PackedStringArray("player") instance=ExtResource("35_m4e5o")]
+player = NodePath("../../..")
+
+[node name="PerkPiercingShot" parent="PerkManager/Perks" unique_id=1629709656 node_paths=PackedStringArray("player") instance=ExtResource("36_f7306")]
+player = NodePath("../../..")
+
+[node name="PerkStunGrenade" parent="PerkManager/Perks" unique_id=1597407078 node_paths=PackedStringArray("player") instance=ExtResource("37_4hqgc")]
+player = NodePath("../../..")
+
+[node name="Ui" type="CanvasLayer" parent="." unique_id=108126596]
 process_mode = 3
 layer = 100
 
-[node name="PerkSelector" parent="Ui" instance=ExtResource("38_wsf62")]
+[node name="PerkSelector" parent="Ui" unique_id=703586708 instance=ExtResource("38_wsf62")]
 unique_name_in_owner = true
+process_mode = 3
 visible = false
 
-[node name="Building UI" parent="Ui" node_paths=PackedStringArray("player") instance=ExtResource("39_8tjx6")]
+[node name="Building UI" parent="Ui" unique_id=1113135167 node_paths=PackedStringArray("player") instance=ExtResource("39_8tjx6")]
 unique_name_in_owner = true
 visible = false
 player = NodePath("../..")
 
 [connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]
-[connection signal="show_perk_selection_ui" from="Perks" to="Ui/PerkSelector" method="set_perk_details"]
-[connection signal="select_perk_by_index" from="Ui/PerkSelector" to="Perks" method="_select_by_index"]
+[connection signal="show_perk_selection_ui" from="PerkManager" to="Ui/PerkSelector" method="set_perk_details"]
+[connection signal="select_perk_by_index" from="Ui/PerkSelector" to="PerkManager" method="_select_by_index"]

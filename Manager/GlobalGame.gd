@@ -10,6 +10,7 @@ var camera: MainCam
 
 var time_played := 0.00
 
+var is_in_tutorial := false
 
 
 func _process(delta: float) -> void:

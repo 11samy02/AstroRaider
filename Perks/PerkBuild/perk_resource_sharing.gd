@@ -1,17 +1,18 @@
 extends PerkBuild
 
-var collected_count := 0
+var _collected_count := 0
 
+## Passive: shares a percentage of collected crystals with teammates
 func _ready() -> void:
-	GSignals.PERK_event_collect_crystal.connect(share_coins)
+	GSignals.PERK_event_collect_crystal.connect(_on_crystal_collected)
 
-func share_coins() -> void:
-	collected_count += 1
-	
-	if floor(collected_count / 100 * get_value()) > 0:
-		for p_res : PlayerResource in GlobalGame.Players:
-			if p_res.player != Player_Res.player:
-				p_res.crystal_count += floor(collected_count / 100 * get_value())
-
-func _exit_tree() -> void:
-	pass
+func _on_crystal_collected(_pos: Vector2) -> void:
+	if !has_unlocked:
+		return
+	_collected_count += 1
+	var share := int(floor(_collected_count / 100.0 * get_value()))
+	if share > 0:
+		var res := get_player_res()
+		for p_res: PlayerResource in GlobalGame.Players:
+			if is_instance_valid(res) and p_res.player != res.player:
+				p_res.crystal_count += share

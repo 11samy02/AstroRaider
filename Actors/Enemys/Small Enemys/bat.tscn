@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c5fkee3ubvyvd"]
+[gd_scene format=3 uid="uid://c5fkee3ubvyvd"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_nx18g"]
 [ext_resource type="Script" uid="uid://77pn1mi1bwqa" path="res://Bat.gd" id="2_q52fh"]
@@ -27,16 +27,16 @@ script = ExtResource("6_7sg3r")
 key = 2
 state = 2
 
-[sub_resource type="Resource" id="Resource_8idiu"]
+[sub_resource type="Resource" id="Resource_yyvr8"]
 resource_local_to_scene = true
 script = ExtResource("7_sibcj")
 damage = 3
 
-[sub_resource type="Resource" id="Resource_7witj"]
+[sub_resource type="Resource" id="Resource_6tfvp"]
 resource_local_to_scene = true
 script = ExtResource("7_nrcht")
 max_health = 2
-attack = SubResource("Resource_8idiu")
+attack = SubResource("Resource_yyvr8")
 ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_fqdai"), SubResource("Resource_luiws"), SubResource("Resource_1443f")])
 speed = 100.0
 max_speed = 200.0
@@ -56,7 +56,7 @@ default_crit_chance = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_32yl0"]
 radius = 5.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2ik0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc3ci"]
 resource_local_to_scene = true
 shader = ExtResource("9_gg1tf")
 shader_parameter/opacity = 1.0
@@ -110,10 +110,10 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
 radius = 6.0
 
-[node name="Bat" instance=ExtResource("1_nx18g")]
+[node name="Bat" unique_id=624866104 instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
-stats = SubResource("Resource_7witj")
+stats = SubResource("Resource_6tfvp")
 stats_upgrades = SubResource("Resource_a3kia")
 sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 die_particle_variation = Array[Texture2D]([ExtResource("9_4w8is"), ExtResource("10_mcywg"), ExtResource("11_m18u0")])
@@ -124,31 +124,29 @@ position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_32yl0")
 
 [node name="sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_a2ik0")
+material = SubResource("ShaderMaterial_mc3ci")
 texture = ExtResource("3_kxtlt")
 hframes = 3
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-libraries = {
-&"": SubResource("AnimationLibrary_61fje")
-}
-autoplay = "flying"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=233451015]
+libraries/ = SubResource("AnimationLibrary_61fje")
+autoplay = &"flying"
 
-[node name="AttackBox" parent="." index="3" node_paths=PackedStringArray("owner_entity") instance=ExtResource("8_tqbtd")]
+[node name="AttackBox" parent="." index="3" unique_id=1442970693 node_paths=PackedStringArray("owner_entity") instance=ExtResource("8_tqbtd")]
 owner_entity = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0" unique_id=1249169730]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_sxo5n")
 
-[node name="Timer" type="Node" parent="." index="4"]
+[node name="Timer" type="Node" parent="." index="4" unique_id=1060107646]
 
-[node name="wander_time" type="Timer" parent="Timer" index="0"]
+[node name="wander_time" type="Timer" parent="Timer" index="0" unique_id=1453620528]
 one_shot = true
 
-[node name="follow_time" type="Timer" parent="Timer" index="1"]
+[node name="follow_time" type="Timer" parent="Timer" index="1" unique_id=1018171307]
 wait_time = 2.0
 one_shot = true
 
@@ -163,5 +161,8 @@ visible = false
 [node name="Death" parent="Sounds" index="0"]
 min_random_pitch = 2.0
 max_random_pitch = 3.0
+
+[node name="Effects_animation" parent="Effects" index="1"]
+autoplay = &"rotate_stun"
 
 [connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

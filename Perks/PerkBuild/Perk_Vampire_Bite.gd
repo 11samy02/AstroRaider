@@ -1,13 +1,11 @@
 extends PerkBuild
 
-
+## Passive: heals player when they kill an enemy
 func _enter_tree() -> void:
-	GSignals.ENE_killed_by.connect(heal_player)
+	GSignals.ENE_killed_by.connect(_on_enemy_killed)
 
-
-func heal_player(player: Player) -> void:
-	if player == Player_Res.player:
-		GSignals.HIT_take_heal.emit(Player_Res.player, get_value())
-
-func _exit_tree() -> void:
-	pass
+func _on_enemy_killed(killed_by: Player) -> void:
+	if !has_unlocked:
+		return
+	if killed_by == player:
+		GSignals.HIT_take_heal.emit(player, get_value())

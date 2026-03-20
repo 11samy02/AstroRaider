@@ -1,17 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://cwi0qr43hj35l"]
+[gd_scene format=3 uid="uid://cwi0qr43hj35l"]
 
 [ext_resource type="Script" uid="uid://iqgdis0gh0mk" path="res://Projectiles/Photon_gun_projectile.gd" id="1_08njn"]
 [ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="2_8acic"]
-[ext_resource type="Texture2D" uid="uid://betk3rgbaluts" path="res://Sprites/Projectiles/energy_ball_blue.png" id="3_3sbgt"]
 [ext_resource type="Script" uid="uid://b31rxhp2hd877" path="res://Manager/enemy_detector.gd" id="4_ibkb1"]
+[ext_resource type="Script" uid="uid://dfjjb5na8bgtc" path="res://Projectiles/line_2d.gd" id="4_n52xp"]
 
 [sub_resource type="Resource" id="Resource_y1juh"]
 script = ExtResource("2_8acic")
-damage = 1
 knockback = 2.0
-crit_chance = 0.0
-has_stun = false
-stun_strength = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwaew"]
 radius = 6.0
@@ -99,92 +95,96 @@ _data = {
 &"hit": SubResource("Animation_3j0tr")
 }
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x50bl"]
-light_mode = 1
-particles_animation = true
-particles_anim_h_frames = 2
-particles_anim_v_frames = 2
-particles_anim_loop = true
+[sub_resource type="Shader" id="Shader_kd8vk"]
+code = "shader_type canvas_item;
+render_mode blend_add;
 
-[sub_resource type="Gradient" id="Gradient_twtt0"]
-offsets = PackedFloat32Array(0.0247525, 0.133663, 0.712644, 1)
-colors = PackedColorArray(1, 1, 1, 0, 2, 2, 2, 1, 2, 2, 2, 1, 0, 0, 0, 0)
+uniform vec4 color_1 : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 color_2 : source_color = vec4(0.0, 1.0, 1.0, 1.0);
+uniform vec4 color_3 : source_color = vec4(0.0, 0.3, 1.0, 1.0);
+uniform float pulse_speed : hint_range(0.0, 20.0) = 6.0;
+uniform float glow_intensity : hint_range(0.0, 10.0) = 4.0;
+uniform float core_sharpness : hint_range(1.0, 20.0) = 8.0;
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_8g21i"]
-gradient = SubResource("Gradient_twtt0")
+void fragment() {
+	float along = UV.x;
+	float across = abs(UV.y - 0.5) * 2.0;
 
-[sub_resource type="Curve" id="Curve_iiadq"]
-_data = [Vector2(0, 0.252396), 0.0, 3.85669, 0, 0, Vector2(0.485149, 0.406593), -1.07818, -1.07818, 0, 0, Vector2(0.995049, 0.043956), 0.602903, 0.0, 0, 0]
-point_count = 3
+	float t = TIME * pulse_speed;
+	float phase1 = sin(t) * 0.5 + 0.5;
+	float phase2 = sin(t + 2.094) * 0.5 + 0.5;
+	float phase3 = sin(t + 4.188) * 0.5 + 0.5;
+	float total = phase1 + phase2 + phase3;
+	vec3 pulsed = (color_1.rgb * phase1 + color_2.rgb * phase2 + color_3.rgb * phase3) / total;
 
-[sub_resource type="CurveTexture" id="CurveTexture_14hi4"]
-curve = SubResource("Curve_iiadq")
+	float trail_fade = 1.0 - along;
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hcrm6"]
-particle_flag_damping_as_friction = true
-emission_shape = 1
-emission_sphere_radius = 2.0
-angle_min = -360.0
-angle_max = 360.0
-direction = Vector3(0, 0, 0)
-spread = 5.0
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-gravity = Vector3(0, 0, 0)
-linear_accel_min = 10.0
-linear_accel_max = 20.0
-scale_curve = SubResource("CurveTexture_14hi4")
-color_ramp = SubResource("GradientTexture1D_8g21i")
-anim_speed_min = 1.0
-anim_speed_max = 1.0
+	float core = pow(1.0 - across, core_sharpness);
+	float glow = pow(1.0 - across, 2.0) * 0.5;
+
+	float brightness = core + glow;
+	vec3 final_color = mix(pulsed, vec3(1.0), core * 0.6) * glow_intensity;
+
+	float alpha = (core + glow * 0.5) * trail_fade;
+
+	COLOR = vec4(final_color, alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xowwe"]
+shader = SubResource("Shader_kd8vk")
+shader_parameter/color_1 = Color(0.96862745, 1, 0, 1)
+shader_parameter/color_2 = Color(0, 1, 1, 1)
+shader_parameter/color_3 = Color(0, 0.3, 1, 1)
+shader_parameter/pulse_speed = 6.0
+shader_parameter/glow_intensity = 6.000000285
+shader_parameter/core_sharpness = 12.0000005225
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jacb"]
 radius = 256.0
 
-[node name="PhotoGunProjectile" type="Area2D" node_paths=PackedStringArray("enemy_detector_area")]
+[node name="PhotoGunProjectile" type="Area2D" unique_id=1565731246 node_paths=PackedStringArray("trail", "enemy_detector_area")]
 process_mode = 1
-modulate = Color(1, 1, 1, 0)
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_08njn")
+trail = NodePath("trail")
 enemy_detector_area = NodePath("EnemyDetectorArea")
 atk_resource = SubResource("Resource_y1juh")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1894054126]
+visible = false
 top_level = true
 position = Vector2(-5, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_iwaew")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_fp201")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=674237300]
+libraries/ = SubResource("AnimationLibrary_fp201")
 
-[node name="lifetime" type="Timer" parent="."]
+[node name="trail" type="MeshInstance2D" parent="." unique_id=1474624237]
+material = SubResource("ShaderMaterial_xowwe")
+script = ExtResource("4_n52xp")
+max_trail_points = 75
+trail_width = 25.0
+
+[node name="lifetime" type="Timer" parent="." unique_id=718679058]
 wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="particle" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_x50bl")
-amount = 256
-texture = ExtResource("3_3sbgt")
-lifetime = 0.3
-fixed_fps = 0
-draw_order = 0
-process_material = SubResource("ParticleProcessMaterial_hcrm6")
-
-[node name="EnemyDetectorArea" type="Area2D" parent="." node_paths=PackedStringArray("parent")]
+[node name="EnemyDetectorArea" type="Area2D" parent="." unique_id=1509789038 node_paths=PackedStringArray("parent")]
+visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_ibkb1")
 parent = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea" unique_id=932349472]
 shape = SubResource("CircleShape2D_5jacb")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=238891374]
+visible = false
 position = Vector2(-16, 0)
 scale = Vector2(2.875, 1)
 

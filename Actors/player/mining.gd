@@ -4,7 +4,7 @@ extends Node
 var player_res : PlayerResource
 
 var static_hit_list : Array[Area2D] = []
-
+var _last_bohrer_state := false
 
 func _ready() -> void:
 	await(get_tree().create_timer(0.1).timeout)
@@ -21,40 +21,24 @@ func set_bohrer_state() -> void:
 	bohrer_damage_on_static_hit()
 	if player.check_for_destroyable_ground.is_colliding():
 		destroy_ground()
-		
-	if player.controller_id == 0 and Input.get_connected_joypads().size() == 0 and player.player_id == 0:
-		if player.gravity_dir == Vector2.LEFT and Input.is_action_pressed("ui_left"):
-			player.is_bohrer_active = true
-			
-		elif player.gravity_dir == Vector2.RIGHT and Input.is_action_pressed("ui_right"):
-			player.is_bohrer_active = true
-			
-		elif player.gravity_dir == Vector2.UP and Input.is_action_pressed("ui_up"):
-			player.is_bohrer_active = true
-			
-		elif player.gravity_dir == Vector2.DOWN and Input.is_action_pressed("ui_down"):
-			player.is_bohrer_active = true
-			
-		else:
-			player.is_bohrer_active = false
-			player.bohrer_sound.stop()
+
+	var dir = get_parent().get_node("Movement").get_input_direction()
+	var is_moving_in_gravity_dir := false
+
+	if player.gravity_dir == Vector2.LEFT and dir.x < -player.deadzone:
+		is_moving_in_gravity_dir = true
+	elif player.gravity_dir == Vector2.RIGHT and dir.x > player.deadzone:
+		is_moving_in_gravity_dir = true
+	elif player.gravity_dir == Vector2.UP and dir.y < -player.deadzone:
+		is_moving_in_gravity_dir = true
+	elif player.gravity_dir == Vector2.DOWN and dir.y > player.deadzone:
+		is_moving_in_gravity_dir = true
+
+	if is_moving_in_gravity_dir:
+		player.is_bohrer_active = true
 	else:
-		if player.gravity_dir == Vector2.LEFT and (Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_X) < -player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_LEFT)) :
-				player.is_bohrer_active = true
-			
-		elif player.gravity_dir == Vector2.RIGHT and (Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_X) > player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_RIGHT)) :
-				player.is_bohrer_active = true
-			
-		elif player.gravity_dir == Vector2.UP and (Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_Y) < -player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_UP)):
-				player.is_bohrer_active = true
-			
-		elif player.gravity_dir == Vector2.DOWN and (Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_Y) > player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_DOWN)):
-				player.is_bohrer_active = true
-			
-		else:
-			player.bohrer_sound.stop()
-			player.is_bohrer_active = false
-			
+		player.is_bohrer_active = false
+		player.bohrer_sound.stop()
 
 ##Muss geändert werden: ERROR
 func destroy_ground() -> void:
@@ -72,20 +56,20 @@ func destroy_ground() -> void:
 		player.bohrer_sound.stop()
 
 func use_bohrer_anim() -> void:
-	var tween = create_tween()
+	if player.is_bohrer_active == _last_bohrer_state:
+		return
+	_last_bohrer_state = player.is_bohrer_active
 	
+	var tween = create_tween()
 	if !player.is_bohrer_active:
 		tween.tween_property(player.bohrer_holder, "modulate", Color("#ffffff00"), 0.05)
 		player.bohrer_hit_coll.set_disabled(true)
-		return
-		
 	else:
 		tween.tween_property(player.bohrer_holder, "modulate", Color("#ffffff"), 0.05)
 		player.bohrer_hit_coll.set_disabled(false)
 		if player.anim.current_animation != "use_item":
 			player.anim.stop()
 			player.anim.play("use_item")
-
 
 func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 	if area is Hitbox:

@@ -33,36 +33,25 @@ func apply_gravity(delta: float) -> void:
 
 
 
-func input_movement(event: InputEvent) ->void:
-	if player.controller_id == 0 and Input.get_connected_joypads().size() == 0 and player.player_id == 0:
-		if Input.is_action_pressed("ui_left"):
-			player.sprite.flip_h = true
-			player.bohrer_holder.get_child(0).flip_h = true
-			change_gravity(Vector2.LEFT)
-		elif Input.is_action_pressed("ui_right"):
-			player.sprite.flip_h = false
-			player.bohrer_holder.get_child(0).flip_h = false
-			change_gravity(Vector2.RIGHT)
-		elif Input.is_action_pressed("ui_up"):
-			change_gravity(Vector2.UP)
-		elif Input.is_action_pressed("ui_down"):
-			change_gravity(Vector2.DOWN)
-	else:
-		if Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_X) < -player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_LEFT):
-			player.sprite.flip_h = true
-			player.sprite_outline.flip_h = true
-			player.bohrer_holder.get_child(0).flip_h = true
-			change_gravity(Vector2.LEFT)
-		elif Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_X) > player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_RIGHT):
-			player.sprite.flip_h = false
-			player.sprite_outline.flip_h = false
-			player.bohrer_holder.get_child(0).flip_h = false
-			change_gravity(Vector2.RIGHT)
-		elif Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_Y) < -player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_UP):
-			change_gravity(Vector2.UP)
-		elif Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_Y) > player.deadzone or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_DOWN):
-			change_gravity(Vector2.DOWN)
+func input_movement(event: InputEvent) -> void:
+	var dir = get_input_direction()
+	if dir.length() < player.deadzone:
+		return
 
+	if abs(dir.x) > abs(dir.y):
+		if dir.x < 0:
+			player.sprite.flip_h = true
+			player.bohrer_holder.get_child(0).flip_h = true
+			change_gravity(Vector2.LEFT)
+		else:
+			player.sprite.flip_h = false
+			player.bohrer_holder.get_child(0).flip_h = false
+			change_gravity(Vector2.RIGHT)
+	else:
+		if dir.y < 0:
+			change_gravity(Vector2.UP)
+		else:
+			change_gravity(Vector2.DOWN)
 
 func change_gravity(new_dir: Vector2) -> void:
 	if player.gravity_dir != new_dir:
@@ -99,3 +88,15 @@ func wrap_angle(angle: float) -> float:
 	while angle < 0.0:
 		angle += 360.0
 	return angle
+
+func get_input_direction() -> Vector2:
+	if player.controller_id == 0 and Input.get_connected_joypads().size() == 0 and player.player_id == 0:
+		return Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	else:
+		var joy_x = Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_X)
+		var joy_y = Input.get_joy_axis(player.controller_id, JOY_AXIS_LEFT_Y)
+		if Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_LEFT): joy_x = -1.0
+		elif Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_RIGHT): joy_x = 1.0
+		if Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_UP): joy_y = -1.0
+		elif Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_DPAD_DOWN): joy_y = 1.0
+		return Vector2(joy_x, joy_y)

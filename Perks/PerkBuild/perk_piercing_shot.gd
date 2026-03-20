@@ -1,8 +1,9 @@
 extends PerkBuild
 
+## Passive: projectiles pierce through additional enemies
 func activate_perk() -> void:
 	super()
-	if has_unlocked:
-		stats.added_Projectile_lives = get_value()
-	else:
-		stats.added_Projectile_lives = 0
+	stats.added_Projectile_lives = get_value()
+
+func _reset_stats() -> void:
+	stats.added_Projectile_lives = 0

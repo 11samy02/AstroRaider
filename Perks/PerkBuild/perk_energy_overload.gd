@@ -1,44 +1,28 @@
 extends PerkBuild
 
-@export var added_armor := 10
-@export var added_bohrer_dam := 5
-@export var added_speed := 50
+var _cooldown := 0.0
+var _is_active := false
 
-var time_delay : float = 0
-var can_activate_perk_again : bool = false
-
+## Activation: temporarily boosts stats for a duration based on perk value
 func _process(delta: float) -> void:
 	super(delta)
-	_time_delay(delta)
+	if _cooldown > 0:
+		_cooldown -= delta
 
 func activate_perk() -> void:
-	#stats.armor = default_armor + added_armor
-	#stats.bohrer_damage = default_bohrer_dam + added_bohrer_dam
-	#stats.max_speed = default_max_Speed + added_speed
-	var timer = Timer.new()
-	add_child(timer)
-	timer.set_one_shot(true)
-	#timer.timeout.connect(_on_timer_timeout)
-	timer.set_wait_time(get_value())
-	timer.start()
-	time_delay = 120
-	await timer.timeout
-	timer.queue_free()
+	if !has_unlocked:
+		return
+	if _cooldown > 0:
+		return
+	_apply_boost()
 
-#func reset_perk() -> void:
-	#stats.armor = default_armor
-	#stats.bohrer_damage = default_bohrer_dam
-	#stats.max_speed = default_max_Speed
+func _apply_boost() -> void:
+	stats.added_bohrer_damage = 5
+	stats.added_max_speed = 50
+	_cooldown = 120.0
+	await get_tree().create_timer(float(get_value())).timeout
+	_remove_boost()
 
-#func _exit_tree() -> void:
-	#stats.armor = default_armor
-	#stats.bohrer_damage = default_bohrer_dam
-
-
-#func _on_timer_timeout() -> void:
-	#reset_perk()
-
-func _time_delay(delta):
-	time_delay -= delta
-	if time_delay <= 0:
-		can_activate_perk_again = true
+func _remove_boost() -> void:
+	stats.added_bohrer_damage = 0
+	stats.added_max_speed = 0

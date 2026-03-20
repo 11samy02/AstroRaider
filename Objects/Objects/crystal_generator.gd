@@ -86,6 +86,6 @@ func death():
 	queue_free()
 
 func get_hit():
-	GSignals.CAM_shake_effect.emit(randf_range(8.0, 12.0),3)
+	GSignals.CAM_shake_effect.emit(randf_range(1.0, 4.0),1.5)
 	animation_player.play("hit")
 	await (animation_player.animation_finished)

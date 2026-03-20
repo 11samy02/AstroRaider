@@ -11,9 +11,13 @@ class_name BossHealthBar
 var glow_tween: Tween
 var glow_active := false
 var alive_modulate := Color(1, 1, 1, 1)
-var dead_modulate := Color(0.20, 0.20, 0.20, 1) # dunkler/„verbrannter“ Look
+var dead_modulate := Color(0.20, 0.20, 0.20, 1)
 var death_tween: Tween
 var death_played := false
+var vanish_tween: Tween
+var vanish_done := false
+var _vanish_origin := Vector2.ZERO
+
 
 ## Initialisiert Material/Max-Werte und setzt den Startzustand (Glow/Dead-Bar).
 func _ready() -> void:
@@ -31,14 +35,11 @@ func _ready() -> void:
 
 	update_glow_state()
 
+
 ## Test-Input und regelmäßige Aktualisierung des Glow-Zustands.
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("aktivat_perk"):
-		if randi_range(0, 2):
-			get_damage(randi_range(1, 3) * 10, randi_range(0, 44) == 0)
-		else:
-			get_damage(randi_range(1, 3) * 100, randi_range(0, 4) == 0)
 	update_glow_state()
+
 
 ## Aktualisiert visuelle Zustände: Puls-Glow unter Schwelle, epischer Dead-State bei 0 HP.
 func update_glow_state() -> void:
@@ -64,6 +65,7 @@ func update_glow_state() -> void:
 			stop_glow_pulse()
 		else:
 			bar.material.set_shader_parameter("glow_intensity", 0.0)
+
 
 ## Wendet Schaden an, animiert Chip-Bar, Feedback und Zustände.
 func get_damage(amount: float, is_crit: bool = false) -> void:
@@ -92,6 +94,7 @@ func get_damage(amount: float, is_crit: bool = false) -> void:
 
 	update_glow_state()
 
+
 ## Heilt HP, animiert reale Bar und aktualisiert Zustände.
 func heal(amount: float) -> void:
 	var old_hp: float = boss_stats.current_hp
@@ -107,11 +110,13 @@ func heal(amount: float) -> void:
 
 	update_glow_state()
 
+
 ## Kurzer Treffer-Flash auf der Hauptleiste.
 func hit_flash() -> void:
 	var t := create_tween()
 	t.tween_property(bar, "modulate", Color(1, 1, 1, 1), 0.04)
 	t.tween_property(bar, "modulate", Color(1, 1, 1, 0.96), 0.10)
+
 
 ## Minimaler Horizontal-Ruck für die Leiste selbst (kein globales Movement).
 func micro_shake(intensity: float = 3.0, dur: float = 0.15) -> void:
@@ -120,6 +125,7 @@ func micro_shake(intensity: float = 3.0, dur: float = 0.15) -> void:
 	t.tween_property(self, "position", start + Vector2(-intensity, 0), dur * 0.25)
 	t.tween_property(self, "position", start + Vector2(intensity, 0), dur * 0.50)
 	t.tween_property(self, "position", start, dur * 0.25)
+
 
 ## Kritischer Hit-Puls im Material (nur wenn lebendig).
 func crit_pulse() -> void:
@@ -132,10 +138,12 @@ func crit_pulse() -> void:
 	t.tween_property(bar.material, "shader_parameter/crit_intensity", 0.0, 0.16)
 	t.tween_callback(Callable(self, "_end_crit"))
 
+
 ## Beendet den Crit-Status im Shader.
 func _end_crit() -> void:
 	if bar.material:
 		bar.material.set_shader_parameter("crit_active", false)
+
 
 ## Startet Herzschlag-Glow (Doppel-Schlag) mit HP-abhängiger Geschwindigkeit/Intensität.
 func start_glow_pulse() -> void:
@@ -193,6 +201,7 @@ func start_glow_pulse() -> void:
 
 	glow_tween.tween_callback(Callable(self, "start_glow_pulse"))
 
+
 ## Stoppt Glow-Tween und setzt die Intensität zurück.
 func stop_glow_pulse() -> void:
 	if glow_tween and glow_tween.is_valid():
@@ -201,6 +210,7 @@ func stop_glow_pulse() -> void:
 	glow_active = false
 	if bar.material:
 		bar.material.set_shader_parameter("glow_intensity", 0.0)
+
 
 ## Epische Dead-Sequenz (ohne Bewegung): Weiß-Flash → Blutrot → Flicker → Ausglühen → Verkohlt.
 func _play_death_sequence() -> void:
@@ -220,16 +230,13 @@ func _play_death_sequence() -> void:
 	death_tween.set_trans(Tween.TRANS_SINE)
 	death_tween.set_ease(Tween.EASE_OUT)
 
-	# 1) Weiß-Flash (kurz, hart)
 	var flash_up := death_tween.tween_property(bar, "modulate", Color(1, 1, 1, 1), 0.05)
 	flash_up.set_trans(Tween.TRANS_QUINT); flash_up.set_ease(Tween.EASE_OUT)
 
-	# 2) Blutrot-Aufglühen (kräftiger Farbwechsel)
 	var crimson := Color(0.85, 0.15, 0.15, 1.0)
 	var to_crimson := death_tween.tween_property(bar, "modulate", crimson, 0.10)
 	to_crimson.set_trans(Tween.TRANS_QUAD); to_crimson.set_ease(Tween.EASE_OUT)
 
-	# 3) Glow-Flicker (mehrere schnelle Peaks/Abfälle)
 	if bar.material:
 		var flick := create_tween()
 		flick.tween_property(bar.material, "shader_parameter/glow_intensity", 0.90, 0.06)
@@ -239,14 +246,12 @@ func _play_death_sequence() -> void:
 		flick.tween_property(bar.material, "shader_parameter/glow_intensity", 0.50, 0.04)
 		flick.tween_property(bar.material, "shader_parameter/glow_intensity", 0.00, 0.16)
 
-	# 4) Helligkeits-Flicker der Chip-Bar, damit beide „sterben“
 	var chip_flick := create_tween()
 	chip_flick.tween_property(chip_bar, "modulate", crimson.lightened(0.15), 0.06)
 	chip_flick.tween_property(chip_bar, "modulate", crimson.darkened(0.25), 0.07)
 	chip_flick.tween_property(chip_bar, "modulate", crimson, 0.05)
 	chip_flick.tween_property(chip_bar, "modulate", crimson.darkened(0.35), 0.10)
 
-	# 5) Langsames Ausglühen in verkohltes Grau (final)
 	var to_dead_main := death_tween.tween_property(bar, "modulate", dead_modulate, 0.30)
 	to_dead_main.set_trans(Tween.TRANS_SINE); to_dead_main.set_ease(Tween.EASE_IN)
 
@@ -257,6 +262,8 @@ func _play_death_sequence() -> void:
 		if bar.material:
 			bar.material.set_shader_parameter("glow_intensity", 0.0)
 	)
+	death_tween.tween_callback(Callable(self, "_vanish_after_death"))
+
 
 ## Bricht eine laufende Death-Animation ab und stellt den normalen Look wieder her.
 func _cancel_death_sequence() -> void:
@@ -267,13 +274,56 @@ func _cancel_death_sequence() -> void:
 	_set_alive_state()
 	if bar.material:
 		bar.material.set_shader_parameter("glow_intensity", 0.0)
+	_cancel_vanish()
+
 
 ## Setzt dunkleren Look für die „Dead Bar“ (Fallback).
 func _set_dead_state() -> void:
 	bar.modulate = dead_modulate
 	chip_bar.modulate = dead_modulate
 
+
 ## Setzt normalen Look für lebendige Zustände.
 func _set_alive_state() -> void:
 	bar.modulate = alive_modulate
 	chip_bar.modulate = alive_modulate
+
+
+## Lässt die gesamte Healthbar stilvoll verschwinden (nach der Dead-Animation).
+func _vanish_after_death() -> void:
+	if vanish_done:
+		return
+	vanish_done = true
+	_vanish_origin = position
+	pivot_offset = size * 0.5
+	if vanish_tween and vanish_tween.is_valid():
+		vanish_tween.kill()
+	vanish_tween = create_tween()
+	vanish_tween.set_trans(Tween.TRANS_QUART)
+	vanish_tween.set_ease(Tween.EASE_IN_OUT)
+	vanish_tween.tween_property(self, "scale", Vector2(1.06, 1.06), 0.10)
+	var shrink_time := 0.22
+	vanish_tween.parallel().tween_property(self, "scale", Vector2(0.82, 0.82), shrink_time)
+	vanish_tween.parallel().tween_property(self, "modulate:a", 0.0, shrink_time)
+	vanish_tween.parallel().tween_property(self, "position:y", _vanish_origin.y - 8.0, shrink_time)
+	vanish_tween.tween_callback(Callable(self, "_after_vanish"))
+
+
+## Wird nach dem Verschwinden aufgerufen – setzt Werte zurück und blendet aus.
+func _after_vanish() -> void:
+	hide()
+	modulate.a = 1.0
+	scale = Vector2.ONE
+	position = _vanish_origin
+
+
+## Hebt eine laufende Vanish-Animation auf (z. B. bei Revive).
+func _cancel_vanish() -> void:
+	if vanish_tween and vanish_tween.is_valid():
+		vanish_tween.kill()
+	vanish_tween = null
+	vanish_done = false
+	show()
+	modulate.a = 1.0
+	scale = Vector2.ONE
+	position = _vanish_origin

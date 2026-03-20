@@ -1,22 +1,18 @@
 extends PerkBuild
 
-var math : SimplefySettingMath = SimplefySettingMath.new()
-
 const ITEM_CRYSTAL = preload("res://Collectable/crystal.tscn")
 
+## Passive: spawns bonus crystals when player collects one
 func _ready() -> void:
-	GSignals.PERK_event_collect_crystal.connect(spawn_more_coins)
+	GSignals.PERK_event_collect_crystal.connect(_on_crystal_collected)
 	super()
 
-
-func spawn_more_coins(pos: Vector2) -> void:
-	math.min_value = 1
-	math.max_value = get_value()
-	
+func _on_crystal_collected(pos: Vector2) -> void:
+	if !has_unlocked:
+		return
 	var new_crystal: ItemCrystal = ITEM_CRYSTAL.instantiate()
-	
-	new_crystal.global_position = pos + Vector2(randi_range(-10,10), randi_range(-10,10))
-	var rand = randi_range(math.min_value, math.max_value)
+	var rand := randi_range(1, get_value())
+	new_crystal.global_position = pos + Vector2(randi_range(-10, 10), randi_range(-10, 10))
 	new_crystal.value += rand
 	new_crystal.is_first_one = false
 	new_crystal.mass += rand / 10.0

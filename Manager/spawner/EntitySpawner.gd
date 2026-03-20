@@ -27,20 +27,26 @@ static var enemy_levels_after : int = 2
 
 
 func _ready() -> void:
+	Dialogic.signal_event.connect(dialog_event)
 	reset()
 
 func start_wave():
 	start_new_wave()
 
 func _process(delta: float) -> void:
-	wave_time_max_time = wave_time.wait_time
-	wave_time_to_next = wave_time.wait_time - wave_time.time_left
-	wave_time_stopped = wave_time.is_stopped()
-	wave_count = local_wave_count
+	if !GlobalGame.is_in_tutorial:
+		wave_time_max_time = wave_time.wait_time
+		wave_time_to_next = wave_time.wait_time - wave_time.time_left
+		wave_time_stopped = wave_time.is_stopped()
+		wave_count = local_wave_count
+	else:
+		wave_count = 1
+		local_wave_count = 1
 
 func _on_wave_time_timeout() -> void:
-	if EnemyBaseTemplate.entity_list.is_empty():
-		start_new_wave()
+	if !GlobalGame.is_in_tutorial:
+		if EnemyBaseTemplate.entity_list.is_empty():
+			start_new_wave()
 
 func _on_spawn_time_timeout() -> void:
 	if wave_spawn_count > 0 and EnemyBaseTemplate.entity_list.size() < EnemyBaseTemplate.max_entitys_on_screen:
@@ -52,13 +58,14 @@ func _on_spawn_time_timeout() -> void:
 			wave_time.start()
 
 func start_new_wave() -> void:
-	GSignals.WAV_wave_endet.emit()
-	wave_count += wave_count_added_per_round
-	local_wave_count = wave_count
-	wave_spawn_count = rng.randi_range(spawn_per_round.min_value + wave_count + GlobalGame.Players.size(), spawn_per_round.max_value + wave_count + GlobalGame.Players.size())
-	spawn_time.start()
+	if !GlobalGame.is_in_tutorial:
+		GSignals.WAV_wave_endet.emit()
+		wave_count += wave_count_added_per_round
+		local_wave_count = wave_count
+		wave_spawn_count = rng.randi_range(spawn_per_round.min_value + wave_count + GlobalGame.Players.size(), spawn_per_round.max_value + wave_count + GlobalGame.Players.size())
+		spawn_time.start()
 
-func spawn_enemy() -> void:
+func spawn_enemy(random_enemy : bool = true) -> void:
 	randomize()
 	var spawn_pos: Vector2 = GlobalGame.camera.get_pos_out_of_cam()
 	var enemy_list : Array[PackedScene] = []
@@ -67,14 +74,20 @@ func spawn_enemy() -> void:
 		for i in enemy_res.rarity:
 			enemy_list.append(enemy_res.Entity)
 	
+	
 	var enemy = enemy_list.pick_random().instantiate()
+	if !random_enemy:
+		enemy = enemy_list[0].instantiate()
 	enemy.global_position = spawn_pos
 	enemy.level = floori(wave_count/enemy_levels_after)
 	get_parent().add_child(enemy)
 	EnemyBaseTemplate.entity_list.append(enemy)
 	wave_spawn_count -= 1
 
+
+
 func reset():
+	local_wave_count = 0
 	wave_count = 0
 	EnemyBaseTemplate.entity_list.clear()
 
@@ -95,3 +108,10 @@ func get_wave_type(wave_type_res: WaveTypeResource) -> bool:
 		wave_time.set_wait_time(pause_time)
 		return true
 	return false
+
+
+func dialog_event(argument : String) -> void:
+	if argument == "spawn_enemies":
+		wave_spawn_count = 3
+		for i in wave_spawn_count:
+			spawn_enemy(false)

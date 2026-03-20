@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d1j1bd7ma1q07"]
+[gd_scene format=3 uid="uid://d1j1bd7ma1q07"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_j57v1"]
 [ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://Actors/player/player.gdshader" id="2_8iqur"]
@@ -11,8 +11,6 @@
 
 [sub_resource type="Resource" id="Resource_6iokw"]
 script = ExtResource("3_die81")
-key = 0
-state = 0
 
 [sub_resource type="Resource" id="Resource_jp2f4"]
 script = ExtResource("3_die81")
@@ -24,46 +22,36 @@ script = ExtResource("3_die81")
 key = 2
 state = 2
 
-[sub_resource type="Resource" id="Resource_e365i"]
+[sub_resource type="Resource" id="Resource_b0nvu"]
 resource_local_to_scene = true
 script = ExtResource("4_tv15v")
 damage = 5
-knockback = 1.0
-crit_chance = 0.0
 
-[sub_resource type="Resource" id="Resource_57a5t"]
+[sub_resource type="Resource" id="Resource_0iplv"]
 resource_local_to_scene = true
 script = ExtResource("5_hrj2a")
 max_health = 5
-max_Random_health_edit = 0
-attack = SubResource("Resource_e365i")
+attack = SubResource("Resource_b0nvu")
 ai_type_keys = Array[ExtResource("3_die81")]([SubResource("Resource_6iokw"), SubResource("Resource_jp2f4"), SubResource("Resource_oasmq")])
 speed = 50.0
 max_speed = 150.0
-default_crit_chance = 20.0
 
-[sub_resource type="Resource" id="Resource_bdwum"]
+[sub_resource type="Resource" id="Resource_lweds"]
 resource_local_to_scene = true
 script = ExtResource("4_tv15v")
 damage = 5
-knockback = 1.0
-crit_chance = 0.0
 
-[sub_resource type="Resource" id="Resource_auds6"]
+[sub_resource type="Resource" id="Resource_b6l0w"]
 resource_local_to_scene = true
 script = ExtResource("5_hrj2a")
 max_health = 5
-max_Random_health_edit = 0
-attack = SubResource("Resource_bdwum")
-ai_type_keys = Array[ExtResource("3_die81")]([])
+attack = SubResource("Resource_lweds")
 speed = 10.0
-max_speed = 300.0
-default_crit_chance = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhm8i"]
 radius = 12.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_usxby"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5wtd"]
 resource_local_to_scene = true
 shader = ExtResource("2_8iqur")
 shader_parameter/opacity = 1.0
@@ -111,10 +99,10 @@ _data = {
 &"idle": SubResource("Animation_54vgy")
 }
 
-[node name="Glimblob" instance=ExtResource("1_j57v1")]
+[node name="Glimblob" unique_id=1386771000 instance=ExtResource("1_j57v1")]
 script = ExtResource("2_82sf1")
-stats = SubResource("Resource_57a5t")
-stats_upgrades = SubResource("Resource_auds6")
+stats = SubResource("Resource_0iplv")
+stats_upgrades = SubResource("Resource_b6l0w")
 sprite_variation = Array[Texture2D]([ExtResource("2_onj4g")])
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
@@ -123,7 +111,7 @@ position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_fhm8i")
 
 [node name="sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_usxby")
+material = SubResource("ShaderMaterial_q5wtd")
 texture = ExtResource("2_onj4g")
 hframes = 3
 vframes = 3
@@ -142,27 +130,31 @@ scale = Vector2(1.35, 1.65)
 min_random_pitch = 0.5
 max_random_pitch = 0.8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
-libraries = {
-"": SubResource("AnimationLibrary_x03m5")
-}
-autoplay = "idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6" unique_id=1696364050]
+libraries/ = SubResource("AnimationLibrary_x03m5")
+autoplay = &"idle"
 
-[node name="Timer" type="Node" parent="." index="7"]
+[node name="Timer" type="Node" parent="." index="7" unique_id=1870583630]
 
-[node name="wander_time" type="Timer" parent="Timer" index="0"]
+[node name="wander_time" type="Timer" parent="Timer" index="0" unique_id=1263329439]
 one_shot = true
 
-[node name="follow_time" type="Timer" parent="Timer" index="1"]
+[node name="follow_time" type="Timer" parent="Timer" index="1" unique_id=1650409726]
 wait_time = 2.0
 one_shot = true
 
-[node name="AttackBox" parent="." index="8" node_paths=PackedStringArray("owner_entity") instance=ExtResource("5_ldoh3")]
+[node name="AttackBox" parent="." index="8" unique_id=1370791554 node_paths=PackedStringArray("owner_entity") instance=ExtResource("5_ldoh3")]
 owner_entity = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0" unique_id=1819134092]
 visible = false
 position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_fhm8i")
+
+[node name="Effects" parent="." index="9"]
+visible = false
+
+[node name="Effects_animation" parent="Effects" index="1"]
+autoplay = &"rotate_stun"
 
 [connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

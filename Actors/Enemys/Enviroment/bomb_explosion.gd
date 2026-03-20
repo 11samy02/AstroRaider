@@ -29,7 +29,7 @@ func _apply_radius_to_shape() -> void:
 		pass
 	
 	scale = Vector2(radius_px / 60.0, radius_px / 60.0)
-	amount = int(radius_px * 10)
+	amount = int(radius_px / 60 * 3)
 
 
 

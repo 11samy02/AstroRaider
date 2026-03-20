@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BluePrintResource" load_steps=5 format=3 uid="uid://cc5ujc1dc164u"]
+[gd_resource type="Resource" script_class="BluePrintResource" format=3 uid="uid://cc5ujc1dc164u"]
 
 [ext_resource type="Script" uid="uid://d3nu3r61lypu2" path="res://Crafting/Resources/BluePrintCostTemplate.gd" id="1_qbbi5"]
 [ext_resource type="Script" uid="uid://crukqjhvhpjlt" path="res://Crafting/Resources/BluePrintResource.gd" id="2_7yknd"]

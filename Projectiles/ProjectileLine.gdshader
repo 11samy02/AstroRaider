@@ -1,39 +1,31 @@
 shader_type canvas_item;
+render_mode blend_add;
 
-uniform vec4 core_color : source_color = vec4(1.0, 0.0, 0.0, 1.0); // Farbe des Kerns (Mitte)
-uniform vec4 edge_color : source_color = vec4(1.0, 1.0, 0.0, 1.0); // Farbe des äußeren Glow
-uniform float speed = 3.0; // Geschwindigkeit der Animation
-uniform float glow_intensity = 1.5; // Stärke des Glows
-uniform float wave_amplitude = 0.05; // Höhe der Wellen
-uniform float wave_frequency = 10.0; // Frequenz der Wellen
-uniform float core_width = 0.2; // Breite des Kernbereichs
-uniform float edge_falloff = 0.4; // Weicher Übergang zu den Rändern
+uniform vec4 color_1 : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 color_2 : source_color = vec4(0.0, 1.0, 1.0, 1.0);
+uniform vec4 color_3 : source_color = vec4(0.0, 0.3, 1.0, 1.0);
+uniform float pulse_speed : hint_range(0.0, 20.0) = 6.0;
+uniform float glow_intensity : hint_range(0.0, 10.0) = 3.0;
+uniform float core_sharpness : hint_range(1.0, 20.0) = 10.0;
+uniform float white_core_strength : hint_range(0.0, 1.0) = 0.2;
 
 void fragment() {
-    // Zeitabhängige Animation
-    float t = TIME * speed;
+	float along = UV.x;
+	float across = abs(UV.y - 0.5) * 2.0;
 
-    // Wellenbewegung für dynamischen Effekt
-    float wave = sin(UV.x * wave_frequency + t) * wave_amplitude;
+	float t = TIME * pulse_speed;
+	float phase1 = sin(t) * 0.5 + 0.5;
+	float phase2 = sin(t + 2.094) * 0.5 + 0.5;
+	float phase3 = sin(t + 4.188) * 0.5 + 0.5;
+	float total = phase1 + phase2 + phase3;
+	vec3 pulsed = (color_1.rgb * phase1 + color_2.rgb * phase2 + color_3.rgb * phase3) / total;
 
-    // Abstand zur Mitte mit Wave-Verzerrung
-    float dist_to_center = abs(UV.y - 0.5 + wave);
+	float trail_fade = 1.0 - along;
+	float core = pow(1.0 - across, core_sharpness);
+	float glow = pow(1.0 - across, 2.0) * 0.4;
 
-    // Kernfarbe: Helle Mitte
-    float core = smoothstep(0.0, core_width, 0.5 - dist_to_center);
+	vec3 final_color = mix(pulsed, vec3(1.0), core * white_core_strength) * glow_intensity;
+	float alpha = (core + glow) * trail_fade;
 
-    // Randfarbe: Weicher Glow außerhalb des Kerns
-    float glow = smoothstep(edge_falloff, 0.0, dist_to_center);
-
-    // Mischung der Farben basierend auf Abstand
-    vec4 final_color = mix(edge_color, core_color, core);
-
-    // Glow-Intensität hinzufügen
-    final_color.rgb *= 1.0 + glow * glow_intensity;
-
-    // Alpha: immer sichtbar, abhängig von Glow und Kern
-    final_color.a = max(1.0 - dist_to_center, 0.0);
-
-    // Ergebnisfarbe setzen
-    COLOR = final_color;
+	COLOR = vec4(final_color, alpha);
 }

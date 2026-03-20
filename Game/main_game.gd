@@ -2,8 +2,8 @@ extends Node
 
 @export var enviroment : Enviroment
 
-@onready var entity_spawner: EntitySpawner = $EntitySpawner
-@onready var tutorial: CanvasLayer = $Tutorial
+@export var entity_spawner: EntitySpawner
+@export var tutorial: CanvasLayer
 
 const PLAYER = preload("res://Actors/player/player.tscn")
 

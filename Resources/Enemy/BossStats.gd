@@ -18,4 +18,5 @@ var current_Shield : int = Max_Shield
 @export_group("Perks Disadventage")
 @export var stun_resistence := 5.0
 @export var stunCD := 5.0
+@export var default_crit_chance: float = 5.00
 var is_stunned := false

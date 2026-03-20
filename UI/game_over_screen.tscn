@@ -231,6 +231,7 @@ text = "Titelscreen"
 
 [node name="options" type="Button" parent="button/TextureRect/HBoxContainer"]
 process_mode = 3
+visible = false
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
@@ -353,11 +354,11 @@ text = "Continue"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 process_mode = 3
 libraries = {
-"": SubResource("AnimationLibrary_6w5cw")
+&"": SubResource("AnimationLibrary_6w5cw")
 }
 
-[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="titelscreen_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="_on_titelscreen_pressed"]
+[connection signal="pressed" from="button/TextureRect/HBoxContainer/Titelscreen" to="." method="titelscreen_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="button/TextureRect/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="UserScore/TextureRect/HBoxContainer/save" to="." method="_on_save_pressed"]

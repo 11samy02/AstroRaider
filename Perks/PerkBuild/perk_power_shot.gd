@@ -1,8 +1,9 @@
 extends PerkBuild
 
+## Passive: increases projectile damage
 func activate_perk() -> void:
 	super()
-	if has_unlocked:
-		stats.added_projectile_damage = get_value()
-	else:
-		stats.added_projectile_damage = 0
+	stats.added_projectile_damage = get_value()
+
+func _reset_stats() -> void:
+	stats.added_projectile_damage = 0

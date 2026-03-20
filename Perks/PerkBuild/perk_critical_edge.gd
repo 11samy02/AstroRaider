@@ -1,4 +1,9 @@
 extends PerkBuild
 
+## Passive: increases critical hit chance
 func activate_perk() -> void:
-	player.stats.added_crit_chance = player.stats.crit_chance + 1 * get_value()
+	super()
+	stats.added_crit_chance = get_value()
+
+func _reset_stats() -> void:
+	stats.added_crit_chance = 0.0
