@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://maf5bglrbvx4" path="res://Game/main_game.gd" id="1_to3au"]
 [ext_resource type="PackedScene" uid="uid://diaruu2bt2xvq" path="res://Game/Enviroment/enviroment.tscn" id="1_wfgm1"]
 [ext_resource type="Script" uid="uid://dgspeswpe2p8m" path="res://Game/tutorial_manager.gd" id="2_udiv6"]
-[ext_resource type="PackedScene" uid="uid://cy8yxobay3dcf" path="res://UI/game_ui.tscn" id="4_niwkq"]
 [ext_resource type="Script" uid="uid://cgxsqh6vm7yss" path="res://Game/backgrounds.gd" id="4_pq065"]
 [ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://Game/Manager/default_camera.tscn" id="5_1oloc"]
 [ext_resource type="Script" uid="uid://cx7tpbqul3oe1" path="res://Images/Background/BackgroundRes.gd" id="5_1tp0s"]
@@ -291,10 +290,10 @@ color_ramp_bg = SubResource("GradientTexture2D_26ojy")
 color_ramp_fg = SubResource("GradientTexture2D_d42ia")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kp3b7"]
-size = Vector2(3840, 16)
+size = Vector2(7680, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_udiv6"]
-size = Vector2(16, 3000)
+size = Vector2(16, 6000)
 
 [node name="MainGame" type="Node" unique_id=609353765 node_paths=PackedStringArray("enviroment", "entity_spawner", "tutorial")]
 script = ExtResource("1_to3au")
@@ -522,24 +521,22 @@ layer = -5
 
 [node name="fg_fog" parent="." unique_id=539406239 instance=ExtResource("17_5nycs")]
 
-[node name="GameUI" parent="." unique_id=1344694764 instance=ExtResource("4_niwkq")]
-
 [node name="EntitySpawner" parent="." unique_id=327615893 instance=ExtResource("6_kru1y")]
 
 [node name="border" type="StaticBody2D" parent="." unique_id=621774748]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="border" unique_id=369530984]
-position = Vector2(1, -520)
+position = Vector2(1, -1040)
 shape = SubResource("RectangleShape2D_kp3b7")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="border" unique_id=1804767185]
-position = Vector2(0, 1091)
+position = Vector2(0, 2182)
 shape = SubResource("RectangleShape2D_kp3b7")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="border" unique_id=1256776639]
-position = Vector2(-967, -2)
+position = Vector2(-1934, -2)
 shape = SubResource("RectangleShape2D_udiv6")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="border" unique_id=484010249]
-position = Vector2(1448, -2)
+position = Vector2(2896, -2)
 shape = SubResource("RectangleShape2D_udiv6")

@@ -7,10 +7,11 @@ var static_hit_list : Array[Area2D] = []
 var _last_bohrer_state := false
 
 func _ready() -> void:
-	await(get_tree().create_timer(0.1).timeout)
-	for pla_res : PlayerResource in GlobalGame.Players:
+	await get_tree().create_timer(0.1).timeout
+	for pla_res: PlayerResource in GlobalGame.Players:
 		if pla_res.player == player:
 			player_res = pla_res
+	player.bohrer_hit_coll.set_disabled(true)
 
 func _physics_process(delta: float) -> void:
 	if player.current_state == player.states.Default:
@@ -72,6 +73,8 @@ func use_bohrer_anim() -> void:
 			player.anim.play("use_item")
 
 func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
+	if !player.is_bohrer_active:
+		return
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate:
 			var attack: AttackResource = AttackResource.new()

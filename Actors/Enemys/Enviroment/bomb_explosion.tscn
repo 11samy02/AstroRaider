@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxws2mlpf26mt"]
+[gd_scene format=3 uid="uid://bxws2mlpf26mt"]
 
 [ext_resource type="Script" uid="uid://c00hce7k57cvt" path="res://Actors/Enemys/Enviroment/bomb_explosion.gd" id="1_2qx2q"]
 [ext_resource type="Texture2D" uid="uid://b3mpkn3jvacv1" path="res://Sprites/Projectiles/Fireball.png" id="1_w5xmk"]
@@ -21,7 +21,7 @@ colors = PackedColorArray(1.5, 1.5, 1.5, 1, 0, 0, 0, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_dug5j"]
 radius = 60.0
 
-[node name="Bomb Explosion" type="CPUParticles2D"]
+[node name="Bomb Explosion" type="CPUParticles2D" unique_id=1232708512]
 self_modulate = Color(1.75, 1.75, 1, 1)
 material = SubResource("CanvasItemMaterial_12530")
 emitting = false
@@ -48,11 +48,11 @@ scale_amount_curve = SubResource("Curve_eghff")
 color_ramp = SubResource("Gradient_5jhvf")
 script = ExtResource("1_2qx2q")
 
-[node name="StaticAttackBox" type="Area2D" parent="."]
+[node name="StaticAttackBox" type="Area2D" parent="." unique_id=344141373]
 collision_layer = 0
 collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticAttackBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticAttackBox" unique_id=1604940109]
 shape = SubResource("CircleShape2D_dug5j")
 
 [connection signal="finished" from="." to="." method="_on_finished"]

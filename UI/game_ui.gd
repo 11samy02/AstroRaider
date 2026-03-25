@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var label_anim: AnimationPlayer = %label_anim
 @onready var fps_label: Label = %fps_label
 @onready var wave_progress: TextureProgressBar = %wave_progress
+@onready var abilities: HBoxContainer = %Abilities
 
 
 var last_wave_num:String

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://84vvohor50dh"]
+[gd_scene format=3 uid="uid://84vvohor50dh"]
 
 [ext_resource type="Texture2D" uid="uid://ogas3dydl4d1" path="res://Sprites/enviroment/Objects/Generator.png" id="1_gswfc"]
 [ext_resource type="Script" uid="uid://b3ofupfass8mq" path="res://Objects/Objects/crystal_generator.gd" id="1_qydqw"]
@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://cnwdm2llqw4lb" path="res://Sounds/CrystalCollectSound.wav" id="3_fkod7"]
 [ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="4_hf2de"]
 [ext_resource type="Script" uid="uid://htadlvo0gee" path="res://Manager/building_hitbox.gd" id="7_p8wcm"]
+[ext_resource type="Texture2D" uid="uid://b3up7t82onhdw" path="res://Sprites/UI/button_icon.png" id="7_saewh"]
+[ext_resource type="Texture2D" uid="uid://bukt0uxtxkyf6" path="res://Sprites/UI/button_icon_arrow.png" id="8_v04es"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4jwol"]
 light_mode = 1
@@ -188,7 +190,54 @@ radius = 15.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4idp"]
 size = Vector2(32, 32)
 
-[node name="CrystalGenerator" type="Area2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v04es"]
+light_mode = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_v04es"]
+font_size = 64
+font_color = Color(0, 0.61135113, 0.9364113, 1)
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_m76cm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 11)]
+}
+
+[sub_resource type="Animation" id="Animation_gjrvl"]
+resource_name = "iidle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.4, 0.43333334, 0.46666667, 0.5, 0.53333336, 0.56666666, 0.6, 0.6333333, 0.6666667, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 7), Vector2(0, 6.9891872), Vector2(0, 7.054028), Vector2(0, 6.9785824), Vector2(0, 6.8473625), Vector2(0, 6.8647904), Vector2(0, 7.0539055), Vector2(0, 7.354983), Vector2(0, 7.7222986), Vector2(0, 8.151913), Vector2(0, 8.680603), Vector2(0, 9.319397), Vector2(0, 9.848088), Vector2(0, 10.277702), Vector2(0, 10.645018), Vector2(0, 10.9460945), Vector2(0, 11.13521), Vector2(0, 11.1526375), Vector2(0, 11.021418), Vector2(0, 10.945972), Vector2(0, 11.010813), Vector2(0, 11)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kk0bd"]
+_data = {
+&"RESET": SubResource("Animation_m76cm"),
+&"iidle": SubResource("Animation_gjrvl")
+}
+
+[node name="CrystalGenerator" type="Area2D" unique_id=704735660]
 z_index = -20
 collision_layer = 64
 collision_mask = 32
@@ -198,59 +247,92 @@ has_health = true
 max_health = 500
 current_health = 500
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1942572129]
 material = SubResource("CanvasItemMaterial_4jwol")
 sprite_frames = SubResource("SpriteFrames_6xngr")
 autoplay = "default"
 frame_progress = 0.0931071
 
-[node name="damage_shader" type="AnimatedSprite2D" parent="."]
+[node name="damage_shader" type="AnimatedSprite2D" parent="." unique_id=697802416]
 material = SubResource("ShaderMaterial_3letp")
 sprite_frames = SubResource("SpriteFrames_6xngr")
 autoplay = "default"
 frame_progress = 0.0931071
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=632364253]
 shape = SubResource("CircleShape2D_g8ix4")
 
-[node name="Sounds" type="Node2D" parent="."]
+[node name="Sounds" type="Node2D" parent="." unique_id=655965613]
 visible = false
 
-[node name="CollectCrystal" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="CollectCrystal" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1438037402]
 visible = false
 stream = ExtResource("3_fkod7")
 script = ExtResource("4_hf2de")
 min_random_pitch = 0.75
 max_random_pitch = 1.5
 
-[node name="CheckPlayerNearby" type="Area2D" parent="."]
+[node name="CheckPlayerNearby" type="Area2D" parent="." unique_id=2119622012]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPlayerNearby"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CheckPlayerNearby" unique_id=1338347422]
 visible = false
 shape = SubResource("CircleShape2D_lsdkb")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_5sfde")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1641947030]
+libraries/ = SubResource("AnimationLibrary_5sfde")
 
-[node name="BuildingHitbox" type="Area2D" parent="." node_paths=PackedStringArray("entity")]
+[node name="BuildingHitbox" type="Area2D" parent="." unique_id=514216116 node_paths=PackedStringArray("entity")]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("7_p8wcm")
 entity = NodePath("..")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="BuildingHitbox"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BuildingHitbox" unique_id=894746916]
 shape = SubResource("CircleShape2D_7diee")
 
-[node name="BuildingPlacedColl" type="Area2D" parent="."]
+[node name="BuildingPlacedColl" type="Area2D" parent="." unique_id=564195763]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" unique_id=83080945]
 shape = SubResource("RectangleShape2D_d4idp")
+
+[node name="interactionn_icon" type="Sprite2D" parent="." unique_id=796406532]
+visible = false
+material = SubResource("CanvasItemMaterial_v04es")
+position = Vector2(0, -40)
+texture = ExtResource("7_saewh")
+
+[node name="Label" type="Label" parent="interactionn_icon" unique_id=1815113342]
+use_parent_material = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -17.0
+offset_right = 23.5
+offset_bottom = 71.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.17, 0.17)
+size_flags_horizontal = 4
+text = "F"
+label_settings = SubResource("LabelSettings_v04es")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="arrow" type="Sprite2D" parent="interactionn_icon" unique_id=1702542967]
+use_parent_material = true
+position = Vector2(0, 11)
+texture = ExtResource("8_v04es")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="interactionn_icon" unique_id=813817133]
+libraries/ = SubResource("AnimationLibrary_kk0bd")
+autoplay = &"iidle"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="CheckPlayerNearby" to="." method="_on_check_player_nearby_body_entered"]

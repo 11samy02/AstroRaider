@@ -1,10 +1,14 @@
 extends Node
 class_name PerkBuild
 
+signal cooldown_started(duration: float)
+
 @export var Key: PerkData.Keys
 @export var player: Player
 @export_range(1, 6) var Level := 1
 @export var has_unlocked := false
+
+var ability_slot_ref: ability_slot = null
 
 var stats: Stats
 var perk_res: Perk
@@ -12,6 +16,8 @@ var assigned_slot: String = ""  # "Q", "E", "C" oder "X" fuer Ult
 
 var _player_res: PlayerResource
 
+var _cooldown_timer: Timer = null
+@export var cooldowns: Array[float] = [50.0, 44.0, 38.0, 32.0, 26.0, 20.0]
 
 func _ready() -> void:
 	if !is_instance_valid(player):
@@ -34,7 +40,7 @@ func _process(delta: float) -> void:
 func activate_perk() -> void:
 	if !has_unlocked:
 		_reset_stats()
-		return
+
 
 ## Override in subclasses to reset stats when perk is not active
 func _reset_stats() -> void:
@@ -84,3 +90,15 @@ func level_up_perk() -> void:
 		return
 	Level += 1
 	print(self.name, " leveled up to: ", Level)
+
+## Override in subclasses to return cooldown duration
+func get_cooldown() -> float:
+	if cooldowns.size() >= Level:
+		return cooldowns[Level - 1]
+	return 0.0
+
+## Returns true if the ability slot cooldown is still running
+func is_on_cooldown() -> bool:
+	if is_instance_valid(ability_slot_ref):
+		return ability_slot_ref.cooldown.value > 0.0
+	return false

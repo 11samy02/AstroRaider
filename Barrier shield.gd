@@ -7,6 +7,10 @@ var Health := 25
 func _enter_tree() -> void:
 	if entity is Player:
 		entity.can_take_damage = false
+		for player_res: PlayerResource in GlobalGame.Players:
+			if player_res.player == entity:
+				player_res.shield_res.has_shield = true
+				break
 
 func _physics_process(delta: float) -> void:
 	if entity:
@@ -26,4 +30,8 @@ func _on_area_entered(area: Area2D) -> void:
 func destroy() -> void:
 	if entity is Player:
 		entity.can_take_damage = true
+		for player_res: PlayerResource in GlobalGame.Players:
+			if player_res.player == entity:
+				player_res.shield_res.has_shield = false
+				break
 	queue_free()

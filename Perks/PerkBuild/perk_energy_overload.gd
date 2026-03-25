@@ -15,6 +15,7 @@ func activate_perk() -> void:
 	if _cooldown > 0:
 		return
 	_apply_boost()
+	return true
 
 func _apply_boost() -> void:
 	stats.added_bohrer_damage = 5

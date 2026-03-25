@@ -8,6 +8,7 @@ signal show_perk_selection_ui(perks: Array[PerkBuild])
 @export var selection: PerkSelection
 @export var slots: PerkSlots
 @export var perks_node: Node
+@export var abilities_ui: Node
 
 var player_res: PlayerResource
 var is_selecting := false
@@ -43,6 +44,15 @@ func _process(_delta: float) -> void:
 func _check_generator_interact() -> void:
 	if is_selecting or in_perk_session:
 		return
+	if is_instance_valid(abilities_ui) and abilities_ui._selecting:
+		return
+	for building in GlobalGame.Buildings:
+		if building is CrystalGenerator:
+			if building.player_list.has(player):
+				if player_res.crystal_count >= needed_coins:
+					building.interactionn_icon.show()
+				else:
+					building.interactionn_icon.hide()
 	if not Input.is_action_just_pressed("interact"):
 		return
 	for building in GlobalGame.Buildings:
@@ -80,7 +90,6 @@ func _process_next_selection() -> void:
 	if selection.perks_list.is_empty():
 		selection.emergency_release_from_cooldown()
 	if selection.perks_list.is_empty():
-		# Keine Perks mehr verfügbar — alle restlichen Selections verwerfen
 		_queued_selections = 0
 		is_selecting = false
 		in_perk_session = false
@@ -98,9 +107,21 @@ func _process_next_selection() -> void:
 func finalize_after_level_up(perk: PerkBuild) -> void:
 	if perk.is_ult():
 		slots.register_ult(perk)
-	selection.finalize(perk)
-	is_selecting = false
-	_process_next_selection()
+		abilities_ui.assign_ult(perk)
+		selection.finalize(perk)
+		is_selecting = false
+		_process_next_selection()
+	elif perk.is_activation():
+		selection.finalize(perk)
+		is_selecting = false
+		if perk.assigned_slot == "":
+			abilities_ui.begin_slot_selection(perk)
+			await abilities_ui.slot_assigned
+		_process_next_selection()
+	else:
+		selection.finalize(perk)
+		is_selecting = false
+		_process_next_selection()
 
 
 ## Called by PerkSelector signal when player selects a perk

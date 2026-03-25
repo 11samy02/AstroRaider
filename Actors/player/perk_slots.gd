@@ -6,6 +6,12 @@ class_name PerkSlots
 var has_ult := false
 var ult_perk: PerkBuild = null
 
+@export var ability: ability_slot
+@export var ability_2: ability_slot
+@export var ability_3: ability_slot
+@export var ability_4: ability_slot
+
+
 var activation_slots: Dictionary = {
 	"Q": null,
 	"E": null,
@@ -59,6 +65,19 @@ func assign_to_slot(slot_key: String, perk: PerkBuild) -> void:
 		printerr("Slot already filled: ", slot_key)
 		return
 	activation_slots[slot_key] = perk
+	match slot_key:
+		"Q": 
+			perk.ability_slot_ref = ability_2
+			perk.cooldown_started.connect(ability_2.start_cooldown)
+		"E": 
+			perk.ability_slot_ref = ability_3
+			perk.cooldown_started.connect(ability_3.start_cooldown)
+		"C": 
+			perk.ability_slot_ref = ability
+			perk.cooldown_started.connect(ability.start_cooldown)
+		"X": 
+			perk.ability_slot_ref = ability_4
+			perk.cooldown_started.connect(ability_4.start_cooldown)
 
 
 ## Registers the selected ult perk
@@ -70,8 +89,29 @@ func register_ult(perk: PerkBuild) -> void:
 ## Activates the perk in the given slot key
 func activate_slot(slot_key: String) -> void:
 	var perk: PerkBuild = activation_slots.get(slot_key)
-	if is_instance_valid(perk):
-		perk.activate_perk()
+	if !is_instance_valid(perk):
+		return
+	if perk.is_on_cooldown():
+		return
+	perk.activate_perk()
+	if is_instance_valid(perk.ability_slot_ref):
+		perk.ability_slot_ref.show_active(perk.get_cooldown())
+
+## Activates the perk in the given slot key
+func activate_cooldowns(slot_key: String) -> void:
+	var perk: PerkBuild = activation_slots.get(slot_key)
+	if !is_instance_valid(perk):
+		return
+	
+	match slot_key:
+		"Q":
+			ability_2.start_cooldown(perk.get_cooldown())
+		"E":
+			ability_3.start_cooldown(perk.get_cooldown())
+		"C":
+			ability.start_cooldown(perk.get_cooldown())
+		"X":
+			ability_4.start_cooldown(perk.get_cooldown())
 
 
 ## Activates the ult perk if one is assigned

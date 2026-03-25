@@ -14,6 +14,7 @@ func activate_perk() -> void:
 		res.has_perk_anti_mine_det = true
 
 
+
 ## Also sets the flag when first leveled up
 func level_up_perk() -> void:
 	var res := get_player_res()

@@ -9,6 +9,7 @@ enum states {
 var current_state := states.Default
 
 @export var radar_icon : Texture2D
+@export var movement: Node
 
 @onready var check_for_ground: ShapeCast2D = $Rays/check_for_ground
 @onready var check_for_destroyable_ground: ShapeCast2D = $Rays/check_for_destroyable_ground
@@ -33,6 +34,8 @@ var gravity_dir := Vector2.DOWN
 @export var player_id := 0
 @export var controller_id := 0
 @export var character_build_id := 0
+
+@export var perk_manager : PerkManager
 
 var is_bohrer_active := false
 
@@ -77,3 +80,6 @@ func clear_collected_null() -> void:
 	for i in range(collected_crystals.size() - 1, -1, -1):
 		if collected_crystals[i] == null:
 			collected_crystals.remove_at(i)
+
+func get_knockback(dir: Vector2, strength: float) -> void:
+	movement.get_knockback(dir, strength)

@@ -15,7 +15,7 @@ static var wave_time_max_time := 0.00
 static var wave_time_stopped := true
 static var pause_time := 30
 static var wave_count_added_per_round : int = 1
-static var enemy_levels_after : int = 2
+static var enemy_levels_after : int = 3
 
 @export var local_wave_count := wave_count
 @export var spawn_per_round: SimplefySettingMath = SimplefySettingMath.new()

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bdlx6gosn67up" path="res://Sprites/actors/Enemys/small/bat/bat.png" id="3_kxtlt"]
 [ext_resource type="Texture2D" uid="uid://0ynwmka8end" path="res://Sprites/actors/Enemys/small/bat/bat2.png" id="4_awakt"]
 [ext_resource type="Texture2D" uid="uid://bud0ciyc7qwjn" path="res://Sprites/actors/Enemys/small/bat/bat3.png" id="5_epev5"]
+[ext_resource type="Script" uid="uid://emhy5rua0xsg" path="res://Resources/Enemy/EnemyStatsUpgrade.gd" id="6_6tfvp"]
 [ext_resource type="Script" uid="uid://bs2i61l25dpft" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_7sg3r"]
 [ext_resource type="Script" uid="uid://bjpdimde5m5yi" path="res://Resources/Enemy/EnemyStats.gd" id="7_nrcht"]
 [ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="7_sibcj"]
@@ -27,43 +28,40 @@ script = ExtResource("6_7sg3r")
 key = 2
 state = 2
 
-[sub_resource type="Resource" id="Resource_yyvr8"]
-resource_local_to_scene = true
-script = ExtResource("7_sibcj")
-damage = 3
-
 [sub_resource type="Resource" id="Resource_6tfvp"]
 resource_local_to_scene = true
-script = ExtResource("7_nrcht")
-max_health = 2
-attack = SubResource("Resource_yyvr8")
-ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_fqdai"), SubResource("Resource_luiws"), SubResource("Resource_1443f")])
-speed = 100.0
-max_speed = 200.0
-
-[sub_resource type="Resource" id="Resource_tdo6b"]
 script = ExtResource("7_sibcj")
-damage = 2
+damage = 5
+knockback = 2.0
+crit_chance = 5.0
 
-[sub_resource type="Resource" id="Resource_a3kia"]
+[sub_resource type="Resource" id="Resource_kwrcm"]
+script = ExtResource("7_sibcj")
+
+[sub_resource type="Resource" id="Resource_wuqbm"]
+resource_local_to_scene = true
 script = ExtResource("7_nrcht")
-max_health = 1
+max_health = 3
 max_Random_health_edit = 1
-attack = SubResource("Resource_tdo6b")
-speed = 10.0
-default_crit_chance = 0.0
+attack = SubResource("Resource_6tfvp")
+speed = 80.0
+max_speed = 200.0
+ranged_attack = SubResource("Resource_kwrcm")
+default_crit_chance = 10.0
+stun_resistence = 0.8
+ai_type_keys = Array[ExtResource("6_7sg3r")]([SubResource("Resource_fqdai"), SubResource("Resource_luiws"), SubResource("Resource_1443f")])
+follow_distance = 250.0
+attack_distance = 60.0
+
+[sub_resource type="Resource" id="Resource_mc3ci"]
+script = ExtResource("6_6tfvp")
+max_health = 1
+speed = 4.0
+attack_damage = 1
+metadata/_custom_type_script = "uid://emhy5rua0xsg"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_32yl0"]
 radius = 5.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc3ci"]
-resource_local_to_scene = true
-shader = ExtResource("9_gg1tf")
-shader_parameter/opacity = 1.0
-shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
 
 [sub_resource type="Animation" id="Animation_ryi04"]
 length = 0.001
@@ -107,27 +105,38 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxo5n"]
 radius = 6.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwrcm"]
+resource_local_to_scene = true
+shader = ExtResource("9_gg1tf")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 1.0
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
 radius = 6.0
 
 [node name="Bat" unique_id=624866104 instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
-stats = SubResource("Resource_6tfvp")
-stats_upgrades = SubResource("Resource_a3kia")
+stats = SubResource("Resource_wuqbm")
+stats_upgrades = SubResource("Resource_mc3ci")
 sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 die_particle_variation = Array[Texture2D]([ExtResource("9_4w8is"), ExtResource("10_mcywg"), ExtResource("11_m18u0")])
 
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="StateMachine" parent="Scripts" parent_id_path=PackedInt32Array(564846133) index="0" unique_id=1847201236 node_paths=PackedStringArray("enemy", "wander_time", "follow_time")]
+enemy = NodePath("../..")
+wander_time = NodePath("../../Timer/wander_time")
+follow_time = NodePath("../../Timer/follow_time")
+
+[node name="ShaderEffects" parent="Scripts" parent_id_path=PackedInt32Array(564846133) index="1" unique_id=1012968958 node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../..")
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(609129796) index="0" unique_id=1241104627]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_32yl0")
-
-[node name="sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_mc3ci")
-texture = ExtResource("3_kxtlt")
-hframes = 3
-vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=233451015]
 libraries/ = SubResource("AnimationLibrary_61fje")
@@ -150,19 +159,22 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="CollisionShape2D" parent="." index="5"]
+[node name="sprite" parent="." index="5" unique_id=732736570]
+material = SubResource("ShaderMaterial_kwrcm")
+texture = ExtResource("3_kxtlt")
+hframes = 3
+vframes = 2
+
+[node name="CollisionShape2D" parent="." index="6" unique_id=1463611020]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_g3y2r")
 
-[node name="VisibleOnScreenNotifier2D" parent="." index="7"]
+[node name="VisibleOnScreenNotifier2D" parent="." index="8" unique_id=1545953839]
 visible = false
 
-[node name="Death" parent="Sounds" index="0"]
+[node name="Death" parent="Sounds" parent_id_path=PackedInt32Array(2021586428) index="0" unique_id=1033014402]
 min_random_pitch = 2.0
 max_random_pitch = 3.0
-
-[node name="Effects_animation" parent="Effects" index="1"]
-autoplay = &"rotate_stun"
 
 [connection signal="timeout" from="Timer/wander_time" to="." method="_on_wander_time_timeout"]

@@ -165,8 +165,7 @@ libraries/ = SubResource("AnimationLibrary_fp201")
 [node name="trail" type="MeshInstance2D" parent="." unique_id=1474624237]
 material = SubResource("ShaderMaterial_xowwe")
 script = ExtResource("4_n52xp")
-max_trail_points = 75
-trail_width = 25.0
+max_trail_points = 20
 
 [node name="lifetime" type="Timer" parent="." unique_id=718679058]
 wait_time = 10.0

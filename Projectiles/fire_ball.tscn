@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b7mdapvgvv4d4"]
+[gd_scene format=3 uid="uid://b7mdapvgvv4d4"]
 
 [ext_resource type="Script" uid="uid://6dll7od0pdvi" path="res://Projectiles/fire_ball.gd" id="1_tdq83"]
 [ext_resource type="Texture2D" uid="uid://bypxtb1t4uu87" path="res://Sprites/Projectiles/energy_ball_green.png" id="1_xyj5b"]
@@ -7,8 +7,6 @@
 [sub_resource type="Resource" id="Resource_1d2w3"]
 script = ExtResource("2_t5f8m")
 damage = 5
-knockback = 1.0
-crit_chance = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwaew"]
 radius = 4.0
@@ -108,30 +106,28 @@ color_ramp = SubResource("GradientTexture1D_wkynl")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="FireBall" type="Area2D"]
+[node name="FireBall" type="Area2D" unique_id=1356530940]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_tdq83")
 atk_resource = SubResource("Resource_1d2w3")
 speed = 400
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1195530068]
 top_level = true
 position = Vector2(-3, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_iwaew")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_fp201")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1841075671]
+libraries/ = SubResource("AnimationLibrary_fp201")
 
-[node name="lifetime" type="Timer" parent="."]
+[node name="lifetime" type="Timer" parent="." unique_id=222915166]
 wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="particle" type="GPUParticles2D" parent="."]
+[node name="particle" type="GPUParticles2D" parent="." unique_id=1227900811]
 z_index = 1
 material = SubResource("CanvasItemMaterial_x50bl")
 amount = 256
@@ -143,7 +139,7 @@ fract_delta = false
 draw_order = 0
 process_material = SubResource("ParticleProcessMaterial_kfn24")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1028962513]
 position = Vector2(-16, 0)
 scale = Vector2(2.875, 1)
 

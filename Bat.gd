@@ -1,55 +1,36 @@
 extends EnemyBaseTemplate
 class_name Bat
 
-
-@onready var wander_time: Timer = $Timer/wander_time
-@onready var follow_time: Timer = $Timer/follow_time
+@onready var state_machine: EnemyStateMachine = $Scripts/StateMachine
+@onready var shader_effects: EnemyShaderEffects = $Scripts/ShaderEffects
 
 static var kill_count: int = 0
 
-func _physics_process(delta: float) -> void:
+
+func _ready() -> void:
+	super()
+	state_machine.enemy = self
+	state_machine.wander_time = $Timer/wander_time
+	state_machine.follow_time = $Timer/follow_time
+	shader_effects.enemy = self
+	$Timer/wander_time.timeout.connect(state_machine.on_wander_timeout)
+
+
+## Runs health check, shader effects and state machine each physics frame
+func _physics_process(_delta: float) -> void:
 	check_health()
-	shader_effects()
-	controll_state_mashine()
+	shader_effects.run()
+	state_machine.run()
 
 
-func controll_state_mashine():
-	if knockback_time.is_stopped():
-		if global_position.distance_to(get_closest_target()) >= 200:
-			state = state_mashine.Follow
-			if follow_time.is_stopped():
-				follow_time.start()
-		if global_position.distance_to(get_closest_target()) >= 50:
-			if randi_range(0,1) == 0 and wander_time.is_stopped():
-				state = state_mashine.Follow
-				if follow_time.is_stopped():
-					follow_time.start()
-			elif follow_time.is_stopped():
-				state = state_mashine.Wander
-				if wander_time.is_stopped():
-					wander_time.start()
-		elif global_position.distance_to(get_closest_target()) < 50 and state != state_mashine.Wander:
-			state = state_mashine.Attack
-	else:
-		move_and_slide()
-
-
-
-func _on_wander_time_timeout() -> void:
-	state = state_mashine.Follow
-
-
-func shader_effects() -> void:
-	sprite.material.set_shader_parameter("mix_color", shader_value)
-
-
-func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
-	super(entity,damage,crit_chance)
-	
-	if entity == self:
-		get_hit_anim()
-	
-
+## Increments kill count and triggers base death logic
 func death() -> void:
 	kill_count += 1
 	super()
+
+
+## Applies damage and triggers hit animation
+func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
+	super(entity, damage, crit_chance)
+	if entity == self:
+		get_hit_anim()

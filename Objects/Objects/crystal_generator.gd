@@ -3,12 +3,11 @@ class_name CrystalGenerator
 
 @onready var collect_crystal: AudioStreamPlayer2D = $Sounds/CollectCrystal
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var interactionn_icon: Sprite2D = $interactionn_icon
 
 var player_list : Array[Player] = []
-
 const VISUEL_PATH = preload("res://Visuel Feedback Tutorial/visuel_path.tscn")
 const COUNTER_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.tscn")
-
 
 func _enter_tree() -> void:
 	GSignals.PLA_collects_crystal.connect(check_if_player_has_crstal)
@@ -23,7 +22,6 @@ func ensure_all_players_have_all_ores() -> void:
 			if not player_res.Ores.has(ore_name):
 				player_res.Ores[ore_name] = 0
 
-
 func _on_area_entered(area: Area2D) -> void:
 	if area is ItemCrystal:
 		for player_res: PlayerResource in GlobalGame.Players:
@@ -31,16 +29,12 @@ func _on_area_entered(area: Area2D) -> void:
 				player_res.crystal_count += area.value
 				break
 		var counter_part = COUNTER_PARTICLE.instantiate()
-		counter_part.duration = 1.5
-		counter_part.color = Color.GREEN
-		counter_part.outline_color = Color.BLACK
-		counter_part.text = "+" + str(area.value) + "$"
-		counter_part.global_position = self.global_position
-		counter_part.distance = randi_range(30,50)
 		get_parent().add_child(counter_part)
+		counter_part.global_position = self.global_position
+		counter_part.setup("+" + str(area.value) + "$", Color.GREEN, 1.5, randi_range(30, 50))
 		area.destroy()
 		collect_crystal.play_sound()
-	
+
 	if area is OreTemplate:
 		for player_res : PlayerResource in GlobalGame.Players:
 			if player_res.player == area.player_who_collected:
@@ -53,11 +47,9 @@ func _on_area_entered(area: Area2D) -> void:
 		area.destroy()
 		collect_crystal.play_sound()
 
-
 func _on_check_player_nearby_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player_list.append(body)
-
 
 func _on_check_player_nearby_body_exited(body: Node2D) -> void:
 	if body is Player:
@@ -65,8 +57,6 @@ func _on_check_player_nearby_body_exited(body: Node2D) -> void:
 
 func _process(delta: float) -> void:
 	super(delta)
-
-
 
 func check_if_player_has_crstal() -> void:
 	for player_res:PlayerResource in GlobalGame.Players:

@@ -7,40 +7,35 @@ const DAMAGE_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.t
 @onready var sprite: Sprite2D = $sprite
 @onready var stun_sprite: Sprite2D = %stun_sprite
 @onready var stun_timer: Timer = %Stun_Timer
-
+@onready var knockback_time: Timer = $Knockback_time
+@onready var death_sound: Audio2D = $Sounds/Death
 
 @export var stats: EnemyStats
-@export var stats_upgrades: EnemyStats
-var level := 0
-
+@export var stats_upgrades: EnemyStatsUpgrade
+@export_category("Sounds")
+@export var Shoot_sound: Audio2D
 @export var sprite_variation: Array[Texture2D]
 @export var die_particle_variation: Array[Texture2D]
 @export var radar_icon: Texture2D
 
+var level := 0
 var state_mashine := AiEnemyData.state_mashine
-
 @export var state := state_mashine.Follow
-
-@onready var knockback_time: Timer = $Knockback_time
-
-@onready var death_sound: Audio2D = $Sounds/Death
-
-@export_category("Sounds")
-@export var Shoot_sound: Audio2D
-
 var last_state := state
+var killed_by: CharacterBody2D = null
+var shader_value: float = 0.0
+
+var _cached_target: Vector2 = Vector2.ZERO
+var _target_cache_frame: int = -1
 
 static var max_entitys_on_screen = 50
 static var entity_list: Array[EnemyBaseTemplate]
-
-var killed_by : CharacterBody2D = null
-var shader_value: float = 0.0
-
 
 
 func _enter_tree() -> void:
 	GlobalGame.Enemies.append(self)
 	GSignals.HIT_take_Damage.connect(applay_damage)
+
 
 func _ready() -> void:
 	stats.update_stats(stats_upgrades, level)
@@ -50,64 +45,66 @@ func _ready() -> void:
 	sprite.texture = sprite_variation.pick_random()
 	stun_timer.timeout.connect(remove_stun)
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	look_direction()
 	check_if_stunned()
 
 
-func load_ai_to_node():
+## Instantiates and attaches AI behavior nodes from stats configuration
+func load_ai_to_node() -> void:
 	for type_data: AiTypeKeys in stats.ai_type_keys:
 		var ai_init: Entity_Ai = AiEnemyData.load_ai(type_data.key).instantiate()
+		add_child(ai_init)
 		ai_init.parent = self
 		ai_init.state = type_data.state
-		add_child(ai_init)
 
+
+## Returns the closest target position, cached per frame to avoid redundant iterations
 func get_closest_target() -> Vector2:
-	if !GlobalGame.Players.is_empty():
-		var player_pos: Array[Vector2]
-		
-		for player_res: PlayerResource in GlobalGame.Players:
-			player_pos.append(player_res.player.global_position)
-		
-		if !GlobalGame.Buildings.is_empty():
-			for build: Building in GlobalGame.Buildings:
-				if build.has_health:
-					player_pos.append(build.global_position)
-		
-		var closest_distance := global_position.distance_to(player_pos[0])
-		var current_pos := player_pos[0]
-		
-		for pos in player_pos:
-			if global_position.distance_to(pos) < closest_distance:
-				closest_distance = global_position.distance_to(pos)
-				current_pos = pos
-		
-		return current_pos
-	
-	return global_position
+	if Engine.get_process_frames() == _target_cache_frame:
+		return _cached_target
+	_target_cache_frame = Engine.get_process_frames()
 
+	if GlobalGame.Players.is_empty():
+		return global_position
+
+	var positions: Array[Vector2] = []
+	for player_res: PlayerResource in GlobalGame.Players:
+		positions.append(player_res.player.global_position)
+	for build: Building in GlobalGame.Buildings:
+		if build.has_health:
+			positions.append(build.global_position)
+
+	var closest_pos := positions[0]
+	var closest_dist := global_position.distance_to(closest_pos)
+	for pos in positions:
+		var d := global_position.distance_to(pos)
+		if d < closest_dist:
+			closest_dist = d
+			closest_pos = pos
+
+	_cached_target = closest_pos
+	return _cached_target
+
+
+## Applies damage with crit chance calculation and spawns damage particle
 func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float = 0.00) -> void:
-	if entity == self:
-		var is_critical_hit := false
-		var random_num = randf_range(0.00,100.00)
-		var damage_part = DAMAGE_PARTICLE.instantiate()
-		if random_num <= stats.default_crit_chance + crit_chance:
-			damage_part.text = str(damage*3)
-			damage_part.color = Color("#ff5400")
-			damage_part.global_position = self.global_position
-			get_parent().add_child(damage_part)
-			
-			is_critical_hit = true
-			stats.current_health -= damage * 3
-			return
-		
-		damage_part.text = str(damage)
-		damage_part.color = Color("#ffff00")
-		damage_part.global_position = self.global_position
-		get_parent().add_child(damage_part)
-		
-		stats.current_health -= damage
+	if entity != self:
+		return
+	var random_num := randf_range(0.00, 100.00)
+	var damage_part = DAMAGE_PARTICLE.instantiate()
+	get_parent().add_child(damage_part)
+	damage_part.global_position = global_position
+	if random_num <= stats.default_crit_chance + crit_chance:
+		damage_part.setup(str(damage * 3), Color("#ff5400"))
+		stats.current_health -= damage * 3
+		return
+	damage_part.setup(str(damage), Color("#ffff00"))
+	stats.current_health -= damage
 
+
+## Applies knockback force and switches to Knockback state
 func get_knockback(dir: Vector2, knockback: float = 1.0) -> void:
 	if knockback_time.is_stopped():
 		velocity = Vector2.ZERO
@@ -117,26 +114,28 @@ func get_knockback(dir: Vector2, knockback: float = 1.0) -> void:
 		state = state_mashine.Knockback
 
 
-
+## Resets state to the state before knockback
 func reset_to_last_state() -> void:
 	state = last_state
 
+
+## Triggers death if health is zero and not in knockback state
 func check_health() -> void:
 	if stats.current_health <= 0 and state != state_mashine.Knockback:
 		death()
 
-##should be overwritten if you want any effect on death
+
+## Handles death — spawns particles, plays sound, emits signal and frees the node
 func death() -> void:
 	var particle = DIE_PARTICLE.instantiate()
 	particle.global_position = global_position
 	particle.sprite_variation = die_particle_variation
 	particle.sprite_id = sprite_variation.find(sprite.texture)
 	get_parent().add_child(particle)
-	
-	var real_sound:Audio2D = death_sound.duplicate()
+	var real_sound: Audio2D = death_sound.duplicate()
 	get_parent().add_child(real_sound)
 	real_sound.play_sound()
-	real_sound.global_position = self.global_position
+	real_sound.global_position = global_position
 	if self in entity_list:
 		entity_list.erase(self)
 		GSignals.ENE_killed_by.emit(killed_by)
@@ -152,20 +151,21 @@ static func reset() -> void:
 	GlobalGame.Players.clear()
 
 
-func look_direction():
-	if get_closest_target().x < global_position.x:
-		sprite.flip_h = true
-	else:
-		sprite.flip_h = false
+## Flips sprite based on target direction
+func look_direction() -> void:
+	sprite.flip_h = get_closest_target().x < global_position.x
 
+
+## Plays hit animation with scale and shader flash
 func get_hit_anim() -> void:
-	var tween = create_tween()
+	var tween := create_tween()
 	shader_value = 1
-	sprite.scale = Vector2(1.5,1.5)
-	
+	sprite.scale = Vector2(1.5, 1.5)
 	tween.tween_property(self, "shader_value", 0, 0.2)
-	tween.parallel().tween_property(sprite, "scale", Vector2(1,1), 0.2)
+	tween.parallel().tween_property(sprite, "scale", Vector2(1, 1), 0.2)
 
+
+## Shows or hides stun sprite and freezes velocity when stunned
 func check_if_stunned() -> void:
 	if stats.is_stunned:
 		velocity = Vector2.ZERO
@@ -173,12 +173,15 @@ func check_if_stunned() -> void:
 	else:
 		stun_sprite.hide()
 
-func stun_activated(atk_res: AttackResource) -> void:
-	if atk_res.has_stun:
-		if !stats.is_stunned:
-			stats.is_stunned = true
-			stun_timer.set_wait_time(atk_res.stun_strength / stats.stun_resistence)
-			stun_timer.start()
 
+## Activates stun if attack has stun and enemy is not already stunned
+func stun_activated(atk_res: AttackResource) -> void:
+	if atk_res.has_stun and !stats.is_stunned:
+		stats.is_stunned = true
+		stun_timer.set_wait_time(atk_res.stun_strength / stats.stun_resistence)
+		stun_timer.start()
+
+
+## Removes stun state when stun timer ends
 func remove_stun() -> void:
 	stats.is_stunned = false

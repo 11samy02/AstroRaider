@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://d3qlfpiy00se4" path="res://Perks/PerkBuild/Perk_Stun_Grenade.tscn" id="37_4hqgc"]
 [ext_resource type="PackedScene" uid="uid://dqvic8vigvy6m" path="res://UI/perk_selector.tscn" id="38_wsf62"]
 [ext_resource type="PackedScene" uid="uid://bmk2oxwuquwjp" path="res://UI/Player Personal Ui/building_ui.tscn" id="39_8tjx6"]
+[ext_resource type="PackedScene" uid="uid://cy8yxobay3dcf" path="res://UI/game_ui.tscn" id="43_n0jvn"]
 
 [sub_resource type="Resource" id="Resource_f7306"]
 script = ExtResource("4_m4e5o")
@@ -376,13 +377,15 @@ _data = {
 &"build_symbol": SubResource("Animation_ec8vi")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=182532903]
+[node name="Player" type="CharacterBody2D" unique_id=182532903 node_paths=PackedStringArray("movement", "perk_manager")]
 process_mode = 1
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_ook18")
 radar_icon = ExtResource("2_fdgfk")
+movement = NodePath("Script/Movement")
 landing_anim_name = Array[String](["idle", "use_item"])
+perk_manager = NodePath("PerkManager")
 stats = SubResource("Resource_f7306")
 
 [node name="Script" type="Node" parent="." unique_id=179333978]
@@ -533,7 +536,7 @@ texture = ExtResource("20_mmiwy")
 libraries/ = SubResource("AnimationLibrary_0lpgm")
 autoplay = &"build_symbol"
 
-[node name="PerkManager" type="Node" parent="." unique_id=668604466 node_paths=PackedStringArray("player", "perk_selector", "selection", "slots", "perks_node")]
+[node name="PerkManager" type="Node" parent="." unique_id=668604466 node_paths=PackedStringArray("player", "perk_selector", "selection", "slots", "perks_node", "abilities_ui")]
 process_mode = 3
 script = ExtResource("21_05ltf")
 player = NodePath("..")
@@ -541,6 +544,7 @@ perk_selector = NodePath("../Ui/PerkSelector")
 selection = NodePath("---Scripts---/PerkSelection")
 slots = NodePath("---Scripts---/PerkSlots")
 perks_node = NodePath("Perks")
+abilities_ui = NodePath("../GameUI/Control/MarginContainer/Abilities")
 
 [node name="---Scripts---" type="Node" parent="PerkManager" unique_id=1523925065]
 
@@ -548,9 +552,13 @@ perks_node = NodePath("Perks")
 script = ExtResource("24_6gd3v")
 manager = NodePath("../..")
 
-[node name="PerkSlots" type="Node" parent="PerkManager/---Scripts---" unique_id=614116422 node_paths=PackedStringArray("manager")]
+[node name="PerkSlots" type="Node" parent="PerkManager/---Scripts---" unique_id=614116422 node_paths=PackedStringArray("manager", "ability", "ability_2", "ability_3", "ability_4")]
 script = ExtResource("25_pg3yl")
 manager = NodePath("../..")
+ability = NodePath("../../../GameUI/Control/MarginContainer/Abilities/ability")
+ability_2 = NodePath("../../../GameUI/Control/MarginContainer/Abilities/ability2")
+ability_3 = NodePath("../../../GameUI/Control/MarginContainer/Abilities/ability3")
+ability_4 = NodePath("../../../GameUI/Control/MarginContainer/Abilities/ability4")
 
 [node name="Perks" type="Node" parent="PerkManager" unique_id=308913183]
 
@@ -610,7 +618,82 @@ unique_name_in_owner = true
 visible = false
 player = NodePath("../..")
 
+[node name="GameUI" parent="." unique_id=500140784 instance=ExtResource("43_n0jvn")]
+
+[node name="ability" parent="GameUI/Control/MarginContainer/Abilities" parent_id_path=PackedInt32Array(500140784, 1065963898) index="0" unique_id=2030177814]
+custom_minimum_size = Vector2(75, 75)
+
+[node name="TextureRect" parent="GameUI/Control/MarginContainer/Abilities/ability/Button/MarginContainer" parent_id_path=PackedInt32Array(500140784, 2030177814, 1600013385) index="0" unique_id=43651738]
+custom_minimum_size = Vector2(100, 100)
+
+[node name="cooldown" parent="GameUI/Control/MarginContainer/Abilities/ability/Button" parent_id_path=PackedInt32Array(500140784, 2030177814, 2129939063) index="2" unique_id=846734397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ability2" parent="GameUI/Control/MarginContainer/Abilities" parent_id_path=PackedInt32Array(500140784, 1065963898) index="1" unique_id=1257717628]
+custom_minimum_size = Vector2(75, 75)
+
+[node name="TextureRect" parent="GameUI/Control/MarginContainer/Abilities/ability2/Button/MarginContainer" parent_id_path=PackedInt32Array(500140784, 1257717628, 1600013385) index="0" unique_id=43651738]
+custom_minimum_size = Vector2(100, 100)
+
+[node name="cooldown" parent="GameUI/Control/MarginContainer/Abilities/ability2/Button" parent_id_path=PackedInt32Array(500140784, 1257717628, 2129939063) index="2" unique_id=846734397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ability3" parent="GameUI/Control/MarginContainer/Abilities" parent_id_path=PackedInt32Array(500140784, 1065963898) index="2" unique_id=1373866711]
+custom_minimum_size = Vector2(75, 75)
+
+[node name="TextureRect" parent="GameUI/Control/MarginContainer/Abilities/ability3/Button/MarginContainer" parent_id_path=PackedInt32Array(500140784, 1373866711, 1600013385) index="0" unique_id=43651738]
+custom_minimum_size = Vector2(100, 100)
+
+[node name="cooldown" parent="GameUI/Control/MarginContainer/Abilities/ability3/Button" parent_id_path=PackedInt32Array(500140784, 1373866711, 2129939063) index="2" unique_id=846734397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ability4" parent="GameUI/Control/MarginContainer/Abilities" parent_id_path=PackedInt32Array(500140784, 1065963898) index="4" unique_id=1249296522]
+custom_minimum_size = Vector2(75, 75)
+
+[node name="TextureRect" parent="GameUI/Control/MarginContainer/Abilities/ability4/Button/MarginContainer" parent_id_path=PackedInt32Array(500140784, 1249296522, 1600013385) index="0" unique_id=43651738]
+custom_minimum_size = Vector2(100, 100)
+
+[node name="Label" parent="GameUI/Control/MarginContainer/Abilities/ability4/Button" parent_id_path=PackedInt32Array(500140784, 1249296522, 2129939063) index="1" unique_id=1646049229]
+text = "X"
+
+[node name="cooldown" parent="GameUI/Control/MarginContainer/Abilities/ability4/Button" parent_id_path=PackedInt32Array(500140784, 1249296522, 2129939063) index="2" unique_id=846734397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]
 [connection signal="show_perk_selection_ui" from="PerkManager" to="Ui/PerkSelector" method="set_perk_details"]
 [connection signal="select_perk_by_index" from="Ui/PerkSelector" to="PerkManager" method="_select_by_index"]
+
+[editable path="GameUI"]
+[editable path="GameUI/Control/MarginContainer/Abilities/ability"]
+[editable path="GameUI/Control/MarginContainer/Abilities/ability2"]
+[editable path="GameUI/Control/MarginContainer/Abilities/ability3"]
+[editable path="GameUI/Control/MarginContainer/Abilities/ability4"]

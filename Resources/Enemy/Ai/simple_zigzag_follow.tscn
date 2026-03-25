@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ccuuqxuvh26ki"]
+
+[ext_resource type="Script" uid="uid://bryextbvpodkr" path="res://Resources/Enemy/Ai/simple_zigzag_follow.gd" id="1_84brg"]
+
+[node name="Simple_zigzag_follow" type="Node" unique_id=1533912948]
+script = ExtResource("1_84brg")
+key = 6

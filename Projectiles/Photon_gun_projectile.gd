@@ -5,20 +5,28 @@ class_name PlayerProjectile
 @export var trail: Trail
 @export var enemy_detector_area: EnemyDetectorArea
 @export var atk_resource: AttackResource = AttackResource.new()
-@export var speed := 500
+@export var speed := 500.0
 @export var dir := Vector2.ZERO
 @export var hp := 1
 @export var player: Player = null
 
+var _last_rotation_dir := Vector2.ZERO
+
 
 func _ready() -> void:
-	look_at(dir)
+	if dir != Vector2.ZERO:
+		rotation = dir.angle()
+		_last_rotation_dir = dir
+
 	if is_instance_valid(player):
 		hp += player.stats.added_Projectile_lives
+
 	set_physics_process(false)
 	trail.visible = false
+
 	animation_player.play("appearing")
 	await animation_player.animation_finished
+
 	trail.clear_trail()
 	trail.visible = true
 	set_physics_process(true)
@@ -28,6 +36,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate:
 			var new_atk_resource: AttackResource = atk_resource.duplicate()
+
 			if is_instance_valid(player):
 				new_atk_resource.damage += player.stats.added_projectile_damage
 				new_atk_resource.crit_chance += player.stats.crit_chance + player.stats.added_crit_chance
@@ -38,6 +47,7 @@ func _on_area_entered(area: Area2D) -> void:
 			enemy_detector_area.mark_enemy_as_hit(area.entity)
 
 			hp -= 1
+
 			if hp <= 0:
 				set_physics_process(false)
 				area.entity.get_knockback(dir, new_atk_resource.knockback)
@@ -46,8 +56,14 @@ func _on_area_entered(area: Area2D) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	look_at(dir)
-	translate(dir * speed * delta)
+	if dir == Vector2.ZERO:
+		return
+
+	if dir != _last_rotation_dir:
+		rotation = dir.angle()
+		_last_rotation_dir = dir
+
+	global_position += dir * speed * delta
 
 
 func _on_lifetime_timeout() -> void:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://d2r6ecatdtqut"]
+[gd_scene format=3 uid="uid://d2r6ecatdtqut"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_400u0"]
 [ext_resource type="Script" uid="uid://bknn74j4cgscf" path="res://Actors/Enemys/Small Enemys/DemonEye.gd" id="2_xjylt"]
 [ext_resource type="PackedScene" uid="uid://b7mdapvgvv4d4" path="res://Projectiles/fire_ball.tscn" id="5_4325e"]
 [ext_resource type="Script" uid="uid://bs2i61l25dpft" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="6_ra7ad"]
 [ext_resource type="Texture2D" uid="uid://chj2k1h3hk3xq" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye.png" id="7_1k81c"]
+[ext_resource type="Script" uid="uid://emhy5rua0xsg" path="res://Resources/Enemy/EnemyStatsUpgrade.gd" id="7_6c7te"]
 [ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="7_jiem3"]
 [ext_resource type="Texture2D" uid="uid://drw5se8c5e33u" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye2.png" id="8_hpmga"]
 [ext_resource type="Script" uid="uid://bjpdimde5m5yi" path="res://Resources/Enemy/EnemyStats.gd" id="8_yj8bj"]
@@ -17,72 +18,61 @@
 
 [sub_resource type="Resource" id="Resource_nvx3s"]
 script = ExtResource("6_ra7ad")
+key = 7
+state = 5
 
 [sub_resource type="Resource" id="Resource_n7l1v"]
 script = ExtResource("6_ra7ad")
-key = 1
-state = 1
+key = 4
 
-[sub_resource type="Resource" id="Resource_pxb53"]
+[sub_resource type="Resource" id="Resource_7mash"]
 script = ExtResource("6_ra7ad")
 key = 2
 state = 2
+metadata/_custom_type_script = "uid://bs2i61l25dpft"
 
-[sub_resource type="Resource" id="Resource_y5jrm"]
-script = ExtResource("6_ra7ad")
-key = 3
-state = 5
-
-[sub_resource type="Resource" id="Resource_jsdpb"]
+[sub_resource type="Resource" id="Resource_6c7te"]
 resource_local_to_scene = true
 script = ExtResource("7_jiem3")
+damage = 4
+crit_chance = 10.0
 
-[sub_resource type="Resource" id="Resource_fo0lb"]
+[sub_resource type="Resource" id="Resource_7job5"]
 resource_local_to_scene = true
 script = ExtResource("7_jiem3")
-damage = 5
+damage = 6
+knockback = 0.5
+crit_chance = 15.0
 
-[sub_resource type="Resource" id="Resource_x2fwd"]
+[sub_resource type="Resource" id="Resource_cfqbu"]
 resource_local_to_scene = true
 script = ExtResource("8_yj8bj")
-max_health = 1
-attack = SubResource("Resource_jsdpb")
-ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_nvx3s"), SubResource("Resource_n7l1v"), SubResource("Resource_pxb53"), SubResource("Resource_y5jrm")])
-speed = 60.0
-max_speed = 120.0
-projectile = ExtResource("5_4325e")
-ranged_attack = SubResource("Resource_fo0lb")
-
-[sub_resource type="Resource" id="Resource_b3csn"]
-script = ExtResource("7_jiem3")
-
-[sub_resource type="Resource" id="Resource_nckro"]
-resource_local_to_scene = true
-script = ExtResource("7_jiem3")
-damage = 5
-
-[sub_resource type="Resource" id="Resource_044xy"]
-script = ExtResource("8_yj8bj")
-max_health = 1
+max_health = 2
 max_Random_health_edit = 1
-attack = SubResource("Resource_b3csn")
-speed = 10.0
+attack = SubResource("Resource_6c7te")
+ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_nvx3s"), SubResource("Resource_n7l1v"), SubResource("Resource_7mash")])
+speed = 55.0
+max_speed = 140.0
 projectile = ExtResource("5_4325e")
-ranged_attack = SubResource("Resource_nckro")
-default_crit_chance = 0.0
+ranged_attack = SubResource("Resource_7job5")
+follow_distance = 300.0
+attack_distance = 100.0
+can_ranged_attack = true
+ranged_min_distance = 125.0
+ranged_max_distance = 250.0
+orbit_radius = 200.0
+
+[sub_resource type="Resource" id="Resource_heoew"]
+script = ExtResource("7_6c7te")
+max_health = 1
+speed = 2.0
+attack_damage = 1
+ranged_damage = 2
+metadata/_custom_type_script = "uid://emhy5rua0xsg"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3cst2"]
 radius = 5.0
 height = 25.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_un5xr"]
-resource_local_to_scene = true
-shader = ExtResource("9_u1xt7")
-shader_parameter/opacity = 1.0
-shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
 
 [sub_resource type="Animation" id="Animation_ryi04"]
 length = 0.001
@@ -127,73 +117,89 @@ _data = {
 radius = 6.0
 height = 25.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oq150"]
+resource_local_to_scene = true
+shader = ExtResource("9_u1xt7")
+shader_parameter/opacity = 1.0
+shader_parameter/r = 1.0
+shader_parameter/g = 0.0
+shader_parameter/b = 0.0
+shader_parameter/mix_color = 0.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vyc"]
 radius = 6.0
 height = 25.0
 
-[node name="DemonEye" node_paths=PackedStringArray("Shoot_sound") instance=ExtResource("1_400u0")]
+[node name="DemonEye" unique_id=1574381913 node_paths=PackedStringArray("Shoot_sound") instance=ExtResource("1_400u0")]
 z_index = 2
 script = ExtResource("2_xjylt")
-stats = SubResource("Resource_x2fwd")
-stats_upgrades = SubResource("Resource_044xy")
+stats = SubResource("Resource_cfqbu")
+stats_upgrades = SubResource("Resource_heoew")
+Shoot_sound = NodePath("Sounds/ShootSound")
 sprite_variation = Array[Texture2D]([ExtResource("7_1k81c"), ExtResource("8_hpmga")])
 die_particle_variation = Array[Texture2D]([ExtResource("9_w3rug"), ExtResource("10_ilnne")])
-Shoot_sound = NodePath("Sounds/ShootSound")
 
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="StateMachine" parent="Scripts" parent_id_path=PackedInt32Array(564846133) index="0" unique_id=1847201236 node_paths=PackedStringArray("enemy", "wander_time", "follow_time", "shoot_delay")]
+enemy = NodePath("../..")
+wander_time = NodePath("../../Timer/wander_time")
+follow_time = NodePath("../../Timer/follow_time")
+shoot_delay = NodePath("../../Timer/shoot_delay")
+
+[node name="ShaderEffects" parent="Scripts" parent_id_path=PackedInt32Array(564846133) index="1" unique_id=1012968958 node_paths=PackedStringArray("enemy")]
+enemy = NodePath("../..")
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(609129796) index="0" unique_id=1241104627]
 visible = false
 position = Vector2(1, 7)
 shape = SubResource("CapsuleShape2D_3cst2")
 
-[node name="sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_un5xr")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=2042709076]
+libraries/ = SubResource("AnimationLibrary_61fje")
+autoplay = &"flying"
+
+[node name="AttackBox" parent="." index="3" unique_id=1614895578 node_paths=PackedStringArray("owner_entity") instance=ExtResource("10_jwp4k")]
+owner_entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0" unique_id=1472742835]
+visible = false
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_d84vw")
+
+[node name="Timer" type="Node" parent="." index="4" unique_id=1165476779]
+
+[node name="wander_time" type="Timer" parent="Timer" index="0" unique_id=1369894796]
+one_shot = true
+
+[node name="follow_time" type="Timer" parent="Timer" index="1" unique_id=1375648457]
+wait_time = 2.0
+one_shot = true
+
+[node name="shoot_delay" type="Timer" parent="Timer" index="2" unique_id=1951234969]
+wait_time = 0.5
+one_shot = true
+
+[node name="sprite" parent="." index="5" unique_id=732736570]
+material = SubResource("ShaderMaterial_oq150")
 position = Vector2(0, 7)
 texture = ExtResource("7_1k81c")
 hframes = 3
 vframes = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-libraries = {
-&"": SubResource("AnimationLibrary_61fje")
-}
-autoplay = "flying"
-
-[node name="AttackBox" parent="." index="3" node_paths=PackedStringArray("owner_entity") instance=ExtResource("10_jwp4k")]
-owner_entity = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" index="0"]
-visible = false
-position = Vector2(0, -1)
-shape = SubResource("CapsuleShape2D_d84vw")
-
-[node name="Timer" type="Node" parent="." index="4"]
-
-[node name="wander_time" type="Timer" parent="Timer" index="0"]
-one_shot = true
-
-[node name="follow_time" type="Timer" parent="Timer" index="1"]
-wait_time = 2.0
-one_shot = true
-
-[node name="shoot_delay" type="Timer" parent="Timer" index="2"]
-wait_time = 0.5
-one_shot = true
-
-[node name="CollisionShape2D" parent="." index="5"]
+[node name="CollisionShape2D" parent="." index="6" unique_id=1463611020]
 visible = false
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_q2vyc")
 
-[node name="VisibleOnScreenNotifier2D" parent="." index="7"]
+[node name="VisibleOnScreenNotifier2D" parent="." index="8" unique_id=1545953839]
 visible = false
 rect = Rect2(-10, -10, 20, 40)
 
-[node name="Death" parent="Sounds" index="0"]
+[node name="Death" parent="Sounds" parent_id_path=PackedInt32Array(2021586428) index="0" unique_id=1033014402]
 pitch_scale = 1.5
 min_random_pitch = 1.5
 max_random_pitch = 2.0
 
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(2021586428) index="1" unique_id=2041781727]
 stream = ExtResource("10_qctm1")
 script = ExtResource("11_kusyn")
 max_random_pitch = 1.5
