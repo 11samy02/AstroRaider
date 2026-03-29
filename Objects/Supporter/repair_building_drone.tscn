@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cotcwq1468kvu"]
+[gd_scene format=3 uid="uid://cotcwq1468kvu"]
 
 [ext_resource type="Script" uid="uid://mg4ls7w6uidg" path="res://Objects/Supporter/repair_building_drone.gd" id="1_sq6yu"]
 [ext_resource type="Texture2D" uid="uid://lv2eu3em5mo1" path="res://Sprites/Buildings/RebairDrones.png" id="1_vgro4"]
@@ -58,24 +58,23 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3g8fx"]
 radius = 5.0
 
-[node name="RepairBuildingDrone" type="Area2D"]
+[node name="RepairBuildingDrone" type="Area2D" unique_id=1248734703]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_sq6yu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=343873531]
 material = SubResource("ShaderMaterial_j18m1")
 sprite_frames = SubResource("SpriteFrames_8jgbp")
 autoplay = "default"
-frame = 3
-frame_progress = 0.209902
+frame_progress = 0.34266844
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=573480302]
 visible = false
 position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_3g8fx")
 
-[node name="cooldown" type="Timer" parent="."]
+[node name="cooldown" type="Timer" parent="." unique_id=1245011036]
 wait_time = 5.0
 one_shot = true
 

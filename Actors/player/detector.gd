@@ -10,7 +10,7 @@ var can_destroy := true
 
 func _enter_tree() -> void:
 	GSignals.ENV_check_detection_tile.connect(check_for_tile_points)
-	GSignals.Perk_add_vision_behind_wall.connect(reset_detector)
+	GSignals.PERK_add_vision_behind_wall.connect(reset_detector)
 
 func _ready() -> void:
 	for i in detector_count * detector_count:

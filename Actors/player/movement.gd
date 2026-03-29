@@ -4,6 +4,7 @@ extends Node
 
 var _knockback_velocity: Vector2 = Vector2.ZERO
 var _knockback_timer: float = 0.0
+var last_move_direction := Vector2.RIGHT
 
 
 func _physics_process(delta: float) -> void:
@@ -38,7 +39,7 @@ func apply_gravity(delta: float) -> void:
 		if player.anim.current_animation == "idle":
 			player.anim.stop()
 			player.anim.play("fling")
-		player.velocity += player.gravity_dir * player.stats.gravity_strength * delta
+		player.velocity += player.gravity_dir * player.stats.get_gravity_strength_total() * delta
 	else:
 		if !player.anim.current_animation in player.landing_anim_name and !player.is_bohrer_active:
 			player.anim.stop()
@@ -51,7 +52,8 @@ func apply_gravity(delta: float) -> void:
 		if _knockback_timer <= 0.0:
 			player.velocity = Vector2.ZERO
 
-	var max_speed := Vector2.ONE * (player.stats.max_speed + player.stats.added_max_speed)
+	var max_speed_value := player.stats.get_max_speed_total()
+	var max_speed := Vector2.ONE * max_speed_value
 	player.velocity = player.velocity.clamp(-max_speed, max_speed)
 
 
@@ -60,6 +62,8 @@ func input_movement(event: InputEvent) -> void:
 	var dir := get_input_direction()
 	if dir.length() < player.deadzone:
 		return
+	if dir != Vector2.ZERO:
+		last_move_direction = dir.normalized()
 	if abs(dir.x) > abs(dir.y):
 		if dir.x < 0:
 			player.sprite.flip_h = true

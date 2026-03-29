@@ -116,11 +116,12 @@ func _stop_pulse(key: String) -> void:
 
 ## Called when a slot button is clicked
 func _on_slot_clicked(key: String) -> void:
-	if not _selecting or key == "X":
-		return
-	if slots.activation_slots.get(key) != null:
-		return
-	_assign_pending(key)
+	if _selecting:
+		if key == "X":
+			return
+		if slots.activation_slots.get(key) != null:
+			return
+		_assign_pending(key)
 
 ## Assigns the pending perk to the given slot key
 func _assign_pending(key: String) -> void:

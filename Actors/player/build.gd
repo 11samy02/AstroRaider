@@ -3,9 +3,13 @@ extends Node
 @export var player: Player
 @onready var building_ui: Control = %"Building UI"
 
+
+## Connects signals for leaving build mode when the perk selector is shown
 func _ready() -> void:
 	GSignals.UI_show_only_PerkSelector.connect(remove_building_state)
 
+
+## Toggles build mode on input release
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("aktivate_building_mode"):
 		if player.current_state == player.states.Default:
@@ -15,6 +19,8 @@ func _physics_process(delta: float) -> void:
 			player.current_state = player.states.Default
 			building_ui.hide()
 
+
+## Forces the player back into the default state and hides the build UI
 func remove_building_state() -> void:
 	player.current_state = player.states.Default
 	building_ui.hide()

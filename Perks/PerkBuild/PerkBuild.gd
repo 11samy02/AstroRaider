@@ -12,13 +12,13 @@ var ability_slot_ref: ability_slot = null
 
 var stats: Stats
 var perk_res: Perk
-var assigned_slot: String = ""  # "Q", "E", "C" oder "X" fuer Ult
+var assigned_slot: String = "" # "Q", "E", "C" or "X" for Ult
 
 var _player_res: PlayerResource
-
 var _cooldown_timer: Timer = null
-@export var cooldowns: Array[float] = [50.0, 44.0, 38.0, 32.0, 26.0, 20.0]
 
+
+## Initializes the perk by loading its resource and caching player stats
 func _ready() -> void:
 	if !is_instance_valid(player):
 		printerr("Player Must be selected: ", self.name)
@@ -27,6 +27,7 @@ func _ready() -> void:
 	perk_res = PerkData.load_perk_res(Key)
 
 
+## Handles always-active perks and resets stats if not unlocked
 func _process(delta: float) -> void:
 	if !is_instance_valid(perk_res):
 		return
@@ -36,40 +37,57 @@ func _process(delta: float) -> void:
 	if perk_res.active_type == Perk.Active_type_keys.Always:
 		activate_perk()
 
-## Override in subclasses to implement perk effect
+
+## Called to activate the perk (override in subclasses)
 func activate_perk() -> void:
 	if !has_unlocked:
 		_reset_stats()
 
 
-## Override in subclasses to reset stats when perk is not active
+## Resets all stat modifications applied by this perk (override in subclasses)
 func _reset_stats() -> void:
 	pass
 
 
-## Returns the current value for this perk's level
+## Returns the main value of the perk for the current level
 func get_value() -> int:
-	return perk_res.value[Level - 1]
+	if !is_instance_valid(perk_res):
+		return 0
+	return perk_res.get_value(Level)
 
 
-## Returns true if this perk is an ult type
+## Returns the cooldown duration for the current level
+func get_cooldown() -> float:
+	if !is_instance_valid(perk_res):
+		return 0.0
+	return perk_res.get_cooldown(Level)
+
+
+## Returns the duration of the perk effect for the current level
+func get_duration() -> float:
+	if !is_instance_valid(perk_res):
+		return 0.0
+	return perk_res.get_duration(Level)
+
+
+## Returns true if this perk is an ultimate ability
 func is_ult() -> bool:
 	return is_instance_valid(perk_res) and perk_res.active_type == Perk.Active_type_keys.Ult
 
 
-## Returns true if this perk is an Activation type
+## Returns true if this perk is an activation-type ability
 func is_activation() -> bool:
 	return is_instance_valid(perk_res) and perk_res.active_type == Perk.Active_type_keys.Activation
 
 
-## Returns the list of perk keys excluded by this perk
+## Returns a list of perk keys that cannot be selected together with this perk
 func get_excluded_keys() -> Array[PerkData.Keys]:
 	if !is_instance_valid(perk_res):
 		return []
 	return perk_res.excluded_perks
 
 
-## Returns or lazily resolves the PlayerResource for this perk's player
+## Resolves and returns the PlayerResource associated with this player
 func get_player_res() -> PlayerResource:
 	if !is_instance_valid(_player_res):
 		for ply_res: PlayerResource in GlobalGame.Players:
@@ -79,7 +97,7 @@ func get_player_res() -> PlayerResource:
 	return _player_res
 
 
-## Levels up the perk or unlocks it on first call
+## Unlocks or increases the perk level up to max level
 func level_up_perk() -> void:
 	if !has_unlocked:
 		print(self.name, " unlocked at Level: ", Level)
@@ -91,13 +109,8 @@ func level_up_perk() -> void:
 	Level += 1
 	print(self.name, " leveled up to: ", Level)
 
-## Override in subclasses to return cooldown duration
-func get_cooldown() -> float:
-	if cooldowns.size() >= Level:
-		return cooldowns[Level - 1]
-	return 0.0
 
-## Returns true if the ability slot cooldown is still running
+## Returns true if the perk is currently on cooldown via ability slot
 func is_on_cooldown() -> bool:
 	if is_instance_valid(ability_slot_ref):
 		return ability_slot_ref.cooldown.value > 0.0

@@ -16,14 +16,7 @@ func run() -> void:
 	if dist >= stats.follow_distance:
 		_set_follow()
 	elif stats.can_ranged_attack and dist >= stats.ranged_min_distance and dist <= stats.ranged_max_distance:
-		if is_instance_valid(shoot_delay) and shoot_delay.is_stopped():
-			var roll := randf() * 100.0
-			if roll > stats.ranged_chance:
-				_set_follow()
-			else:
-				_set_ranged_attack()
-		else:
-			_set_follow()
+		_set_ranged_attack()
 	elif dist > stats.ranged_max_distance:
 		_set_follow()
 	elif stats.can_ranged_attack and dist < stats.ranged_min_distance:

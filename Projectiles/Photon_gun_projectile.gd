@@ -13,13 +13,14 @@ class_name PlayerProjectile
 var _last_rotation_dir := Vector2.ZERO
 
 
+## Initializes projectile direction, stats, and spawn animation
 func _ready() -> void:
 	if dir != Vector2.ZERO:
 		rotation = dir.angle()
 		_last_rotation_dir = dir
 
 	if is_instance_valid(player):
-		hp += player.stats.added_Projectile_lives
+		hp += int(round(player.stats.get_projectile_lives_total()))
 
 	set_physics_process(false)
 	trail.visible = false
@@ -32,14 +33,15 @@ func _ready() -> void:
 	set_physics_process(true)
 
 
+## Applies projectile damage when colliding with an enemy
 func _on_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate:
 			var new_atk_resource: AttackResource = atk_resource.duplicate()
 
 			if is_instance_valid(player):
-				new_atk_resource.damage += player.stats.added_projectile_damage
-				new_atk_resource.crit_chance += player.stats.crit_chance + player.stats.added_crit_chance
+				new_atk_resource.damage += player.stats.get_projectile_damage_total()
+				new_atk_resource.crit_chance += player.stats.get_crit_chance_total()
 				new_atk_resource.has_stun = player.stats.has_stun_active
 				new_atk_resource.stun_strength = player.stats.stun_strength
 
@@ -55,6 +57,7 @@ func _on_area_entered(area: Area2D) -> void:
 				animation_player.play("hit")
 
 
+## Moves the projectile and updates its rotation
 func _physics_process(delta: float) -> void:
 	if dir == Vector2.ZERO:
 		return
@@ -66,6 +69,7 @@ func _physics_process(delta: float) -> void:
 	global_position += dir * speed * delta
 
 
+## Ends the projectile when its lifetime expires
 func _on_lifetime_timeout() -> void:
 	set_physics_process(false)
 	trail.clear_trail()

@@ -37,5 +37,5 @@ func get_hit(attack: AttackResource, who_attacked: CharacterBody2D = null) -> vo
 ## Calculates real damage after armor reduction for players
 func calculate_real_damage(damage: int) -> int:
 	if entity is Player:
-		return ceil(damage / (entity.stats.armor + entity.stats.added_armor))
+		return ceil(float(damage) / entity.stats.get_armor_total())
 	return damage

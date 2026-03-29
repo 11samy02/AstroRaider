@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bpi0x0vtweskt"]
+
+[ext_resource type="Script" uid="uid://dnf3afpbiariw" path="res://Actors/player/screen_effects.gd" id="1_nnytx"]
+[ext_resource type="Shader" uid="uid://dj2mr4820oxi1" path="res://Shader/vignette.gdshader" id="2_ytef5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gddw4"]
+shader = ExtResource("2_ytef5")
+shader_parameter/vignette_color = Color(0.99081403, 0.41085213, 0, 1)
+shader_parameter/inner_color = Color(1, 0.6, 0, 0)
+shader_parameter/line_color = Color(1, 0.9, 0.2, 1)
+shader_parameter/intensity = 0.0
+shader_parameter/radius = 0.7250000344375
+shader_parameter/softness = 0.3
+shader_parameter/pulse_speed = 3.0000001425
+shader_parameter/pulse_strength = 0.04
+shader_parameter/line_brightness = 1.2
+shader_parameter/flicker_speed = 5.0000002375
+
+[node name="ScreenEffects" type="CanvasLayer" unique_id=1955692799 node_paths=PackedStringArray("overload_vignette")]
+script = ExtResource("1_nnytx")
+overload_vignette = NodePath("vignette")
+
+[node name="vignette" type="ColorRect" parent="." unique_id=7102969]
+material = SubResource("ShaderMaterial_gddw4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

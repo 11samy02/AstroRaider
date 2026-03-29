@@ -35,6 +35,7 @@ AiEnemyData="*res://Resources/Enemy/AiEnemyData.gd"
 GameOverScreen="*res://UI/game_over_screen.tscn"
 FirebaseSync="*res://Https/firebase_sync.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+ScreenEffects="*uid://bpi0x0vtweskt"
 
 [debug]
 

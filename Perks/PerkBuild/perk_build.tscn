@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ggmqkrtktbeu"]
+[gd_scene format=3 uid="uid://ggmqkrtktbeu"]
 
 [ext_resource type="Script" uid="uid://b3gr0cwnvudut" path="res://Perks/PerkBuild/PerkBuild.gd" id="1_kvdsa"]
 
-[node name="PerkBuild" type="Node"]
+[node name="PerkBuild" type="Node" unique_id=1955747805]
 script = ExtResource("1_kvdsa")

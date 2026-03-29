@@ -10,15 +10,18 @@ var had_shoot := false
 @onready var shoot_sound: Audio2D = $ShootSound
 
 
+## Loads the currently assigned item resource
 func _ready() -> void:
 	_load_item()
 
 
+## Resolves the item resource from the configured item key
 func _load_item() -> void:
 	if item_key != null:
 		holding_item = ItemConfig.get_item_resource(item_key)
 
 
+## Updates weapon visibility and aiming behavior
 func _process(delta: float) -> void:
 	if holding_item == null:
 		return
@@ -31,11 +34,12 @@ func _process(delta: float) -> void:
 		else:
 			var target_rotation := get_input_axis()
 			if target_rotation != Vector2.ZERO:
-				rotation = lerp_angle(rotation, target_rotation.angle(), player.stats.rotation_speed * delta)
+				rotation = lerp_angle(rotation, target_rotation.angle(), player.stats.get_rotation_speed_total() * delta)
 	else:
 		hide()
 
 
+## Handles shoot input while the player is in the default state
 func _input(_event: InputEvent) -> void:
 	if player.current_state == player.states.Default:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) \
@@ -47,6 +51,7 @@ func _input(_event: InputEvent) -> void:
 					shoot()
 
 
+## Returns the normalized right stick input direction
 func get_input_axis() -> Vector2:
 	var input_axis := Vector2.ZERO
 
@@ -59,6 +64,7 @@ func get_input_axis() -> Vector2:
 	return input_axis.normalized()
 
 
+## Spawns and launches a projectile from the current weapon
 func shoot() -> void:
 	var projectile: PlayerProjectile = ItemConfig.get_item_scene(holding_item.key).instantiate()
 
@@ -70,7 +76,7 @@ func shoot() -> void:
 
 	shoot_sound.play_sound()
 
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(player.stats.get_attack_speed_total()).timeout
 	had_shoot = false
 
 	GSignals.PLA_is_shooting.emit(player)

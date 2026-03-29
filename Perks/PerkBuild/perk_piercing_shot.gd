@@ -3,7 +3,8 @@ extends PerkBuild
 ## Passive: projectiles pierce through additional enemies
 func activate_perk() -> void:
 	super()
-	stats.added_Projectile_lives = get_value()
+	stats.set_modifier(stats.projectile_lives_modifiers, Key, float(get_value()))
 
+## Removes the projectile pierce bonus applied by this perk
 func _reset_stats() -> void:
-	stats.added_Projectile_lives = 0
+	stats.remove_modifier(stats.projectile_lives_modifiers, Key)

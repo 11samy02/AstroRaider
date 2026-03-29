@@ -301,6 +301,7 @@ shape = SubResource("RectangleShape2D_d4idp")
 
 [node name="interactionn_icon" type="Sprite2D" parent="." unique_id=796406532]
 visible = false
+z_index = 128
 material = SubResource("CanvasItemMaterial_v04es")
 position = Vector2(0, -40)
 texture = ExtResource("7_saewh")

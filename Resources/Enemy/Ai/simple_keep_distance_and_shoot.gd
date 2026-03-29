@@ -1,27 +1,26 @@
 extends Entity_Ai
 
 @onready var shoot_timer: Timer = $shoot_timer
-
 @export var preferred_distance: float = 150.0
 @export var accel: float = 600.0
 @export var brake: float = 800.0
 @export var projectiles_holder: NodePath
 
+## Starts shoot timer on ready
+func _ready() -> void:
+	shoot_timer.start()
 
 func _physics_process(delta: float) -> void:
-
 	if parent.state != state:
 		return
 	_move(delta)
 	parent.move_and_slide()
-
 
 ## Moves toward or away from target to maintain preferred distance
 func _move(delta: float) -> void:
 	var to_tgt := parent.get_closest_target() - parent.global_position
 	var dist := to_tgt.length()
 	var dir := to_tgt.normalized()
-
 	if dist > preferred_distance + 20.0:
 		parent.velocity = parent.velocity.move_toward(dir * parent.stats.speed, accel * delta)
 	elif dist < preferred_distance - 20.0:
@@ -29,9 +28,10 @@ func _move(delta: float) -> void:
 	else:
 		parent.velocity = parent.velocity.move_toward(Vector2.ZERO, brake * delta)
 
-
 ## Fires a projectile toward the target on timer interval
 func _on_shoot_timer_timeout() -> void:
+	if not is_instance_valid(parent):
+		return
 	if parent.state != state:
 		return
 	if not parent.stats.projectile:
@@ -45,7 +45,6 @@ func _on_shoot_timer_timeout() -> void:
 			prj.atk_resource = parent.stats.ranged_attack.duplicate()
 		prj.global_position = parent.global_position
 		_get_projectile_parent().add_child(prj)
-
 
 ## Returns the node to parent projectiles under
 func _get_projectile_parent() -> Node:

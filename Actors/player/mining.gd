@@ -41,7 +41,7 @@ func set_bohrer_state() -> void:
 		player.is_bohrer_active = false
 		player.bohrer_sound.stop()
 
-##Muss geändert werden: ERROR
+## Destroys drillable ground while the drill is active
 func destroy_ground() -> void:
 	if !player.is_bohrer_active:
 		player.bohrer_sound.stop()
@@ -51,11 +51,12 @@ func destroy_ground() -> void:
 		if !player.bohrer_sound.playing:
 			player.bohrer_sound.play_sound()
 		
-		var bohrer_damage := player.stats.bohrer_damage + player.stats.added_bohrer_damage
+		var bohrer_damage := player.stats.get_bohrer_damage_total()
 		GSignals.ENV_check_detection_tile.emit(player_res, bohrer_damage)
 	else:
 		player.bohrer_sound.stop()
 
+## Handles drill visibility, animation, and collision activation
 func use_bohrer_anim() -> void:
 	if player.is_bohrer_active == _last_bohrer_state:
 		return
@@ -72,15 +73,16 @@ func use_bohrer_anim() -> void:
 			player.anim.stop()
 			player.anim.play("use_item")
 
+## Applies drill damage to enemies and registers static hitboxes
 func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 	if !player.is_bohrer_active:
 		return
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate:
 			var attack: AttackResource = AttackResource.new()
-			attack.damage = player.stats.bohrer_damage + player.stats.added_bohrer_damage
-			attack.knockback = player.stats.bohrer_knockback + player.stats.added_bohrer_knockback
-			attack.crit_chance = player.stats.crit_chance + player.stats.added_crit_chance
+			attack.damage = player.stats.get_bohrer_damage_total()
+			attack.knockback = player.stats.get_bohrer_knockback_total()
+			attack.crit_chance = player.stats.get_crit_chance_total()
 			
 			area.get_hit(attack, player)
 			
@@ -89,8 +91,8 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 	
 	if area is StaticHitbox:
 		static_hit_list.append(area)
-		
 
+## Removes static hitboxes from the active drill hit list
 func _on_bohrer_hit_box_area_exited(area: Area2D) -> void:
 	if !is_instance_valid(area):
 		return
@@ -98,12 +100,13 @@ func _on_bohrer_hit_box_area_exited(area: Area2D) -> void:
 		if static_hit_list.has(area):
 			static_hit_list.erase(area)
 
+## Continuously applies drill damage to all overlapping static hitboxes
 func bohrer_damage_on_static_hit() -> void:
 	if static_hit_list.is_empty():
 		return
 	
 	var attack: AttackResource = AttackResource.new()
-	attack.damage = player.stats.bohrer_damage + player.stats.added_bohrer_damage
+	attack.damage = player.stats.get_bohrer_damage_total()
 	for area in static_hit_list:
 		if is_instance_valid(area.entity):
 			await area.get_hit(attack, player)

@@ -13,11 +13,12 @@ signal HIT_take_heal
 #Perks
 signal PERK_event_collect_crystal
 signal PERK_reset_perks_from_controller_id
-signal PERK_barrier_shield_destroyed
 signal PERK_Aim_bot_activate
 signal PERK_Extra_health
 signal PERK_show_items_behind_wall
-signal Perk_add_vision_behind_wall
+signal PERK_add_vision_behind_wall
+signal PERK_barrier_shield_destroyed
+signal PERK_energy_overload_stopped
 
 ## first value -> strength, seconst value -> duration
 signal CAM_shake_effect

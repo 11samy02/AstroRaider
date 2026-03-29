@@ -50,16 +50,15 @@ script = ExtResource("8_yj8bj")
 max_health = 2
 max_Random_health_edit = 1
 attack = SubResource("Resource_6c7te")
-ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_nvx3s"), SubResource("Resource_n7l1v"), SubResource("Resource_7mash")])
 speed = 55.0
 max_speed = 140.0
 projectile = ExtResource("5_4325e")
 ranged_attack = SubResource("Resource_7job5")
+ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_nvx3s"), SubResource("Resource_n7l1v"), SubResource("Resource_7mash")])
 follow_distance = 300.0
 attack_distance = 100.0
-can_ranged_attack = true
-ranged_min_distance = 125.0
-ranged_max_distance = 250.0
+ranged_max_distance = 150.0
+ranged_chance = 70
 orbit_radius = 200.0
 
 [sub_resource type="Resource" id="Resource_heoew"]
