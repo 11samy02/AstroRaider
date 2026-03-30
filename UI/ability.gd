@@ -24,10 +24,9 @@ func show_active(max_cooldown: float) -> void:
 	cooldown.value = max_cooldown
 	_counting = false
 
-## Starts counting down — called when shield is destroyed
-func start_cooldown(max_cooldown: float) -> void:
-	cooldown.max_value = max_cooldown
-	cooldown.value = max_cooldown
+## Starts counting down with potentially reduced duration
+func start_cooldown(duration: float) -> void:
+	cooldown.value = duration
 	_counting = true
 
 func _physics_process(delta: float) -> void:

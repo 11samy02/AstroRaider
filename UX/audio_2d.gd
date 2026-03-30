@@ -4,9 +4,9 @@ class_name Audio2D
 @export_enum("Music","Sound Effect") var type = "Sound Effect"
 
 static var Music_volume := -25
-static var Music_audio_on := true
+static var Music_audio_on := false
 static var Sound_volume := -50
-static var Sound_audio_on := true
+static var Sound_audio_on := false
 
 @export var min_random_pitch : float = 1.00
 @export var max_random_pitch : float = 1.00
@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 		volume_db = Music_volume
 	elif type == "Sound Effect":
 		volume_db = Sound_volume
-	
+
 
 func play_sound() -> void:
 	if (type == "Music" and !Music_audio_on) or (type == "Sound Effect" and !Sound_audio_on):

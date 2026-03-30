@@ -56,7 +56,7 @@ func set_live_to_tiles(tiles_to_process: Array = []) -> void:
 func destroy_tile_at(pos: Array[Vector2], damage: int = 1) -> void:
 	if pos.is_empty():
 		return
-
+	
 	var uniq := {}
 	for w in pos:
 		uniq[Vector2i(env.local_to_map(w))] = true
