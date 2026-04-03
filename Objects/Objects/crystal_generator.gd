@@ -38,7 +38,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is OreTemplate:
 		for player_res : PlayerResource in GlobalGame.Players:
 			if player_res.player == area.player_who_collected:
-				var ore_name = area.Ores.keys()[area.Ore_type]
+				var ore_name = area.Ores.keys()[area.ore_type]
 				if player_res.Ores.has(ore_name):
 					player_res.Ores[ore_name] += 1
 				else:

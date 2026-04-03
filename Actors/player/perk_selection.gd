@@ -57,7 +57,7 @@ func _get_available_perks() -> Array:
 			continue
 		if p.is_ult() and manager.slots.has_ult:
 			continue
-		if p.is_activation() and manager.slots.all_slots_filled():
+		if p.is_activation() and manager.slots.all_slots_filled() and !p.has_unlocked:
 			continue
 		if not cleaned.has(p):
 			cleaned.append(p)

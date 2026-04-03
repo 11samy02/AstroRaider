@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bj04ov6ofjiup"]
+[gd_scene format=3 uid="uid://bj04ov6ofjiup"]
 
 [ext_resource type="PackedScene" uid="uid://dd8s7nwmnq0ud" path="res://Collectable/ore_template.tscn" id="1_y7sq5"]
 [ext_resource type="Texture2D" uid="uid://couxge5p5egvg" path="res://Sprites/Items/Ores/gold_ore.png" id="2_43dbl"]
 
-[sub_resource type="Shader" id="Shader_np2hv"]
+[sub_resource type="Shader" id="Shader_3dv3x"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode unshaded;
@@ -41,9 +41,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_18rk4"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4uphr"]
 resource_local_to_scene = true
-shader = SubResource("Shader_np2hv")
+shader = SubResource("Shader_3dv3x")
 shader_parameter/hologram_tint = Vector4(1, 1, 1, 1)
 shader_parameter/line_frequency = 3.0
 shader_parameter/line_intensity = 0.6
@@ -51,12 +51,11 @@ shader_parameter/distortion_strength = 0.0
 shader_parameter/glow_intensity = 0.5
 shader_parameter/time_speed = 2.0
 
-[node name="Gold_Ore" instance=ExtResource("1_y7sq5")]
-Ore_type = 2
-mass = 3
+[node name="Gold_Ore" unique_id=2120218087 instance=ExtResource("1_y7sq5")]
+ore_type = 2
 
 [node name="Sprite2D" parent="." index="0"]
-material = SubResource("ShaderMaterial_18rk4")
+material = SubResource("ShaderMaterial_4uphr")
 texture = ExtResource("2_43dbl")
 
 [node name="CollisionShape2D" parent="." index="1"]

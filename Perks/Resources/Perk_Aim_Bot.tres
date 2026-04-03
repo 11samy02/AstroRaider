@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://dml2y1d80mvg0"]
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://dml2y1d80mvg0"]
 
 [ext_resource type="Texture2D" uid="uid://ctj5u4dfj6704" path="res://Sprites/Perks/AutoTargeting.png" id="1_r76u1"]
 [ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="1_u7ugd"]
@@ -9,7 +9,7 @@ image = ExtResource("1_r76u1")
 Key = 7
 perk_name = "Aim Bot"
 cost = Array[int]([100, 150, 200, 250, 300, 350])
-value = Array[int]([2, 4, 6, 8, 10, 12])
+value = Array[int]([20, 35, 50, 70, 90, 120])
 description = "your projectiles can auto Target the enemy by a value of {{value}}"
 type = 2
 active_type = 4

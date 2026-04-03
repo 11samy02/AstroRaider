@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dv6htoe1tv4yu"]
+[gd_scene format=3 uid="uid://dv6htoe1tv4yu"]
 
 [ext_resource type="PackedScene" uid="uid://cqfioe138kr8o" path="res://Collectable/collectable_template.tscn" id="1_tfalh"]
 [ext_resource type="Script" uid="uid://dsc4y7ca28axk" path="res://Collectable/Crystal.gd" id="2_ttcpk"]
 [ext_resource type="Texture2D" uid="uid://b2wttn85cre2k" path="res://Sprites/Items/Ores/Cristals.png" id="3_d8oh4"]
 [ext_resource type="Shader" uid="uid://b06ow7jpp56ql" path="res://Shader/item_shimmer.gdshader" id="3_gwyhe"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_27kij"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_44aqq"]
 resource_local_to_scene = true
 radius = 60.0
 
@@ -189,7 +189,7 @@ light_mode = 1
 [sub_resource type="Gradient" id="Gradient_jawau"]
 colors = PackedColorArray(0.36, 0.36, 0.36, 1, 0.82, 0.82, 0.82, 1)
 
-[node name="Crystal" instance=ExtResource("1_tfalh")]
+[node name="Crystal" unique_id=1635695734 instance=ExtResource("1_tfalh")]
 scale = Vector2(0.5, 0.5)
 collision_layer = 32
 script = ExtResource("2_ttcpk")
@@ -198,22 +198,20 @@ collectable_name = "Crystal"
 
 [node name="CollisionShape2D" parent="." index="0"]
 visible = false
-shape = SubResource("CircleShape2D_27kij")
+shape = SubResource("CircleShape2D_44aqq")
 disabled = true
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="1" unique_id=534646602]
 self_modulate = Color(1.5, 1.5, 1.5, 1)
 material = SubResource("ShaderMaterial_lqh4p")
 texture = ExtResource("3_d8oh4")
 hframes = 5
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-libraries = {
-&"": SubResource("AnimationLibrary_2rmbn")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2" unique_id=1561813969]
+libraries/ = SubResource("AnimationLibrary_2rmbn")
 
-[node name="rope" type="Line2D" parent="." index="3"]
+[node name="rope" type="Line2D" parent="." index="3" unique_id=806436826]
 modulate = Color(1, 0.768627, 0, 1)
 show_behind_parent = true
 z_index = -2
@@ -221,5 +219,5 @@ material = SubResource("CanvasItemMaterial_gmry1")
 width = 1.0
 gradient = SubResource("Gradient_jawau")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="4"]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="4" unique_id=775651831]
 visible = false

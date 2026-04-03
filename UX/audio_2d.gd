@@ -21,7 +21,6 @@ func _physics_process(delta: float) -> void:
 	elif type == "Sound Effect":
 		volume_db = Sound_volume
 
-
 func play_sound() -> void:
 	if (type == "Music" and !Music_audio_on) or (type == "Sound Effect" and !Sound_audio_on):
 		stop()

@@ -72,16 +72,24 @@ func aim_to_target() -> void:
 		var e := Enemy_list[i]
 		if !is_instance_valid(e) or Enemy_hit_list.has(e):
 			Enemy_list.remove_at(i)
-
 	if Enemy_list.is_empty():
 		return
 
-	var target_dir := (get_closest_target_pos() - global_position).normalized()
-	var t = clamp(value / 100.0, 0.0, 1.0)
-	var new_angle := lerp_angle(parent.dir.angle(), target_dir.angle(), t)
+	var target_pos := get_closest_target_pos()
+	var target_dir := (target_pos - global_position).normalized()
+	var dist := global_position.distance_to(target_pos)
+
+	if dist < 40.0:
+		parent.dir = target_dir
+		return
+
+	var max_turn := deg_to_rad(value * 0.1)
+	var current_angle := parent.dir.angle()
+	var target_angle := target_dir.angle()
+	var angle_diff := wrapf(target_angle - current_angle, -PI, PI)
+	var step = clamp(angle_diff, -max_turn, max_turn)
+	var new_angle = current_angle + step
 	parent.dir = Vector2.RIGHT.rotated(new_angle).normalized()
-
-
 func mark_enemy_as_hit(enemy: EnemyBaseTemplate) -> void:
 	if enemy == null:
 		return
