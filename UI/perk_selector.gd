@@ -27,7 +27,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not visible or not is_button_pressed:
 		return
-	progress_bar.value += 200.0 * delta
+	progress_bar.value += 500.0 * delta
 	if progress_bar.value >= progress_bar.max_value:
 		is_button_pressed = false
 		progress_bar.value = 0.0

@@ -1,31 +1,44 @@
 extends PerkBuild
 
+@export var reveal: PlayerRevealDetection
+
 var _previous_value := -1
 
 
-## Passive: reveals items hidden behind walls
 func activate_perk() -> void:
 	super()
-
-	if _previous_value != get_value():
-		GSignals.PERK_add_vision_behind_wall.emit(player, get_value())
-		_previous_value = get_value()
-
+	
 	var res := get_player_res()
 	if is_instance_valid(res) and has_unlocked:
 		res.has_perk_anti_mine_det = true
+	
+	var current_value := get_value()
+	if current_value != _previous_value:
+		if is_instance_valid(reveal):
+			reveal.set_reveal_radius(current_value)
+		_previous_value = current_value
 
 
-## Resets the perk effects when disabled
 func _reset_stats() -> void:
 	var res := get_player_res()
 	if is_instance_valid(res):
 		res.has_perk_anti_mine_det = false
+	
+	if is_instance_valid(reveal):
+		reveal.set_reveal_radius(0)
+	
+	_previous_value = -1
 
 
-## Ensures the flag is set when leveling up
 func level_up_perk() -> void:
+	super()
+	
 	var res := get_player_res()
 	if is_instance_valid(res):
 		res.has_perk_anti_mine_det = true
-	super()
+	
+	var current_value := get_value()
+	if is_instance_valid(reveal):
+		reveal.set_reveal_radius(current_value)
+	
+	_previous_value = current_value

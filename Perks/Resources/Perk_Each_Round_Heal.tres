@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://brbcy124mswp1"]
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://brbcy124mswp1"]
 
 [ext_resource type="Texture2D" uid="uid://df8ns1fyykf0m" path="res://Sprites/Perks/EachRoundHeal.png" id="1_fa71l"]
 [ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="2_joykj"]
@@ -8,8 +8,11 @@ script = ExtResource("2_joykj")
 image = ExtResource("1_fa71l")
 Key = 4
 perk_name = "Each Round Heal"
-cost = Array[int]([100, 150, 200, 250, 300, 350])
-value = Array[int]([10, 20, 30, 40, 50, 60])
 description = "After each round, you heal {{value}}% of your maximum health."
 type = 1
 active_type = 3
+tags = Array[int]([2, 6])
+mechanics = Array[int]([3])
+rarity = Array[float]([7.0, 7.0, 6.0, 5.0, 4.0, 3.0])
+value = Array[int]([10, 20, 30, 40, 50, 60])
+cost = Array[int]([100, 150, 200, 250, 300, 350])

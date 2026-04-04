@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Perk" load_steps=3 format=3 uid="uid://dee4qmbi800yd"]
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://dee4qmbi800yd"]
 
 [ext_resource type="Texture2D" uid="uid://dh4sboeevsghg" path="res://Sprites/Perks/NotSoFast.png" id="1_ti5b4"]
 [ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="2_2pdkf"]
@@ -8,7 +8,9 @@ script = ExtResource("2_2pdkf")
 image = ExtResource("1_ti5b4")
 Key = 5
 perk_name = "Resilience"
-cost = Array[int]([50, 75, 100, 125, 150, 175])
-value = Array[int]([50, 75, 100, 125, 150, 175])
 description = "The vulnerable time after you get hit increases by {{value}}%."
 type = 1
+tags = Array[int]([2, 5])
+rarity = Array[float]([7.0, 7.0, 6.0, 5.0, 4.0, 3.0])
+value = Array[int]([50, 75, 100, 125, 150, 175])
+cost = Array[int]([50, 75, 100, 125, 150, 175])

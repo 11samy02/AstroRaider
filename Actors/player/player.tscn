@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c3v5coeuuf6c6" path="res://Sprites/actors/items/crosshair.png" id="7_vmm8m"]
 [ext_resource type="Script" uid="uid://c1lcsc3d35vpk" path="res://Actors/player/player_shader_effects.gd" id="9_8mobi"]
 [ext_resource type="AudioStream" uid="uid://dhq4tomopgolt" path="res://Sounds/LaserSound.wav" id="9_51d1q"]
+[ext_resource type="Script" uid="uid://bfaipmjxlxmvp" path="res://Actors/player/player_detection.gd" id="10_gddw4"]
 [ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="10_pasbu"]
 [ext_resource type="AudioStream" uid="uid://dlo0yu1a81ksu" path="res://Sounds/damage.wav" id="11_bdp4b"]
 [ext_resource type="AudioStream" uid="uid://nf0618xwf4nf" path="res://Sounds/BohrerSound.wav" id="12_purh8"]
@@ -47,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://dx2duij3kymp" path="res://Perks/PerkBuild/Perk_Energy_Overload.tscn" id="41_823vk"]
 [ext_resource type="PackedScene" uid="uid://cy8yxobay3dcf" path="res://UI/game_ui.tscn" id="43_n0jvn"]
 [ext_resource type="PackedScene" uid="uid://mj5htxevexkt" path="res://Perks/PerkBuild/Perk_Impulse_Drive.tscn" id="44_oiqbg"]
+[ext_resource type="PackedScene" uid="uid://mhgxa18ikbht" path="res://Perks/PerkBuild/Perk_Vampire_Bite.tscn" id="45_qxlfy"]
 
 [sub_resource type="Resource" id="Resource_f7306"]
 script = ExtResource("4_m4e5o")
@@ -411,6 +413,10 @@ player = NodePath("../..")
 script = ExtResource("9_8mobi")
 sprite = NodePath("../../Sprite")
 
+[node name="PlayerRevealDetection" type="Node" parent="Script" unique_id=2042162012 node_paths=PackedStringArray("player")]
+script = ExtResource("10_gddw4")
+player = NodePath("../..")
+
 [node name="Sprite" type="Sprite2D" parent="." unique_id=446006153]
 z_index = 1
 material = ExtResource("2_0osdd")
@@ -582,7 +588,8 @@ player = NodePath("../../..")
 [node name="AimBot" parent="PerkManager/Perks" unique_id=1063151400 node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
 player = NodePath("../../..")
 
-[node name="PerkAntiMineDetection" parent="PerkManager/Perks" unique_id=1856133259 node_paths=PackedStringArray("player") instance=ExtResource("25_38jmy")]
+[node name="PerkAntiMineDetection" parent="PerkManager/Perks" unique_id=1856133259 node_paths=PackedStringArray("reveal", "player") instance=ExtResource("25_38jmy")]
+reveal = NodePath("../../../Script/PlayerRevealDetection")
 player = NodePath("../../..")
 
 [node name="BarrierShield" parent="PerkManager/Perks" unique_id=1121491132 node_paths=PackedStringArray("player") instance=ExtResource("26_wpgrq")]
@@ -619,6 +626,9 @@ player = NodePath("../../..")
 player = NodePath("../../..")
 
 [node name="Impulse Drive" parent="PerkManager/Perks" unique_id=1336730520 node_paths=PackedStringArray("player") instance=ExtResource("44_oiqbg")]
+player = NodePath("../../..")
+
+[node name="VampireBite" parent="PerkManager/Perks" unique_id=1763410141 node_paths=PackedStringArray("player") instance=ExtResource("45_qxlfy")]
 player = NodePath("../../..")
 
 [node name="Ui" type="CanvasLayer" parent="." unique_id=108126596]

@@ -1,8 +1,8 @@
 extends Area2D
 class_name SingleDetector
 
-var has_detected = false
-var player_inside = false
+var has_detected := false
+var player_inside := false
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -10,6 +10,7 @@ func _on_body_entered(body: Node2D) -> void:
 		player_inside = true
 	else:
 		has_detected = true
+		_update_debug_color()
 
 
 func _on_body_exited(body: Node2D) -> void:
@@ -17,8 +18,10 @@ func _on_body_exited(body: Node2D) -> void:
 		player_inside = false
 	else:
 		has_detected = false
+		_update_debug_color()
 
-func _process(delta: float) -> void:
+
+func _update_debug_color() -> void:
 	if has_detected:
 		modulate = Color.GREEN
 	else:

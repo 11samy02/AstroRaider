@@ -6,6 +6,8 @@ class_name Hitbox
 
 ## Applies damage, crit and knockback to the entity
 func get_hit(attack: AttackResource, who_attacked: CharacterBody2D = null) -> void:
+	if entity is Player and !entity.can_take_damage:
+		return
 	if entity is EnemyBaseTemplate:
 		entity.killed_by = who_attacked
 		entity.stun_activated(attack)
