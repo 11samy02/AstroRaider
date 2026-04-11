@@ -25,8 +25,8 @@ func _orbit(delta: float) -> void:
 	var to_desired := desired_pos - parent.global_position
 	var dist := to_desired.length()
 	
-	var tangent := Vector2(-sin(_angle), cos(_angle)) * dir_sign * parent.stats.speed
-	var correction = to_desired.normalized() * min(dist, parent.stats.speed)
+	var tangent := Vector2(-sin(_angle), cos(_angle)) * dir_sign * parent.stats.get_effective_speed()
+	var correction = to_desired.normalized() * min(dist, parent.stats.get_effective_speed())
 	
 	var desired_v = tangent + correction
 	parent.velocity = parent.velocity.move_toward(desired_v, accel * delta)

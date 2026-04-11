@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://drplyear4uby8"]
+[gd_scene format=3 uid="uid://drplyear4uby8"]
 
 [ext_resource type="Texture2D" uid="uid://dkfyi2yu36ioh" path="res://Sprites/UI/bars/live_bar_frame.png" id="1_4t3oe"]
 [ext_resource type="Texture2D" uid="uid://cunwsolh8fo86" path="res://Sprites/UI/bars/live_bar_fill.png" id="2_vpo8i"]
@@ -7,7 +7,7 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t8gss"]
 light_mode = 1
 
-[node name="bar" type="TextureProgressBar"]
+[node name="bar" type="TextureProgressBar" unique_id=1271180155]
 process_mode = 3
 z_index = 10
 material = SubResource("CanvasItemMaterial_t8gss")
@@ -20,7 +20,7 @@ texture_over = ExtResource("1_4t3oe")
 texture_progress = ExtResource("2_vpo8i")
 script = ExtResource("3_628qs")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1794639955]
 wait_time = 2.0
 autostart = true
 

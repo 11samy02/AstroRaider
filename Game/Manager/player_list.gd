@@ -36,18 +36,8 @@ func set_players() -> void:
 			
 			id += 1
 	
-	spawn_healtbars_to_players()
-	
 	for i in range(0, GlobalGame.Players.size()):
 		add_perks_to_player(i)
-
-
-func spawn_healtbars_to_players() -> void:
-	for player_res: PlayerResource in GlobalGame.Players:
-		var healthbar = preload("res://Actors/player/Healthbar.tscn").instantiate()
-		healthbar.parent_entity = player_res.player
-		healthbar.global_position = player_res.player.global_position
-		add_child(healthbar)
 
 
 func add_perks_to_player(id: int) -> void:

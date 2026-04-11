@@ -260,6 +260,7 @@ autoplay = "default"
 frame_progress = 0.0931071
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=632364253]
+visible = false
 shape = SubResource("CircleShape2D_g8ix4")
 
 [node name="Sounds" type="Node2D" parent="." unique_id=655965613]
@@ -273,6 +274,7 @@ min_random_pitch = 0.75
 max_random_pitch = 1.5
 
 [node name="CheckPlayerNearby" type="Area2D" parent="." unique_id=2119622012]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -284,6 +286,7 @@ shape = SubResource("CircleShape2D_lsdkb")
 libraries/ = SubResource("AnimationLibrary_5sfde")
 
 [node name="BuildingHitbox" type="Area2D" parent="." unique_id=514216116 node_paths=PackedStringArray("entity")]
+visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("7_p8wcm")
@@ -293,6 +296,7 @@ entity = NodePath("..")
 shape = SubResource("CircleShape2D_7diee")
 
 [node name="BuildingPlacedColl" type="Area2D" parent="." unique_id=564195763]
+visible = false
 collision_layer = 128
 collision_mask = 0
 

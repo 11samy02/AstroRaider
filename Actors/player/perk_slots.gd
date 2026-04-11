@@ -80,10 +80,12 @@ func assign_to_slot(slot_key: String, perk: PerkBuild) -> void:
 			perk.cooldown_started.connect(ability_4.start_cooldown)
 
 
-## Registers the selected ult perk
+## Registers the selected ult perk and connects cooldown signal
 func register_ult(perk: PerkBuild) -> void:
 	has_ult = true
 	ult_perk = perk
+	perk.ability_slot_ref = ability_4
+	perk.cooldown_started.connect(ability_4.start_cooldown)
 
 
 ## Activates the perk in the given slot key

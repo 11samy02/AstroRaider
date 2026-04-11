@@ -26,7 +26,7 @@ func _update(delta: float) -> void:
 
 	if _charging:
 		parent.velocity = parent.velocity.move_toward(
-			_charge_dir * parent.stats.speed * charge_speed_mul,
+			_charge_dir * parent.stats.get_effective_speed() * charge_speed_mul,
 			accel * delta
 		)
 		return

@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name GameUi
 
 @onready var label: Label = %Label
 @onready var label_anim: AnimationPlayer = %label_anim
@@ -6,6 +7,7 @@ extends CanvasLayer
 @onready var wave_progress: TextureProgressBar = %wave_progress
 @onready var abilities: HBoxContainer = %Abilities
 
+@export var player : Player
 
 var last_wave_num:String
 

@@ -1,5 +1,5 @@
 extends TextureProgressBar
-class_name HealthBar
+#class_name HealthBar
 
 @onready var timer: Timer = $Timer
 

@@ -104,6 +104,7 @@ enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://Perks/": "blue",
 "res://Resources/": "gray",
 "res://addons/": "red"
 }

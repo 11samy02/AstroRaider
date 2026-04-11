@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c3e2wukowerev"]
+[gd_scene format=3 uid="uid://c3e2wukowerev"]
 
 [ext_resource type="Texture2D" uid="uid://dwk5euihon04r" path="res://Sprites/UI/bars/Boss-bar-health.png" id="1_hp4dq"]
 [ext_resource type="Script" uid="uid://coq3cuwvt7xvk" path="res://UI/Boss/bossbar.gd" id="1_pgojx"]
@@ -36,7 +36,7 @@ region = Rect2(0, 102, 290, 51)
 atlas = ExtResource("1_hp4dq")
 region = Rect2(123, 0, 44, 34)
 
-[node name="Bossbar" type="MarginContainer"]
+[node name="Bossbar" type="MarginContainer" unique_id=208450167]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -51,7 +51,7 @@ theme_override_constants/margin_bottom = 75
 script = ExtResource("1_pgojx")
 boss_stats = SubResource("Resource_ravbd")
 
-[node name="chip_bar" type="TextureProgressBar" parent="."]
+[node name="chip_bar" type="TextureProgressBar" parent="." unique_id=1715976016]
 custom_minimum_size = Vector2(1024, 51)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -68,7 +68,7 @@ texture_under = SubResource("AtlasTexture_pgojx")
 texture_over = SubResource("AtlasTexture_p4ix2")
 texture_progress = SubResource("AtlasTexture_ravbd")
 
-[node name="real_bar" type="TextureProgressBar" parent="."]
+[node name="real_bar" type="TextureProgressBar" parent="." unique_id=1041154045]
 material = SubResource("ShaderMaterial_iraqf")
 custom_minimum_size = Vector2(1024, 51)
 layout_mode = 2
@@ -85,7 +85,7 @@ stretch_margin_bottom = 12
 texture_over = SubResource("AtlasTexture_p4ix2")
 texture_progress = SubResource("AtlasTexture_5bwrv")
 
-[node name="TextureRect" type="TextureRect" parent="real_bar"]
+[node name="TextureRect" type="TextureRect" parent="real_bar" unique_id=1206273841]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

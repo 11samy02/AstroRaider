@@ -2,6 +2,8 @@
 extends Resource
 class_name EnemyStats
 
+static var time_warp_multiplier := 1.00
+
 @export_group("Default Stats")
 @export var max_health: int = 10
 @export var max_Random_health_edit: int = 0
@@ -82,3 +84,7 @@ func update_stats(upgrades: EnemyStatsUpgrade, level: int) -> void:
 	attack.crit_chance += upgrades.attack_crit_chance * level
 	ranged_attack.damage += upgrades.ranged_damage * level
 	default_crit_chance += upgrades.default_crit_chance * level
+
+## gives the real speed of the Enemy
+func get_effective_speed() -> float:
+	return speed * EnemyStats.time_warp_multiplier

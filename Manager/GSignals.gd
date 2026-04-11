@@ -44,6 +44,7 @@ signal UI_show_only_PerkSelector
 
 #Buildings
 signal BUI_generator_gets_hit
+signal BUI_generator_is_placed(generator: CrystalGenerator)
 signal BUI_BUILDING_select_building
 signal BUI_allow_to_place
 signal BUI_hide_resource_cost

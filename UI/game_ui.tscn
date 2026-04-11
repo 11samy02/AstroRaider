@@ -6,8 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://cupjbn6mvtim6" path="res://Sprites/UI/in Game/Rader.png" id="4_3aifi"]
 [ext_resource type="Texture2D" uid="uid://mgiqy8g1uvqr" path="res://Sprites/UI/in Game/Rader_curser1.png" id="5_dkflf"]
 [ext_resource type="Script" uid="uid://coa0alkfyrpl3" path="res://UI/rader.gd" id="5_fm8ch"]
+[ext_resource type="Texture2D" uid="uid://7ssh3vmfgv52" path="res://Sprites/UI/in Game/healthbar.png" id="7_jd38o"]
 [ext_resource type="Script" uid="uid://c3705he7h0ga6" path="res://UI/abilities.gd" id="7_v6n52"]
+[ext_resource type="Script" uid="uid://d0diagb1nufkt" path="res://UI/healthbar.gd" id="8_bjx7l"]
+[ext_resource type="Texture2D" uid="uid://6mppvskofpnb" path="res://Sprites/UI/in Game/generatorbar.png" id="8_q8rbd"]
 [ext_resource type="PackedScene" uid="uid://bfhmxjln7hoas" path="res://UI/ability.tscn" id="8_ywmy4"]
+[ext_resource type="Script" uid="uid://bbredx6e4f0j4" path="res://UI/generator_healthbar.gd" id="10_orm7x"]
 
 [sub_resource type="SystemFont" id="SystemFont_4dhts"]
 font_names = PackedStringArray("November")
@@ -73,7 +77,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("curser:rotation")
+tracks/0/path = NodePath("cursor:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -85,7 +89,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("curser:modulate")
+tracks/1/path = NodePath("cursor:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +107,7 @@ step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("curser:rotation")
+tracks/0/path = NodePath("cursor:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -115,7 +119,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("curser:modulate")
+tracks/1/path = NodePath("cursor:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -130,6 +134,37 @@ _data = {
 &"RESET": SubResource("Animation_hnooe"),
 &"rotate": SubResource("Animation_6r258")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjx7l"]
+atlas = ExtResource("7_jd38o")
+region = Rect2(0, 0, 81, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bjx7l"]
+load_path = "res://.godot/imported/healthbar.png-85cc653dc88da164635e5f5ac532565e.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oohqu"]
+atlas = SubResource("CompressedTexture2D_bjx7l")
+region = Rect2(37, 37, 39, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_orm7x"]
+atlas = ExtResource("8_q8rbd")
+region = Rect2(22, 53, 39, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8rbd"]
+atlas = ExtResource("7_jd38o")
+region = Rect2(37, 21, 39, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0y33"]
+atlas = ExtResource("8_q8rbd")
+region = Rect2(0, 0, 66, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fifbr"]
+atlas = ExtResource("8_q8rbd")
+region = Rect2(22, 37, 39, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7suct"]
+atlas = ExtResource("8_q8rbd")
+region = Rect2(22, 21, 39, 6)
 
 [node name="GameUI" type="CanvasLayer" unique_id=500140784]
 process_mode = 3
@@ -213,7 +248,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Rader" type="TextureRect" parent="Control/MarginContainer" unique_id=341768308]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(234, 234)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -221,7 +256,7 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_k2fda")
 script = ExtResource("5_fm8ch")
 
-[node name="curser" type="TextureRect" parent="Control/MarginContainer/Rader" unique_id=1591441423]
+[node name="cursor" type="TextureRect" parent="Control/MarginContainer/Rader" unique_id=1591441423]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -229,12 +264,171 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(100, 100)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_dkflf")
 
 [node name="anim" type="AnimationPlayer" parent="Control/MarginContainer/Rader" unique_id=681454443]
 libraries/ = SubResource("AnimationLibrary_dchpr")
 autoplay = &"rotate"
+
+[node name="HP-Frame" type="TextureRect" parent="Control/MarginContainer/Rader" unique_id=930788651]
+show_behind_parent = true
+custom_minimum_size = Vector2(243, 48)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -93.0
+offset_top = -57.0
+offset_right = 150.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = SubResource("AtlasTexture_bjx7l")
+
+[node name="chipbar" type="TextureProgressBar" parent="Control/MarginContainer/Rader/HP-Frame" unique_id=1671626178]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -9.0
+offset_right = 106.5
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+step = 0.01
+value = 100.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_oohqu")
+texture_progress = SubResource("AtlasTexture_orm7x")
+
+[node name="Healthbar" type="TextureProgressBar" parent="Control/MarginContainer/Rader/HP-Frame" unique_id=1731503030 node_paths=PackedStringArray("game_ui", "chip_bar", "health_label")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -9.0
+offset_right = 106.5
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+step = 0.01
+value = 100.0
+nine_patch_stretch = true
+texture_progress = SubResource("AtlasTexture_q8rbd")
+script = ExtResource("8_bjx7l")
+game_ui = NodePath("../../../../..")
+chip_bar = NodePath("../chipbar")
+health_label = NodePath("healt-label")
+
+[node name="healt-label" type="Label" parent="Control/MarginContainer/Rader/HP-Frame/Healthbar" unique_id=1557333280]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_font_sizes/font_size = 10
+text = "100 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Generator-Frame" type="TextureRect" parent="Control/MarginContainer/Rader" unique_id=1450266962]
+custom_minimum_size = Vector2(198, 48)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = 15.0
+offset_right = 168.0
+offset_bottom = 63.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = SubResource("AtlasTexture_q0y33")
+
+[node name="chipbar" type="TextureProgressBar" parent="Control/MarginContainer/Rader/Generator-Frame" unique_id=846961627]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -9.0
+offset_right = 83.99997
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+step = 0.01
+value = 100.0
+nine_patch_stretch = true
+texture_under = SubResource("AtlasTexture_fifbr")
+texture_progress = SubResource("AtlasTexture_orm7x")
+
+[node name="GeneratorHealthbar" type="TextureProgressBar" parent="Control/MarginContainer/Rader/Generator-Frame" unique_id=602292616 node_paths=PackedStringArray("chip_bar", "health_label", "frame")]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -9.0
+offset_right = 84.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+step = 0.01
+value = 100.0
+nine_patch_stretch = true
+texture_progress = SubResource("AtlasTexture_7suct")
+script = ExtResource("10_orm7x")
+chip_bar = NodePath("../chipbar")
+health_label = NodePath("GeneratorHealthLabel")
+frame = NodePath("..")
+
+[node name="GeneratorHealthLabel" type="Label" parent="Control/MarginContainer/Rader/Generator-Frame/GeneratorHealthbar" unique_id=276791786]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_font_sizes/font_size = 10
+text = "500 / 500"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Abilities" type="HBoxContainer" parent="Control/MarginContainer" unique_id=1065963898]
 unique_name_in_owner = true

@@ -31,8 +31,10 @@ func init(mgr: Node) -> void:
 func _init_perks_from_children() -> void:
 	perks_list.clear()
 	for child in manager.perks_node.get_children():
-		if child is PerkBuild and child.Level < 6 and not perks_list.has(child):
-			perks_list.append(child)
+		if child is PerkBuild:
+			var max_level := 3 if child.is_ult() else 6
+			if child.Level < max_level and not perks_list.has(child):
+				perks_list.append(child)
 
 
 ## Builds a perk offer for the given selector type and emits the UI signal.
@@ -151,7 +153,8 @@ func _get_available_perks(selector_type: SelectorType = SelectorType.Standard) -
 		if not is_instance_valid(p):
 			continue
 
-		if p.Level >= 6:
+		var max_level := 3 if p.is_ult() else 6
+		if p.Level >= max_level:
 			continue
 
 		if not is_instance_valid(p.perk_res):
@@ -275,14 +278,13 @@ func _pick_weighted_perk(perks: Array[PerkBuild]) -> PerkBuild:
 	return weighted_entries.back().perk
 
 
-## Removes all maxed perks from the active selection list.
+## Remove perks that reached max level from the list
 func prune_maxed() -> void:
 	var to_remove: Array[PerkBuild] = []
-
 	for p in perks_list:
-		if is_instance_valid(p) and p.Level >= 6:
+		var max_level := 3 if p.is_ult() else 6
+		if p.Level >= max_level:
 			to_remove.append(p)
-
 	for p in to_remove:
 		perks_list.erase(p)
 
@@ -298,15 +300,16 @@ func _cooldown_push(perk: PerkBuild) -> void:
 		var back: PerkBuild = last_selected_perks[0]
 		last_selected_perks.remove_at(0)
 
-		if is_instance_valid(back) and back.Level < 6 and not perks_list.has(back):
+		var max_level := 3 if back.is_ult() else 6
+		if is_instance_valid(back) and back.Level < max_level and not perks_list.has(back):
 			perks_list.append(back)
 
 
 ## Finalizes the selected perk and updates the cooldown rotation.
 func finalize(perk: PerkBuild) -> void:
 	perks_to_choose_from.clear()
-
-	if perk.Level >= 6:
+	var max_level := 3 if perk.is_ult() else 6
+	if perk.Level >= max_level:
 		if perks_list.has(perk):
 			perks_list.erase(perk)
 	else:
@@ -334,8 +337,9 @@ func emergency_release_from_cooldown() -> void:
 		if not is_instance_valid(perk) or not is_instance_valid(perk.perk_res):
 			last_selected_perks.remove_at(i)
 			continue
-
-		if perk.Level < 6 and not perks_list.has(perk):
+		
+		var max_level := 3 if perk.is_ult() else 6
+		if perk.Level < max_level and not perks_list.has(perk):
 			perks_list.append(perk)
 			last_selected_perks.remove_at(i)
 			released += 1
@@ -348,11 +352,12 @@ func _count_total_remaining() -> int:
 	var count := 0
 
 	for p in perks_list:
-		if is_instance_valid(p) and p.Level < 6:
+		var max_level := 3 if p.is_ult() else 6
+		if is_instance_valid(p) and p.Level < max_level:
 			count += 1
-
 	for p in last_selected_perks:
-		if is_instance_valid(p) and p.Level < 6 and not perks_list.has(p):
+		var max_level := 3 if p.is_ult() else 6
+		if is_instance_valid(p) and p.Level < max_level and not perks_list.has(p):
 			count += 1
 
 	return count
@@ -389,7 +394,8 @@ func _top_up_available_from_cooldown(available: Array[PerkBuild], target: int, s
 			SelectorType.Standard:
 				valid_for_selector = true
 
-		if perk.Level < 6 and not available.has(perk) and not perks_list.has(perk):
+		var max_level := 3 if perk.is_ult() else 6
+		if perk.Level < max_level and not available.has(perk) and not perks_list.has(perk):
 			if _has_required_perks(perk) and valid_for_selector:
 				perks_list.append(perk)
 				available.append(perk)

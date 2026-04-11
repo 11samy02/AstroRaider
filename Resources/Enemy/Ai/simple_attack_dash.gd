@@ -25,7 +25,7 @@ func _attack(delta: float) -> void:
 	if to_tgt.length() < engage_dist:
 		_has_attacked = true
 
-	var desired_v := -dir * parent.stats.speed * retreat_speed_mul if _has_attacked else dir * parent.stats.speed * dash_speed_mul
+	var desired_v := -dir * parent.stats.get_effective_speed() * retreat_speed_mul if _has_attacked else dir * parent.stats.get_effective_speed() * dash_speed_mul
 	parent.velocity = parent.velocity.move_toward(desired_v, accel * delta)
 
 	if dash_time.is_stopped():

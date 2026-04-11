@@ -12,6 +12,6 @@ func _physics_process(delta: float) -> void:
 func _move(delta: float) -> void:
 	var dir := (parent.get_closest_target() - parent.global_position).normalized()
 	parent.velocity = parent.velocity.move_toward(
-		dir * parent.stats.speed,
-		parent.stats.speed * delta * 10
+		dir * parent.stats.get_effective_speed(),
+		parent.stats.get_effective_speed() * delta * 10
 	)

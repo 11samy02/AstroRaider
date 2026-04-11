@@ -22,9 +22,9 @@ func _move(delta: float) -> void:
 	var dist := to_tgt.length()
 	var dir := to_tgt.normalized()
 	if dist > preferred_distance + 20.0:
-		parent.velocity = parent.velocity.move_toward(dir * parent.stats.speed, accel * delta)
+		parent.velocity = parent.velocity.move_toward(dir * parent.stats.get_effective_speed(), accel * delta)
 	elif dist < preferred_distance - 20.0:
-		parent.velocity = parent.velocity.move_toward(-dir * parent.stats.speed, accel * delta)
+		parent.velocity = parent.velocity.move_toward(-dir * parent.stats.get_effective_speed(), accel * delta)
 	else:
 		parent.velocity = parent.velocity.move_toward(Vector2.ZERO, brake * delta)
 

@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bpc404cnfuccf"]
+
+[ext_resource type="Script" uid="uid://bqqeesnmktbol" path="res://Perks/PerkBuild/perk_temporal_collapse.gd" id="1_g5cxl"]
+
+[node name="PerkTemporalCollapse" type="Node" unique_id=717977835]
+script = ExtResource("1_g5cxl")
+Key = 21
+metadata/_custom_type_script = "uid://b3gr0cwnvudut"

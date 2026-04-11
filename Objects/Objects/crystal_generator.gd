@@ -1,6 +1,8 @@
 extends Building
 class_name CrystalGenerator
 
+
+
 @onready var collect_crystal: AudioStreamPlayer2D = $Sounds/CollectCrystal
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var interactionn_icon: Sprite2D = $interactionn_icon
@@ -15,6 +17,7 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	ensure_all_players_have_all_ores()
+	GSignals.BUI_generator_is_placed.emit(self)
 
 func ensure_all_players_have_all_ores() -> void:
 	for player_res: PlayerResource in GlobalGame.Players:

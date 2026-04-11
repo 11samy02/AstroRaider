@@ -103,7 +103,8 @@ func level_up_perk() -> void:
 		print(self.name, " unlocked at Level: ", Level)
 		has_unlocked = true
 		return
-	if Level >= 6:
+	var max_level := 3 if is_ult() else 6
+	if Level >= max_level:
 		printerr("Perk is already on Max Level: ", self.name)
 		return
 	Level += 1
