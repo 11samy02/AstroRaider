@@ -115,12 +115,12 @@ func _on_bohrer_hit_box_area_entered(area: Area2D) -> void:
 			attack.damage = player.stats.get_bohrer_damage_total()
 			attack.knockback = player.stats.get_bohrer_knockback_total()
 			attack.crit_chance = player.stats.get_crit_chance_total()
-
+	
 			area.get_hit(attack, player)
-
+	
 			var dir: Vector2 = (area.global_position - player.global_position).normalized()
 			area.entity.get_knockback(dir, attack.knockback)
-
+	
 	if area is StaticHitbox:
 		static_hit_list.append(area)
 

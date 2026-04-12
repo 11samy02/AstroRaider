@@ -50,6 +50,8 @@
 [ext_resource type="PackedScene" uid="uid://mj5htxevexkt" path="res://Perks/PerkBuild/Perk_Impulse_Drive.tscn" id="44_oiqbg"]
 [ext_resource type="PackedScene" uid="uid://mhgxa18ikbht" path="res://Perks/PerkBuild/Perk_Vampire_Bite.tscn" id="45_qxlfy"]
 [ext_resource type="PackedScene" uid="uid://bpc404cnfuccf" path="res://Perks/PerkBuild/perk_temporal_collapse.tscn" id="47_o2pqv"]
+[ext_resource type="PackedScene" uid="uid://b0r42snyrrlpc" path="res://Perks/PerkBuild/perk_blood_claws.tscn" id="48_5f53s"]
+[ext_resource type="Shader" uid="uid://bacc40ajix2rt" path="res://UI/Boss/bossbar.gdshader" id="52_w5y2x"]
 
 [sub_resource type="Resource" id="Resource_f7306"]
 script = ExtResource("4_m4e5o")
@@ -384,6 +386,24 @@ _data = {
 &"build_symbol": SubResource("Animation_ec8vi")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1kcd"]
+resource_local_to_scene = true
+shader = ExtResource("52_w5y2x")
+shader_parameter/glow_intensity = 0.0
+shader_parameter/crit_active = false
+shader_parameter/crit_intensity = 0.0
+shader_parameter/crit_color = Color(1, 0.27058825, 0.2, 1)
+shader_parameter/glow_color = Color(0.54247046, 0.008527867, 1.4439226e-07, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glpjx"]
+resource_local_to_scene = true
+shader = ExtResource("52_w5y2x")
+shader_parameter/glow_intensity = 0.0
+shader_parameter/crit_active = false
+shader_parameter/crit_intensity = 0.0
+shader_parameter/crit_color = Color(1, 0.271, 0.2, 1)
+shader_parameter/glow_color = Color(1.0588765e-06, 0.61795694, 0.7694895, 1)
+
 [node name="Player" type="CharacterBody2D" unique_id=182532903 node_paths=PackedStringArray("movement", "shader_effects", "perk_manager")]
 process_mode = 1
 collision_layer = 2
@@ -635,6 +655,9 @@ player = NodePath("../../..")
 [node name="TemporalCollapse" parent="PerkManager/Perks" unique_id=717977835 node_paths=PackedStringArray("player") instance=ExtResource("47_o2pqv")]
 player = NodePath("../../..")
 
+[node name="Perk_Blood_Claws" parent="PerkManager/Perks" unique_id=67303946 node_paths=PackedStringArray("player") instance=ExtResource("48_5f53s")]
+player = NodePath("../../..")
+
 [node name="Ui" type="CanvasLayer" parent="." unique_id=108126596]
 process_mode = 3
 layer = 100
@@ -655,6 +678,12 @@ player = NodePath("..")
 [node name="Control" parent="GameUI" index="0" unique_id=1651289539]
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="Healthbar" parent="GameUI/Control/MarginContainer/Rader/HP-Frame" parent_id_path=PackedInt32Array(500140784, 930788651) index="1" unique_id=1731503030]
+material = SubResource("ShaderMaterial_x1kcd")
+
+[node name="GeneratorHealthbar" parent="GameUI/Control/MarginContainer/Rader/Generator-Frame" parent_id_path=PackedInt32Array(500140784, 1450266962) index="1" unique_id=602292616]
+material = SubResource("ShaderMaterial_glpjx")
 
 [node name="ability" parent="GameUI/Control/MarginContainer/Abilities" parent_id_path=PackedInt32Array(500140784, 1065963898) index="0" unique_id=2030177814]
 custom_minimum_size = Vector2(75, 75)

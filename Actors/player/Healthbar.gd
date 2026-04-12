@@ -15,7 +15,6 @@ const HEAL_PARTICLE := preload("res://Particles/heal_particle.tscn")
 func _enter_tree() -> void:
 	GSignals.HIT_take_Damage.connect(applay_damage)
 	GSignals.HIT_take_heal.connect(applay_heal)
-	GSignals.PERK_Extra_health.connect(increase_max_health)
 
 func _ready() -> void:
 	if parent_entity == null:
@@ -86,10 +85,3 @@ func applay_heal(entity: Node2D, heal_value : int):
 func _on_timer_timeout() -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color("#ffffff00"), 0.2)
-
-func increase_max_health() -> void:
-	var last_value = max_hp
-	if parent_entity is Player:
-		max_hp = parent_entity.stats.max_hp
-		var perk: Perk = PerkData.load_perk_res(PerkData.Keys.Extra_Health)
-		GSignals.HIT_take_heal.emit(parent_entity, perk.value)

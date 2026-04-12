@@ -248,3 +248,4 @@ common/max_physics_steps_per_frame=16
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1

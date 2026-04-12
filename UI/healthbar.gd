@@ -52,7 +52,7 @@ func setup_player_res() -> void:
 func _sync_max_health() -> void:
 	if player_res == null or game_ui.player == null:
 		return
-	player_res.max_health = game_ui.player.stats.max_hp
+	player_res.max_health = game_ui.player.stats.get_max_hp_total()
 	player_res.current_health = clampi(player_res.current_health, 0, player_res.max_health)
 	max_value = player_res.max_health
 	value = player_res.current_health
@@ -122,7 +122,7 @@ func applay_heal(entity: Node2D, heal_value: int) -> void:
 func increase_max_health() -> void:
 	if player_res == null or player_res.player is not Player:
 		return
-	var new_max := player_res.player.stats.max_hp
+	var new_max := player_res.player.stats.get_max_hp_total()
 	var diff := new_max - player_res.max_health
 	player_res.max_health = new_max
 	player_res.current_health = clampi(player_res.current_health + diff, 0, player_res.max_health)

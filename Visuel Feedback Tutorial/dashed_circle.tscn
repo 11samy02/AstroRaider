@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcmf2abm1rjmp"]
+[gd_scene format=3 uid="uid://bcmf2abm1rjmp"]
 
 [ext_resource type="Script" uid="uid://g30w6m3sxsug" path="res://Visuel Feedback Tutorial/dashed_circle.gd" id="1_h5dun"]
 
@@ -48,15 +48,13 @@ _data = {
 &"colored_anim": SubResource("Animation_syrft")
 }
 
-[node name="DashedCircle" type="Line2D"]
+[node name="DashedCircle" type="Line2D" unique_id=1003389102]
 modulate = Color(2, 2, 2, 1)
 self_modulate = Color(2, 0, 0, 1)
 width = 1.0
 gradient = SubResource("Gradient_cdaix")
 script = ExtResource("1_h5dun")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_owhcm")
-}
-autoplay = "colored_anim"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=310225381]
+libraries/ = SubResource("AnimationLibrary_owhcm")
+autoplay = &"colored_anim"

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://d0diagb1nufkt" path="res://UI/healthbar.gd" id="8_bjx7l"]
 [ext_resource type="Texture2D" uid="uid://6mppvskofpnb" path="res://Sprites/UI/in Game/generatorbar.png" id="8_q8rbd"]
 [ext_resource type="PackedScene" uid="uid://bfhmxjln7hoas" path="res://UI/ability.tscn" id="8_ywmy4"]
+[ext_resource type="Shader" uid="uid://bacc40ajix2rt" path="res://UI/Boss/bossbar.gdshader" id="9_orm7x"]
 [ext_resource type="Script" uid="uid://bbredx6e4f0j4" path="res://UI/generator_healthbar.gd" id="10_orm7x"]
 
 [sub_resource type="SystemFont" id="SystemFont_4dhts"]
@@ -150,6 +151,15 @@ region = Rect2(37, 37, 39, 6)
 atlas = ExtResource("8_q8rbd")
 region = Rect2(22, 53, 39, 6)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q0y33"]
+resource_local_to_scene = true
+shader = ExtResource("9_orm7x")
+shader_parameter/glow_intensity = 0.0
+shader_parameter/crit_active = false
+shader_parameter/crit_intensity = 0.0
+shader_parameter/crit_color = Color(1, 0.27058825, 0.2, 1)
+shader_parameter/glow_color = Color(0.54247046, 0.008527867, 1.4439226e-07, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_q8rbd"]
 atlas = ExtResource("7_jd38o")
 region = Rect2(37, 21, 39, 6)
@@ -161,6 +171,15 @@ region = Rect2(0, 0, 66, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fifbr"]
 atlas = ExtResource("8_q8rbd")
 region = Rect2(22, 37, 39, 6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fifbr"]
+resource_local_to_scene = true
+shader = ExtResource("9_orm7x")
+shader_parameter/glow_intensity = 0.0
+shader_parameter/crit_active = false
+shader_parameter/crit_intensity = 0.0
+shader_parameter/crit_color = Color(1, 0.271, 0.2, 1)
+shader_parameter/glow_color = Color(1.0588765e-06, 0.61795694, 0.7694895, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7suct"]
 atlas = ExtResource("8_q8rbd")
@@ -315,6 +334,7 @@ texture_progress = SubResource("AtlasTexture_orm7x")
 
 [node name="Healthbar" type="TextureProgressBar" parent="Control/MarginContainer/Rader/HP-Frame" unique_id=1731503030 node_paths=PackedStringArray("game_ui", "chip_bar", "health_label")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_q0y33")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -392,6 +412,7 @@ texture_progress = SubResource("AtlasTexture_orm7x")
 
 [node name="GeneratorHealthbar" type="TextureProgressBar" parent="Control/MarginContainer/Rader/Generator-Frame" unique_id=602292616 node_paths=PackedStringArray("chip_bar", "health_label", "frame")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_fifbr")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

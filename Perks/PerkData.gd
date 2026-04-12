@@ -23,6 +23,7 @@ enum Keys {
 	Critical_Edge,
 	Power_Shot,
 	Temporal_Collapse,
+	Blood_Claws,
 }
 
 const Keys_scene = {
@@ -48,6 +49,7 @@ const Keys_scene = {
 	Keys.Critical_Edge: "res://Perks/PerkBuild/Perk_Critical_Edge.tscn",
 	Keys.Power_Shot: "res://Perks/PerkBuild/Perk_Power_Shot.tscn",
 	Keys.Temporal_Collapse: "res://Perks/PerkBuild/perk_temporal_collapse.tscn",
+	Keys.Blood_Claws: "res://Perks/PerkBuild/perk_blood_claws.tscn",
 }
 
 const Keys_res = {
@@ -73,6 +75,7 @@ const Keys_res = {
 	Keys.Critical_Edge: "res://Perks/Resources/Perk_Critical_Edge.tres",
 	Keys.Power_Shot: "res://Perks/Resources/Perk_Power_Shot.tres",
 	Keys.Temporal_Collapse: "res://Perks/Resources/Perk_Temporal_Collapse.tres",
+	Keys.Blood_Claws: "res://Perks/Resources/Perk_Blood_Claws.tres",
 }
 
 static var _scene_cache := {}
