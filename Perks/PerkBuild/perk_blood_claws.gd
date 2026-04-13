@@ -10,6 +10,9 @@ const BLOOD_CLAWS_NODE_NAME := "BloodClaws"
 var _claws_root: Node2D = null
 var _duration_timer: Timer = null
 var _is_active := false
+var _is_despawning := false
+var _pending_claw_despawns := 0
+var _emit_cooldown_after_despawn := false
 
 
 func _ready() -> void:
@@ -21,10 +24,12 @@ func _ready() -> void:
 
 
 func activate_perk() -> void:
-	if not has_unlocked or _is_active or is_on_cooldown():
+	if not has_unlocked or _is_active or _is_despawning or is_on_cooldown():
 		return
 	if not is_instance_valid(player):
 		return
+
+	_emit_cooldown_after_despawn = false
 
 	if is_instance_valid(_duration_timer):
 		_duration_timer.stop()
@@ -42,19 +47,23 @@ func activate_perk() -> void:
 
 func _on_duration_ended() -> void:
 	_is_active = false
-	_despawn_claws()
-	cooldown_started.emit(get_cooldown())
+	_emit_cooldown_after_despawn = true
+	_despawn_claws(false)
 
 
 func _reset_stats() -> void:
 	_is_active = false
-	_despawn_claws()
+	_is_despawning = false
+	_emit_cooldown_after_despawn = false
+
 	if is_instance_valid(_duration_timer):
 		_duration_timer.stop()
 
+	_despawn_claws(true)
+
 
 func is_on_cooldown() -> bool:
-	if _is_active:
+	if _is_active or _is_despawning:
 		return true
 	if is_instance_valid(ability_slot_ref):
 		return ability_slot_ref.cooldown.value > 0.0
@@ -62,7 +71,8 @@ func is_on_cooldown() -> bool:
 
 
 func _spawn_claws() -> void:
-	_despawn_claws()
+	_emit_cooldown_after_despawn = false
+	_despawn_claws(true)
 
 	var scene_root := get_tree().current_scene
 	if not is_instance_valid(scene_root):
@@ -89,7 +99,54 @@ func _spawn_claws() -> void:
 		claw.setup(angle_offset, reach, lunge, dmg, player)
 
 
-func _despawn_claws() -> void:
+func _despawn_claws(instant: bool = false) -> void:
+	if not is_instance_valid(_claws_root):
+		_claws_root = null
+		_is_despawning = false
+		_pending_claw_despawns = 0
+
+		if _emit_cooldown_after_despawn and not instant:
+			_emit_cooldown_after_despawn = false
+			cooldown_started.emit(get_cooldown())
+		return
+
+	if instant:
+		_is_despawning = false
+		_pending_claw_despawns = 0
+		_claws_root.queue_free()
+		_claws_root = null
+		return
+
+	_is_despawning = true
+	_pending_claw_despawns = 0
+
+	for child in _claws_root.get_children():
+		if child.has_method("begin_despawn") and child.has_signal("despawn_finished"):
+			_pending_claw_despawns += 1
+			child.connect("despawn_finished", Callable(self, "_on_claw_despawn_finished"), CONNECT_ONE_SHOT)
+			child.call("begin_despawn")
+		else:
+			child.queue_free()
+
+	if _pending_claw_despawns == 0:
+		_finish_claw_root_cleanup()
+
+
+func _on_claw_despawn_finished(_claw: Node2D) -> void:
+	_pending_claw_despawns = max(0, _pending_claw_despawns - 1)
+
+	if _pending_claw_despawns == 0:
+		_finish_claw_root_cleanup()
+
+
+func _finish_claw_root_cleanup() -> void:
 	if is_instance_valid(_claws_root):
 		_claws_root.queue_free()
+
 	_claws_root = null
+	_is_despawning = false
+	_pending_claw_despawns = 0
+
+	if _emit_cooldown_after_despawn:
+		_emit_cooldown_after_despawn = false
+		cooldown_started.emit(get_cooldown())

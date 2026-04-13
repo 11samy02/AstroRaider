@@ -1,9 +1,16 @@
 extends Node2D
 
+signal despawn_finished(claw: Node2D)
+
 const STRIKE_COOLDOWN := 0.55
 const RETRACT_DURATION := 0.055
 const LUNGE_DURATION := 0.08
 const RETURN_DURATION := 0.17
+
+const DESPAWN_RETRACT_DURATION := 0.22
+const DESPAWN_MIN_DISTANCE := 2.0
+const DESPAWN_SPIRAL_TURNS := 0.55
+const DESPAWN_SPIRAL_WOBBLE := 0.14
 
 const DETECT_RADIUS := 96.0
 const CURVE_POINTS := 10
@@ -61,6 +68,7 @@ var _spawn_scale := 0.0
 
 var _is_lunging := false
 var _hit_enabled := false
+var _is_despawning := false
 
 var _current_idle_angle := 0.0
 var _current_tip_local := Vector2.ZERO
@@ -75,6 +83,10 @@ var _destroyed_tile_this_attack := false
 var _last_segment_world := Vector2.ZERO
 var _last_attack_dir := Vector2.RIGHT
 var _damaged_enemies_this_attack: Array[EnemyBaseTemplate] = []
+
+var _attack_tween: Tween = null
+var _spawn_tween: Tween = null
+var _despawn_tween: Tween = null
 
 
 ## Called by Perk_Blood_Claws after instantiation
@@ -111,6 +123,9 @@ func _physics_process(delta: float) -> void:
 
 	global_position = _player.global_position
 
+	if _is_despawning:
+		return
+
 	if _is_lunging:
 		return
 
@@ -134,15 +149,23 @@ func _play_spawn_grow() -> void:
 	_spawn_scale = 0.0
 	_spawn_lock_timer = SPAWN_LOCK_DURATION
 
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_method(Callable(self, "_set_spawn_scale"), 0.0, 1.0, SPAWN_GROW_DURATION)
+	if _spawn_tween != null:
+		_spawn_tween.kill()
+
+	_spawn_tween = create_tween()
+	_spawn_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_spawn_tween.tween_method(Callable(self, "_set_spawn_scale"), 0.0, 1.0, SPAWN_GROW_DURATION)
+	_spawn_tween.tween_callback(Callable(self, "_finish_spawn_grow"))
+
+
+func _finish_spawn_grow() -> void:
+	_spawn_tween = null
 
 
 func _set_spawn_scale(value: float) -> void:
 	_spawn_scale = value
 
-	if _is_lunging:
+	if _is_lunging or _is_despawning:
 		return
 
 	var dir := Vector2.RIGHT.rotated(_current_idle_angle)
@@ -197,7 +220,7 @@ func _rebuild_curve(tip_local: Vector2, spear_mode: bool) -> void:
 		var point := base
 		point += perp * len * envelope * (s_wave * curve_strength + ripple * curve_strength * 0.35)
 
-		if not spear_mode:
+		if not spear_mode and not _is_despawning:
 			point += lag_vec * (t * (1.0 - t)) * 0.42
 
 		if i == 0:
@@ -230,11 +253,16 @@ func _sync_tip_nodes_from_points(points: Array[Vector2]) -> void:
 
 	var forward := Vector2.RIGHT.rotated(end_angle)
 	var tip_offset := _get_tip_forward_offset()
+	var tip_offset_factor := 0.25 if _is_despawning else 1.0
 
-	_tip.position = line_end + forward * tip_offset
+	_tip.position = line_end + forward * tip_offset * tip_offset_factor
 	_tip.rotation = end_angle
 
-	_area.position = _tip.position
+	if _is_despawning:
+		_area.position = line_end
+	else:
+		_area.position = _tip.position
+
 	_area.rotation = end_angle
 
 
@@ -398,6 +426,9 @@ func _is_valid_env_collider(collider: Variant) -> bool:
 
 
 func _try_strike() -> void:
+	if _is_despawning:
+		return
+
 	var enemy := _find_priority_enemy()
 	if enemy != null:
 		_strike_timer = STRIKE_COOLDOWN
@@ -420,6 +451,8 @@ func _try_strike() -> void:
 ## 2) from there it shoots out
 ## 3) then it returns to idle
 func _start_attack(local_target: Vector2, target_enemy: EnemyBaseTemplate, hit_env: bool) -> void:
+	if _is_despawning:
+		return
 	if local_target.length_squared() <= 1.0:
 		return
 
@@ -451,7 +484,12 @@ func _start_attack(local_target: Vector2, target_enemy: EnemyBaseTemplate, hit_e
 
 	_last_segment_world = _player.global_position + _current_tip_local
 
-	var tween := create_tween()
+	if _attack_tween != null:
+		_attack_tween.kill()
+
+	_attack_tween = create_tween()
+	var tween := _attack_tween
+
 	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.tween_method(Callable(self, "_attack_update").bind(origin, pullback_end, false), 0.0, 1.0, RETRACT_DURATION)
 
@@ -475,6 +513,7 @@ func _set_hit_enabled(value: bool) -> void:
 ## Tween passes progress first, bind appends from/to/can_hit afterwards
 func _attack_update(weight: float, from: Vector2, to: Vector2, can_hit_phase: bool) -> void:
 	if not is_instance_valid(_player):
+		queue_free()
 		return
 
 	var tip := from.lerp(to, weight)
@@ -587,6 +626,85 @@ func _finish_attack() -> void:
 	_target_enemy = null
 	_target_is_env = false
 	_wall_contact_found = false
+	_attack_tween = null
+
+
+func begin_despawn() -> void:
+	if _is_despawning:
+		return
+
+	_is_despawning = true
+	_is_lunging = false
+	_hit_enabled = false
+	_target_enemy = null
+	_target_is_env = false
+	_wall_contact_found = false
+	_destroyed_tile_this_attack = false
+	_damaged_enemies_this_attack.clear()
+
+	if is_instance_valid(_area):
+		_area.monitoring = false
+		_area.monitorable = false
+
+	if _attack_tween != null:
+		_attack_tween.kill()
+		_attack_tween = null
+
+	if _spawn_tween != null:
+		_spawn_tween.kill()
+		_spawn_tween = null
+
+	if _despawn_tween != null:
+		_despawn_tween.kill()
+		_despawn_tween = null
+
+	if not is_instance_valid(_player):
+		_finish_despawn()
+		return
+
+	var start_tip := _current_tip_local
+	if start_tip.length() <= DESPAWN_MIN_DISTANCE:
+		_finish_despawn()
+		return
+
+	var start_radius := start_tip.length()
+	var start_angle := start_tip.angle()
+	var spin_dir := -1.0 if sin(_angle_offset * 2.37) < 0.0 else 1.0
+
+	_despawn_tween = create_tween()
+	_despawn_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	_despawn_tween.tween_method(
+		Callable(self, "_despawn_spiral_update").bind(start_radius, start_angle, spin_dir),
+		0.0,
+		1.0,
+		DESPAWN_RETRACT_DURATION
+	)
+	_despawn_tween.tween_callback(Callable(self, "_finish_despawn"))
+
+
+func _despawn_spiral_update(weight: float, start_radius: float, start_angle: float, spin_dir: float) -> void:
+	if not is_instance_valid(_player):
+		_finish_despawn()
+		return
+
+	var radius = lerp(start_radius, DESPAWN_MIN_DISTANCE, weight)
+	var angle := start_angle + spin_dir * TAU * DESPAWN_SPIRAL_TURNS * weight
+	angle += sin(weight * TAU + _noise_offset) * DESPAWN_SPIRAL_WOBBLE * (1.0 - weight)
+
+	var tip = Vector2.RIGHT.rotated(angle) * radius
+
+	_current_idle_angle = angle
+	_current_tip_local = tip
+	_desired_tip_local = tip
+	global_position = _player.global_position
+
+	_rebuild_curve(tip, false)
+
+
+func _finish_despawn() -> void:
+	_despawn_tween = null
+	despawn_finished.emit(self)
+	queue_free()
 
 
 func _distance_point_to_segment(point: Vector2, from: Vector2, to: Vector2) -> float:

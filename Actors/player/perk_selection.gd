@@ -67,15 +67,9 @@ func build_offer(selector_type: SelectorType = SelectorType.Standard) -> void:
 
 	if available.is_empty() and selector_type != SelectorType.Standard:
 		available = _get_available_perks(SelectorType.Standard)
-
-	if available.is_empty():
-		for perk in perks_list:
-			if is_instance_valid(perk) and is_instance_valid(perk.perk_res) and perk.Level < 6:
-				if not available.has(perk):
-					available.append(perk)
-
+		
 	var count = min(target, available.size())
-
+	
 	if count <= 0:
 		manager.is_selecting = false
 		manager.in_perk_session = false
@@ -148,47 +142,12 @@ func _refresh_selection_cache() -> void:
 ## Returns all currently valid perks for the given selector type.
 func _get_available_perks(selector_type: SelectorType = SelectorType.Standard) -> Array[PerkBuild]:
 	var cleaned: Array[PerkBuild] = []
-
+	
 	for p in perks_list:
-		if not is_instance_valid(p):
-			continue
-
-		var max_level := 3 if p.is_ult() else 6
-		if p.Level >= max_level:
-			continue
-
-		if not is_instance_valid(p.perk_res):
-			continue
-
-		if _cached_excluded_keys.has(p.Key):
-			continue
-
-		if not _has_required_perks(p):
-			continue
-
-		match selector_type:
-			SelectorType.ActivationOnly:
-				if not p.is_activation():
-					continue
-			SelectorType.UltOnly:
-				if not p.is_ult():
-					continue
-			SelectorType.Standard:
-				pass
-
-		if selector_type != SelectorType.UltOnly:
-			if p.is_ult() and manager.slots.has_ult:
-				continue
-
-		if selector_type != SelectorType.ActivationOnly:
-			if p.is_activation() and manager.slots.all_slots_filled() and !p.has_unlocked:
-				continue
-
-		if not cleaned.has(p):
+		if _is_valid_offer_perk(p, selector_type) and not cleaned.has(p):
 			cleaned.append(p)
-
+	
 	return cleaned
-
 
 ## Returns all excluded perk keys from the current cache.
 func _get_all_excluded_keys() -> Array[PerkData.Keys]:
@@ -396,7 +355,7 @@ func _top_up_available_from_cooldown(available: Array[PerkBuild], target: int, s
 
 		var max_level := 3 if perk.is_ult() else 6
 		if perk.Level < max_level and not available.has(perk) and not perks_list.has(perk):
-			if _has_required_perks(perk) and valid_for_selector:
+			if _is_valid_offer_perk(perk, selector_type) and not available.has(perk) and not perks_list.has(perk):
 				perks_list.append(perk)
 				available.append(perk)
 				last_selected_perks.remove_at(i)
@@ -404,3 +363,49 @@ func _top_up_available_from_cooldown(available: Array[PerkBuild], target: int, s
 				i += 1
 		else:
 			i += 1
+
+
+func _is_valid_offer_perk(perk: PerkBuild, selector_type: SelectorType = SelectorType.Standard) -> bool:
+	if not is_instance_valid(perk) or not is_instance_valid(perk.perk_res):
+		return false
+	
+	var max_level := 3 if perk.is_ult() else 6
+	if perk.Level >= max_level:
+		return false
+	
+	if _cached_excluded_keys.has(perk.Key):
+		return false
+	
+	if not _has_required_perks(perk):
+		return false
+	
+	match selector_type:
+		SelectorType.ActivationOnly:
+			if not perk.is_activation():
+				return false
+		SelectorType.UltOnly:
+			if not perk.is_ult():
+				return false
+		SelectorType.Standard:
+			pass
+	
+	if perk.is_ult() and manager.slots.has_ult:
+		return false
+	
+	if perk.is_activation() and manager.slots.all_slots_filled() and not perk.has_unlocked:
+		return false
+	
+	return true
+
+func has_any_selectable_perks() -> bool:
+	_refresh_selection_cache()
+
+	for p in perks_list:
+		if _is_valid_offer_perk(p, SelectorType.Standard):
+			return true
+
+	for p in last_selected_perks:
+		if _is_valid_offer_perk(p, SelectorType.Standard):
+			return true
+
+	return false

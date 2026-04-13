@@ -55,28 +55,37 @@ func _check_generator_interact() -> void:
 	
 	if is_instance_valid(abilities_ui) and abilities_ui._selecting:
 		return
+
+	var can_open_selector := false
+	if is_instance_valid(player_res):
+		can_open_selector = player_res.crystal_count >= needed_coins and selection.has_any_selectable_perks()
 	
 	for building in GlobalGame.Buildings:
-		if building is CrystalGenerator:
-			if building.player_list.has(player):
-				if player_res.crystal_count >= needed_coins:
-					building.interactionn_icon.show()
-				else:
-					building.interactionn_icon.hide()
+		if building is CrystalGenerator and building.player_list.has(player):
+			if can_open_selector:
+				building.interactionn_icon.show()
+			else:
+				building.interactionn_icon.hide()
 	
 	if not Input.is_action_just_pressed("interact"):
 		return
+
+	if not can_open_selector:
+		return
 	
 	for building in GlobalGame.Buildings:
-		if building is CrystalGenerator:
-			if building.player_list.has(player):
-				try_open_selector()
-				return
+		if building is CrystalGenerator and building.player_list.has(player):
+			try_open_selector()
+			return
 
 
 ## Consumes all available crystal thresholds and queues perk selections.
 func try_open_selector() -> void:
 	if not is_instance_valid(player_res):
+		return
+
+	selection.prune_maxed()
+	if not selection.has_any_selectable_perks():
 		return
 	
 	if player_res.crystal_count < needed_coins:
@@ -101,6 +110,13 @@ func _process_next_selection() -> void:
 		return
 	
 	selection.prune_maxed()
+
+	if not selection.has_any_selectable_perks():
+		_queued_selections = 0
+		is_selecting = false
+		in_perk_session = false
+		get_tree().paused = false
+		return
 	
 	if selection.perks_list.is_empty():
 		selection.emergency_release_from_cooldown()
