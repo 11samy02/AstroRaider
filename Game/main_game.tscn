@@ -491,7 +491,7 @@ min_zoom = 2.5
 max_zoom = 1.5
 
 [node name="Enviroment" parent="." unique_id=1253534675 instance=ExtResource("1_wfgm1")]
-persistence_mode = 2
+persistence_mode = 3
 
 [node name="tileMap Holder" type="Node2D" parent="." unique_id=1561767499]
 

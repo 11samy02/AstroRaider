@@ -22,6 +22,10 @@ func _on_area_entered(area: Area2D) -> void:
 			area.get_hit(atk_resource)
 			set_physics_process(false)
 			animation_player.play("hit")
+		if area.entity is SentinelDrone:
+			area.get_hit(atk_resource)
+			set_physics_process(false)
+			animation_player.play("hit")
 	if area is BuildingHitbox:
 		if area.entity is Building:
 			area.get_hit(atk_resource)

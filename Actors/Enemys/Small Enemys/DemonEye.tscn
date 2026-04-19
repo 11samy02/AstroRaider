@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="7_jiem3"]
 [ext_resource type="Texture2D" uid="uid://drw5se8c5e33u" path="res://Sprites/actors/Enemys/small/Demon Eye/DemonEye2.png" id="8_hpmga"]
 [ext_resource type="Script" uid="uid://bjpdimde5m5yi" path="res://Resources/Enemy/EnemyStats.gd" id="8_yj8bj"]
-[ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://Actors/player/player.gdshader" id="9_u1xt7"]
 [ext_resource type="Texture2D" uid="uid://b81tkcbnqcdis" path="res://Sprites/actors/Enemys/small/bat/bat_particle.png" id="9_w3rug"]
 [ext_resource type="Texture2D" uid="uid://gsta6urcksvx" path="res://Sprites/actors/Enemys/small/bat/bat_particle3.png" id="10_ilnne"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="10_jwp4k"]
@@ -116,14 +115,31 @@ _data = {
 radius = 6.0
 height = 25.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oq150"]
+[sub_resource type="Shader" id="Shader_oq150"]
 resource_local_to_scene = true
-shader = ExtResource("9_u1xt7")
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float opacity : hint_range(0.0, 1.0) = 1.0;
+uniform vec4 blink_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float blink_strength : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+    vec4 tex = texture(TEXTURE, UV);
+    if (tex.a <= 0.0) {
+        discard;
+    }
+
+    vec3 final_rgb = mix(tex.rgb, blink_color.rgb, blink_strength);
+    COLOR = vec4(final_rgb, tex.a * opacity);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_heoew"]
+resource_local_to_scene = true
+shader = SubResource("Shader_oq150")
 shader_parameter/opacity = 1.0
-shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
+shader_parameter/blink_color = Color(0.9724769, 0, 0.43080175, 1)
+shader_parameter/blink_strength = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q2vyc"]
 radius = 6.0
@@ -178,7 +194,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="sprite" parent="." index="5" unique_id=732736570]
-material = SubResource("ShaderMaterial_oq150")
+material = SubResource("ShaderMaterial_heoew")
 position = Vector2(0, 7)
 texture = ExtResource("7_1k81c")
 hframes = 3

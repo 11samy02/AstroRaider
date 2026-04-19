@@ -18,16 +18,16 @@ func _ready() -> void:
 	if dir != Vector2.ZERO:
 		rotation = dir.angle()
 		_last_rotation_dir = dir
-
+	
 	if is_instance_valid(player):
 		hp += int(round(player.stats.get_projectile_lives_total()))
-
+	
 	set_physics_process(false)
 	trail.visible = false
-
+	
 	animation_player.play("appearing")
 	await animation_player.animation_finished
-
+	
 	trail.clear_trail()
 	trail.visible = true
 	set_physics_process(true)
@@ -38,21 +38,21 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate:
 			var new_atk_resource: AttackResource = atk_resource.duplicate()
-
+			
 			if is_instance_valid(player):
 				new_atk_resource.damage += player.stats.get_projectile_damage_total()
 				new_atk_resource.crit_chance += player.stats.get_crit_chance_total()
 				new_atk_resource.has_stun = player.stats.has_stun_active
 				new_atk_resource.stun_strength = player.stats.stun_strength
-
+			
 			area.get_hit(new_atk_resource, player)
+			area.entity.get_knockback(dir, new_atk_resource.knockback)
 			enemy_detector_area.mark_enemy_as_hit(area.entity)
-
+			
 			hp -= 1
-
+			
 			if hp <= 0:
 				set_physics_process(false)
-				area.entity.get_knockback(dir, new_atk_resource.knockback)
 				trail.clear_trail()
 				animation_player.play("hit")
 
@@ -61,7 +61,7 @@ func _on_area_entered(area: Area2D) -> void:
 func _physics_process(delta: float) -> void:
 	if dir == Vector2.ZERO:
 		return
-
+	
 	if dir != _last_rotation_dir:
 		rotation = dir.angle()
 		_last_rotation_dir = dir

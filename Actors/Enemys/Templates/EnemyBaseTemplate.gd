@@ -66,25 +66,33 @@ func get_closest_target() -> Vector2:
 	if Engine.get_process_frames() == _target_cache_frame:
 		return _cached_target
 	_target_cache_frame = Engine.get_process_frames()
-
-	if GlobalGame.Players.is_empty():
-		return global_position
-
+	
 	var positions: Array[Vector2] = []
+	
 	for player_res: PlayerResource in GlobalGame.Players:
-		positions.append(player_res.player.global_position)
+		if is_instance_valid(player_res.player):
+			positions.append(player_res.player.global_position)
+	
 	for build: Building in GlobalGame.Buildings:
-		if build.has_health:
+		if is_instance_valid(build) and build.has_health:
 			positions.append(build.global_position)
-
+	
+	for support: Node2D in GlobalGame.Player_Support:
+		if is_instance_valid(support):
+			positions.append(support.global_position)
+	
+	if positions.is_empty():
+		return global_position
+	
 	var closest_pos := positions[0]
 	var closest_dist := global_position.distance_to(closest_pos)
+	
 	for pos in positions:
 		var d := global_position.distance_to(pos)
 		if d < closest_dist:
 			closest_dist = d
 			closest_pos = pos
-
+	
 	_cached_target = closest_pos
 	return _cached_target
 

@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://Resources/Attack/AttackResource.gd" id="7_sibcj"]
 [ext_resource type="PackedScene" uid="uid://q2xttk0jhejq" path="res://Manager/AttackBox.tscn" id="8_tqbtd"]
 [ext_resource type="Texture2D" uid="uid://b81tkcbnqcdis" path="res://Sprites/actors/Enemys/small/bat/bat_particle.png" id="9_4w8is"]
-[ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://Actors/player/player.gdshader" id="9_gg1tf"]
 [ext_resource type="Texture2D" uid="uid://10cki7mqt6mb" path="res://Sprites/actors/Enemys/small/bat/bat_particle2.png" id="10_mcywg"]
 [ext_resource type="Texture2D" uid="uid://gsta6urcksvx" path="res://Sprites/actors/Enemys/small/bat/bat_particle3.png" id="11_m18u0"]
 
@@ -28,7 +27,7 @@ script = ExtResource("6_7sg3r")
 key = 2
 state = 2
 
-[sub_resource type="Resource" id="Resource_6tfvp"]
+[sub_resource type="Resource" id="Resource_yyvr8"]
 resource_local_to_scene = true
 script = ExtResource("7_sibcj")
 damage = 5
@@ -38,12 +37,12 @@ crit_chance = 5.0
 [sub_resource type="Resource" id="Resource_kwrcm"]
 script = ExtResource("7_sibcj")
 
-[sub_resource type="Resource" id="Resource_wuqbm"]
+[sub_resource type="Resource" id="Resource_6tfvp"]
 resource_local_to_scene = true
 script = ExtResource("7_nrcht")
 max_health = 3
 max_Random_health_edit = 1
-attack = SubResource("Resource_6tfvp")
+attack = SubResource("Resource_yyvr8")
 speed = 80.0
 max_speed = 200.0
 ranged_attack = SubResource("Resource_kwrcm")
@@ -105,14 +104,31 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_sxo5n"]
 radius = 6.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kwrcm"]
+[sub_resource type="Shader" id="Shader_mc3ci"]
 resource_local_to_scene = true
-shader = ExtResource("9_gg1tf")
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float opacity : hint_range(0.0, 1.0) = 1.0;
+uniform vec4 blink_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float blink_strength : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+    vec4 tex = texture(TEXTURE, UV);
+    if (tex.a <= 0.0) {
+        discard;
+    }
+
+    vec3 final_rgb = mix(tex.rgb, blink_color.rgb, blink_strength);
+    COLOR = vec4(final_rgb, tex.a * opacity);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wuqbm"]
+resource_local_to_scene = true
+shader = SubResource("Shader_mc3ci")
 shader_parameter/opacity = 1.0
-shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
+shader_parameter/blink_color = Color(1, 0, 0, 1)
+shader_parameter/blink_strength = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
 radius = 6.0
@@ -120,7 +136,7 @@ radius = 6.0
 [node name="Bat" unique_id=624866104 instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
-stats = SubResource("Resource_wuqbm")
+stats = SubResource("Resource_6tfvp")
 stats_upgrades = SubResource("Resource_mc3ci")
 sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])
 die_particle_variation = Array[Texture2D]([ExtResource("9_4w8is"), ExtResource("10_mcywg"), ExtResource("11_m18u0")])
@@ -160,7 +176,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="sprite" parent="." index="5" unique_id=732736570]
-material = SubResource("ShaderMaterial_kwrcm")
+material = SubResource("ShaderMaterial_wuqbm")
 texture = ExtResource("3_kxtlt")
 hframes = 3
 vframes = 2

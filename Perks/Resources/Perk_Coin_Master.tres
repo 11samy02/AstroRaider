@@ -13,6 +13,6 @@ type = 4
 active_type = 4
 tags = Array[int]([3])
 mechanics = Array[int]([6, 7])
-rarity = Array[float]([5.0, 5.0, 4.0, 3.0, 2.0, 1.5])
+rarity = Array[float]([10.0, 8.0, 6.0, 4.0, 2.0, 1.5])
 value = Array[int]([1, 2, 3, 4, 5, 6])
 cost = Array[int]([200, 300, 400, 500, 600, 700])

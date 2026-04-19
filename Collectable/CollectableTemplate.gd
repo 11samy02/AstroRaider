@@ -39,7 +39,7 @@ func randomize_values() -> void:
 func find_generator() -> void:
 	if is_instance_valid(generator):
 		return
-
+	
 	for building in GlobalGame.Buildings:
 		if building is CrystalGenerator:
 			generator = building

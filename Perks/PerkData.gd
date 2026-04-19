@@ -24,6 +24,7 @@ enum Keys {
 	Power_Shot,
 	Temporal_Collapse,
 	Blood_Claws,
+	Sentinel_Drone,
 }
 
 const Keys_scene = {
@@ -50,6 +51,7 @@ const Keys_scene = {
 	Keys.Power_Shot: "res://Perks/PerkBuild/Perk_Power_Shot.tscn",
 	Keys.Temporal_Collapse: "res://Perks/PerkBuild/perk_temporal_collapse.tscn",
 	Keys.Blood_Claws: "res://Perks/PerkBuild/perk_blood_claws.tscn",
+	Keys.Sentinel_Drone: "res://Perks/PerkBuild/perk_sentinel_drone.tscn",
 }
 
 const Keys_res = {
@@ -76,6 +78,7 @@ const Keys_res = {
 	Keys.Power_Shot: "res://Perks/Resources/Perk_Power_Shot.tres",
 	Keys.Temporal_Collapse: "res://Perks/Resources/Perk_Temporal_Collapse.tres",
 	Keys.Blood_Claws: "res://Perks/Resources/Perk_Blood_Claws.tres",
+	Keys.Sentinel_Drone: "res://Perks/Resources/Perk_sentinel_drone.tres",
 }
 
 static var _scene_cache := {}

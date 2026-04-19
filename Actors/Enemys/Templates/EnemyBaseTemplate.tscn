@@ -13,11 +13,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o7ydl"]
 resource_local_to_scene = true
 shader = ExtResource("3_21iy6")
-shader_parameter/opacity = 0.0
-shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
+shader_parameter/opacity = 1.0
+shader_parameter/blink_color = Color(1, 0, 0, 1)
+shader_parameter/blink_strength = 0.0
 
 [sub_resource type="Animation" id="Animation_s56t4"]
 length = 0.001

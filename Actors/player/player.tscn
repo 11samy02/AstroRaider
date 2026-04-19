@@ -51,6 +51,7 @@
 [ext_resource type="PackedScene" uid="uid://mhgxa18ikbht" path="res://Perks/PerkBuild/Perk_Vampire_Bite.tscn" id="45_qxlfy"]
 [ext_resource type="PackedScene" uid="uid://bpc404cnfuccf" path="res://Perks/PerkBuild/perk_temporal_collapse.tscn" id="47_o2pqv"]
 [ext_resource type="PackedScene" uid="uid://b0r42snyrrlpc" path="res://Perks/PerkBuild/perk_blood_claws.tscn" id="48_5f53s"]
+[ext_resource type="PackedScene" uid="uid://di5pcjgabuv2k" path="res://Perks/PerkBuild/perk_sentinel_drone.tscn" id="49_w5y2x"]
 [ext_resource type="Shader" uid="uid://bacc40ajix2rt" path="res://UI/Boss/bossbar.gdshader" id="52_w5y2x"]
 
 [sub_resource type="Resource" id="Resource_f7306"]
@@ -386,7 +387,7 @@ _data = {
 &"build_symbol": SubResource("Animation_ec8vi")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5f53s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5y2x"]
 resource_local_to_scene = true
 shader = ExtResource("52_w5y2x")
 shader_parameter/glow_intensity = 0.0
@@ -395,7 +396,7 @@ shader_parameter/crit_intensity = 0.0
 shader_parameter/crit_color = Color(1, 0.27058825, 0.2, 1)
 shader_parameter/glow_color = Color(0.54247046, 0.008527867, 1.4439226e-07, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5y2x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1kcd"]
 resource_local_to_scene = true
 shader = ExtResource("52_w5y2x")
 shader_parameter/glow_intensity = 0.0
@@ -602,80 +603,66 @@ ability_4 = NodePath("../../../GameUI/Control/MarginContainer/Abilities/ability4
 
 [node name="Speed_It_Up" parent="PerkManager/Perks" unique_id=1932687981 node_paths=PackedStringArray("player") instance=ExtResource("22_8v5l4")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Construction_expert" parent="PerkManager/Perks" unique_id=914926845 node_paths=PackedStringArray("player") instance=ExtResource("23_02ndh")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="AimBot" parent="PerkManager/Perks" unique_id=1063151400 node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="AntiMineDetection" parent="PerkManager/Perks" unique_id=1856133259 node_paths=PackedStringArray("reveal", "player") instance=ExtResource("25_38jmy")]
 reveal = NodePath("../../../Script/PlayerRevealDetection")
 player = NodePath("../../..")
-Level = 5
 
 [node name="BarrierShield" parent="PerkManager/Perks" unique_id=1121491132 node_paths=PackedStringArray("player") instance=ExtResource("26_wpgrq")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="CoinMaster" parent="PerkManager/Perks" unique_id=842886800 node_paths=PackedStringArray("player") instance=ExtResource("26_3sfd7")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="PerkCriticalEdge" parent="PerkManager/Perks" unique_id=490348910 node_paths=PackedStringArray("player") instance=ExtResource("27_3sfd7")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Each_Round_Heal" parent="PerkManager/Perks" unique_id=1437008909 node_paths=PackedStringArray("player") instance=ExtResource("28_dis4x")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Emergency_Heal" parent="PerkManager/Perks" unique_id=1684271770 node_paths=PackedStringArray("player") instance=ExtResource("29_fs83k")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Extra_Health" parent="PerkManager/Perks" unique_id=218607484 node_paths=PackedStringArray("player") instance=ExtResource("30_6ll5j")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Resilience" parent="PerkManager/Perks" unique_id=1904476207 node_paths=PackedStringArray("player") instance=ExtResource("31_ds0h7")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="PowerShot" parent="PerkManager/Perks" unique_id=1298049131 node_paths=PackedStringArray("player") instance=ExtResource("35_m4e5o")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="PiercingShot" parent="PerkManager/Perks" unique_id=1629709656 node_paths=PackedStringArray("player") instance=ExtResource("36_f7306")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="StunGrenade" parent="PerkManager/Perks" unique_id=1597407078 node_paths=PackedStringArray("player") instance=ExtResource("37_4hqgc")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Energy_Overload" parent="PerkManager/Perks" unique_id=999372027 node_paths=PackedStringArray("player") instance=ExtResource("41_823vk")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Impulse Drive" parent="PerkManager/Perks" unique_id=1336730520 node_paths=PackedStringArray("player") instance=ExtResource("44_oiqbg")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="VampireBite" parent="PerkManager/Perks" unique_id=1763410141 node_paths=PackedStringArray("player") instance=ExtResource("45_qxlfy")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="TemporalCollapse" parent="PerkManager/Perks" unique_id=717977835 node_paths=PackedStringArray("player") instance=ExtResource("47_o2pqv")]
 player = NodePath("../../..")
-Level = 2
 
 [node name="Perk_Blood_Claws" parent="PerkManager/Perks" unique_id=67303946 node_paths=PackedStringArray("player") instance=ExtResource("48_5f53s")]
 player = NodePath("../../..")
-Level = 5
+
+[node name="Perk_Sentinel_Drone" parent="PerkManager/Perks" unique_id=611192029 node_paths=PackedStringArray("player") instance=ExtResource("49_w5y2x")]
+fire_rate_per_level = Array[float]([1.0, 1.0, 0.5, 0.5, 0.35, 0.35])
+player = NodePath("../../..")
+Level = 1
 
 [node name="Ui" type="CanvasLayer" parent="." unique_id=108126596]
 process_mode = 3
@@ -699,10 +686,10 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Healthbar" parent="GameUI/Control/MarginContainer/Rader/HP-Frame" parent_id_path=PackedInt32Array(500140784, 930788651) index="1" unique_id=1731503030]
-material = SubResource("ShaderMaterial_5f53s")
+material = SubResource("ShaderMaterial_w5y2x")
 
 [node name="GeneratorHealthbar" parent="GameUI/Control/MarginContainer/Rader/Generator-Frame" parent_id_path=PackedInt32Array(500140784, 1450266962) index="1" unique_id=602292616]
-material = SubResource("ShaderMaterial_w5y2x")
+material = SubResource("ShaderMaterial_x1kcd")
 
 [node name="ability" parent="GameUI/Control/MarginContainer/Abilities" parent_id_path=PackedInt32Array(500140784, 1065963898) index="0" unique_id=2030177814]
 custom_minimum_size = Vector2(75, 75)

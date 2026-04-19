@@ -2,6 +2,7 @@ extends Node
 
 var Player_count: int = 1
 var Players: Array[PlayerResource] = []
+var Player_Support: Array[Node2D] = []
 
 var Enemies: Array[EnemyBaseTemplate] = []
 var Buildings: Array[Building]

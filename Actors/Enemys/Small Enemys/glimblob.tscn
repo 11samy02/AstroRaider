@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://d1j1bd7ma1q07"]
 
 [ext_resource type="PackedScene" uid="uid://6mo722gvco50" path="res://Actors/Enemys/Templates/EnemyBaseTemplate.tscn" id="1_j57v1"]
-[ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://Actors/player/player.gdshader" id="2_8iqur"]
 [ext_resource type="Script" uid="uid://dw0f8k60qgvhb" path="res://Actors/Enemys/Small Enemys/glimblob.gd" id="2_82sf1"]
 [ext_resource type="Texture2D" uid="uid://y0uee18n5ynf" path="res://Sprites/actors/Enemys/small/Glimblob/Glimblob.png" id="2_onj4g"]
 [ext_resource type="Script" uid="uid://bs2i61l25dpft" path="res://Resources/Enemy/Ai/AiTypeKeys_Resrouce.gd" id="3_die81"]
@@ -31,16 +30,20 @@ damage = 12
 knockback = 4.0
 
 [sub_resource type="Resource" id="Resource_0iplv"]
+script = ExtResource("4_tv15v")
+
+[sub_resource type="Resource" id="Resource_b6l0w"]
 resource_local_to_scene = true
 script = ExtResource("5_hrj2a")
 max_health = 8
 max_Random_health_edit = 2
 attack = SubResource("Resource_b0nvu")
-ai_type_keys = Array[ExtResource("3_die81")]([SubResource("Resource_6iokw"), SubResource("Resource_jp2f4"), SubResource("Resource_oasmq")])
 speed = 35.0
 max_speed = 120.0
+ranged_attack = SubResource("Resource_0iplv")
 default_crit_chance = 5.0
 stun_resistence = 2.5
+ai_type_keys = Array[ExtResource("3_die81")]([SubResource("Resource_6iokw"), SubResource("Resource_jp2f4"), SubResource("Resource_oasmq")])
 
 [sub_resource type="Resource" id="Resource_lweds"]
 script = ExtResource("6_0iplv")
@@ -52,14 +55,31 @@ metadata/_custom_type_script = "uid://emhy5rua0xsg"
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhm8i"]
 radius = 12.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5wtd"]
+[sub_resource type="Shader" id="Shader_q5wtd"]
 resource_local_to_scene = true
-shader = ExtResource("2_8iqur")
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float opacity : hint_range(0.0, 1.0) = 1.0;
+uniform vec4 blink_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float blink_strength : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+    vec4 tex = texture(TEXTURE, UV);
+    if (tex.a <= 0.0) {
+        discard;
+    }
+
+    vec3 final_rgb = mix(tex.rgb, blink_color.rgb, blink_strength);
+    COLOR = vec4(final_rgb, tex.a * opacity);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_glu0v"]
+resource_local_to_scene = true
+shader = SubResource("Shader_q5wtd")
 shader_parameter/opacity = 1.0
-shader_parameter/r = 1.0
-shader_parameter/g = 0.0
-shader_parameter/b = 0.0
-shader_parameter/mix_color = 0.0
+shader_parameter/blink_color = Color(0.6456891, 0.58574724, 3.85046e-07, 1)
+shader_parameter/blink_strength = 0.0
 
 [sub_resource type="Animation" id="Animation_redl5"]
 length = 0.001
@@ -102,7 +122,7 @@ _data = {
 
 [node name="Glimblob" unique_id=1386771000 instance=ExtResource("1_j57v1")]
 script = ExtResource("2_82sf1")
-stats = SubResource("Resource_0iplv")
+stats = SubResource("Resource_b6l0w")
 stats_upgrades = SubResource("Resource_lweds")
 sprite_variation = Array[Texture2D]([ExtResource("2_onj4g")])
 
@@ -120,7 +140,7 @@ position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_fhm8i")
 
 [node name="sprite" parent="." index="2" unique_id=732736570]
-material = SubResource("ShaderMaterial_q5wtd")
+material = SubResource("ShaderMaterial_glu0v")
 texture = ExtResource("2_onj4g")
 hframes = 3
 vframes = 3

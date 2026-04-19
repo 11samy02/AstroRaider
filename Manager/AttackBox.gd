@@ -17,5 +17,7 @@ func _on_area_entered(area: Area2D) -> void:
 			GSignals.CAM_shake_effect.emit()
 		if area.entity is BarrierShield:
 			area.get_hit(owner_entity.stats.attack, owner_entity)
+		if area.entity is SentinelDrone:
+			area.get_hit(owner_entity.stats.attack, owner_entity)
 	elif area is BuildingHitbox:
 		area.get_hit(owner_entity.stats.attack, owner_entity)

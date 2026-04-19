@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://di5pcjgabuv2k"]
+
+[ext_resource type="Script" uid="uid://1xj155faoatj" path="res://Perks/PerkBuild/perk_sentinel_drone.gd" id="1_0lbph"]
+
+[node name="Perk_Sentinel_Drone" type="Node" unique_id=611192029]
+script = ExtResource("1_0lbph")
+hp_per_level = Array[int]([14, 14, 55, 55, 130, 130])
+damage_per_level = Array[int]([2, 2, 4, 4, 8, 8])
+fire_rate_per_level = Array[float]([0.65, 0.65, 0.42, 0.42, 0.22, 0.22])
+explosion_damage_per_level = Array[int]([6, 6, 12, 12, 28, 28])
+Key = 23
+Level = null
+has_unlocked = null
+metadata/_custom_type_script = "uid://b3gr0cwnvudut"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://d38afngp8ad8k"]
+
+[ext_resource type="Texture2D" uid="uid://c1674wqwflo1d" path="res://Sprites/Perks/Sentinel_Drone.png" id="1_4al31"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://Perks/Resources/Perk_Resource.gd" id="1_fdetu"]
+
+[resource]
+script = ExtResource("1_fdetu")
+image = ExtResource("1_4al31")
+Key = 23
+perk_name = "Sentinel Drone"
+description = "Deploys {{value}} Sentinel Drone(s) that protect you and fire at nearby threats for {{duration}}s. Cooldown: {{cooldown}}s."
+type = 1
+active_type = 5
+tags = Array[int]([2, 0])
+mechanics = Array[int]([0])
+rarity = Array[float]([7.0, 5.0, 4.5, 4.0, 3.0, 2.0])
+value = Array[int]([1, 2, 1, 2, 1, 2])
+cooldown = Array[float]([60.0, 60.0, 50.0, 50.0, 40.0, 40.0])
+metadata/_custom_type_script = "uid://bfd0euualynf6"

@@ -91,6 +91,7 @@ window/size/extend_to_title=true
 window/stretch/mode="viewport"
 window/per_pixel_transparency/allowed=true
 window/vsync/vsync_mode=0
+mouse_cursor/custom_image="uid://d0sgos387m8cv"
 
 [editor]
 
