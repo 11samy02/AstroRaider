@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://dfk0x13ghsv8p"]
+
+[ext_resource type="Theme" uid="uid://opofmpqp1ck8" path="res://themes/new_ui.tres" id="1_ktmo5"]
+[ext_resource type="Script" uid="uid://w7efjc1g6d2b" path="res://UI/menu/custom_button.gd" id="2_1x13u"]
+[ext_resource type="FontFile" uid="uid://booga45fd18fs" path="res://themes/Fonts/Orbitron-VariableFont_wght.ttf" id="3_1x13u"]
+
+[sub_resource type="FontVariation" id="FontVariation_h33yf"]
+base_font = ExtResource("3_1x13u")
+variation_embolden = 1.0
+spacing_glyph = 3
+spacing_space = 1
+
+[node name="CustomButton" type="Button" unique_id=994115810]
+custom_minimum_size = Vector2(0, 75)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_ktmo5")
+toggle_mode = true
+script = ExtResource("2_1x13u")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=782570562]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=2020752343]
+modulate = Color(0.49019608, 0.53333336, 0.49803922, 1)
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="text_label" type="Label" parent="HBoxContainer" unique_id=1923013068]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(0.49040926, 0.5318176, 0.4975884, 1)
+theme_override_fonts/font = SubResource("FontVariation_h33yf")
+theme_override_font_sizes/font_size = 24

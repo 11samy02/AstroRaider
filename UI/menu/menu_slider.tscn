@@ -16,6 +16,7 @@ spacing_space = 1
 size_flags_vertical = 0
 theme_override_constants/separation = 50
 script = ExtResource("1_xdrrd")
+audio_bus = "Master"
 
 [node name="hbox" type="HBoxContainer" parent="." unique_id=1102698916]
 custom_minimum_size = Vector2(300, 0)
@@ -24,9 +25,10 @@ theme_override_constants/separation = 50
 
 [node name="TextureRect" type="TextureRect" parent="hbox" unique_id=1878067204]
 modulate = Color(0.49019608, 0.53333336, 0.49803922, 1)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 0
-expand_mode = 3
+expand_mode = 1
 stretch_mode = 5
 
 [node name="text_label" type="Label" parent="hbox" unique_id=696228658]

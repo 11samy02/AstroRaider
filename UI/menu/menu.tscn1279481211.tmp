@@ -379,14 +379,13 @@ custom_text = "Video"
 
 [node name="TabContainer" type="TabContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer" unique_id=852419874]
 layout_mode = 2
-current_tab = 1
+current_tab = 0
 tabs_visible = false
 use_hidden_tabs_for_min_size = true
 tab_0/icon = ExtResource("10_66jq7")
 tab_1/icon = ExtResource("11_r2mo7")
 
 [node name="Audio" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer" unique_id=180640651]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_top = 25
 metadata/_tab_index = 0
@@ -404,7 +403,7 @@ vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer" unique_id=2095718068]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 15
 
 [node name="seperator2" type="ColorRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/VBoxContainer" unique_id=533130507]
 custom_minimum_size = Vector2(0, 2)
@@ -573,17 +572,11 @@ theme_override_font_sizes/font_size = 24
 text = "Output"
 vertical_alignment = 1
 
-[node name="seperator9" type="ColorRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer" unique_id=215703252]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-color = Color(0.19803204, 0.22135232, 0.20213334, 1)
-
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer" unique_id=345495917]
 layout_mode = 2
 theme_override_constants/separation = 100
 
 [node name="text_label" type="Label" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer" unique_id=1067941549]
-custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.49019608, 0.53333336, 0.49803922, 1)
@@ -628,13 +621,14 @@ icon = ExtResource("16_r2mo7")
 expand_icon = true
 
 [node name="Video" type="MarginContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer" unique_id=791519684]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_top = 25
 metadata/_tab_index = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video" unique_id=1694737912]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 25
 
 [node name="Titel_pt_1" type="Label" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=1199993531]
 layout_mode = 2
@@ -642,11 +636,6 @@ theme_override_colors/font_color = Color(0.24313726, 0.88235295, 0.7764706, 1)
 theme_override_font_sizes/font_size = 24
 text = "VIDEO"
 vertical_alignment = 1
-
-[node name="seperator11" type="ColorRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=405440021]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-color = Color(0.19803204, 0.22135232, 0.20213334, 1)
 
 [node name="DisplayMode" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=1971279861]
 layout_mode = 2
@@ -697,11 +686,6 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_56576")
 icon = ExtResource("16_r2mo7")
 expand_icon = true
 
-[node name="seperator8" type="ColorRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=1337780189]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-color = Color(0.19803204, 0.22135232, 0.20213334, 1)
-
 [node name="Resolution" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=1923975646]
 layout_mode = 2
 theme_override_constants/separation = 100
@@ -750,11 +734,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_0swta")
 theme_override_styles/focus = SubResource("StyleBoxFlat_56576")
 icon = ExtResource("16_r2mo7")
 expand_icon = true
-
-[node name="seperator9" type="ColorRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=1202891293]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-color = Color(0.19803204, 0.22135232, 0.20213334, 1)
 
 [node name="Monitor" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=1773395358]
 layout_mode = 2
@@ -805,65 +784,6 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_56576")
 icon = ExtResource("16_r2mo7")
 expand_icon = true
 
-[node name="seperator10" type="ColorRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=330111315]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-color = Color(0.19803204, 0.22135232, 0.20213334, 1)
-
-[node name="fps" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=1054513901]
-layout_mode = 2
-theme_override_constants/separation = 100
-
-[node name="text_label" type="Label" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/fps" unique_id=203749063]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_color = Color(0.49019608, 0.53333336, 0.49803922, 1)
-theme_override_fonts/font = SubResource("FontVariation_3jdw3")
-text = "FPS"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/fps" unique_id=1805142177]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 60
-alignment = 1
-
-[node name="left_device_fps" type="Button" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/fps/HBoxContainer" unique_id=287403700]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_8j121")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_k3m1v")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0swta")
-theme_override_styles/focus = SubResource("StyleBoxFlat_56576")
-icon = ExtResource("15_ra7va")
-expand_icon = true
-
-[node name="fps_selected_text" type="Button" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/fps/HBoxContainer" unique_id=2054776886]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(450, 0)
-layout_mode = 2
-mouse_filter = 2
-theme_override_font_sizes/font_size = 16
-text = "Windowed"
-text_overrun_behavior = 6
-
-[node name="right_device_fps" type="Button" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/fps/HBoxContainer" unique_id=216321726]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_8j121")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_k3m1v")
-theme_override_styles/hover = SubResource("StyleBoxFlat_0swta")
-theme_override_styles/focus = SubResource("StyleBoxFlat_56576")
-icon = ExtResource("16_r2mo7")
-expand_icon = true
-
-[node name="seperator12" type="ColorRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=128195185]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-color = Color(0.19803204, 0.22135232, 0.20213334, 1)
-
 [node name="Vsync" type="HBoxContainer" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2" unique_id=783726562]
 layout_mode = 2
 theme_override_constants/separation = 50
@@ -874,12 +794,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 50
 
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/Vsync/hbox" unique_id=1648994353]
+modulate = Color(0.49019608, 0.53333336, 0.49803922, 1)
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("11_kh5io")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="text_label" type="Label" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/Vsync/hbox" unique_id=1970252831]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.49019608, 0.53333336, 0.49803922, 1)
 theme_override_fonts/font = SubResource("FontVariation_5xle5")
-text = "Vsync"
+text = "Music"
 
 [node name="Vsync_on_checkbox" type="CheckButton" parent="Control/MarginContainer/HBoxContainer/site_menu/MarginContainer/VBoxContainer/TabContainer/Video/VBoxContainer2/Vsync" unique_id=1195393533]
 unique_name_in_owner = true
