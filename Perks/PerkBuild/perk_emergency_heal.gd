@@ -16,7 +16,7 @@ func _exit_tree() -> void:
 
 ## Automatically heals when HP drops below 25%
 func _process(delta: float) -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		return
 
 	var res := get_player_res()

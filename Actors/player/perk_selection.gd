@@ -123,7 +123,7 @@ func _refresh_selection_cache() -> void:
 		if not (child is PerkBuild):
 			continue
 
-		if not child.has_unlocked:
+		if not child.selected_in_run :
 			continue
 
 		_cached_unlocked_keys[child.Key] = true
@@ -392,7 +392,7 @@ func _is_valid_offer_perk(perk: PerkBuild, selector_type: SelectorType = Selecto
 	if perk.is_ult() and manager.slots.has_ult:
 		return false
 	
-	if perk.is_activation() and manager.slots.all_slots_filled() and not perk.has_unlocked:
+	if perk.is_activation() and manager.slots.all_slots_filled() and not perk.selected_in_run :
 		return false
 	
 	return true

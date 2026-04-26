@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 
 ## Activates the dash in the current input direction
 func activate_perk() -> void:
-	if !has_unlocked or _is_active or is_on_cooldown():
+	if !selected_in_run  or _is_active or is_on_cooldown():
 		return
 	if !is_instance_valid(player):
 		return

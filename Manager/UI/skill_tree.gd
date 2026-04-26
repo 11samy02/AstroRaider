@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 
 func open_skill_tree(player: Player) -> void:
 	if player == player_res.player:
-		PauseMenu.can_pause_on_screen = false
+		Menu.can_pause_on_screen = false
 		get_tree().paused = true
 		show()
 		player_res.fake_crystal_count = player_res.crystal_count
@@ -78,7 +78,7 @@ var delay := 0.2
 
 func close_skill_tree(delta) -> void:
 	if Input.is_joy_button_pressed(player_res.player.controller_id, JOY_BUTTON_Y) and delay <= 0 or Input.is_action_pressed("interact") and delay <= 0:
-		PauseMenu.can_pause_on_screen = true
+		Menu.can_pause_on_screen = true
 		get_tree().paused = false
 		hide()
 	elif Input.is_joy_button_pressed(player_res.player.controller_id, JOY_BUTTON_Y) or Input.is_action_pressed("interact"):

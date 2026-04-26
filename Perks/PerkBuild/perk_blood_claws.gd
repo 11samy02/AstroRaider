@@ -24,7 +24,7 @@ func _ready() -> void:
 
 
 func activate_perk() -> void:
-	if not has_unlocked or _is_active or _is_despawning or is_on_cooldown():
+	if not selected_in_run  or _is_active or _is_despawning or is_on_cooldown():
 		return
 	if not is_instance_valid(player):
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dsqtnel040hel"]
+[gd_scene format=3 uid="uid://dsqtnel040hel"]
 
 [ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://Objects/Buildings/BuildingTemplate.tscn" id="1_ri5sr"]
 [ext_resource type="Script" uid="uid://digju80nfbw0a" path="res://Objects/Buildings/torrent.gd" id="2_d2g3u"]
@@ -122,7 +122,7 @@ void light() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ey4yk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvdey"]
 resource_local_to_scene = true
 shader = SubResource("Shader_dhseu")
 shader_parameter/opacity = 0.0
@@ -253,7 +253,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yn4l"]
 size = Vector2(48, 32)
 
-[node name="Torrent" instance=ExtResource("1_ri5sr")]
+[node name="Torrent" unique_id=1183047304 instance=ExtResource("1_ri5sr")]
 collision_mask = 32
 script = ExtResource("2_d2g3u")
 atk_res = SubResource("Resource_ntmmc")
@@ -268,25 +268,26 @@ sprite_frames = SubResource("SpriteFrames_hobbd")
 autoplay = "default"
 
 [node name="damage_shader" parent="." index="1"]
-material = SubResource("ShaderMaterial_ey4yk")
+material = SubResource("ShaderMaterial_hvdey")
 sprite_frames = SubResource("SpriteFrames_hobbd")
 animation = &"default"
 
-[node name="EnemyDetectorArea" type="Area2D" parent="." index="2"]
+[node name="EnemyDetectorArea" type="Area2D" parent="." index="2" unique_id=1834152940]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_lwr6g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea" index="0" unique_id=1991731336]
 visible = false
 shape = SubResource("CircleShape2D_6xjr8")
 
-[node name="shoot_time" type="Timer" parent="." index="3"]
+[node name="shoot_time" type="Timer" parent="." index="3" unique_id=191861928]
 wait_time = 0.5
 autostart = true
 
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="." index="4"]
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." index="4" unique_id=1610843907]
 stream = ExtResource("5_cqh6p")
+bus = &"Sfx"
 script = ExtResource("6_q54f1")
 min_random_pitch = 0.5
 max_random_pitch = 1.5
@@ -298,16 +299,14 @@ shape = SubResource("CircleShape2D_q7f57")
 [node name="BuildingHitbox" parent="." index="7" node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0" unique_id=375541144]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_th3tk")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
-libraries = {
-&"": SubResource("AnimationLibrary_cx17e")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8" unique_id=1645133193]
+libraries/ = SubResource("AnimationLibrary_cx17e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0" unique_id=1402390121]
 shape = SubResource("RectangleShape2D_3yn4l")
 
 [connection signal="timeout" from="shoot_time" to="." method="_on_shoot_time_timeout"]

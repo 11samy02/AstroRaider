@@ -42,6 +42,13 @@ enum Mechanic_keys {
 	Stun,
 }
 
+enum UnlockType {
+	FREE,
+	SHOP,
+	SUIT_LEVEL,
+	ACHIEVEMENT,
+}
+
 @export_tool_button("Sync Array Sizes") var _sync_btn = _sync_arrays
 @export_category("General")
 @export var image: Texture2D
@@ -79,10 +86,12 @@ enum Mechanic_keys {
 	set(val): duration = _validate_array(val, duration, _max_levels())
 	get: return duration
 
-@export_category("Economy")
-@export var cost: Array[int] = [0, 0, 0, 0, 0, 0]:
-	set(val): cost = _validate_array_int(val, cost, _max_levels())
-	get: return cost
+@export_category("Meta Unlock")
+@export var unlock_type: UnlockType = UnlockType.FREE
+@export var shop_price: int = 0
+#@export var required_suit: SuitData.SuitKeys
+@export var required_suit_level: int = 0
+@export var starts_unlocked := true
 
 ## Returns max level count based on active type
 func _max_levels() -> int:
@@ -113,9 +122,6 @@ func get_cooldown(custom_level: int = 1) -> float:
 func get_duration(custom_level: int = 1) -> float:
 	return duration[clampi(custom_level - 1, 0, _max_levels() - 1)]
 
-## Returns the cost for a given level
-func get_cost(custom_level: int = 1) -> int:
-	return cost[clampi(custom_level - 1, 0, _max_levels() - 1)]
 
 ## Hides irrelevant fields and adjusts level range based on active type
 func _validate_property(property: Dictionary) -> void:
@@ -159,5 +165,4 @@ func _sync_arrays() -> void:
 	value = _validate_array_int(value, value, size)
 	cooldown = _validate_array(cooldown, cooldown, size)
 	duration = _validate_array(duration, duration, size)
-	cost = _validate_array_int(cost, cost, size)
 	notify_property_list_changed()

@@ -15,13 +15,13 @@ extends Control
 
 
 func _enter_tree() -> void:
-	PauseMenu.can_pause_on_screen = false
+	Menu.can_pause_on_screen = false
 	GlobalGame.reset()
 
 
 func _ready() -> void:
 	GlobalGame.Players.clear()
-	PauseMenu.can_pause_on_screen = false
+	Menu.can_pause_on_screen = false
 	margin_container.size = margin_container.get_minimum_size()
 	new_game.grab_focus()
 
@@ -38,7 +38,7 @@ func _input(event: InputEvent) -> void:
 
 func new_game_pressed() -> void:
 	if animation_player_2.is_playing():
-		PauseMenu.can_pause_on_screen = true
+		Menu.can_pause_on_screen = true
 		ScreenTransition.change_scene_and_wait(game_szene)
 
 

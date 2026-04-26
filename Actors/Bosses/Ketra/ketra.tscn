@@ -21,23 +21,6 @@ healtbar = NodePath("CanvasLayer/Bossbar")
 
 [node name="sprites" type="Node2D" parent="." unique_id=382900051]
 
-[node name="legs" type="Sprite2D" parent="sprites" unique_id=414671471]
-texture = ExtResource("3_7lg3g")
-hframes = 5
-vframes = 4
-
-[node name="arms" type="Sprite2D" parent="sprites" unique_id=1655894815]
-texture = ExtResource("3_7lg3g")
-hframes = 5
-vframes = 4
-frame = 5
-
-[node name="horns" type="Sprite2D" parent="sprites" unique_id=1710501050]
-texture = ExtResource("3_7lg3g")
-hframes = 5
-vframes = 4
-frame = 10
-
 [node name="head" type="Sprite2D" parent="sprites" unique_id=1684824659]
 texture = ExtResource("3_7lg3g")
 hframes = 5

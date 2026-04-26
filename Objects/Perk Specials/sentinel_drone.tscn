@@ -15,6 +15,12 @@ shader = ExtResource("1_icpet")
 shader_parameter/opacity = 1.0
 shader_parameter/blink_color = Color(1, 1, 1, 1)
 shader_parameter/blink_strength = 0.0
+shader_parameter/use_recolor = false
+shader_parameter/blink_color_2 = Color(0.6, 0.9, 1, 1)
+shader_parameter/blink_strength_2 = 0.0
+shader_parameter/blink_uses_recolor = true
+shader_parameter/gradient_offset = 0.0
+shader_parameter/gradient_contrast = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d1wxd"]
 atlas = ExtResource("1_gi6l8")
@@ -250,4 +256,5 @@ entity = NodePath("..")
 metadata/_custom_type_script = "uid://dsbtboypl2kg1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=798049134]
+visible = false
 shape = SubResource("CircleShape2D_86vo5")

@@ -13,5 +13,5 @@ func _exit_tree() -> void:
 
 ## Activates aim assist on player projectiles when the player shoots
 func _on_player_shoot(ply: Player) -> void:
-	if has_unlocked and ply == player:
+	if selected_in_run  and ply == player:
 		GSignals.PERK_Aim_bot_activate.emit(player, get_value())

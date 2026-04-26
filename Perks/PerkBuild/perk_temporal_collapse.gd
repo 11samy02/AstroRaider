@@ -13,7 +13,7 @@ func _ready() -> void:
 
 ## Activates Time Warp — slows all enemies
 func activate_perk() -> void:
-	if !has_unlocked or _is_active or is_on_cooldown():
+	if !selected_in_run  or _is_active or is_on_cooldown():
 		return
 	_is_active = true
 	EnemyStats.time_warp_multiplier = _get_slow_multiplier()

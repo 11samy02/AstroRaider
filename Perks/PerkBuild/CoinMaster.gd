@@ -17,7 +17,7 @@ func _exit_tree() -> void:
 
 ## Spawns bonus crystals when the player collects one
 func _on_crystal_collected(pos: Vector2) -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		return
 
 	var new_crystal: ItemCrystal = ITEM_CRYSTAL.instantiate()

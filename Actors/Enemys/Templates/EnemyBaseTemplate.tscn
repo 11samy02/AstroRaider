@@ -16,6 +16,12 @@ shader = ExtResource("3_21iy6")
 shader_parameter/opacity = 1.0
 shader_parameter/blink_color = Color(1, 0, 0, 1)
 shader_parameter/blink_strength = 0.0
+shader_parameter/use_recolor = false
+shader_parameter/blink_color_2 = Color(1, 0.2, 0.2, 1)
+shader_parameter/blink_strength_2 = 0.0
+shader_parameter/blink_uses_recolor = true
+shader_parameter/gradient_offset = 0.0
+shader_parameter/gradient_contrast = 1.0
 
 [sub_resource type="Animation" id="Animation_s56t4"]
 length = 0.001
@@ -90,6 +96,7 @@ one_shot = true
 [node name="Death" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1033014402]
 stream = ExtResource("3_ggwx2")
 max_distance = 5000.0
+bus = &"Sfx"
 script = ExtResource("4_clgxi")
 
 [node name="Effects" type="Node2D" parent="." unique_id=898744823]

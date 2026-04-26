@@ -13,6 +13,6 @@ func _exit_tree() -> void:
 
 ## Heals the player at the end of each wave
 func _on_wave_ended() -> void:
-	if has_unlocked:
+	if selected_in_run :
 		var max_hp := player.stats.get_max_hp_total()
 		GSignals.HIT_take_heal.emit(player, max_hp / 100.0 * get_value())

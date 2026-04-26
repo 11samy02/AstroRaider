@@ -8,6 +8,24 @@
 
 config_version=5
 
+[addons]
+
+resources_spreadsheet_view/array_color_tint=100.0
+resources_spreadsheet_view/color_rows=true
+resources_spreadsheet_view/array_min_width=128.0
+resources_spreadsheet_view/resource_preview_size=128.0
+resources_spreadsheet_view/clip_headers=true
+resources_spreadsheet_view/dupe_arrays=true
+resources_spreadsheet_view/context_menu_on_leftclick=false
+resources_spreadsheet_view/fold_docks=true
+resources_spreadsheet_view/resource_cell_label_mode=1
+resources_spreadsheet_view/freeze_first_column=true
+auto_backup/output_directory="user://backups/"
+auto_backup/enable_zipping=false
+auto_backup/persistent_count=true
+auto_backup/_internal_count_storage=382
+auto_backup/save_frequency_minutes=5
+
 [animation]
 
 compatibility/default_parent_skeleton_in_mesh_instance_3d=true
@@ -21,12 +39,16 @@ boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 config/icon="res://Images/icon.png"
 
+[audio]
+
+buses/default_bus_layout="uid://cs2g0f4qu4y4p"
+
 [autoload]
 
 GlobalGame="*res://Manager/GlobalGame.gd"
 GSignals="*res://Manager/GSignals.gd"
 ScreenTransition="*res://Manager/UI/screen_transition.tscn"
-PauseMenu="*res://UI/pause_menu.tscn"
+Menu="*uid://cq0lkhbolmkdw"
 PerkData="*res://Perks/PerkData.gd"
 PlayerDataBuilds="*res://Manager/PlayerDataBuilds.gd"
 BluePrintData="*res://Crafting/Resources/BluePrintData.gd"
@@ -36,6 +58,9 @@ GameOverScreen="*res://UI/game_over_screen.tscn"
 FirebaseSync="*res://Https/firebase_sync.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 ScreenEffects="*uid://bpi0x0vtweskt"
+DebugMenu="*uid://cggqb75a8w8r"
+InputHelper="*uid://cholww48njaeh"
+LocalizationManager="*uid://bjv5ufgo23ljc"
 
 [debug]
 
@@ -78,10 +103,10 @@ choices/autofocus_first=true
 choices/delay=0.2
 choices/reveal_delay=0.25
 choices/reveal_by_input=false
-save/autosave_delay=60.0
 save/encryption_on_exports_only=true
 text/autopauses={}
 text/autocolor_names=true
+save/autosave_delay=60.0
 
 [display]
 
@@ -100,7 +125,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/auto_backup/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/godotsteam/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg", "res://addons/screen_debug/plugin.cfg")
 
 [file_customization]
 
@@ -223,9 +248,14 @@ slot_x={
 ]
 }
 
+[input_devices]
+
+pen_tablet/driver.windows="dummy"
+
 [internationalization]
 
 locale/translation_remaps={}
+locale/translations=PackedStringArray("res://localization/localizations.en.translation", "res://localization/localizations.de.translation", "res://localization/localizations.ru.translation")
 
 [layer_names]
 
@@ -250,3 +280,10 @@ common/max_physics_steps_per_frame=16
 
 textures/canvas_textures/default_texture_filter=0
 textures/canvas_textures/default_texture_repeat=1
+
+[steam]
+
+initialization/initialize_on_startup=true
+multiplayer_peer/max_channels=4
+initialization/app_id=0
+initialization/embed_callbacks=false

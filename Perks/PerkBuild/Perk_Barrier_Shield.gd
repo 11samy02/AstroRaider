@@ -25,7 +25,7 @@ func _exit_tree() -> void:
 
 ## Spawns a barrier shield around the player
 func activate_perk() -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		return
 	var res := get_player_res()
 	if !is_instance_valid(res):

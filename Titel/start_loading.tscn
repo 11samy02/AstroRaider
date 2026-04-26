@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dakj0is30rwsr"]
+[gd_scene format=3 uid="uid://dakj0is30rwsr"]
 
 [ext_resource type="Texture2D" uid="uid://b0u0niqk1q5ov" path="res://Images/titel.png" id="1_4ichx"]
 [ext_resource type="Script" uid="uid://ditdpq1mff4tb" path="res://Titel/start_loading.gd" id="1_7kjhf"]
@@ -447,7 +447,7 @@ _data = {
 &"loop": SubResource("Animation_j8yup")
 }
 
-[node name="Start_loading" type="Control"]
+[node name="Start_loading" type="Control" unique_id=1607527484]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -457,7 +457,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_7kjhf")
 
-[node name="animated title" type="Control" parent="."]
+[node name="animated title" type="Control" parent="." unique_id=72584851]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -466,7 +466,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="bg" type="TextureRect" parent="animated title"]
+[node name="bg" type="TextureRect" parent="animated title" unique_id=1019816501]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -476,7 +476,7 @@ grow_vertical = 2
 texture = ExtResource("2_e3lvk")
 stretch_mode = 6
 
-[node name="fg" type="TextureRect" parent="animated title"]
+[node name="fg" type="TextureRect" parent="animated title" unique_id=797080419]
 top_level = true
 z_index = 5
 layout_mode = 1
@@ -488,7 +488,7 @@ grow_vertical = 2
 texture = ExtResource("3_j8yup")
 stretch_mode = 6
 
-[node name="deamon" type="MarginContainer" parent="animated title"]
+[node name="deamon" type="MarginContainer" parent="animated title" unique_id=1163115036]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -504,14 +504,14 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="deamon" type="TextureRect" parent="animated title/deamon"]
+[node name="deamon" type="TextureRect" parent="animated title/deamon" unique_id=372297980]
 z_index = 2
 layout_mode = 2
 size_flags_vertical = 4
 texture = SubResource("AtlasTexture_d3cpo")
 stretch_mode = 3
 
-[node name="title" type="MarginContainer" parent="animated title"]
+[node name="title" type="MarginContainer" parent="animated title" unique_id=1396805292]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -522,14 +522,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/margin_top = 75
 
-[node name="title" type="TextureRect" parent="animated title/title"]
+[node name="title" type="TextureRect" parent="animated title/title" unique_id=45626439]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = ExtResource("5_f37j7")
 stretch_mode = 3
 
-[node name="drone-left" type="MarginContainer" parent="animated title"]
+[node name="drone-left" type="MarginContainer" parent="animated title" unique_id=221634948]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 175.0
@@ -540,14 +540,14 @@ size_flags_vertical = 0
 theme_override_constants/margin_left = 75
 theme_override_constants/margin_top = 100
 
-[node name="drone-left" type="TextureRect" parent="animated title/drone-left"]
+[node name="drone-left" type="TextureRect" parent="animated title/drone-left" unique_id=1421214218]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = SubResource("AtlasTexture_0ac55")
 stretch_mode = 3
 
-[node name="drone-right" type="MarginContainer" parent="animated title"]
+[node name="drone-right" type="MarginContainer" parent="animated title" unique_id=2094115075]
 top_level = true
 layout_mode = 0
 offset_left = 1378.0
@@ -559,14 +559,14 @@ size_flags_vertical = 8
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 0
 
-[node name="drone-righht" type="TextureRect" parent="animated title/drone-right"]
+[node name="drone-righht" type="TextureRect" parent="animated title/drone-right" unique_id=1689580244]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 texture = SubResource("AtlasTexture_5d1u5")
 stretch_mode = 3
 
-[node name="human-left" type="MarginContainer" parent="animated title"]
+[node name="human-left" type="MarginContainer" parent="animated title" unique_id=1478245911]
 top_level = true
 layout_mode = 0
 anchor_top = 1.0
@@ -580,14 +580,14 @@ size_flags_vertical = 8
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_bottom = 50
 
-[node name="human-left" type="TextureRect" parent="animated title/human-left"]
+[node name="human-left" type="TextureRect" parent="animated title/human-left" unique_id=1853217230]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 texture = SubResource("AtlasTexture_ayl17")
 stretch_mode = 3
 
-[node name="human-right" type="MarginContainer" parent="animated title"]
+[node name="human-right" type="MarginContainer" parent="animated title" unique_id=595031191]
 layout_mode = 0
 offset_left = 1605.0
 offset_top = 710.0
@@ -598,12 +598,12 @@ size_flags_vertical = 8
 theme_override_constants/margin_right = 75
 theme_override_constants/margin_bottom = 50
 
-[node name="human-right" type="TextureRect" parent="animated title/human-right"]
+[node name="human-right" type="TextureRect" parent="animated title/human-right" unique_id=2133910850]
 layout_mode = 2
 texture = SubResource("AtlasTexture_ib00q")
 stretch_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=267470249]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -614,7 +614,7 @@ grow_vertical = 2
 texture = ExtResource("1_4ichx")
 expand_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1653156415]
 top_level = true
 z_index = 99
 layout_mode = 1
@@ -626,18 +626,14 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_xkeof")
-}
-autoplay = "show_godot_logo"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1930384319]
+libraries/ = SubResource("AnimationLibrary_xkeof")
+autoplay = &"show_godot_logo"
 
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_f37j7")
-}
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." unique_id=571076082]
+libraries/ = SubResource("AnimationLibrary_f37j7")
 
-[node name="godot_logo" type="TextureRect" parent="."]
+[node name="godot_logo" type="TextureRect" parent="." unique_id=1633701514]
 modulate = Color(0, 0, 0, 0)
 top_level = true
 z_index = 1000
@@ -657,7 +653,7 @@ grow_vertical = 2
 texture = ExtResource("2_fsvmp")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1363358734]
 top_level = true
 z_index = 1000
 custom_minimum_size = Vector2(1920, 1080)
@@ -674,7 +670,7 @@ theme_override_constants/margin_top = 40
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 40
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" unique_id=54658225]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 8
@@ -683,7 +679,7 @@ texture = ExtResource("5_58nfv")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/TextureRect" unique_id=282436581]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -700,7 +696,7 @@ size_flags_vertical = 8
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="continue" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+[node name="continue" type="Button" parent="MarginContainer/TextureRect/HBoxContainer" unique_id=2039582679]
 visible = false
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
@@ -708,14 +704,14 @@ size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
 text = "Continue"
 
-[node name="new_game" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+[node name="new_game" type="Button" parent="MarginContainer/TextureRect/HBoxContainer" unique_id=874528203]
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
 text = "New Game"
 
-[node name="perks" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+[node name="perks" type="Button" parent="MarginContainer/TextureRect/HBoxContainer" unique_id=1566830991]
 visible = false
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
@@ -724,7 +720,7 @@ theme = ExtResource("4_o0jvk")
 text = "Perks
 "
 
-[node name="options" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+[node name="options" type="Button" parent="MarginContainer/TextureRect/HBoxContainer" unique_id=1071380156]
 visible = false
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
@@ -732,7 +728,7 @@ size_flags_vertical = 4
 theme = ExtResource("4_o0jvk")
 text = "Options"
 
-[node name="Exit" type="Button" parent="MarginContainer/TextureRect/HBoxContainer"]
+[node name="Exit" type="Button" parent="MarginContainer/TextureRect/HBoxContainer" unique_id=2057768654]
 custom_minimum_size = Vector2(227, 62)
 layout_mode = 2
 size_flags_vertical = 4

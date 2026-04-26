@@ -15,7 +15,7 @@ func _ready() -> void:
 	super()
 
 func activate_perk() -> void:
-	if not has_unlocked:
+	if not selected_in_run :
 		return
 	if _is_active:
 		return

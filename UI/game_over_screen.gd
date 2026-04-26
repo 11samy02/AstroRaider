@@ -26,7 +26,7 @@ func game_over() -> void:
 
 	is_showing = true
 	visible = true
-	PauseMenu.can_pause_on_screen = false
+	Menu.can_pause_on_screen = false
 
 	waves.text = "Rounds Survived:  %s" % str(EntitySpawner.wave_count)
 	$AnimationPlayer.play("Show")

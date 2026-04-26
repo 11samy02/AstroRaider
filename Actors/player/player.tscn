@@ -517,6 +517,7 @@ texture = ExtResource("7_vmm8m")
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="Crosshair" unique_id=568386698]
 stream = ExtResource("9_51d1q")
+bus = &"Sfx"
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 1.5
@@ -529,23 +530,27 @@ update_rotation = false
 
 [node name="Damage" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1089492862]
 stream = ExtResource("11_bdp4b")
+bus = &"Sfx"
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.4
 
 [node name="BohrerSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=661693454]
 stream = ExtResource("12_purh8")
+bus = &"Sfx"
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 0.75
 
 [node name="LiveIndikator" type="AudioStreamPlayer2D" parent="Sounds" unique_id=287317411]
 stream = ExtResource("19_02ndh")
+bus = &"Sfx"
 script = ExtResource("10_pasbu")
 metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
 
 [node name="ErrorSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=670081951]
 stream = ExtResource("20_pg3yl")
 volume_db = 10.0
+bus = &"Sfx"
 script = ExtResource("10_pasbu")
 metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
 

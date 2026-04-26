@@ -216,6 +216,7 @@ max_random_pitch = 2.0
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(2021586428) index="1" unique_id=2041781727]
 stream = ExtResource("10_qctm1")
+bus = &"Sfx"
 script = ExtResource("11_kusyn")
 max_random_pitch = 1.5
 

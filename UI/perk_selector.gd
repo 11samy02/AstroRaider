@@ -58,7 +58,7 @@ func _on_perk_mouse_entered(id: int) -> void:
 		return
 	var perk := temp_list[id]
 	var res := perk.perk_res
-	var display_level := perk.Level if not perk.has_unlocked else perk.Level + 1
+	var display_level := perk.Level if not perk.selected_in_run  else perk.Level + 1
 	description.text = res.get_description(display_level)
 	titel.text = res.perk_name
 

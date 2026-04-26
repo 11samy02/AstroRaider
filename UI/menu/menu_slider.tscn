@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://g1s2gp6aprj1"]
+
+[ext_resource type="Script" uid="uid://qvhjq0av17i0" path="res://UI/menu/menu_slider.gd" id="1_xdrrd"]
+[ext_resource type="FontFile" uid="uid://booga45fd18fs" path="res://themes/Fonts/Orbitron-VariableFont_wght.ttf" id="2_xdrrd"]
+[ext_resource type="Theme" uid="uid://opofmpqp1ck8" path="res://themes/new_ui.tres" id="3_lkd5k"]
+[ext_resource type="AudioStream" uid="uid://cua3mkuduyebk" path="res://Sounds/UI/slider.wav" id="4_lkd5k"]
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="5_xo8vp"]
+
+[sub_resource type="FontVariation" id="FontVariation_5xle5"]
+base_font = ExtResource("2_xdrrd")
+variation_embolden = 1.0
+spacing_glyph = 3
+spacing_space = 1
+
+[node name="MasterVolumeContainer" type="HBoxContainer" unique_id=140083126]
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+script = ExtResource("1_xdrrd")
+
+[node name="hbox" type="HBoxContainer" parent="." unique_id=1102698916]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="hbox" unique_id=1878067204]
+modulate = Color(0.49019608, 0.53333336, 0.49803922, 1)
+layout_mode = 2
+size_flags_horizontal = 0
+expand_mode = 3
+stretch_mode = 5
+
+[node name="text_label" type="Label" parent="hbox" unique_id=696228658]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.49019608, 0.53333336, 0.49803922, 1)
+theme_override_fonts/font = SubResource("FontVariation_5xle5")
+
+[node name="slider" type="HSlider" parent="." unique_id=1950946761]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_lkd5k")
+value = 100.0
+rounded = true
+
+[node name="count" type="Label" parent="." unique_id=1143023906]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0.49019608, 0.53333336, 0.49803922, 1)
+theme_override_fonts/font = SubResource("FontVariation_5xle5")
+text = "100%"
+horizontal_alignment = 2
+
+[node name="Audio2D" type="AudioStreamPlayer2D" parent="." unique_id=1497269556]
+stream = ExtResource("4_lkd5k")
+bus = &"ui"
+script = ExtResource("5_xo8vp")
+metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"

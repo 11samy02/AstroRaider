@@ -195,10 +195,10 @@ func _play_hit_blink() -> void:
 		return
 	if not material is ShaderMaterial:
 		return
-
+	
 	var mat := material as ShaderMaterial
 	mat.set_shader_parameter("blink_color", Color.WHITE)
 	mat.set_shader_parameter("blink_strength", 1.0)
-
+	
 	var tween := create_tween()
 	tween.tween_property(mat, "shader_parameter/blink_strength", 0.0, 0.10)

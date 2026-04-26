@@ -25,7 +25,7 @@ func _ready() -> void:
 
 ## Activates Energy Overload and applies temporary stat modifiers
 func activate_perk() -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		return
 	if _is_active:
 		return

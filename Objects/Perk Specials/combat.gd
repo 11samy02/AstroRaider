@@ -9,7 +9,7 @@ extends Node
 @export var approach_weight: float = 260.0
 @export var distance_weight: float = 0.45
 @export var stick_bonus: float = 2.0
-@export var projectile_speed: float = 950.0
+@export var projectile_speed: float = 500.0
 
 var _shot_timer: float = 0.0
 var _generator: CrystalGenerator = null

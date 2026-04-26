@@ -6,7 +6,7 @@ signal cooldown_started(duration: float)
 @export var Key: PerkData.Keys
 @export var player: Player
 @export_range(1, 6) var Level := 1
-@export var has_unlocked := false
+@export var selected_in_run  := false
 
 var ability_slot_ref: ability_slot = null
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if !is_instance_valid(perk_res):
 		return
-	if !has_unlocked:
+	if !selected_in_run :
 		_reset_stats()
 		return
 	if perk_res.active_type == Perk.Active_type_keys.Always:
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 
 ## Called to activate the perk (override in subclasses)
 func activate_perk() -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		_reset_stats()
 
 
@@ -99,9 +99,9 @@ func get_player_res() -> PlayerResource:
 
 ## Unlocks or increases the perk level up to max level
 func level_up_perk() -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		print(self.name, " unlocked at Level: ", Level)
-		has_unlocked = true
+		selected_in_run  = true
 		return
 	var max_level := 3 if is_ult() else 6
 	if Level >= max_level:

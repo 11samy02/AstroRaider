@@ -9,17 +9,17 @@ func _ready() -> void:
 
 func change_scene_to(szene_path: PackedScene) -> void:
 	new_szene = szene_path
-	PauseMenu.can_pause_on_screen = false
+	Menu.can_pause_on_screen = false
 	anim.play("Transition")
 
 func change_scene_and_wait(szene_path: PackedScene) -> void:
 	new_szene = szene_path
-	PauseMenu.can_pause_on_screen = false
+	Menu.can_pause_on_screen = false
 	anim.play("Transition_and_wait")
 
 func _transition():
 	get_tree().change_scene_to_packed(new_szene)
-	PauseMenu.can_pause_on_screen = true
+	Menu.can_pause_on_screen = true
 
 func _transition_wait():
 	get_tree().change_scene_to_packed(new_szene)
@@ -27,4 +27,4 @@ func _transition_wait():
 func fade_out():
 	await get_tree().create_timer(0.5).timeout
 	anim.play("fade_out")
-	PauseMenu.can_pause_on_screen = true
+	Menu.can_pause_on_screen = true

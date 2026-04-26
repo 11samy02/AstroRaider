@@ -9,7 +9,7 @@ func activate_perk() -> void:
 	super()
 	
 	var res := get_player_res()
-	if is_instance_valid(res) and has_unlocked:
+	if is_instance_valid(res) and selected_in_run :
 		res.has_perk_anti_mine_det = true
 	
 	var current_value := get_value()

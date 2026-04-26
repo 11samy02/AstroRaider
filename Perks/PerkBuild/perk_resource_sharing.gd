@@ -18,7 +18,7 @@ func _exit_tree() -> void:
 
 ## Shares a percentage of collected crystals with teammates
 func _on_crystal_collected(_pos: Vector2) -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		return
 
 	_collected_count += 1

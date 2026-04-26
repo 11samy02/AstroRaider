@@ -473,9 +473,9 @@ process_mode = 3
 stream = ExtResource("15_oaiby")
 autoplay = true
 max_distance = 100000000000.0
+bus = &"Music"
 parameters/looping = true
 script = ExtResource("16_ky8iu")
-type = "Music"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1715120967]
 environment = SubResource("Environment_4h7l4")

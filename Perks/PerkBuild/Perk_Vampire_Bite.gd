@@ -13,7 +13,7 @@ func _exit_tree() -> void:
 
 ## Heals the player when they kill an enemy
 func _on_enemy_killed(killed_by: Player) -> void:
-	if !has_unlocked:
+	if !selected_in_run :
 		return
 	if killed_by == player:
 		GSignals.HIT_take_heal.emit(player, get_value())
