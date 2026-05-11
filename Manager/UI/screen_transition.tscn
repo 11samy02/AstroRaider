@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://xae054wq8w45"]
+[gd_scene format=3 uid="uid://xae054wq8w45"]
 
 [ext_resource type="Script" uid="uid://dso12d2suih8m" path="res://Manager/UI/screen_transition.gd" id="1_336kf"]
 [ext_resource type="Shader" uid="uid://bwlh04x568xmq" path="res://Shader/StarShader.gdshader" id="1_atgp0"]
-[ext_resource type="Theme" uid="uid://ss5o0ot61xc0" path="res://themes/title_screen.tres" id="3_fpgdc"]
+[ext_resource type="Theme" uid="uid://opofmpqp1ck8" path="res://themes/new_ui.tres" id="3_ghr61"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gci7h"]
 shader = ExtResource("1_atgp0")
@@ -256,12 +256,12 @@ _data = {
 &"loading": SubResource("Animation_6s0fn")
 }
 
-[node name="ScreenTransition" type="CanvasLayer"]
+[node name="ScreenTransition" type="CanvasLayer" unique_id=1191067435]
 process_mode = 3
 layer = 128
 script = ExtResource("1_336kf")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=275006968]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -272,7 +272,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=414692237]
 material = SubResource("ShaderMaterial_gci7h")
 layout_mode = 1
 anchors_preset = 15
@@ -281,14 +281,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.0237182, 0.0623325, 0.0835872, 1)
+color = Color(0.0032517752, 0.0474694, 0.036020156, 1)
 
-[node name="anim" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_gxtx2")
-}
+[node name="anim" type="AnimationPlayer" parent="." unique_id=1061350365]
+libraries/ = SubResource("AnimationLibrary_gxtx2")
 
-[node name="Loading" type="Control" parent="."]
+[node name="Loading" type="Control" parent="." unique_id=220606993]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -297,8 +295,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Loading"]
-custom_minimum_size = Vector2(400, 200)
+[node name="Label" type="Label" parent="Loading" unique_id=1493706701]
+custom_minimum_size = Vector2(500, 200)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -309,17 +307,15 @@ offset_left = -95.0
 offset_top = -23.0
 grow_horizontal = 0
 grow_vertical = 0
-theme = ExtResource("3_fpgdc")
+theme = ExtResource("3_ghr61")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.690196, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.24313726, 0.88235295, 0.7764706, 1)
 theme_override_constants/outline_size = 20
 theme_override_font_sizes/font_size = 48
 text = "Loading"
 vertical_alignment = 1
 uppercase = true
 
-[node name="anim" type="AnimationPlayer" parent="Loading"]
-libraries = {
-&"": SubResource("AnimationLibrary_1wc7i")
-}
-autoplay = "loading"
+[node name="anim" type="AnimationPlayer" parent="Loading" unique_id=1975085745]
+libraries/ = SubResource("AnimationLibrary_1wc7i")
+autoplay = &"loading"

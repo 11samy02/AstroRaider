@@ -120,8 +120,9 @@ _data = {
 &"idle": SubResource("Animation_54vgy")
 }
 
-[node name="Glimblob" unique_id=1386771000 instance=ExtResource("1_j57v1")]
+[node name="Glimblob" unique_id=1386771000 node_paths=PackedStringArray("wander_time") instance=ExtResource("1_j57v1")]
 script = ExtResource("2_82sf1")
+wander_time = NodePath("Timer/follow_time")
 stats = SubResource("Resource_b6l0w")
 stats_upgrades = SubResource("Resource_lweds")
 sprite_variation = Array[Texture2D]([ExtResource("2_onj4g")])

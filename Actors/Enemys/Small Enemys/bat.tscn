@@ -129,9 +129,11 @@ shader_parameter/gradient_contrast = 1.00000004424012
 [sub_resource type="CircleShape2D" id="CircleShape2D_g3y2r"]
 radius = 6.0
 
-[node name="Bat" unique_id=624866104 instance=ExtResource("1_nx18g")]
+[node name="Bat" unique_id=624866104 node_paths=PackedStringArray("wander_time", "follow_time") instance=ExtResource("1_nx18g")]
 z_index = 2
 script = ExtResource("2_q52fh")
+wander_time = NodePath("Timer/wander_time")
+follow_time = NodePath("Timer/follow_time")
 stats = SubResource("Resource_wuqbm")
 stats_upgrades = SubResource("Resource_mc3ci")
 sprite_variation = Array[Texture2D]([ExtResource("3_kxtlt"), ExtResource("4_awakt"), ExtResource("5_epev5")])

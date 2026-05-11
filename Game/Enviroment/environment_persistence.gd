@@ -8,27 +8,27 @@ class_name EnvironmentPersistence
 func _try_load_saved_level() -> bool:
 	if env.persistence_mode != 2 and env.persistence_mode != 3:
 		return false
-
+	
 	var path: String
 	if env.persistence_mode == 3:
 		path = _get_random_saved_path()
 	else:
 		path = _get_latest_saved_path()
-
+	
 	if path == "":
 		return false
-
+	
 	var data := ResourceLoader.load(path) as TileMapData
 	if data == null:
 		return false
-
+	
 	await _apply_tile_map_data(data)
-
+	
 	env.finished_map = true
 	env.is_generating = false
 	env.map_was_created.emit()
 	ScreenTransition.finished_loading.emit()
-
+	
 	return true
 
 

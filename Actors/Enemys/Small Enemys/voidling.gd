@@ -1,5 +1,5 @@
 extends EnemyBaseTemplate
-class_name Glimblob
+class_name Voidling
 
 static var kill_count: int = 0
 

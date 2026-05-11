@@ -23,7 +23,7 @@ resources_spreadsheet_view/freeze_first_column=true
 auto_backup/output_directory="user://backups/"
 auto_backup/enable_zipping=false
 auto_backup/persistent_count=true
-auto_backup/_internal_count_storage=394
+auto_backup/_internal_count_storage=489
 auto_backup/save_frequency_minutes=5
 
 [animation]

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name BossEntity
 
 const DAMAGE_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.tscn")

@@ -4,6 +4,9 @@ class_name EnemyBaseTemplate
 const DIE_PARTICLE = preload("res://Particles/Enemys/small/Enemy_die_particle.tscn")
 const DAMAGE_PARTICLE = preload("res://Visuel Feedback Tutorial/visuel_counter.tscn")
 
+@onready var state_machine: EnemyStateMachine = $Scripts/StateMachine
+@onready var shader_effects: EnemyShaderEffects = $Scripts/ShaderEffects
+
 @onready var sprite: Sprite2D = $sprite
 @onready var stun_sprite: Sprite2D = %stun_sprite
 @onready var stun_timer: Timer = %Stun_Timer
@@ -28,6 +31,11 @@ var shader_value: float = 0.0
 var _cached_target: Vector2 = Vector2.ZERO
 var _target_cache_frame: int = -1
 
+@export_group("Timer")
+@export var wander_time : Timer
+@export var follow_time : Timer
+@export var shoot_delay : Timer
+
 static var max_entitys_on_screen = 50
 static var entity_list: Array[EnemyBaseTemplate]
 
@@ -42,14 +50,45 @@ func _ready() -> void:
 	stats.max_health += randi_range(0, stats.max_Random_health_edit)
 	stats.current_health = stats.max_health
 	stats._sync_ai_flags()
+	
 	load_ai_to_node()
-	sprite.texture = sprite_variation.pick_random()
-	stun_timer.timeout.connect(remove_stun)
+	
+	if sprite_variation.size() > 0:
+		sprite.texture = sprite_variation.pick_random()
+	
+	if is_instance_valid(stun_timer):
+		stun_timer.timeout.connect(remove_stun)
+	
+	state_machine.enemy = self
+	
+	if is_instance_valid(wander_time):
+		state_machine.wander_time = wander_time
+	
+		if not wander_time.timeout.is_connected(state_machine.on_wander_timeout):
+			wander_time.timeout.connect(state_machine.on_wander_timeout)
+	
+	if is_instance_valid(follow_time):
+		state_machine.follow_time = follow_time
+	
+	if is_instance_valid(shoot_delay):
+		state_machine.shoot_delay = shoot_delay
+	
+	shader_effects.enemy = self
 
 
 func _process(_delta: float) -> void:
 	look_direction()
 	check_if_stunned()
+
+## Runs health check, shader effects and state machine each physics frame
+func _physics_process(_delta: float) -> void:
+	check_health()
+	
+	if is_instance_valid(shader_effects):
+		shader_effects.run()
+	
+	if is_instance_valid(state_machine):
+		state_machine.run()
 
 
 ## Instantiates and attaches AI behavior nodes from stats configuration
@@ -111,17 +150,21 @@ func applay_damage(entity: CharacterBody2D, damage: int = 1, crit_chance: float 
 		return
 	damage_part.setup(str(damage), Color("#ffff00"))
 	stats.current_health -= damage
+	if entity == self:
+		get_hit_anim()
 
 
 ## Applies knockback force and switches to Knockback state
 func get_knockback(dir: Vector2, knockback: float = 1.0) -> void:
+	if not is_instance_valid(knockback_time):
+		return
+	
 	if knockback_time.is_stopped():
 		velocity = Vector2.ZERO
 		knockback_time.start()
 		velocity = dir * knockback * stats.speed * 2
 		last_state = state
 		state = state_mashine.Knockback
-
 
 ## Resets state to the state before knockback
 func reset_to_last_state() -> void:
@@ -136,18 +179,26 @@ func check_health() -> void:
 
 ## Handles death — spawns particles, plays sound, emits signal and frees the node
 func death() -> void:
-	var particle = DIE_PARTICLE.instantiate()
-	particle.global_position = global_position
-	particle.sprite_variation = die_particle_variation
-	particle.sprite_id = sprite_variation.find(sprite.texture)
-	get_parent().add_child(particle)
-	var real_sound: Audio2D = death_sound.duplicate()
-	get_parent().add_child(real_sound)
-	real_sound.play_sound()
-	real_sound.global_position = global_position
+	if DIE_PARTICLE:
+		var particle = DIE_PARTICLE.instantiate()
+		particle.global_position = global_position
+		particle.sprite_variation = die_particle_variation
+	
+		if is_instance_valid(sprite) and sprite_variation.size() > 0:
+			particle.sprite_id = sprite_variation.find(sprite.texture)
+	
+		get_parent().add_child(particle)
+	
+	if is_instance_valid(death_sound):
+		var real_sound: Audio2D = death_sound.duplicate()
+		get_parent().add_child(real_sound)
+		real_sound.global_position = global_position
+		real_sound.play_sound()
+	
 	if self in entity_list:
 		entity_list.erase(self)
-		GSignals.ENE_killed_by.emit(killed_by)
+	
+	GSignals.ENE_killed_by.emit(killed_by)
 	queue_free()
 
 
@@ -162,32 +213,41 @@ static func reset() -> void:
 
 ## Flips sprite based on target direction
 func look_direction() -> void:
+	if not is_instance_valid(sprite):
+		return
+	
 	sprite.flip_h = get_closest_target().x < global_position.x
-
 
 ## Plays hit animation with scale and shader flash
 func get_hit_anim() -> void:
+	if not is_instance_valid(sprite):
+		return
+	
 	var tween := create_tween()
 	shader_value = 1
 	sprite.scale = Vector2(1.5, 1.5)
 	tween.tween_property(self, "shader_value", 0, 0.2)
 	tween.parallel().tween_property(sprite, "scale", Vector2(1, 1), 0.2)
 
-
 ## Shows or hides stun sprite and freezes velocity when stunned
 func check_if_stunned() -> void:
 	if stats.is_stunned:
 		velocity = Vector2.ZERO
-		stun_sprite.show()
+		if is_instance_valid(stun_sprite):
+			stun_sprite.show()
 	else:
-		stun_sprite.hide()
+		if is_instance_valid(stun_sprite):
+			stun_sprite.hide()
 
 
 ## Activates stun if attack has stun and enemy is not already stunned
 func stun_activated(atk_res: AttackResource) -> void:
+	if not is_instance_valid(stun_timer):
+		return
+
 	if atk_res.has_stun and !stats.is_stunned:
 		stats.is_stunned = true
-		stun_timer.set_wait_time(atk_res.stun_strength / stats.stun_resistence)
+		stun_timer.wait_time = atk_res.stun_strength / stats.stun_resistence
 		stun_timer.start()
 
 

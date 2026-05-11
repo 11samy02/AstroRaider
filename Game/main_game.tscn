@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://maf5bglrbvx4" path="res://Game/main_game.gd" id="1_to3au"]
 [ext_resource type="PackedScene" uid="uid://diaruu2bt2xvq" path="res://Game/Enviroment/enviroment.tscn" id="1_wfgm1"]
 [ext_resource type="Script" uid="uid://dgspeswpe2p8m" path="res://Game/tutorial_manager.gd" id="2_udiv6"]
+[ext_resource type="Script" uid="uid://baxvettiavg7s" path="res://Resources/CodeSimplefier/SimplefySettingMath.gd" id="3_kp3b7"]
 [ext_resource type="Script" uid="uid://cgxsqh6vm7yss" path="res://Game/backgrounds.gd" id="4_pq065"]
 [ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://Game/Manager/default_camera.tscn" id="5_1oloc"]
 [ext_resource type="Script" uid="uid://cx7tpbqul3oe1" path="res://Images/Background/BackgroundRes.gd" id="5_1tp0s"]
@@ -17,6 +18,12 @@
 [ext_resource type="AudioStream" uid="uid://fmbgq834qesn" path="res://Music/ERH BlueBeat 01 [loop].ogg" id="15_oaiby"]
 [ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://UX/audio_2d.gd" id="16_ky8iu"]
 [ext_resource type="PackedScene" uid="uid://cpw54eux7rlse" path="res://Game/Enviroment/fg_fog.tscn" id="17_5nycs"]
+
+[sub_resource type="Resource" id="Resource_kp3b7"]
+resource_local_to_scene = true
+script = ExtResource("3_kp3b7")
+min_value = 5
+max_value = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp3b7"]
 bg_color = Color(0.344076, 0.344076, 0.344076, 0.67451)
@@ -301,6 +308,9 @@ enviroment = NodePath("Enviroment")
 entity_spawner = NodePath("EntitySpawner")
 tutorial = NodePath("TutorialManager/Tutorial")
 
+[node name="EntitySpawner" parent="." unique_id=957906261 instance=ExtResource("6_kru1y")]
+time_until_wave_start = SubResource("Resource_kp3b7")
+
 [node name="TutorialManager" type="Node" parent="." unique_id=1111507496 node_paths=PackedStringArray("enviroment", "key_labels", "wasd_tutorial")]
 script = ExtResource("2_udiv6")
 enviroment = NodePath("../Enviroment")
@@ -520,8 +530,6 @@ texture = ExtResource("1_oy3rq")
 layer = -5
 
 [node name="fg_fog" parent="." unique_id=539406239 instance=ExtResource("17_5nycs")]
-
-[node name="EntitySpawner" parent="." unique_id=327615893 instance=ExtResource("6_kru1y")]
 
 [node name="border" type="StaticBody2D" parent="." unique_id=621774748]
 
