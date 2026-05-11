@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://mj5htxevexkt"]
-
-[ext_resource type="Script" uid="uid://vbemx6w23l66" path="res://Perks/PerkBuild/Perk_Impulse_Drive.gd" id="1_psp3e"]
-
-[node name="Impulse Drive" type="Node" unique_id=1336730520]
-script = ExtResource("1_psp3e")
-tiles_destroyable_per_level = Array[int]([1, 3, 5, 7, 9, 11])
-Key = 9
-metadata/_custom_type_script = "uid://b3gr0cwnvudut"

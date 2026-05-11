@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://bn1666y7p77sk"]
-
-[ext_resource type="Script" uid="uid://dklfujl8vicn5" path="res://Resources/Enemy/Ai/simple_orbit_target.gd" id="1_0gimo"]
-
-[node name="Simple_Orbit_Target" type="Node" unique_id=803363556]
-script = ExtResource("1_0gimo")
-key = 4

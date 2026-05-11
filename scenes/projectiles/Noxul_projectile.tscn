@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://dn78iyh35glof"]
+
+[ext_resource type="Script" uid="uid://6dll7od0pdvi" path="res://scripts/projectiles/fire_ball.gd" id="1_4a02k"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://scripts/resources/attack/AttackResource.gd" id="2_04w53"]
+[ext_resource type="Texture2D" uid="uid://ccplusqrcdied" path="res://assets/sprites/projectiles/energy_ball_purple.png" id="3_4a02k"]
+
+[sub_resource type="Resource" id="Resource_1d2w3"]
+script = ExtResource("2_04w53")
+damage = 5
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwaew"]
+radius = 5.0
+height = 14.0
+
+[sub_resource type="Animation" id="Animation_5lcwe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3j0tr"]
+resource_name = "hit"
+length = 0.1
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.075, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"spawn_explosion"
+}, {
+"args": [],
+"method": &"_destroy"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.1001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 0.1), Vector2(0.325, 0.325)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fp201"]
+_data = {
+&"RESET": SubResource("Animation_5lcwe"),
+&"hit": SubResource("Animation_3j0tr")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x50bl"]
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_twtt0"]
+offsets = PackedFloat32Array(0.0247525, 0.172414, 0.735632, 0.994253, 1)
+colors = PackedColorArray(1, 1, 1, 0, 2, 2, 2, 1, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wkynl"]
+gradient = SubResource("Gradient_twtt0")
+
+[sub_resource type="Curve" id="Curve_iiadq"]
+_data = [Vector2(0.0173913, 0.263736), 0.0, 2.88854, 0, 0, Vector2(0.652174, 0.21978), -0.180534, -0.180534, 0, 0, Vector2(1, 0), -1.64286, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1mrwb"]
+curve = SubResource("Curve_iiadq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kfn24"]
+particle_flag_damping_as_friction = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(0, 0, 0)
+spread = 0.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 30.0
+linear_accel_max = 80.0
+scale_curve = SubResource("CurveTexture_1mrwb")
+color_ramp = SubResource("GradientTexture1D_wkynl")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Noxul_projectile" type="Area2D" unique_id=1356530940]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_4a02k")
+atk_resource = SubResource("Resource_1d2w3")
+speed = 400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1195530068]
+top_level = true
+position = Vector2(-3, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_iwaew")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1841075671]
+libraries/ = SubResource("AnimationLibrary_fp201")
+
+[node name="lifetime" type="Timer" parent="." unique_id=222915166]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="particle" type="GPUParticles2D" parent="." unique_id=1227900811]
+z_index = 1
+material = SubResource("CanvasItemMaterial_x50bl")
+scale = Vector2(2, 2)
+amount = 256
+texture = ExtResource("3_4a02k")
+lifetime = 0.75
+speed_scale = 2.0
+fixed_fps = 0
+fract_delta = false
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_kfn24")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1028962513]
+position = Vector2(-16, 0)
+scale = Vector2(2.875, 1)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]

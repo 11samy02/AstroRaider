@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dpjj7b4eerysc"]
+
+[ext_resource type="Shader" uid="uid://bded02mwyhj4o" path="res://assets/shaders/projectiles/ProjectileLine.gdshader" id="1_fxai0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14xu2"]
+shader = ExtResource("1_fxai0")
+shader_parameter/color_1 = Color(1, 1, 1, 1)
+shader_parameter/color_2 = Color(0, 1, 1, 1)
+shader_parameter/color_3 = Color(0, 0.3, 1, 1)
+shader_parameter/pulse_speed = 6.0
+shader_parameter/glow_intensity = 4.0
+shader_parameter/core_sharpness = 8.0
+
+[sub_resource type="GDScript" id="GDScript_7c68e"]
+script/source = "extends Line2D
+class_name Trail
+
+@export var target: Node2D
+@export var max_length: int = 100  
+
+func _process(delta: float) -> void:
+	if target:
+		add_point(target.global_position)
+		
+		while get_point_count() > max_length:
+			remove_point(0)
+"
+
+[node name="Trail" type="Line2D" unique_id=1364362211]
+material = SubResource("ShaderMaterial_14xu2")
+script = SubResource("GDScript_7c68e")

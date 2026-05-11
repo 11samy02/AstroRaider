@@ -19,7 +19,7 @@
 &"portraits": {
 "Default": {
 "export_overrides": {
-"image": "\"res://Images/Title/deamon.png\""
+"image": "\"res://assets/images/title/deamon.png\""
 },
 "ignore_char_scale": false,
 "mirror": false,

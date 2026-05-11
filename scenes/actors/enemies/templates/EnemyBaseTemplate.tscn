@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://6mo722gvco50"]
+
+[ext_resource type="Script" uid="uid://p1e241kbpv0m" path="res://scripts/actors/enemies/templates/EnemyBaseTemplate.gd" id="1_di2us"]
+[ext_resource type="Texture2D" uid="uid://bu4sqb1ogjxvj" path="res://assets/sprites/ui/in_game/rader_points.png" id="2_4ri1a"]
+[ext_resource type="Shader" uid="uid://cwienuvgbski1" path="res://assets/shaders/actors/player/damage.gdshader" id="3_21iy6"]
+[ext_resource type="AudioStream" uid="uid://bedq6k2r4i0qw" path="res://assets/audio/sfx/AlienDeathSound.wav" id="3_ggwx2"]
+[ext_resource type="Script" uid="uid://bpbml76pg6v2b" path="res://scripts/actors/enemies/templates/state_mashine.gd" id="3_s56t4"]
+[ext_resource type="Script" uid="uid://d3obcdmgnc7f8" path="res://scripts/actors/enemies/templates/shader_effects.gd" id="4_2amy3"]
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://scripts/ux/audio_2d.gd" id="4_clgxi"]
+[ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://scenes/managers/hitbox.tscn" id="4_dx01d"]
+[ext_resource type="Texture2D" uid="uid://ckmypdqrfe3tv" path="res://assets/sprites/particles/stun_particles.png" id="7_sybs2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o7ydl"]
+resource_local_to_scene = true
+shader = ExtResource("3_21iy6")
+shader_parameter/opacity = 1.0
+shader_parameter/blink_color = Color(1, 0, 0, 1)
+shader_parameter/blink_strength = 0.0
+shader_parameter/use_recolor = false
+shader_parameter/blink_color_2 = Color(1, 0.2, 0.2, 1)
+shader_parameter/blink_strength_2 = 0.0
+shader_parameter/blink_uses_recolor = true
+shader_parameter/gradient_offset = 0.0
+shader_parameter/gradient_contrast = 1.0
+
+[sub_resource type="Animation" id="Animation_s56t4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_sybs2"]
+resource_name = "rotate_stun"
+length = 0.45
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.0333333, 0.05, 0.0666667, 0.0833333, 0.1, 0.116667, 0.133333, 0.15, 0.166667, 0.183333, 0.2, 0.216667, 0.233333, 0.25, 0.266667, 0.283333, 0.3, 0.316667, 0.333333, 0.35, 0.366667, 0.383333, 0.4, 0.416667, 0.433333, 0.45, 0.466667, 0.483333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -7.10686e-05, -0.0011371, -0.00575656, -0.0181936, -0.0444179, -0.0921049, -0.170636, -0.291097, -0.466281, -0.710686, -1.04052, -1.47368, -2.02979, -2.73017, -3.55301, -4.2534, -4.80951, -5.24267, -5.5725, -5.8169, -5.99209, -6.11255, -6.19108, -6.23877, -6.26499, -6.27743, -6.28205, -6.28311, -6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2amy3"]
+_data = {
+&"RESET": SubResource("Animation_s56t4"),
+&"rotate_stun": SubResource("Animation_sybs2")
+}
+
+[node name="EnemyBaseTemplate" type="CharacterBody2D" unique_id=1614769174]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_di2us")
+radar_icon = ExtResource("2_4ri1a")
+
+[node name="Scripts" type="Node" parent="." unique_id=564846133]
+
+[node name="StateMachine" type="Node" parent="Scripts" unique_id=1847201236]
+script = ExtResource("3_s56t4")
+
+[node name="ShaderEffects" type="Node" parent="Scripts" unique_id=1012968958]
+script = ExtResource("4_2amy3")
+
+[node name="Hitbox" parent="." unique_id=609129796 node_paths=PackedStringArray("entity") instance=ExtResource("4_dx01d")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1241104627]
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=732736570]
+material = SubResource("ShaderMaterial_o7ydl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1463611020]
+
+[node name="Knockback_time" type="Timer" parent="." unique_id=1073602706]
+wait_time = 0.1
+one_shot = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1545953839]
+
+[node name="Sounds" type="Node2D" parent="." unique_id=2021586428]
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1033014402]
+stream = ExtResource("3_ggwx2")
+max_distance = 5000.0
+bus = &"Sfx"
+script = ExtResource("4_clgxi")
+
+[node name="Effects" type="Node2D" parent="." unique_id=898744823]
+
+[node name="stun_sprite" type="Sprite2D" parent="Effects" unique_id=670799220]
+unique_name_in_owner = true
+position = Vector2(0, -19)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_sybs2")
+
+[node name="Effects_animation" type="AnimationPlayer" parent="Effects" unique_id=2079843226]
+root_node = NodePath("../stun_sprite")
+libraries/ = SubResource("AnimationLibrary_2amy3")
+autoplay = &"rotate_stun"
+
+[node name="Timers" type="Node" parent="." unique_id=632631911]
+
+[node name="Stun_Timer" type="Timer" parent="Timers" unique_id=91639843]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Knockback_time" to="." method="reset_to_last_state"]

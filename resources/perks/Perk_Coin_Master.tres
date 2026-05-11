@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://b60jv1h5jty5v"]
+
+[ext_resource type="Texture2D" uid="uid://cglusam8h3boj" path="res://assets/sprites/perks/Coin_Master.png" id="1_705wp"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://scripts/perks/resources/Perk_Resource.gd" id="2_jo4of"]
+
+[resource]
+script = ExtResource("2_jo4of")
+image = ExtResource("1_705wp")
+Key = 2
+perk_name = "Coin Master"
+description = "Boosts the value of your crystals by +{{value}}."
+type = 4
+active_type = 4
+tags = Array[int]([3])
+mechanics = Array[int]([6, 7])
+rarity = Array[float]([10.0, 8.0, 6.0, 4.0, 2.0, 1.5])
+value = Array[int]([1, 2, 3, 4, 5, 6])
+cost = Array[int]([200, 300, 400, 500, 600, 700])

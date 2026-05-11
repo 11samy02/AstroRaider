@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b5xnojapesv2"]
+
+[ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://scenes/perks/perk_build/perk_build.tscn" id="1_ix0r8"]
+[ext_resource type="Script" uid="uid://bihxc38wo1nw6" path="res://scripts/perks/perk_build/Construction_expert.gd" id="2_xcq6c"]
+
+[node name="Construction_expert" unique_id=1496859806 instance=ExtResource("1_ix0r8")]
+script = ExtResource("2_xcq6c")
+Key = 1

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://brn651v5wm1ly"]
+
+[ext_resource type="Script" uid="uid://ohadn0oyqbuh" path="res://scripts/perks/perk_build/perk_critical_edge.gd" id="1_vccpn"]
+
+[node name="PerkCriticalEdge" type="Node"]
+script = ExtResource("1_vccpn")
+Key = 19

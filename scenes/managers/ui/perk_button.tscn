@@ -1,0 +1,49 @@
+[gd_scene load_steps=16 format=3 uid="uid://deniacf7djdsm"]
+
+[ext_resource type="Texture2D" uid="uid://dqus8c46qwn38" path="res://assets/sprites/perks/new_frames/frame_normal1.png" id="1_sfjgn"]
+[ext_resource type="Texture2D" uid="uid://c0eol7ask10ni" path="res://assets/sprites/perks/new_frames/frame_normal2.png" id="2_idd62"]
+[ext_resource type="Texture2D" uid="uid://cy32lgcchcx2p" path="res://assets/sprites/perks/new_frames/frame_disabled1.png" id="3_bg1u0"]
+[ext_resource type="Script" uid="uid://dpcp0wow06k7x" path="res://scripts/managers/ui/perk_button.gd" id="4_ly8wx"]
+[ext_resource type="Texture2D" uid="uid://dfhtk2imq31dh" path="res://assets/sprites/perks/new_frames/frame_disabled2.png" id="5_1oble"]
+[ext_resource type="Texture2D" uid="uid://cpgq85gxv4wvm" path="res://assets/sprites/perks/new_frames/frame_movement1.png" id="6_fojc2"]
+[ext_resource type="Texture2D" uid="uid://dktajwqhda1r6" path="res://assets/sprites/perks/new_frames/frame_movement2.png" id="7_seytq"]
+[ext_resource type="Texture2D" uid="uid://cskiit8a3pmqy" path="res://assets/sprites/perks/new_frames/frame_attack1.png" id="8_xo13n"]
+[ext_resource type="Texture2D" uid="uid://bsqf2xka02ojy" path="res://assets/sprites/perks/new_frames/frame_attack2.png" id="9_txpeo"]
+[ext_resource type="Texture2D" uid="uid://3t3yf5msc0sk" path="res://assets/sprites/perks/new_frames/frame_defense1.png" id="10_05pfh"]
+[ext_resource type="Texture2D" uid="uid://dqy28c8mj48e3" path="res://assets/sprites/perks/new_frames/frame_defense2.png" id="11_ix383"]
+[ext_resource type="Texture2D" uid="uid://bi0nj0h6mnqro" path="res://assets/sprites/perks/new_frames/frame_team1.png" id="12_7tw2k"]
+[ext_resource type="Texture2D" uid="uid://dfqw7funuss8y" path="res://assets/sprites/perks/new_frames/frame_team2.png" id="13_wrb4v"]
+[ext_resource type="Texture2D" uid="uid://bs5uplv0nlgow" path="res://assets/sprites/perks/new_frames/frame_mining1.png" id="14_jeno3"]
+[ext_resource type="Texture2D" uid="uid://cjik020wivmbx" path="res://assets/sprites/perks/new_frames/frame_mining2.png" id="15_mplln"]
+
+[node name="PerkButton" type="TextureButton" groups=["PerkButton"]]
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+disabled = true
+texture_normal = ExtResource("1_sfjgn")
+texture_hover = ExtResource("2_idd62")
+texture_disabled = ExtResource("3_bg1u0")
+texture_focused = ExtResource("2_idd62")
+stretch_mode = 5
+script = ExtResource("4_ly8wx")
+button_textures = Array[Texture2D]([ExtResource("5_1oble"), ExtResource("2_idd62"), ExtResource("6_fojc2"), ExtResource("7_seytq"), ExtResource("8_xo13n"), ExtResource("9_txpeo"), ExtResource("10_05pfh"), ExtResource("11_ix383"), ExtResource("12_7tw2k"), ExtResource("13_wrb4v"), ExtResource("14_jeno3"), ExtResource("15_mplln")])
+
+[node name="icon" type="TextureRect" parent="."]
+modulate = Color(0.389287, 0.389287, 0.389287, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="focus_entered" from="." to="." method="change_descibtion"]
+[connection signal="mouse_entered" from="." to="." method="change_descibtion"]

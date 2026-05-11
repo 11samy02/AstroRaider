@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://bhmsjtfelgkxa"]
+
+[ext_resource type="Script" uid="uid://cvabo1m0bi473" path="res://scripts/managers/spawner/EntitySpawner.gd" id="1_qqvtv"]
+[ext_resource type="Script" uid="uid://baxvettiavg7s" path="res://scripts/resources/code_simplifier/SimplefySettingMath.gd" id="2_2abb3"]
+[ext_resource type="PackedScene" uid="uid://c5fkee3ubvyvd" path="res://scenes/actors/enemies/small_enemies/bat.tscn" id="2_oshkf"]
+[ext_resource type="Script" uid="uid://c8xfgf51ytvhu" path="res://scripts/managers/spawner/EnemySpawnResource.gd" id="2_t0nq5"]
+[ext_resource type="PackedScene" uid="uid://d2r6ecatdtqut" path="res://scenes/actors/enemies/small_enemies/DemonEye.tscn" id="3_h83o2"]
+[ext_resource type="PackedScene" uid="uid://d1j1bd7ma1q07" path="res://scenes/actors/enemies/small_enemies/glimblob.tscn" id="5_ypiin"]
+[ext_resource type="Script" uid="uid://uxffft8cgyfq" path="res://scripts/resources/round_types/base_resource/RoundType.gd" id="7_or7au"]
+[ext_resource type="Script" uid="uid://dyrrjx224kfwi" path="res://scripts/resources/round_types/base_resource/RoundTypeSingleEnemy.gd" id="8_yd5sq"]
+[ext_resource type="Script" uid="uid://bddortti8811q" path="res://scripts/resources/round_types/base_resource/RoundTypeBreak.gd" id="9_lrvd1"]
+[ext_resource type="PackedScene" uid="uid://dakj0is30rwsr" path="res://scenes/title/start_loading.tscn" id="9_yd5sq"]
+[ext_resource type="PackedScene" uid="uid://dfb5jd6koj2gi" path="res://scenes/actors/bosses/noxul/noxul.tscn" id="9_yqn3w"]
+[ext_resource type="Script" uid="uid://n23i6573bpb6" path="res://scripts/resources/round_types/base_resource/RoundTypeBoss.gd" id="11_lrvd1"]
+
+[sub_resource type="Resource" id="Resource_mmijs"]
+script = ExtResource("2_t0nq5")
+Entity = ExtResource("2_oshkf")
+rarity = 5
+
+[sub_resource type="Resource" id="Resource_wpfis"]
+script = ExtResource("2_t0nq5")
+Entity = ExtResource("3_h83o2")
+rarity = 3
+
+[sub_resource type="Resource" id="Resource_hvwmm"]
+script = ExtResource("2_t0nq5")
+Entity = ExtResource("5_ypiin")
+
+[sub_resource type="Resource" id="Resource_yut6a"]
+script = ExtResource("2_t0nq5")
+Entity = ExtResource("2_oshkf")
+metadata/_custom_type_script = "uid://c8xfgf51ytvhu"
+
+[sub_resource type="Resource" id="Resource_r4h57"]
+script = ExtResource("8_yd5sq")
+forced_enemy = SubResource("Resource_yut6a")
+priority = 5
+metadata/_custom_type_script = "uid://dyrrjx224kfwi"
+
+[sub_resource type="Resource" id="Resource_yqn3w"]
+script = ExtResource("7_or7au")
+repeatable = true
+metadata/_custom_type_script = "uid://uxffft8cgyfq"
+
+[sub_resource type="Resource" id="Resource_w3tkl"]
+script = ExtResource("9_lrvd1")
+wave_start = 5
+repeatable = true
+metadata/_custom_type_script = "uid://bddortti8811q"
+
+[sub_resource type="Resource" id="Resource_jopod"]
+script = ExtResource("11_lrvd1")
+boss_scene = ExtResource("9_yqn3w")
+round_name = "Noxl"
+priority = 20
+ends_run = true
+scene_after_round = ExtResource("9_yd5sq")
+metadata/_custom_type_script = "uid://n23i6573bpb6"
+
+[sub_resource type="Resource" id="Resource_4tqhy"]
+script = ExtResource("2_2abb3")
+min_value = 2
+max_value = 3
+
+[sub_resource type="Resource" id="Resource_663ip"]
+resource_local_to_scene = true
+script = ExtResource("2_2abb3")
+min_value = 5
+max_value = 5
+
+[node name="EntitySpawner" type="Node" unique_id=957906261]
+script = ExtResource("1_qqvtv")
+ENEMY = Array[ExtResource("2_t0nq5")]([SubResource("Resource_mmijs"), SubResource("Resource_wpfis"), SubResource("Resource_hvwmm")])
+round_types = Array[ExtResource("7_or7au")]([SubResource("Resource_r4h57"), SubResource("Resource_yqn3w"), SubResource("Resource_w3tkl"), SubResource("Resource_jopod")])
+spawn_per_round = SubResource("Resource_4tqhy")
+time_until_wave_start = SubResource("Resource_663ip")
+
+[node name="spawn_time" type="Timer" parent="." unique_id=230539366]
+wait_time = 0.1
+
+[node name="wave_time" type="Timer" parent="." unique_id=1447909294]
+one_shot = true
+
+[connection signal="timeout" from="spawn_time" to="." method="_on_spawn_time_timeout"]
+[connection signal="timeout" from="wave_time" to="." method="_on_wave_time_timeout"]

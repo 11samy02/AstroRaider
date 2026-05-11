@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://d2xi2nwj1p3bj"]
+
+[ext_resource type="PackedScene" uid="uid://dd8s7nwmnq0ud" path="res://scenes/collectables/ore_template.tscn" id="1_6aupr"]
+[ext_resource type="Shader" uid="uid://b06ow7jpp56ql" path="res://assets/shaders/item_shimmer.gdshader" id="2_181qx"]
+[ext_resource type="Texture2D" uid="uid://cf4tb0omtqrn2" path="res://assets/sprites/items/ores/copper_ore.png" id="2_qfdv2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7lcg"]
+resource_local_to_scene = true
+shader = ExtResource("2_181qx")
+shader_parameter/hologram_tint = Vector4(1, 1, 1, 1)
+shader_parameter/line_frequency = 3.0
+shader_parameter/line_intensity = 0.6
+shader_parameter/distortion_strength = 0.0
+shader_parameter/glow_intensity = 0.6
+shader_parameter/time_speed = 2.0
+
+[node name="CopperOre" unique_id=731370053 instance=ExtResource("1_6aupr")]
+ore_type = 1
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_w7lcg")
+texture = ExtResource("2_qfdv2")

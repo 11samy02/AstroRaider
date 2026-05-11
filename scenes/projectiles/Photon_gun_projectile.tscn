@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://cwi0qr43hj35l"]
+
+[ext_resource type="Script" uid="uid://iqgdis0gh0mk" path="res://scripts/projectiles/Photon_gun_projectile.gd" id="1_08njn"]
+[ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://scripts/resources/attack/AttackResource.gd" id="2_8acic"]
+[ext_resource type="Script" uid="uid://b31rxhp2hd877" path="res://scripts/managers/enemy_detector.gd" id="4_ibkb1"]
+[ext_resource type="Script" uid="uid://dfjjb5na8bgtc" path="res://scripts/projectiles/line_2d.gd" id="4_n52xp"]
+
+[sub_resource type="Resource" id="Resource_y1juh"]
+script = ExtResource("2_8acic")
+knockback = 2.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iwaew"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="Animation" id="Animation_5lcwe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pv78o"]
+resource_name = "appearing"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.05),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.2, 0.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.05),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3j0tr"]
+resource_name = "hit"
+length = 0.1
+step = 0.015
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.1001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 0.1), Vector2(0.325, 0.325)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fp201"]
+_data = {
+&"RESET": SubResource("Animation_5lcwe"),
+&"appearing": SubResource("Animation_pv78o"),
+&"hit": SubResource("Animation_3j0tr")
+}
+
+[sub_resource type="Shader" id="Shader_kd8vk"]
+code = "shader_type canvas_item;
+render_mode blend_add;
+
+uniform vec4 color_1 : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 color_2 : source_color = vec4(0.0, 1.0, 1.0, 1.0);
+uniform vec4 color_3 : source_color = vec4(0.0, 0.3, 1.0, 1.0);
+uniform float pulse_speed : hint_range(0.0, 20.0) = 6.0;
+uniform float glow_intensity : hint_range(0.0, 10.0) = 4.0;
+uniform float core_sharpness : hint_range(1.0, 20.0) = 8.0;
+
+void fragment() {
+	float along = UV.x;
+	float across = abs(UV.y - 0.5) * 2.0;
+
+	float t = TIME * pulse_speed;
+	float phase1 = sin(t) * 0.5 + 0.5;
+	float phase2 = sin(t + 2.094) * 0.5 + 0.5;
+	float phase3 = sin(t + 4.188) * 0.5 + 0.5;
+	float total = phase1 + phase2 + phase3;
+	vec3 pulsed = (color_1.rgb * phase1 + color_2.rgb * phase2 + color_3.rgb * phase3) / total;
+
+	float trail_fade = 1.0 - along;
+
+	float core = pow(1.0 - across, core_sharpness);
+	float glow = pow(1.0 - across, 2.0) * 0.5;
+
+	float brightness = core + glow;
+	vec3 final_color = mix(pulsed, vec3(1.0), core * 0.6) * glow_intensity;
+
+	float alpha = (core + glow * 0.5) * trail_fade;
+
+	COLOR = vec4(final_color, alpha);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xowwe"]
+shader = SubResource("Shader_kd8vk")
+shader_parameter/color_1 = Color(0.96862745, 1, 0, 1)
+shader_parameter/color_2 = Color(0, 1, 1, 1)
+shader_parameter/color_3 = Color(0, 0.3, 1, 1)
+shader_parameter/pulse_speed = 6.0
+shader_parameter/glow_intensity = 6.000000285
+shader_parameter/core_sharpness = 12.0000005225
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5jacb"]
+radius = 256.0
+
+[node name="PhotoGunProjectile" type="Area2D" unique_id=1565731246 node_paths=PackedStringArray("trail", "enemy_detector_area")]
+process_mode = 1
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_08njn")
+trail = NodePath("trail")
+enemy_detector_area = NodePath("EnemyDetectorArea")
+atk_resource = SubResource("Resource_y1juh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1894054126]
+visible = false
+top_level = true
+position = Vector2(-5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_iwaew")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=674237300]
+libraries/ = SubResource("AnimationLibrary_fp201")
+
+[node name="trail" type="MeshInstance2D" parent="." unique_id=1474624237]
+material = SubResource("ShaderMaterial_xowwe")
+script = ExtResource("4_n52xp")
+max_trail_points = 20
+
+[node name="lifetime" type="Timer" parent="." unique_id=718679058]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="EnemyDetectorArea" type="Area2D" parent="." unique_id=1509789038 node_paths=PackedStringArray("parent")]
+visible = false
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_ibkb1")
+parent = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectorArea" unique_id=932349472]
+shape = SubResource("CircleShape2D_5jacb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=238891374]
+visible = false
+position = Vector2(-16, 0)
+scale = Vector2(2.875, 1)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="lifetime" to="." method="_on_lifetime_timeout"]

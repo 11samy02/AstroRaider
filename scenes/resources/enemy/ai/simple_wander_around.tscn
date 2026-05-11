@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://du11x1vvembyj"]
+
+[ext_resource type="Script" uid="uid://cs4ntvcma4hwl" path="res://scripts/resources/enemy/ai/simple_wander_around.gd" id="1_qae8p"]
+
+[node name="Simple_Wander_Around" type="Node" unique_id=1503361934]
+script = ExtResource("1_qae8p")
+key = 2
+state = 2
+
+[node name="change_dir_time" type="Timer" parent="." unique_id=138741304]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="change_dir_time" to="." method="_on_change_dir_time_timeout"]

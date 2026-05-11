@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b0r42snyrrlpc"]
+
+[ext_resource type="Script" uid="uid://7y2snbiwmxip" path="res://scripts/perks/perk_build/perk_blood_claws.gd" id="1_tr2el"]
+
+[node name="Perk_Blood_Claws" type="Node" unique_id=67303946]
+script = ExtResource("1_tr2el")
+strike_damage_per_level = Array[int]([3, 5, 7, 10, 12, 15])
+Key = 22
+metadata/_custom_type_script = "uid://b3gr0cwnvudut"

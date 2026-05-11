@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bu3nbdygugps1"]
+
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://scripts/ux/audio_2d.gd" id="1_alsat"]
+
+[node name="Audio2d" type="AudioStreamPlayer2D" unique_id=1893699128]
+script = ExtResource("1_alsat")

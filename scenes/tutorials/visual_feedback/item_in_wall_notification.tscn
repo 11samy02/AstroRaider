@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr3wnqk3gk4tu"]
+
+[ext_resource type="Texture2D" uid="uid://ultyblvm67we" path="res://assets/sprites/ui/icons/drops_icon.png" id="1_j2rhs"]
+[ext_resource type="Shader" uid="uid://7fy3x64bfqow" path="res://assets/shaders/tutorials/visual_feedback/item_in_wall_notification.gdshader" id="1_me2lh"]
+[ext_resource type="Script" uid="uid://dwx5x7s7a70fj" path="res://scripts/tutorials/visual_feedback/item_in_wall_notification.gd" id="2_dpjac"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71kmc"]
+resource_local_to_scene = true
+shader = ExtResource("1_me2lh")
+shader_parameter/hologram_tint = Vector4(0, 0.75, 1, 1)
+shader_parameter/line_frequency = 5.0
+shader_parameter/line_intensity = 0.5
+shader_parameter/distortion_strength = 0.0
+shader_parameter/glow_intensity = 0.6
+shader_parameter/time_speed = 3.0
+shader_parameter/alpha = 0.5
+
+[node name="item_in_wall_notification" type="Sprite2D"]
+z_index = 100
+material = SubResource("ShaderMaterial_71kmc")
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_j2rhs")
+hframes = 2
+vframes = 2
+script = ExtResource("2_dpjac")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

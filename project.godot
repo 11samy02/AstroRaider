@@ -23,7 +23,7 @@ resources_spreadsheet_view/freeze_first_column=true
 auto_backup/output_directory="user://backups/"
 auto_backup/enable_zipping=false
 auto_backup/persistent_count=true
-auto_backup/_internal_count_storage=489
+auto_backup/_internal_count_storage=556
 auto_backup/save_frequency_minutes=5
 
 [animation]
@@ -33,11 +33,11 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Astro Raider"
-run/main_scene="res://Titel/start_loading.tscn"
+run/main_scene="res://scenes/title/start_loading.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
-config/icon="res://Images/icon.png"
+config/icon="res://assets/images/icon.png"
 
 [audio]
 
@@ -45,20 +45,21 @@ buses/default_bus_layout="uid://cs2g0f4qu4y4p"
 
 [autoload]
 
-GlobalGame="*res://Manager/GlobalGame.gd"
-GSignals="*res://Manager/GSignals.gd"
-ScreenTransition="*res://Manager/UI/screen_transition.tscn"
+GlobalGame="*res://scripts/managers/GlobalGame.gd"
+GSignals="*res://scripts/managers/GSignals.gd"
+ScreenTransition="*res://scenes/managers/ui/screen_transition.tscn"
 Menu="*uid://cq0lkhbolmkdw"
-PerkData="*res://Perks/PerkData.gd"
-PlayerDataBuilds="*res://Manager/PlayerDataBuilds.gd"
-BluePrintData="*res://Crafting/Resources/BluePrintData.gd"
-DropData="*res://Resources/Enviroment/Destroyable Tiles/DropData.gd"
-AiEnemyData="*res://Resources/Enemy/AiEnemyData.gd"
-GameOverScreen="*res://UI/game_over_screen.tscn"
-FirebaseSync="*res://Https/firebase_sync.tscn"
+PerkData="*res://scripts/perks/PerkData.gd"
+PlayerDataBuilds="*res://scripts/managers/PlayerDataBuilds.gd"
+BluePrintData="*res://scripts/crafting/resources/BluePrintData.gd"
+DropData="*res://scripts/resources/environment/destroyable_tiles/DropData.gd"
+AiEnemyData="*res://scripts/resources/enemy/AiEnemyData.gd"
+GameOverScreen="*res://scenes/ui/game_over_screen.tscn"
+FirebaseSync="*res://scenes/services/firebase_sync.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 ScreenEffects="*uid://bpi0x0vtweskt"
 DebugMenu="*uid://cggqb75a8w8r"
+SettingsSaver="*uid://1l7j7tnaf1qj"
 InputHelper="*uid://cholww48njaeh"
 LocalizationManager="*uid://bjv5ufgo23ljc"
 
@@ -130,9 +131,12 @@ enabled=PackedStringArray("res://addons/auto_backup/plugin.cfg", "res://addons/d
 [file_customization]
 
 folder_colors={
-"res://Perks/": "blue",
-"res://Resources/": "gray",
-"res://addons/": "red"
+"res://addons/": "red",
+"res://assets/": "green",
+"res://resources/": "gray",
+"res://resources/perks/": "blue",
+"res://scenes/": "yellow",
+"res://scripts/": "red"
 }
 
 [global_group]
@@ -255,7 +259,7 @@ pen_tablet/driver.windows="dummy"
 [internationalization]
 
 locale/translation_remaps={}
-locale/translations=PackedStringArray("res://localization/localizations.en.translation", "res://localization/localizations.de.translation", "res://localization/localizations.ru.translation")
+locale/translations=PackedStringArray("res://resources/localization/localizations.en.translation", "res://resources/localization/localizations.de.translation", "res://resources/localization/localizations.ru.translation")
 
 [layer_names]
 

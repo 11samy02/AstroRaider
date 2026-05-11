@@ -1,0 +1,550 @@
+[gd_scene format=3 uid="uid://c82etxgt0m7uw"]
+
+[ext_resource type="Texture2D" uid="uid://rc4wjwgym4o6" path="res://assets/images/background/in_game/bg1.png" id="1_oy3rq"]
+[ext_resource type="Script" uid="uid://maf5bglrbvx4" path="res://scripts/game/main_game.gd" id="1_to3au"]
+[ext_resource type="PackedScene" uid="uid://diaruu2bt2xvq" path="res://scenes/game/environment/enviroment.tscn" id="1_wfgm1"]
+[ext_resource type="Script" uid="uid://dgspeswpe2p8m" path="res://scripts/game/tutorial_manager.gd" id="2_udiv6"]
+[ext_resource type="Script" uid="uid://baxvettiavg7s" path="res://scripts/resources/code_simplifier/SimplefySettingMath.gd" id="3_kp3b7"]
+[ext_resource type="Script" uid="uid://cgxsqh6vm7yss" path="res://scripts/game/backgrounds.gd" id="4_pq065"]
+[ext_resource type="PackedScene" uid="uid://dcjxw1m4ip04" path="res://scenes/game/managers/default_camera.tscn" id="5_1oloc"]
+[ext_resource type="Script" uid="uid://cx7tpbqul3oe1" path="res://scripts/images/background/BackgroundRes.gd" id="5_1tp0s"]
+[ext_resource type="Texture2D" uid="uid://briiuogexiing" path="res://assets/images/background/in_game/dessert.png" id="5_n7n0j"]
+[ext_resource type="PackedScene" uid="uid://bhmsjtfelgkxa" path="res://scenes/managers/spawner/EntitySpawner.tscn" id="6_kru1y"]
+[ext_resource type="Texture2D" uid="uid://rqecy6315ckx" path="res://assets/images/background/in_game/DeepHole.png" id="6_y2k8o"]
+[ext_resource type="Texture2D" uid="uid://gcnrrmdtolev" path="res://assets/images/background/in_game/FairyForrest.png" id="8_hf13b"]
+[ext_resource type="Texture2D" uid="uid://tnwtot5slb4k" path="res://assets/images/background/in_game/IceHole.png" id="9_mnxq5"]
+[ext_resource type="Texture2D" uid="uid://d0q8q6tgti7jy" path="res://assets/images/background/in_game/swamp.png" id="10_aupoh"]
+[ext_resource type="PackedScene" uid="uid://dqbjjcoeesyrx" path="res://scenes/game/environment/bg_fog.tscn" id="14_vltkg"]
+[ext_resource type="AudioStream" uid="uid://fmbgq834qesn" path="res://assets/audio/music/ERH BlueBeat 01 [loop].ogg" id="15_oaiby"]
+[ext_resource type="Script" uid="uid://bpyfjjfqu7ghm" path="res://scripts/ux/audio_2d.gd" id="16_ky8iu"]
+[ext_resource type="PackedScene" uid="uid://cpw54eux7rlse" path="res://scenes/game/environment/fg_fog.tscn" id="17_5nycs"]
+
+[sub_resource type="Resource" id="Resource_ccb4r"]
+resource_local_to_scene = true
+script = ExtResource("3_kp3b7")
+min_value = 5
+max_value = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kp3b7"]
+bg_color = Color(0.344076, 0.344076, 0.344076, 0.67451)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_udiv6"]
+font_size = 64
+
+[sub_resource type="Animation" id="Animation_5ysq5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/MarginContainer/VBoxContainer/w-key:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%a-key:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%s-key:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%d-key:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0po0n"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/MarginContainer/VBoxContainer/w-key:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%a-key:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%s-key:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%d-key:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7e1k"]
+_data = {
+&"RESET": SubResource("Animation_5ysq5"),
+&"new_animation": SubResource("Animation_0po0n")
+}
+
+[sub_resource type="Environment" id="Environment_4h7l4"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/3 = 2.0
+glow_levels/4 = 10.0
+glow_levels/6 = 1.0
+glow_levels/7 = 1.0
+glow_intensity = 0.1
+glow_strength = 0.75
+glow_bloom = 0.8
+fog_mode = 1
+fog_light_energy = 5.36
+fog_density = 1.0415
+fog_height = 6.3
+fog_height_density = 0.1275
+volumetric_fog_density = 0.4054
+adjustment_enabled = true
+adjustment_brightness = 0.9
+adjustment_contrast = 1.25
+adjustment_saturation = 1.3
+
+[sub_resource type="Gradient" id="Gradient_levrl"]
+offsets = PackedFloat32Array(0, 0.155556, 0.259259, 0.371585, 0.614815)
+colors = PackedColorArray(0.0555753, 0.0907172, 0.143283, 0.392157, 0.1716, 0.181913, 0.26, 0.784314, 0.234, 0.2466, 0.36, 0.294118, 0.466901, 0.422852, 0.594006, 0.392157, 0.735175, 0.747081, 0.916787, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dodui"]
+gradient = SubResource("Gradient_levrl")
+
+[sub_resource type="Gradient" id="Gradient_68ska"]
+offsets = PackedFloat32Array(0.17037, 0.22963, 0.333333, 0.451852)
+colors = PackedColorArray(0.3337, 0.376862, 0.47, 0, 0.332844, 0.375515, 0.471122, 0.196078, 0.595757, 0.531541, 0.705759, 0.0980392, 0.70673, 0.686655, 0.850489, 0.0980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qynml"]
+gradient = SubResource("Gradient_68ska")
+
+[sub_resource type="Resource" id="Resource_sj2y8"]
+script = ExtResource("5_1tp0s")
+texture = ExtResource("6_y2k8o")
+color = Color(0.321728, 0.321728, 0.321728, 1)
+color_ramp_bg = SubResource("GradientTexture2D_dodui")
+color_ramp_fg = SubResource("GradientTexture2D_qynml")
+
+[sub_resource type="Gradient" id="Gradient_ky278"]
+offsets = PackedFloat32Array(0.0222222, 0.185185, 0.311111, 0.451852, 0.562963)
+colors = PackedColorArray(0.186658, 0.00437505, 0.0789144, 0.0980392, 0.25, 0.0925, 0.025, 0.6, 0.31, 0.102403, 0.0558, 0.666667, 0.84, 0.0588, 0.17598, 0.572549, 0.849773, 0.374214, 0.0902275, 0.196078)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8gso"]
+gradient = SubResource("Gradient_ky278")
+
+[sub_resource type="Gradient" id="Gradient_x2v41"]
+offsets = PackedFloat32Array(0.251852, 0.333333, 0.42963, 0.555556)
+colors = PackedColorArray(0.66, 0.1584, 0.242, 0, 0.71, 0.213, 0.1775, 0.105882, 0.727746, 0.528493, 0.0794832, 0.0980392, 0.971735, 0.594727, 0.508447, 0.0980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4uimg"]
+gradient = SubResource("Gradient_x2v41")
+
+[sub_resource type="Resource" id="Resource_ad6c7"]
+script = ExtResource("5_1tp0s")
+texture = ExtResource("5_n7n0j")
+color = Color(0.303233, 0.303233, 0.303233, 1)
+color_ramp_bg = SubResource("GradientTexture2D_a8gso")
+color_ramp_fg = SubResource("GradientTexture2D_4uimg")
+
+[sub_resource type="Gradient" id="Gradient_i1wbv"]
+offsets = PackedFloat32Array(0, 0.10929, 0.259259, 0.371585, 0.6)
+colors = PackedColorArray(0.136979, 0.0379441, 0.169497, 0.392157, 0.0874275, 0.201964, 0.255147, 0.392157, 0.0935127, 0.291089, 0.262156, 0.0980392, 0.505317, 0.451664, 0.275474, 0.392157, 0.411463, 0.827506, 0.945922, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_esno6"]
+gradient = SubResource("Gradient_i1wbv")
+
+[sub_resource type="Gradient" id="Gradient_w1x5i"]
+offsets = PackedFloat32Array(0.125926, 0.155556, 0.244444, 0.362963)
+colors = PackedColorArray(0.1806, 0.43, 0.363493, 0, 0.180251, 0.427603, 0.361178, 0.196078, 0.289983, 0.576231, 0.908882, 0.0980392, 0.807938, 0.635023, 0.872913, 0.0980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jtmic"]
+gradient = SubResource("Gradient_w1x5i")
+
+[sub_resource type="Resource" id="Resource_xveht"]
+script = ExtResource("5_1tp0s")
+texture = ExtResource("8_hf13b")
+color = Color(0.288488, 0.277198, 0.288487, 1)
+color_ramp_bg = SubResource("GradientTexture2D_esno6")
+color_ramp_fg = SubResource("GradientTexture2D_jtmic")
+
+[sub_resource type="Gradient" id="Gradient_23j40"]
+offsets = PackedFloat32Array(0, 0.10929, 0.259259, 0.407407, 0.637037)
+colors = PackedColorArray(0.0221268, 0.0802433, 0.208105, 0.392157, 0.130614, 0.16671, 0.353875, 0.392157, 0.140794, 0.309945, 0.557043, 0.0980392, 0.28814, 0.447927, 0.734347, 0.392157, 0.810757, 0.829382, 0.966661, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3w8d4"]
+gradient = SubResource("Gradient_23j40")
+
+[sub_resource type="Gradient" id="Gradient_xaig7"]
+offsets = PackedFloat32Array(0.0888889, 0.148148, 0.259259, 0.42963)
+colors = PackedColorArray(0.3948, 0.45416, 0.84, 0, 0.39861, 0.456775, 0.842061, 0.196078, 0.4992, 0.77568, 0.96, 0.0980392, 0.723877, 0.861001, 0.918189, 0.0980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_he4dt"]
+gradient = SubResource("Gradient_xaig7")
+
+[sub_resource type="Resource" id="Resource_yjdjc"]
+script = ExtResource("5_1tp0s")
+texture = ExtResource("9_mnxq5")
+color = Color(0.299548, 0.299547, 0.299547, 1)
+color_ramp_bg = SubResource("GradientTexture2D_3w8d4")
+color_ramp_fg = SubResource("GradientTexture2D_he4dt")
+
+[sub_resource type="Gradient" id="Gradient_84w8x"]
+offsets = PackedFloat32Array(0, 0.10929, 0.259259, 0.371585, 0.73224)
+colors = PackedColorArray(0.0555753, 0.0907172, 0.143283, 0.392157, 0.169239, 0.179747, 0.258019, 0.392157, 0.230916, 0.243609, 0.355228, 0.0980392, 0.466901, 0.422852, 0.594006, 0.392157, 0.735175, 0.747081, 0.916787, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jtarm"]
+gradient = SubResource("Gradient_84w8x")
+
+[sub_resource type="Gradient" id="Gradient_6sf4x"]
+offsets = PackedFloat32Array(0.111111, 0.17037, 0.289617, 0.474074)
+colors = PackedColorArray(0.3337, 0.376862, 0.47, 0, 0.332844, 0.375515, 0.471122, 0.196078, 0.595757, 0.531541, 0.705759, 0.0980392, 0.70673, 0.686655, 0.850489, 0.0980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_leyrg"]
+gradient = SubResource("Gradient_6sf4x")
+
+[sub_resource type="Resource" id="Resource_o1oln"]
+script = ExtResource("5_1tp0s")
+texture = ExtResource("10_aupoh")
+color = Color(0.288518, 0.288518, 0.288518, 1)
+color_ramp_bg = SubResource("GradientTexture2D_jtarm")
+color_ramp_fg = SubResource("GradientTexture2D_leyrg")
+
+[sub_resource type="Gradient" id="Gradient_2x5ci"]
+offsets = PackedFloat32Array(0, 0.10929, 0.259259, 0.371585, 0.73224)
+colors = PackedColorArray(0.0198045, 0.110547, 0.0567159, 0.392157, 0.0989579, 0.22005, 0.0717116, 0.392157, 0.175085, 0.291814, 0.0714507, 0.0980392, 0.348329, 0.511286, 0.148972, 0.392157, 0.689988, 0.831988, 0.100096, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_26ojy"]
+gradient = SubResource("Gradient_2x5ci")
+
+[sub_resource type="Gradient" id="Gradient_jwwft"]
+offsets = PackedFloat32Array(0.118519, 0.2, 0.288889, 0.42963)
+colors = PackedColorArray(0.575, 0.69, 0, 0, 0.575, 0.69, 0, 0.0980392, 0.62196, 0.71, 0.2698, 0, 0.810272, 0.726924, 0.156335, 0.0980392)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d42ia"]
+gradient = SubResource("Gradient_jwwft")
+
+[sub_resource type="Resource" id="Resource_jprgx"]
+script = ExtResource("5_1tp0s")
+texture = ExtResource("1_oy3rq")
+color = Color(0.241156, 0.241156, 0.241156, 1)
+color_ramp_bg = SubResource("GradientTexture2D_26ojy")
+color_ramp_fg = SubResource("GradientTexture2D_d42ia")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kp3b7"]
+size = Vector2(7680, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udiv6"]
+size = Vector2(16, 6000)
+
+[node name="MainGame" type="Node" unique_id=609353765 node_paths=PackedStringArray("enviroment", "entity_spawner", "tutorial")]
+script = ExtResource("1_to3au")
+enviroment = NodePath("Enviroment")
+entity_spawner = NodePath("EntitySpawner")
+tutorial = NodePath("TutorialManager/Tutorial")
+
+[node name="EntitySpawner" parent="." unique_id=957906261 instance=ExtResource("6_kru1y")]
+time_until_wave_start = SubResource("Resource_ccb4r")
+
+[node name="TutorialManager" type="Node" parent="." unique_id=1111507496 node_paths=PackedStringArray("enviroment", "key_labels", "wasd_tutorial")]
+script = ExtResource("2_udiv6")
+enviroment = NodePath("../Enviroment")
+key_labels = [NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/w-key/Label"), NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/s-key/Label"), NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/a-key/Label"), NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/d-key/Label")]
+wasd_tutorial = NodePath("Tutorial_wasd")
+
+[node name="Tutorial" type="CanvasLayer" parent="TutorialManager" unique_id=127861471]
+visible = false
+
+[node name="Control" type="Control" parent="TutorialManager/Tutorial" unique_id=561858934]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TutorialManager/Tutorial/Control" unique_id=548807004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="Panel" type="Panel" parent="TutorialManager/Tutorial/Control/MarginContainer" unique_id=416858556]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp3b7")
+
+[node name="Label" type="Label" parent="TutorialManager/Tutorial/Control/MarginContainer/Panel" unique_id=1940947986]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "B"
+label_settings = SubResource("LabelSettings_udiv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialManager/Tutorial" unique_id=1754220801]
+libraries/ = SubResource("AnimationLibrary_l7e1k")
+autoplay = &"new_animation"
+
+[node name="Tutorial_wasd" type="CanvasLayer" parent="TutorialManager" unique_id=1837317726]
+visible = false
+
+[node name="Control" type="Control" parent="TutorialManager/Tutorial_wasd" unique_id=667250186]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TutorialManager/Tutorial_wasd/Control" unique_id=1944342351]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer" unique_id=1864080615]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="w-key" type="Panel" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer" unique_id=869690492]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp3b7")
+
+[node name="Label" type="Label" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer/w-key" unique_id=1372815456]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "W"
+label_settings = SubResource("LabelSettings_udiv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer" unique_id=1966247457]
+layout_mode = 2
+
+[node name="a-key" type="Panel" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer" unique_id=481536101]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp3b7")
+
+[node name="Label" type="Label" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/a-key" unique_id=377014844]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A"
+label_settings = SubResource("LabelSettings_udiv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="s-key" type="Panel" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer" unique_id=70537661]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp3b7")
+
+[node name="Label" type="Label" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/s-key" unique_id=707692083]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "S"
+label_settings = SubResource("LabelSettings_udiv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="d-key" type="Panel" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer" unique_id=517679621]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_kp3b7")
+
+[node name="Label" type="Label" parent="TutorialManager/Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/d-key" unique_id=1929691909]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "D"
+label_settings = SubResource("LabelSettings_udiv6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TutorialManager/Tutorial_wasd" unique_id=161389652]
+libraries/ = SubResource("AnimationLibrary_l7e1k")
+autoplay = &"new_animation"
+
+[node name="Audio2D" type="AudioStreamPlayer2D" parent="." unique_id=1929504843]
+process_mode = 3
+stream = ExtResource("15_oaiby")
+autoplay = true
+max_distance = 100000000000.0
+bus = &"Music"
+parameters/looping = true
+script = ExtResource("16_ky8iu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1715120967]
+environment = SubResource("Environment_4h7l4")
+
+[node name="DefaultCamera" parent="." unique_id=1104042003 instance=ExtResource("5_1oloc")]
+position = Vector2(111, 861)
+limit_left = -1920
+limit_top = -1024
+limit_right = 2876
+limit_bottom = 2168
+limit_smoothed = true
+min_zoom = 2.5
+max_zoom = 1.5
+
+[node name="Enviroment" parent="." unique_id=1253534675 instance=ExtResource("1_wfgm1")]
+persistence_mode = 3
+
+[node name="tileMap Holder" type="Node2D" parent="." unique_id=1561767499]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=139575141]
+color = Color(0.721569, 0.729412, 0.776471, 1)
+
+[node name="Backgrounds" type="CanvasLayer" parent="." unique_id=119587406 node_paths=PackedStringArray("bg_fog", "fg_fog")]
+layer = -10
+script = ExtResource("4_pq065")
+backgrounds = Array[ExtResource("5_1tp0s")]([SubResource("Resource_sj2y8"), SubResource("Resource_ad6c7"), SubResource("Resource_xveht"), SubResource("Resource_yjdjc"), SubResource("Resource_o1oln"), SubResource("Resource_jprgx")])
+bg_fog = NodePath("../Bg_Fog")
+fg_fog = NodePath("../fg_fog")
+
+[node name="TextureRect" type="TextureRect" parent="Backgrounds" unique_id=171669711]
+modulate = Color(0.197937, 0.197937, 0.197937, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_oy3rq")
+
+[node name="Bg_Fog" parent="." unique_id=499612783 instance=ExtResource("14_vltkg")]
+layer = -5
+
+[node name="fg_fog" parent="." unique_id=539406239 instance=ExtResource("17_5nycs")]
+
+[node name="border" type="StaticBody2D" parent="." unique_id=621774748]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border" unique_id=369530984]
+position = Vector2(1, -1040)
+shape = SubResource("RectangleShape2D_kp3b7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="border" unique_id=1804767185]
+position = Vector2(0, 2182)
+shape = SubResource("RectangleShape2D_kp3b7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="border" unique_id=1256776639]
+position = Vector2(-1934, -2)
+shape = SubResource("RectangleShape2D_udiv6")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="border" unique_id=484010249]
+position = Vector2(2896, -2)
+shape = SubResource("RectangleShape2D_udiv6")

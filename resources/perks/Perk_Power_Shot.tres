@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://dvsgwddn5jiof"]
+
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://scripts/perks/resources/Perk_Resource.gd" id="1_2vbfu"]
+[ext_resource type="Texture2D" uid="uid://cr0sipbfyqd7s" path="res://assets/sprites/perks/Power_Shot.png" id="1_5855j"]
+
+[resource]
+script = ExtResource("1_2vbfu")
+image = ExtResource("1_5855j")
+Key = 20
+perk_name = "Power Shot"
+description = "Your ranged attacks deal +{{value}} more damage"
+type = 2
+active_type = 3
+tags = Array[int]([1, 0])
+mechanics = Array[int]([0])
+rarity = Array[float]([7.0, 7.0, 6.0, 5.0, 4.0, 3.0])
+value = Array[int]([1, 2, 3, 4, 5, 6])
+cost = Array[int]([100, 200, 300, 400, 500, 600])
+metadata/_custom_type_script = "uid://bfd0euualynf6"

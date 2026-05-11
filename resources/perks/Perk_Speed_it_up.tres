@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://c7cw2i8t6iniu"]
+
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://scripts/perks/resources/Perk_Resource.gd" id="1_aag0k"]
+[ext_resource type="Texture2D" uid="uid://cox486n3g2a78" path="res://assets/sprites/perks/Speed_it_up.png" id="1_fjmea"]
+
+[resource]
+script = ExtResource("1_aag0k")
+image = ExtResource("1_fjmea")
+perk_name = "Speed it up"
+description = "Increases your speed by +{{value}}%."
+active_type = 3
+tags = Array[int]([5, 3])
+mechanics = Array[int]([4])
+rarity = Array[float]([9.0, 9.0, 8.0, 7.0, 6.0, 5.0])
+value = Array[int]([10, 15, 20, 25, 30, 40])
+cost = Array[int]([75, 100, 125, 150, 175, 200])
