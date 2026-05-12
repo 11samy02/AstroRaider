@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BluePrintResource" load_steps=5 format=3 uid="uid://ye0mf3p4clmh"]
+[gd_resource type="Resource" script_class="BluePrintResource" format=3 uid="uid://ye0mf3p4clmh"]
 
 [ext_resource type="Script" uid="uid://d3nu3r61lypu2" path="res://scripts/crafting/resources/BluePrintCostTemplate.gd" id="1_c01dn"]
 [ext_resource type="Script" uid="uid://crukqjhvhpjlt" path="res://scripts/crafting/resources/BluePrintResource.gd" id="2_j3d86"]
@@ -6,7 +6,6 @@
 
 [sub_resource type="Resource" id="Resource_mfa6w"]
 script = ExtResource("1_c01dn")
-Ore = 0
 cost = 1
 
 [resource]

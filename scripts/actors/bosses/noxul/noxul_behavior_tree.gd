@@ -54,6 +54,11 @@ func _physics_process(delta: float) -> void:
 	_tick_root_selector(delta)
 
 
+func clamp_active_cooldowns_to_phase() -> void:
+	_summon_cooldown_left = min(_summon_cooldown_left, summon_cooldown)
+	_shot_cooldown_left = min(_shot_cooldown_left, shot_cooldown)
+
+
 func _tick_root_selector(delta: float) -> Status:
 	var shot_status := _tick_shot_sequence(delta)
 	if shot_status == Status.RUNNING or shot_status == Status.SUCCESS:

@@ -35,7 +35,7 @@ crit_chance = 5.0
 [sub_resource type="Resource" id="Resource_vohf6"]
 script = ExtResource("4_kbqw5")
 
-[sub_resource type="Resource" id="Resource_keir1"]
+[sub_resource type="Resource" id="Resource_2v3ne"]
 resource_local_to_scene = true
 script = ExtResource("5_hylx8")
 max_health = 2
@@ -60,7 +60,7 @@ radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_uh3lc"]
 radius = 8.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uh3lc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aj5ne"]
 resource_local_to_scene = true
 shader = ExtResource("2_giblq")
 shader_parameter/opacity = 1.0
@@ -112,9 +112,12 @@ _data = {
 &"idle": SubResource("Animation_hylx8")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2v3ne"]
+radius = 8.0
+
 [node name="Voidling" unique_id=1614769174 instance=ExtResource("1_7ghyo")]
 script = ExtResource("2_y34di")
-stats = SubResource("Resource_keir1")
+stats = SubResource("Resource_2v3ne")
 stats_upgrades = SubResource("Resource_q1405")
 
 [node name="StateMachine" parent="Scripts" parent_id_path=PackedInt32Array(564846133) index="0" unique_id=1847201236 node_paths=PackedStringArray("enemy", "wander_time", "follow_time")]
@@ -135,7 +138,7 @@ owner_entity = NodePath("..")
 shape = SubResource("CircleShape2D_uh3lc")
 
 [node name="sprite" parent="." index="3" unique_id=732736570]
-material = SubResource("ShaderMaterial_uh3lc")
+material = SubResource("ShaderMaterial_aj5ne")
 texture = ExtResource("8_kbqw5")
 hframes = 2
 vframes = 2
@@ -143,6 +146,9 @@ vframes = 2
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4" unique_id=770985437]
 libraries/ = SubResource("AnimationLibrary_keir1")
 autoplay = &"idle"
+
+[node name="CollisionShape2D" parent="." index="5" unique_id=1463611020]
+shape = SubResource("CircleShape2D_2v3ne")
 
 [node name="wander_time" type="Timer" parent="Timers" parent_id_path=PackedInt32Array(632631911) index="1" unique_id=664635965]
 one_shot = true

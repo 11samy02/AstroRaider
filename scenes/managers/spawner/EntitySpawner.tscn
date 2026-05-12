@@ -54,6 +54,7 @@ script = ExtResource("11_lrvd1")
 boss_scene = ExtResource("9_yqn3w")
 round_name = "Noxl"
 priority = 20
+wave_start = 20
 ends_run = true
 scene_after_round = ExtResource("9_yd5sq")
 metadata/_custom_type_script = "uid://n23i6573bpb6"

@@ -7,6 +7,7 @@ class_name PlayerHand
 @onready var building_placement: Node2D = $BuildingPlacement
 @onready var building_sprite: Sprite2D = $BuildingPlacement/Sprite2D
 @onready var check_ground: Area2D = $check_ground
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 @export var building_res : BluePrintResource = null
 

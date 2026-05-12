@@ -1,1 +1,2 @@
 extends Building
+class_name MetalGround

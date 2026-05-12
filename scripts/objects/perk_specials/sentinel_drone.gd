@@ -144,6 +144,7 @@ func _damage_enemies_in_radius() -> void:
 		attack.damage = explosion_damage
 		attack.crit_chance = 0.0
 		attack.knockback = 0.0
+		attack.source_type = AttackResource.SourceType.SUPPORT
 		boss.get_hit(attack, self)
 
 func _damage_environment_in_radius() -> void:

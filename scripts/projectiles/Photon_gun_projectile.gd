@@ -37,13 +37,7 @@ func _ready() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Hitbox:
 		if area.entity is EnemyBaseTemplate or area.entity is BossEntity:
-			var new_atk_resource: AttackResource = atk_resource.duplicate()
-			
-			if is_instance_valid(player):
-				new_atk_resource.damage += player.stats.get_projectile_damage_total()
-				new_atk_resource.crit_chance += player.stats.get_crit_chance_total()
-				new_atk_resource.has_stun = player.stats.has_stun_active
-				new_atk_resource.stun_strength = player.stats.stun_strength
+			var new_atk_resource := _build_attack_resource()
 			
 			area.get_hit(new_atk_resource, player)
 			
@@ -59,6 +53,22 @@ func _on_area_entered(area: Area2D) -> void:
 				set_physics_process(false)
 				trail.clear_trail()
 				animation_player.play("hit")
+
+
+func _build_attack_resource() -> AttackResource:
+	var new_atk_resource: AttackResource = atk_resource.duplicate()
+
+	if is_instance_valid(player):
+		new_atk_resource.damage += player.stats.get_projectile_damage_total()
+		new_atk_resource.crit_chance += player.stats.get_crit_chance_total()
+		new_atk_resource.has_stun = player.stats.has_stun_active
+		new_atk_resource.stun_strength = player.stats.stun_strength
+		if new_atk_resource.source_type == AttackResource.SourceType.UNKNOWN:
+			new_atk_resource.source_type = AttackResource.SourceType.PLAYER_PROJECTILE
+	elif new_atk_resource.source_type == AttackResource.SourceType.UNKNOWN:
+		new_atk_resource.source_type = AttackResource.SourceType.SUPPORT
+
+	return new_atk_resource
 
 
 ## Moves the projectile and updates its rotation

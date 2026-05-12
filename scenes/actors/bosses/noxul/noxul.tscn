@@ -11,9 +11,18 @@
 [ext_resource type="Script" uid="uid://ceyynby3qm75a" path="res://scripts/resources/attack/AttackResource.gd" id="5_gfayx"]
 [ext_resource type="Script" uid="uid://dsbtboypl2kg1" path="res://scripts/managers/hitbox.gd" id="6_f8rtt"]
 [ext_resource type="Texture2D" uid="uid://bjft7yronti4h" path="res://assets/sprites/actors/bosses/tentacle/shockwave.png" id="7_2tr0q"]
+[ext_resource type="Script" uid="uid://c66wmub5x51ql" path="res://scripts/resources/enemy/NoxulBossPhaseData.gd" id="9_0ndd6"]
 [ext_resource type="Script" uid="uid://dv6c2v7ldqgam" path="res://scripts/actors/bosses/noxul/noxul_movement.gd" id="9_egw5l"]
 [ext_resource type="Script" uid="uid://cb6m2yndbnoxt" path="res://scripts/actors/bosses/noxul/noxul_behavior_tree.gd" id="10_x8miv"]
+[ext_resource type="Texture2D" uid="uid://cpavjusqdqpbm" path="res://assets/sprites/actors/bosses/tentacle/tentacle_body_small.png" id="12_qf5qi"]
 [ext_resource type="Texture2D" uid="uid://b8kbaqmblhoqm" path="res://assets/sprites/actors/bosses/tentacle/charge-attack.png" id="12_yyve1"]
+[ext_resource type="Texture2D" uid="uid://ckjrym5dxwrgt" path="res://assets/sprites/actors/bosses/tentacle/tentacle_body.png" id="13_saerm"]
+[ext_resource type="Texture2D" uid="uid://cj4b2w3hgu6yn" path="res://assets/sprites/actors/bosses/tentacle/tentacle_body_big.png" id="14_0ndd6"]
+[ext_resource type="PackedScene" uid="uid://dcgdyh6cimopm" path="res://scenes/actors/bosses/noxul/noxul_tentacle_claws.tscn" id="14_tclaw"]
+[ext_resource type="Script" uid="uid://bj5fyxqs1pkkt" path="res://scripts/resources/enemy/BossPhaseData.gd" id="15_base"]
+[ext_resource type="Texture2D" uid="uid://na5u27b5873l" path="res://assets/sprites/actors/bosses/tentacle/tentacle_top_small.png" id="15_qv5kg"]
+[ext_resource type="Texture2D" uid="uid://dlob8axlbvug5" path="res://assets/sprites/actors/bosses/tentacle/tentacle_top.png" id="16_srpa7"]
+[ext_resource type="Texture2D" uid="uid://bft06bifdakwl" path="res://assets/sprites/actors/bosses/tentacle/tentacle_top_big.png" id="17_gh65v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yyve1"]
 shader = ExtResource("1_mtpmt")
@@ -29,8 +38,8 @@ shader_parameter/gradient_contrast = 1.0
 
 [sub_resource type="Resource" id="Resource_013tq"]
 script = ExtResource("5_gfayx")
-damage = 15
-knockback = 1.5
+damage = 10
+knockback = 2.0
 metadata/_custom_type_script = "uid://ceyynby3qm75a"
 
 [sub_resource type="Resource" id="Resource_1cjka"]
@@ -44,8 +53,95 @@ Driven by instinct rather than intellect, Noxul attacks with savage force, lashi
 More mutant than creature, Noxul is a living infestation — a malformed predator born from corruption, growth, and survival."
 Short_Description = "A grotesque parasitic mutant from the first planet. Noxul uses writhing tentacles, crystal-fired projectiles, sonic shockwaves, and spawned jelly minions to crush and overwhelm its prey."
 radar_icon = ExtResource("2_3utdv")
+Max_HP = 1800
 Max_Shield = 0
 metadata/_custom_type_script = "uid://i71iok7xek37"
+
+[sub_resource type="Resource" id="Resource_qv5kg"]
+script = ExtResource("9_0ndd6")
+phase_name = "Emergence"
+projectile_count = 4
+projectile_spread_angle = 16.0
+charge_damage = 16
+charge_knockback = 2.4
+minions_spawn_count = 4
+max_active_voidlings = 8
+building_target_chance = 0.35
+building_target_range = 680.0
+summon_cooldown = 9.0
+shot_cooldown = 3.6
+shot_recovery_time = 0.25
+tentacle_attack_damage = 4
+tentacle_cooldown_min = 1.8
+tentacle_cooldown_max = 3.4
+building_damage_multiplier = 0.35
+perk_damage_multiplier = 0.5
+support_damage_multiplier = 0.55
+max_damage_per_hit = 35
+metadata/_custom_type_script = "uid://c66wmub5x51ql"
+
+[sub_resource type="Resource" id="Resource_srpa7"]
+script = ExtResource("9_0ndd6")
+phase_name = "Pressure"
+projectile_count = 5
+projectile_spread_angle = 22.0
+charge_damage = 22
+charge_knockback = 3.0
+minions_spawn_count = 4
+max_active_voidlings = 12
+building_target_chance = 0.55
+building_target_range = 760.0
+summon_cooldown = 6.8
+shot_cooldown = 2.65
+shot_recovery_time = 0.2
+move_speed = 115.0
+acceleration = 520.0
+hover_distance = 118.0
+orbit_weight = 0.6
+tentacle_attack_damage = 6
+tentacle_cooldown_min = 1.25
+tentacle_cooldown_max = 2.6
+incoming_damage_multiplier = 0.85
+building_damage_multiplier = 0.22
+perk_damage_multiplier = 0.38
+support_damage_multiplier = 0.42
+max_damage_per_hit = 28
+health_ratio = 0.67
+metadata/_custom_type_script = "uid://c66wmub5x51ql"
+
+[sub_resource type="Resource" id="Resource_gh65v"]
+script = ExtResource("9_0ndd6")
+phase_name = "Frenzy"
+projectile_count = 8
+projectile_spread_angle = 30.0
+charge_damage = 30
+charge_knockback = 3.6
+minions_spawn_count = 6
+max_active_voidlings = 16
+building_target_chance = 0.75
+building_target_range = 860.0
+summon_cooldown = 5.2
+summon_range = 420.0
+shot_cooldown = 1.9
+shot_range = 560.0
+shot_recovery_time = 0.15
+move_speed = 135.0
+acceleration = 650.0
+hover_distance = 96.0
+orbit_weight = 0.75
+tentacle_attack_range = 280.0
+tentacle_lunge_length = 205.0
+tentacle_knockback_strength = 8.0
+tentacle_attack_damage = 9
+tentacle_cooldown_min = 0.8
+tentacle_cooldown_max = 1.8
+incoming_damage_multiplier = 0.72
+building_damage_multiplier = 0.15
+perk_damage_multiplier = 0.28
+support_damage_multiplier = 0.32
+max_damage_per_hit = 22
+health_ratio = 0.34
+metadata/_custom_type_script = "uid://c66wmub5x51ql"
 
 [sub_resource type="Animation" id="Animation_3utdv"]
 length = 0.001
@@ -121,8 +217,8 @@ _data = {
 light_mode = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2tr0q"]
-radius = 44.0
-height = 118.0
+radius = 40.0
+height = 112.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_14bba"]
 atlas = ExtResource("7_2tr0q")
@@ -518,18 +614,25 @@ animations = [{
 "speed": 35.0
 }]
 
-[node name="Noxul" type="CharacterBody2D" unique_id=79114284 node_paths=PackedStringArray("movement", "behavior_tree", "hitbox", "healtbar")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gfayx"]
+radius = 38.0
+height = 106.0
+
+[node name="Noxul" type="CharacterBody2D" unique_id=79114284 node_paths=PackedStringArray("movement", "behavior_tree", "tentacle_claws", "hitbox", "healtbar")]
 material = SubResource("ShaderMaterial_yyve1")
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_qrj7g")
 movement = NodePath("Scripts/Movement")
 behavior_tree = NodePath("Scripts/BehaviorTree")
+tentacle_claws = NodePath("TentacleClaws")
 voidling_scene = ExtResource("2_ajt4d")
 projectile_scene = ExtResource("4_x3mm4")
 charge_attack = SubResource("Resource_013tq")
-projectile_spread_angle = 20.0
 stats = SubResource("Resource_1cjka")
 hitbox = NodePath("Hitbox")
 healtbar = NodePath("CanvasLayer/Bossbar")
+phases = Array[ExtResource("15_base")]([SubResource("Resource_qv5kg"), SubResource("Resource_srpa7"), SubResource("Resource_gh65v")])
 
 [node name="Scripts" type="Node" parent="." unique_id=268300397]
 
@@ -556,6 +659,11 @@ texture = ExtResource("3_1cjka")
 hframes = 3
 vframes = 2
 
+[node name="TentacleClaws" parent="." unique_id=964394149 node_paths=PackedStringArray("boss") instance=ExtResource("14_tclaw")]
+boss = NodePath("..")
+body_texture_variants = Array[Texture2D]([ExtResource("12_qf5qi"), ExtResource("13_saerm"), ExtResource("14_0ndd6")])
+tip_texture_variants = Array[Texture2D]([ExtResource("15_qv5kg"), ExtResource("16_srpa7"), ExtResource("17_gh65v")])
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1006349173]
 
 [node name="Bossbar" parent="CanvasLayer" unique_id=208450167 node_paths=PackedStringArray("Boss") instance=ExtResource("4_uswy6")]
@@ -574,6 +682,7 @@ entity = NodePath("..")
 metadata/_custom_type_script = "uid://dsbtboypl2kg1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=232792372]
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_2tr0q")
 
 [node name="scream_effect" type="AnimatedSprite2D" parent="." unique_id=1114235246]
@@ -587,5 +696,9 @@ position = Vector2(15, -17)
 sprite_frames = SubResource("SpriteFrames_uddrk")
 frame = 13
 frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=705749105]
+visible = false
+shape = SubResource("CapsuleShape2D_gfayx")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

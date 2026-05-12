@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5nf3l55q0ggp"]
+[gd_scene format=3 uid="uid://b5nf3l55q0ggp"]
 
 [ext_resource type="PackedScene" uid="uid://bhmvhsrfsgk2j" path="res://scenes/objects/buildings/BuildingTemplate.tscn" id="1_10djh"]
 [ext_resource type="Texture2D" uid="uid://dq3hnxb5we00g" path="res://assets/sprites/buildings/dekoration/ground.png" id="2_02ifi"]
@@ -46,7 +46,7 @@ void light() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hgnt3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21hhq"]
 resource_local_to_scene = true
 shader = SubResource("Shader_dhseu")
 shader_parameter/opacity = 0.0
@@ -61,8 +61,11 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bnkkm"]
 size = Vector2(16, 16)
 
-[node name="MetalGround" instance=ExtResource("1_10djh")]
+[node name="MetalGround" unique_id=1670559045 instance=ExtResource("1_10djh")]
 script = ExtResource("2_dvvsg")
+has_health = true
+max_health = 35
+current_health = 35
 
 [node name="sprite" parent="." index="0"]
 material = SubResource("CanvasItemMaterial_3pstw")
@@ -70,7 +73,7 @@ sprite_frames = SubResource("SpriteFrames_io1mc")
 
 [node name="damage_shader" parent="." index="1"]
 visible = false
-material = SubResource("ShaderMaterial_hgnt3")
+material = SubResource("ShaderMaterial_21hhq")
 
 [node name="collision" parent="." index="2"]
 visible = false
@@ -82,17 +85,17 @@ visible = false
 [node name="BuildingHitbox" parent="." index="4" node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0" unique_id=54176444]
 visible = false
 shape = SubResource("RectangleShape2D_bnkkm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0" unique_id=535283507]
 visible = false
 shape = SubResource("RectangleShape2D_bnkkm")
 
-[node name="ground" type="StaticBody2D" parent="." index="6"]
+[node name="ground" type="StaticBody2D" parent="." index="6" unique_id=2037155814]
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ground" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground" index="0" unique_id=232860760]
 visible = false
 shape = SubResource("RectangleShape2D_bnkkm")

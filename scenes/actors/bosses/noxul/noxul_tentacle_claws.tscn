@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dcgdyh6cimopm"]
+
+[ext_resource type="Script" uid="uid://dede6provxfqv" path="res://scripts/actors/bosses/noxul/boss_tentacle_claws.gd" id="1_noxul"]
+[ext_resource type="Texture2D" uid="uid://ckjrym5dxwrgt" path="res://assets/sprites/actors/bosses/tentacle/tentacle_body.png" id="2_bagsl"]
+[ext_resource type="Texture2D" uid="uid://dlob8axlbvug5" path="res://assets/sprites/actors/bosses/tentacle/tentacle_top.png" id="3_h1gix"]
+
+[node name="TentacleClaws" type="Node2D" unique_id=530327997]
+use_parent_material = true
+script = ExtResource("1_noxul")
+claw_count = 7
+body_texture = ExtResource("2_bagsl")
+tip_texture = ExtResource("3_h1gix")
+body_texture_variants = Array[Texture2D]([ExtResource("2_bagsl")])
+tip_texture_variants = Array[Texture2D]([ExtResource("3_h1gix")])
+base_offset = Vector2(0, 24)
+claw_spacing = 10.0
+idle_length = 86.0
+side_length_falloff = 0.06
+outer_fan_degrees = 62.0
+outer_arm_bend = 0.28
+side_attach_lift = 10.0
+idle_sway_degrees = 7.0
+attack_range = 230.0
+attack_lunge_length = 160.0
+attack_knockback_strength = 5.5

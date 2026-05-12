@@ -615,6 +615,7 @@ func _damage_enemy(enemy: Node2D) -> void:
 		attack.damage = _damage
 		attack.crit_chance = 0.0
 		attack.knockback = 0.0
+		attack.source_type = AttackResource.SourceType.PERK
 		boss.get_hit(attack, _player)
 		return
 	

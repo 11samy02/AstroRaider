@@ -106,6 +106,7 @@ func _try_shoot(target: Node2D) -> void:
 		projectile.atk_resource.damage = drone.damage
 		projectile.atk_resource.crit_chance = 0.0
 		projectile.atk_resource.has_stun = false
+		projectile.atk_resource.source_type = AttackResource.SourceType.SUPPORT
 
 	_shot_timer = drone.fire_rate
 

@@ -9,6 +9,7 @@ class_name Noxul
 
 @export var movement: NoxulMovement
 @export var behavior_tree: NoxulBehaviorTree
+@export var tentacle_claws: BossTentacleClaws
 @export var voidling_scene: PackedScene
 @export var projectile_scene: PackedScene
 @export var charge_attack: AttackResource = AttackResource.new()
@@ -29,12 +30,15 @@ var _summon_triggered_this_scream := false
 var _hit_blink_tween: Tween = null
 var _contact_knockback_until: Dictionary = {}
 var _charge_shot_active := false
+var _current_noxul_phase: NoxulBossPhaseData = null
 
 
 func _ready() -> void:
 	super._ready()
 	_rng.randomize()
 	_resolve_behavior_nodes()
+	_resolve_tentacle_claws()
+	_apply_noxul_phase(_current_noxul_phase)
 	if is_instance_valid(charge_effect):
 		charge_effect.visible = false
 	if is_instance_valid(anim) and anim.has_animation("idle"):
@@ -81,11 +85,19 @@ func is_charge_shot_active() -> bool:
 
 
 func get_preferred_projectile_target() -> Node2D:
+	var building_target := _get_priority_building_target()
+	if is_instance_valid(building_target) and _should_target_building():
+		return building_target
+
 	var closest_player := _get_closest_player()
 	if is_instance_valid(closest_player):
 		return closest_player
 	
-	return _get_closest_support()
+	var closest_support := _get_closest_support()
+	if is_instance_valid(closest_support):
+		return closest_support
+
+	return building_target
 
 
 func get_closest_combat_target() -> Node2D:
@@ -117,6 +129,26 @@ func get_hit_anim() -> void:
 		0.0,
 		hit_blink_duration
 	)
+
+
+func calculate_real_damage(attack: AttackResource, is_crit: bool = false, who_attacked: CharacterBody2D = null) -> int:
+	var damage := super.calculate_real_damage(attack, is_crit, who_attacked)
+	if damage <= 0 or _current_noxul_phase == null:
+		return damage
+
+	var multiplier := _current_noxul_phase.incoming_damage_multiplier
+	match attack.source_type:
+		AttackResource.SourceType.BUILDING:
+			multiplier *= _current_noxul_phase.building_damage_multiplier
+		AttackResource.SourceType.PERK:
+			multiplier *= _current_noxul_phase.perk_damage_multiplier
+		AttackResource.SourceType.SUPPORT:
+			multiplier *= _current_noxul_phase.support_damage_multiplier
+
+	var final_damage = max(1, int(round(float(damage) * multiplier)))
+	if _current_noxul_phase.max_damage_per_hit > 0:
+		final_damage = min(final_damage, _current_noxul_phase.max_damage_per_hit)
+	return final_damage
 
 
 func start_scream_effect() -> void:
@@ -222,9 +254,9 @@ func summon_voidlings(count: int = -1) -> void:
 			-minion_spawn_random_offset,
 			minion_spawn_random_offset
 		))
-		
+
 		spawn_parent.add_child(voidling)
-		
+
 		if voidling is Node2D:
 			voidling.global_position = global_position + Vector2.RIGHT.rotated(angle) * distance
 		
@@ -263,6 +295,61 @@ func _resolve_behavior_nodes() -> void:
 	if is_instance_valid(behavior_tree):
 		behavior_tree.boss = self
 		behavior_tree.movement = movement
+
+
+func _resolve_tentacle_claws() -> void:
+	if tentacle_claws == null and has_node("TentacleClaws"):
+		tentacle_claws = $TentacleClaws as BossTentacleClaws
+
+	if is_instance_valid(tentacle_claws):
+		tentacle_claws.boss = self
+
+
+func _on_phase_changed(_phase_index: int, phase_data: BossPhaseData) -> void:
+	var phase := phase_data as NoxulBossPhaseData
+	if phase == null:
+		return
+
+	_current_noxul_phase = phase
+	_apply_noxul_phase(phase)
+
+
+func _apply_noxul_phase(phase: NoxulBossPhaseData) -> void:
+	if phase == null:
+		return
+
+	projectile_count = phase.projectile_count
+	projectile_spread_angle = phase.projectile_spread_angle
+	minions_spawn_count = phase.minions_spawn_count
+	max_active_voidlings = phase.max_active_voidlings
+
+	if charge_attack != null:
+		charge_attack.damage = phase.charge_damage
+		charge_attack.knockback = phase.charge_knockback
+		charge_attack.source_type = AttackResource.SourceType.BOSS
+
+	if is_instance_valid(behavior_tree):
+		behavior_tree.summon_cooldown = phase.summon_cooldown
+		behavior_tree.summon_range = phase.summon_range
+		behavior_tree.summon_recovery_time = phase.summon_recovery_time
+		behavior_tree.shot_cooldown = phase.shot_cooldown
+		behavior_tree.shot_range = phase.shot_range
+		behavior_tree.shot_recovery_time = phase.shot_recovery_time
+		behavior_tree.clamp_active_cooldowns_to_phase()
+
+	if is_instance_valid(movement):
+		movement.move_speed = phase.move_speed
+		movement.acceleration = phase.acceleration
+		movement.hover_distance = phase.hover_distance
+		movement.orbit_weight = phase.orbit_weight
+
+	if is_instance_valid(tentacle_claws):
+		tentacle_claws.attack_range = phase.tentacle_attack_range
+		tentacle_claws.attack_lunge_length = phase.tentacle_lunge_length
+		tentacle_claws.attack_knockback_strength = phase.tentacle_knockback_strength
+		tentacle_claws.attack_damage = phase.tentacle_attack_damage
+		tentacle_claws.attack_cooldown_min = phase.tentacle_cooldown_min
+		tentacle_claws.attack_cooldown_max = phase.tentacle_cooldown_max
 
 
 func _prune_summoned_voidlings() -> void:
@@ -369,6 +456,47 @@ func _get_closest_support() -> Node2D:
 	return closest_support
 
 
+func _should_target_building() -> bool:
+	if _current_noxul_phase == null:
+		return false
+
+	return _rng.randf() <= _current_noxul_phase.building_target_chance
+
+
+func _get_priority_building_target() -> Building:
+	var best_building: Building = null
+	var best_score := INF
+	var max_range := 620.0
+	if _current_noxul_phase != null:
+		max_range = _current_noxul_phase.building_target_range
+
+	for building: Building in GlobalGame.Buildings:
+		if not is_instance_valid(building):
+			continue
+		if not building.has_health:
+			continue
+
+		var dist := global_position.distance_to(building.global_position)
+		if dist > max_range:
+			continue
+
+		var score := dist
+		if building is Torrent:
+			score -= 220.0
+		elif building is MetalGround:
+			score -= 90.0
+
+		if building.max_health > 0:
+			var health_ratio := float(building.current_health) / float(building.max_health)
+			score += health_ratio * 40.0
+
+		if score < best_score:
+			best_score = score
+			best_building = building
+
+	return best_building
+
+
 func _get_combat_targets() -> Array[Node2D]:
 	var targets: Array[Node2D] = []
 	
@@ -379,5 +507,9 @@ func _get_combat_targets() -> Array[Node2D]:
 	for support: Node2D in GlobalGame.Player_Support:
 		if is_instance_valid(support):
 			targets.append(support)
+
+	for building: Building in GlobalGame.Buildings:
+		if is_instance_valid(building) and building.has_health:
+			targets.append(building)
 	
 	return targets
