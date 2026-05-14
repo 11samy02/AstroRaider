@@ -15,8 +15,15 @@ var can_place_building : bool = true
 var building_list : Array[Area2D] = []
 var place_building_is_locked : bool = false
 
+var delete_mode : bool = false
+var hovered_salvage_building: Building = null
 
 var velocity: Vector2 = Vector2.ZERO
+var _prev_rmb: bool = false
+var _prev_lmb: bool = false
+var _prev_joy_delete: bool = false
+const HAND_FRAME_DEFAULT := 0
+const HAND_FRAME_DELETE := 4
 
 func _enter_tree() -> void:
 	GSignals.BUI_BUILDING_select_building.connect(select_building)
@@ -24,13 +31,15 @@ func _enter_tree() -> void:
 
 func check_button_pressed() -> void:
 	if player_res.player.current_state == player_res.player.states.Build:
+		if delete_mode:
+			return
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !place_building_is_locked:
 			place_building()
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and is_instance_valid(building_res):
-			building_res = null
-			GSignals.BUI_hide_resource_cost.emit()
 
 func show_texture() -> void:
+	if delete_mode:
+		building_sprite.texture = null
+		return
 	if is_instance_valid(building_res):
 		if can_place_building:
 			building_sprite.modulate = Color("#00ff0096")
@@ -42,13 +51,42 @@ func show_texture() -> void:
 
 func _process(delta: float) -> void:
 	if player_res.player.current_state == player_res.player.states.Build:
+		var rmb := Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
+		if rmb and not _prev_rmb:
+			_toggle_delete_mode()
+		var player: Player = player_res.player
+		var joy_delete := false
+		if Input.get_connected_joypads().size() > 0:
+			joy_delete = Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_B)
+		if joy_delete and not _prev_joy_delete:
+			_toggle_delete_mode()
+		_prev_joy_delete = joy_delete
+
 		show()
 		movement(delta)
 		enforce_max_distance()
 		show_texture()
-		check_button_pressed()
+		_apply_hand_sprite_frame()
+		_update_salvage_hover()
+		var lmb := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+		if delete_mode:
+			if lmb and not _prev_lmb and not place_building_is_locked:
+				_try_salvage_under_hand()
+		else:
+			check_button_pressed()
+		_prev_rmb = rmb
+		_prev_lmb = lmb
 		can_place_building = _can_buy_building() and building_list.is_empty()
 	else:
+		delete_mode = false
+		_prev_rmb = false
+		_prev_lmb = false
+		_prev_joy_delete = false
+
+		if is_instance_valid(hovered_salvage_building):
+			hovered_salvage_building.set_salvage_hover(false)
+		hovered_salvage_building = null
+
 		hide()
 		global_position = player_res.player.global_position + Vector2(0, -25)
 
@@ -95,6 +133,8 @@ func place_building() -> void:
 		var building : Building = BluePrintData.load_Building_tres(building_res.Key).instantiate()
 		
 		building.global_position = building_placement.global_position
+		building.can_salvage_refund = true
+		building.salvage_blueprint_key = building_res.Key
 		get_parent().get_parent().add_child(building)
 		_deduct_building_cost()
 		
@@ -130,12 +170,115 @@ func _deduct_building_cost() -> void:
 				player_res.Ores[first_ore] -= ore.cost
 
 func select_building(key: BluePrintData.Keys) -> void:
+	delete_mode = false
+	_apply_hand_sprite_frame()
 	if is_instance_valid(building_res):
 		if building_res.Key == BluePrintData.Keys.Generator:
 			return
 	
 	building_res = BluePrintData.load_Building_res(key)
 	GSignals.UI_selected_blueprint.emit(building_res)
+
+
+func _apply_hand_sprite_frame() -> void:
+	if not is_instance_valid(sprite_2d):
+		return
+	var f := HAND_FRAME_DELETE if delete_mode else HAND_FRAME_DEFAULT
+	sprite_2d.frame = clampi(f, 0, maxi(sprite_2d.hframes * sprite_2d.vframes - 1, 0))
+
+
+func _toggle_delete_mode() -> void:
+	delete_mode = !delete_mode
+
+	if delete_mode:
+		building_res = null
+		GSignals.BUI_hide_resource_cost.emit()
+	else:
+		if is_instance_valid(hovered_salvage_building):
+			hovered_salvage_building.set_salvage_hover(false)
+		hovered_salvage_building = null
+
+	_apply_hand_sprite_frame()
+
+
+func _building_from_overlap(area: Area2D) -> Building:
+	if area == null or area.name != "BuildingPlacedColl":
+		return null
+	var p := area.get_parent()
+	return p as Building
+
+
+func _get_buildings_under_hand() -> Array[Building]:
+	var out: Array[Building] = []
+	var seen: Dictionary = {}
+	for a in building_list:
+		var b := _building_from_overlap(a)
+		if b != null and not seen.has(b):
+			seen[b] = true
+			out.append(b)
+	return out
+
+
+func _salvage_refund_fraction(building: Building) -> float:
+	if not building.has_health or building.max_health <= 0:
+		return 1.0
+	var h := clampf(float(building.current_health) / float(building.max_health), 0.0, 1.0)
+	if h < 0.1:
+		return 0.0
+	return (h - 0.1) / 0.9
+
+
+func _refund_salvage_to_player(building: Building) -> void:
+	if not building.can_salvage_refund:
+		return
+	var bp := BluePrintData.load_Building_res(building.salvage_blueprint_key)
+	if bp == null:
+		return
+	var mult := _salvage_refund_fraction(building)
+	if mult <= 0.0:
+		return
+	for ore: BluePrintCostResource in bp.cost:
+		var ore_key = OreTemplate.Ores.keys()[ore.Ore]
+		var add_amt := int(ceil(float(ore.cost) * mult))
+		if add_amt <= 0:
+			continue
+		if player_res.Ores.has(ore_key):
+			player_res.Ores[ore_key] += add_amt
+		else:
+			player_res.Ores[ore_key] = add_amt
+
+
+func _try_salvage_under_hand() -> void:
+	var candidates := _get_buildings_under_hand()
+	if candidates.is_empty():
+		return
+	var best: Building = null
+	var best_d2 := INF
+	var pt := building_placement.global_position
+	for b in candidates:
+		if _is_generator_building(b):
+			continue
+		var d2 := pt.distance_squared_to(b.global_position)
+		if d2 < best_d2:
+			best_d2 = d2
+			best = b
+	if best == null:
+		return
+	_refund_salvage_to_player(best)
+
+	if is_instance_valid(best):
+		best.set_salvage_hover(false)
+
+	if hovered_salvage_building == best:
+		hovered_salvage_building = null
+
+	best.queue_free()
+
+
+func _is_generator_building(b: Building) -> bool:
+	if b is CrystalGenerator:
+		return true
+	return b.can_salvage_refund and b.salvage_blueprint_key == BluePrintData.Keys.Generator
 
 
 
@@ -148,3 +291,28 @@ func _on_check_ground_area_exited(area: Area2D) -> void:
 
 func set_place_building_locked(value : bool) -> void:
 	place_building_is_locked = value
+
+func _update_salvage_hover() -> void:
+	var new_hover: Building = null
+
+	var candidates := _get_buildings_under_hand()
+	var best_d2 := INF
+	var pt := building_placement.global_position
+
+	for b in candidates:
+		if delete_mode and _is_generator_building(b):
+			continue
+
+		var d2 := pt.distance_squared_to(b.global_position)
+		if d2 < best_d2:
+			best_d2 = d2
+			new_hover = b
+
+	if hovered_salvage_building != new_hover:
+		if is_instance_valid(hovered_salvage_building):
+			hovered_salvage_building.set_building_hover(false)
+
+		hovered_salvage_building = new_hover
+
+		if is_instance_valid(hovered_salvage_building):
+			hovered_salvage_building.set_building_hover(true)

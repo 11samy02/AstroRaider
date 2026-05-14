@@ -122,7 +122,7 @@ void light() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvdey"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkebp"]
 resource_local_to_scene = true
 shader = SubResource("Shader_dhseu")
 shader_parameter/opacity = 0.0
@@ -259,16 +259,14 @@ script = ExtResource("2_d2g3u")
 atk_res = SubResource("Resource_ntmmc")
 radar_icon = ExtResource("4_vgx3k")
 has_health = true
-max_health = 500
-current_health = 500
 
-[node name="sprite" parent="." index="0"]
+[node name="sprite" parent="." index="0" unique_id=1462669344]
 material = SubResource("CanvasItemMaterial_s06gm")
 sprite_frames = SubResource("SpriteFrames_hobbd")
 autoplay = "default"
 
-[node name="damage_shader" parent="." index="1"]
-material = SubResource("ShaderMaterial_hvdey")
+[node name="damage_shader" parent="." index="1" unique_id=1321301252]
+material = SubResource("ShaderMaterial_jkebp")
 sprite_frames = SubResource("SpriteFrames_hobbd")
 animation = &"default"
 
@@ -292,11 +290,11 @@ script = ExtResource("6_q54f1")
 min_random_pitch = 0.5
 max_random_pitch = 1.5
 
-[node name="collision" parent="." index="5"]
+[node name="collision" parent="." index="5" unique_id=196945518]
 visible = false
 shape = SubResource("CircleShape2D_q7f57")
 
-[node name="BuildingHitbox" parent="." index="7" node_paths=PackedStringArray("entity")]
+[node name="BuildingHitbox" parent="." index="7" unique_id=381063236 node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0" unique_id=375541144]
@@ -306,7 +304,7 @@ shape = SubResource("CapsuleShape2D_th3tk")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8" unique_id=1645133193]
 libraries/ = SubResource("AnimationLibrary_cx17e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0" unique_id=1402390121]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" parent_id_path=PackedInt32Array(1708857127) index="0" unique_id=1402390121]
 shape = SubResource("RectangleShape2D_3yn4l")
 
 [connection signal="timeout" from="shoot_time" to="." method="_on_shoot_time_timeout"]

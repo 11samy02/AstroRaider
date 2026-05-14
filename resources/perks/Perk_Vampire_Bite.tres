@@ -15,4 +15,6 @@ tags = Array[int]([0, 6])
 mechanics = Array[int]([3, 1])
 rarity = Array[float]([4.0, 4.0, 3.0, 2.5, 2.0, 1.5])
 value = Array[int]([1, 2, 3, 4, 5, 6])
-cost = Array[int]([150, 200, 250, 300, 350, 400])
+unlock_type = 2
+required_suit = 2
+starts_unlocked = false

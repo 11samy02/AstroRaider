@@ -369,6 +369,9 @@ func _is_valid_offer_perk(perk: PerkBuild, selector_type: SelectorType = Selecto
 	if not is_instance_valid(perk) or not is_instance_valid(perk.perk_res):
 		return false
 	
+	if not perk.perk_res.is_meta_unlocked(manager.player):
+		return false
+
 	var max_level := 3 if perk.is_ult() else 6
 	if perk.Level >= max_level:
 		return false

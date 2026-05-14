@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dq3hnxb5we00g" path="res://assets/sprites/buildings/dekoration/ground.png" id="2_02ifi"]
 [ext_resource type="Script" uid="uid://bg4n4x5hfla0v" path="res://scripts/objects/buildings/metal_ground.gd" id="2_dvvsg"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3pstw"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_21hhq"]
 light_mode = 1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_io1mc"]
@@ -67,29 +67,29 @@ has_health = true
 max_health = 35
 current_health = 35
 
-[node name="sprite" parent="." index="0"]
-material = SubResource("CanvasItemMaterial_3pstw")
+[node name="sprite" parent="." index="0" unique_id=1462669344]
+material = SubResource("CanvasItemMaterial_21hhq")
 sprite_frames = SubResource("SpriteFrames_io1mc")
 
-[node name="damage_shader" parent="." index="1"]
+[node name="damage_shader" parent="." index="1" unique_id=1321301252]
 visible = false
 material = SubResource("ShaderMaterial_21hhq")
 
-[node name="collision" parent="." index="2"]
+[node name="collision" parent="." index="2" unique_id=196945518]
 visible = false
 shape = SubResource("RectangleShape2D_fq30b")
 
-[node name="rope" parent="." index="3"]
+[node name="rope" parent="." index="3" unique_id=906259222]
 visible = false
 
-[node name="BuildingHitbox" parent="." index="4" node_paths=PackedStringArray("entity")]
+[node name="BuildingHitbox" parent="." index="4" unique_id=381063236 node_paths=PackedStringArray("entity")]
 entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingHitbox" index="0" unique_id=54176444]
 visible = false
 shape = SubResource("RectangleShape2D_bnkkm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" index="0" unique_id=535283507]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingPlacedColl" parent_id_path=PackedInt32Array(1708857127) index="0" unique_id=535283507]
 visible = false
 shape = SubResource("RectangleShape2D_bnkkm")
 

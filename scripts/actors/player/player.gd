@@ -27,23 +27,74 @@ var gravity_dir := Vector2.DOWN
 @export var player_id := 0
 @export var controller_id := 0
 @export var character_build_id := 0
+@export var selected_suit: SuitData.SuitKeys = SuitData.SuitKeys.Trailblazer
 @export var perk_manager: PerkManager
 var is_bohrer_active := false
 var deadzone := 0.25
-@export var stats: Stats
+var stats: Stats = Stats.new()
+var suit_data: SuitData
 var collected_crystals: Array[ItemCrystal] = []
 var can_take_damage := true
 var invuln_task_running := false
 var shield_damage_block := false
 var hit_iframe_duration := 1.0
 
-## Loads the stats from the selected saved build
+## Loads the selected suit before child nodes cache player stats.
+func _enter_tree() -> void:
+	_load_saved_build()
+	_load_stats_from_selected_suit()
+
+
+## Initializes runtime state after the player entered the scene.
 func _ready() -> void:
-	if character_build_id < PlayerDataBuilds.player_saved_res.saved_builds.size():
-		stats = PlayerDataBuilds.player_saved_res.saved_builds[character_build_id].stats
-	else:
-		print("No Player Build was found with the ID ", character_build_id)
 	_refresh_damage_state()
+
+
+## Returns the currently selected suit resource.
+func get_selected_suit_data() -> SuitData:
+	if is_instance_valid(suit_data) and suit_data.Key == selected_suit:
+		return suit_data
+	suit_data = SuitData.load_suit_res(selected_suit)
+	return suit_data
+
+
+## Applies the selected saved build's suit key when a build exists.
+func _load_saved_build() -> void:
+	if character_build_id >= PlayerDataBuilds.player_saved_res.saved_builds.size():
+		print("No Player Build was found with the ID ", character_build_id)
+		return
+
+	var saved_build := PlayerDataBuilds.player_saved_res.saved_builds[character_build_id]
+	selected_suit = saved_build.selected_suit
+
+
+## Rebuilds the player's runtime stats from the selected suit.
+func _load_stats_from_selected_suit() -> void:
+	var selected_suit_data := get_selected_suit_data()
+	if not is_instance_valid(selected_suit_data) or not selected_suit_data.has_unlocked:
+		stats = Stats.new()
+		return
+
+	var runtime_stats := selected_suit_data.stats.duplicate(true)
+	if runtime_stats is Stats:
+		stats = runtime_stats
+	else:
+		stats = Stats.new()
+
+	_apply_saved_perks()
+
+
+## Adds build-specific unlocked perks on top of the suit stats.
+func _apply_saved_perks() -> void:
+	if character_build_id >= PlayerDataBuilds.player_saved_res.saved_builds.size():
+		return
+
+	var saved_build := PlayerDataBuilds.player_saved_res.saved_builds[character_build_id]
+	for perk in saved_build.unlocked_perks:
+		if is_instance_valid(perk):
+			var perk_copy := perk.duplicate(true)
+			if perk_copy is Perk:
+				stats.Perks.append(perk_copy)
 
 ## Updates the player movement and shader effects
 func _physics_process(_delta: float) -> void:

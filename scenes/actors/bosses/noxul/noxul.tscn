@@ -53,17 +53,12 @@ Driven by instinct rather than intellect, Noxul attacks with savage force, lashi
 More mutant than creature, Noxul is a living infestation — a malformed predator born from corruption, growth, and survival."
 Short_Description = "A grotesque parasitic mutant from the first planet. Noxul uses writhing tentacles, crystal-fired projectiles, sonic shockwaves, and spawned jelly minions to crush and overwhelm its prey."
 radar_icon = ExtResource("2_3utdv")
-Max_HP = 1800
+Max_HP = 2000
 Max_Shield = 0
 metadata/_custom_type_script = "uid://i71iok7xek37"
 
 [sub_resource type="Resource" id="Resource_qv5kg"]
 script = ExtResource("9_0ndd6")
-phase_name = "Emergence"
-projectile_count = 4
-projectile_spread_angle = 16.0
-charge_damage = 16
-charge_knockback = 2.4
 minions_spawn_count = 4
 max_active_voidlings = 8
 building_target_chance = 0.35
@@ -78,14 +73,13 @@ building_damage_multiplier = 0.35
 perk_damage_multiplier = 0.5
 support_damage_multiplier = 0.55
 max_damage_per_hit = 35
+phase_name = "Emergence"
 metadata/_custom_type_script = "uid://c66wmub5x51ql"
 
 [sub_resource type="Resource" id="Resource_srpa7"]
 script = ExtResource("9_0ndd6")
-phase_name = "Pressure"
 projectile_count = 5
-projectile_spread_angle = 22.0
-charge_damage = 22
+charge_damage = 20
 charge_knockback = 3.0
 minions_spawn_count = 4
 max_active_voidlings = 12
@@ -106,14 +100,13 @@ building_damage_multiplier = 0.22
 perk_damage_multiplier = 0.38
 support_damage_multiplier = 0.42
 max_damage_per_hit = 28
+phase_name = "Pressure"
 health_ratio = 0.67
 metadata/_custom_type_script = "uid://c66wmub5x51ql"
 
 [sub_resource type="Resource" id="Resource_gh65v"]
 script = ExtResource("9_0ndd6")
-phase_name = "Frenzy"
-projectile_count = 8
-projectile_spread_angle = 30.0
+projectile_count = 7
 charge_damage = 30
 charge_knockback = 3.6
 minions_spawn_count = 6
@@ -140,6 +133,7 @@ building_damage_multiplier = 0.15
 perk_damage_multiplier = 0.28
 support_damage_multiplier = 0.32
 max_damage_per_hit = 22
+phase_name = "Frenzy"
 health_ratio = 0.34
 metadata/_custom_type_script = "uid://c66wmub5x51ql"
 

@@ -2,41 +2,73 @@ extends Resource
 class_name Stats
 
 @export_group("Default")
+## Base gravity acceleration before modifiers.
 @export var gravity_strength := 200.0
+## Counter-force used by movement to slow gravity influence.
 @export var gravity_break := 2.0
+## Base movement speed before modifiers.
 @export var max_speed := 250.0
+## Base energy pool used by slowness mechanics.
 @export var slowness_energy := 100.0
+## Base drill damage before modifiers.
 @export var bohrer_damage := 1.0
+## Base drill knockback before modifiers.
 @export var bohrer_knockback := 3.0
+## Base invulnerability duration after the player is hit.
 @export var hit_iframe_duration: float = 1.0
+## Playback speed for the player hit animation.
 @export var hit_animation_speed: float = 1.0
+## Base aiming rotation speed.
 @export var rotation_speed := 10.0
+## Base maximum health before modifiers.
 @export var max_hp := 100
+## Base armor divisor before modifiers.
 @export var armor := 1.0
+## Base critical hit chance before modifiers.
 @export var crit_chance := 0.0
+## Base projectile damage bonus before modifiers.
 @export var projectile_damage := 0.0
+## Base attack cooldown before modifiers.
 @export var attack_speed := 0.4
 
 @export_group("Modifiers")
+## Runtime modifiers applied to gravity strength.
 @export var gravity_strength_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to gravity break.
 @export var gravity_break_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to movement speed.
 @export var max_speed_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to slowness energy.
 @export var slowness_energy_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to drill damage.
 @export var bohrer_damage_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to drill knockback.
 @export var bohrer_knockback_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to hit invulnerability duration.
 @export var hit_iframe_duration_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to aiming rotation speed.
 @export var rotation_speed_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to maximum health.
 @export var max_hp_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to armor.
 @export var armor_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to critical hit chance.
 @export var crit_chance_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to projectile damage.
 @export var projectile_damage_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to projectile lives.
 @export var projectile_lives_modifiers: Array[StatModifier] = []
+## Runtime modifiers applied to attack cooldown.
 @export var attack_speed_modifiers: Array[StatModifier] = []
 
 @export_group("Perks")
+## Base amount of extra projectile hits before modifiers.
 @export var projectile_lives := 0.0
+## Perks granted by this stat profile or saved player build.
 @export var Perks: Array[Perk] = []
+## Whether projectiles currently apply stun.
 @export var has_stun_active := false
+## Active stun strength applied by projectile attacks.
 @export var stun_strength := 0.0
 
 ## Adds a new modifier or updates the existing modifier for the given perk key

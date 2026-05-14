@@ -13,3 +13,5 @@ func set_building_collision() -> void:
 		if player_hand.building_res != null:
 			rect_shape.size = player_hand.building_res.size * defauls_grid_size
 			rect_shape.size -= Vector2(1,1)
+		else:
+			rect_shape.size = Vector2(defauls_grid_size, defauls_grid_size) - Vector2(1, 1)

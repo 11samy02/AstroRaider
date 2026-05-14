@@ -23,7 +23,7 @@ resources_spreadsheet_view/freeze_first_column=true
 auto_backup/output_directory="user://backups/"
 auto_backup/enable_zipping=false
 auto_backup/persistent_count=true
-auto_backup/_internal_count_storage=562
+auto_backup/_internal_count_storage=571
 auto_backup/save_frequency_minutes=5
 
 [animation]
@@ -126,7 +126,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/auto_backup/plugin.cfg", "res://addons/debug_menu/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/godotsteam/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg", "res://addons/screen_debug/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/godotsteam/plugin.cfg", "res://addons/input_helper/plugin.cfg", "res://addons/localization_editor/plugin.cfg", "res://addons/resources_spreadsheet_view/plugin.cfg", "res://addons/screen_debug/plugin.cfg")
 
 [file_customization]
 
@@ -138,10 +138,6 @@ folder_colors={
 "res://scenes/": "yellow",
 "res://scripts/": "red"
 }
-
-[global_group]
-
-PerkButton=""
 
 [input]
 

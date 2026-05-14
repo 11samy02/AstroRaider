@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhmvhsrfsgk2j"]
+[gd_scene format=3 uid="uid://bhmvhsrfsgk2j"]
 
 [ext_resource type="Script" uid="uid://bh103i622g8mn" path="res://scripts/objects/buildings/building_template.gd" id="1_kya05"]
 [ext_resource type="Script" uid="uid://htadlvo0gee" path="res://scripts/managers/building_hitbox.gd" id="2_g1weh"]
@@ -49,22 +49,22 @@ light_mode = 1
 [sub_resource type="Gradient" id="Gradient_3jlwf"]
 colors = PackedColorArray(0.36, 0.36, 0.36, 1, 0.82, 0.82, 0.82, 1)
 
-[node name="Building" type="Area2D"]
+[node name="Building" type="Area2D" unique_id=200121541]
 z_index = -5
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("1_kya05")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="." unique_id=1462669344]
 
-[node name="damage_shader" type="AnimatedSprite2D" parent="."]
+[node name="damage_shader" type="AnimatedSprite2D" parent="." unique_id=1321301252]
 material = SubResource("ShaderMaterial_r6qvv")
 sprite_frames = SubResource("SpriteFrames_sye1p")
 animation = &""
 
-[node name="collision" type="CollisionShape2D" parent="."]
+[node name="collision" type="CollisionShape2D" parent="." unique_id=196945518]
 
-[node name="rope" type="Line2D" parent="."]
+[node name="rope" type="Line2D" parent="." unique_id=906259222]
 modulate = Color(1, 0.768627, 0, 1)
 show_behind_parent = true
 z_index = -2
@@ -72,12 +72,12 @@ material = SubResource("CanvasItemMaterial_av1se")
 width = 1.0
 gradient = SubResource("Gradient_3jlwf")
 
-[node name="BuildingHitbox" type="Area2D" parent="."]
+[node name="BuildingHitbox" type="Area2D" parent="." unique_id=381063236]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_g1weh")
 
-[node name="BuildingPlacedColl" type="Area2D" parent="."]
+[node name="BuildingPlacedColl" type="Area2D" parent="." unique_id=1708857127]
 collision_layer = 128
 collision_mask = 0
 

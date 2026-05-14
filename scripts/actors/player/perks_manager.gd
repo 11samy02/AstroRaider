@@ -285,6 +285,9 @@ func select_by_index(idx: int) -> void:
 		return
 	
 	var perk: PerkBuild = perks[idx]
+	if not selection._is_valid_offer_perk(perk, PerkSelection.SelectorType.Standard):
+		return
+
 	perk.level_up_perk()
 	finalize_after_level_up(perk)
 

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SuitData" format=3 uid="uid://d42blgsbjlhf"]
+
+[ext_resource type="Texture2D" uid="uid://b4v4suaupb8q2" path="res://assets/sprites/items/Suits/Bloodreaver.png" id="1_2s1k6"]
+[ext_resource type="Script" uid="uid://3sddgq0qt46h" path="res://scripts/resources/player/SuitData.gd" id="2_5lcbt"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://scripts/perks/resources/Perk_Resource.gd" id="3_12b8m"]
+[ext_resource type="Script" uid="uid://bkju3dtig3ue6" path="res://scripts/perks/StatModifierResource.gd" id="4_hxq7g"]
+[ext_resource type="Script" uid="uid://plag5btfsk1b" path="res://scripts/actors/player/Stats.gd" id="5_cqm35"]
+
+[sub_resource type="Resource" id="Resource_c38qa"]
+script = ExtResource("5_cqm35")
+gravity_strength = 250.0
+max_speed = 300.0
+bohrer_damage = 10.0
+bohrer_knockback = 5.0
+max_hp = 500
+armor = 2.0
+crit_chance = 50.0
+projectile_damage = 9.0
+attack_speed = 0.2
+
+[resource]
+script = ExtResource("2_5lcbt")
+Key = 2
+suit_name = "Bloodreaver"
+description = "a suit which was build to hunt."
+image = ExtResource("1_2s1k6")
+has_unlocked = true
+stats = SubResource("Resource_c38qa")
