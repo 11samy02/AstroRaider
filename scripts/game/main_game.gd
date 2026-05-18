@@ -19,6 +19,7 @@ func _ready() -> void:
 	GlobalGame.time_played = 0
 	enviroment = _resolve_enviroment()
 	entity_spawner = _resolve_entity_spawner()
+	SuitExpRunTracker.reset_run_exp()
 	
 	if enviroment == null:
 		push_error("MainGame: Enviroment node is not assigned and could not be found.")

@@ -60,6 +60,7 @@ func destroy_tile_at(pos: Array[Vector2], damage: int = 1) -> void:
 	var uniq := {}
 	for w in pos:
 		uniq[Vector2i(env.local_to_map(w))] = true
+
 	var all_pos: Array[Vector2i] = []
 	for k in uniq.keys():
 		all_pos.append(k)
@@ -73,36 +74,47 @@ func destroy_tile_at(pos: Array[Vector2], damage: int = 1) -> void:
 		var removed: Array[Vector2i] = []
 		var particles_used := 0
 		var drops_used := 0
-
+		var destroyed_tiles_count := 0
+		
 		for j in range(i, end):
 			var tile_pos := all_pos[j]
+		
 			if tiles_dict.has(tile_pos):
 				var tile: DestroyableTileResource = tiles_dict[tile_pos]
 				tile.health -= damage
+		
 				if tile.health <= 0:
+					destroyed_tiles_count += 1
+		
 					if particles_used < PARTICLE_BUDGET_PER_BATCH:
 						var particle = GROUND_PARTICLE.instantiate()
 						particle.global_position = env.map_to_local(tile_pos)
 						env.get_parent().add_child(particle)
 						particles_used += 1
-
+		
 					if drops_used < DROP_BUDGET_PER_BATCH:
 						drop_items(tile)
 						drops_used += 1
-
+		
 					env.erase_cell(tile_pos)
 					tiles_dict.erase(tile_pos)
 					removed.append(tile_pos)
+		
+		if destroyed_tiles_count > 0:
+			SuitExpRunTracker.add_mining_tiles(destroyed_tiles_count)
 
 		if not removed.is_empty():
 			var remset := {}
+
 			for p in removed:
 				remset[p] = true
 
 			var border: Array[Vector2i] = []
+
 			for p in removed:
-				for n in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
+				for n in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
 					var q = p + n
+
 					if not remset.has(q) and env.get_cell_source_id(q) != -1:
 						border.append(q)
 

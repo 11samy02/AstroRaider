@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Perk" format=3 uid="uid://cf7hvyp7hdfhm"]
+
+[ext_resource type="Texture2D" uid="uid://dktwsa5l5bm3k" path="res://assets/sprites/perks/Magnetic_Pull.png" id="1_8444j"]
+[ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://scripts/perks/resources/Perk_Resource.gd" id="1_fwwxm"]
+
+[resource]
+script = ExtResource("1_fwwxm")
+image = ExtResource("1_8444j")
+Key = 24
+perk_name = "Magnetic Pull"
+description = "Increases the pickup radius of crystals and ore by {{value}}%."
+type = 4
+active_type = 3
+tags = Array[int]([3])
+mechanics = Array[int]([6, 7])
+value = Array[int]([50, 100, 150, 200, 250, 300])
+metadata/_custom_type_script = "uid://bfd0euualynf6"

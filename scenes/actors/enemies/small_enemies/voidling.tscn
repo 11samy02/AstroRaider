@@ -38,6 +38,7 @@ script = ExtResource("4_kbqw5")
 [sub_resource type="Resource" id="Resource_2v3ne"]
 resource_local_to_scene = true
 script = ExtResource("5_hylx8")
+enemy_name = "Voidling"
 max_health = 2
 attack = SubResource("Resource_uh3lc")
 speed = 100.0
@@ -45,6 +46,7 @@ max_speed = 200.0
 ranged_attack = SubResource("Resource_vohf6")
 default_crit_chance = 0.0
 ai_type_keys = Array[ExtResource("3_7enna")]([SubResource("Resource_7enna"), SubResource("Resource_kbqw5"), SubResource("Resource_hylx8")])
+suit_exp_reward = 2
 metadata/_custom_type_script = "uid://bjpdimde5m5yi"
 
 [sub_resource type="Resource" id="Resource_q1405"]

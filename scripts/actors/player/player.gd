@@ -29,6 +29,7 @@ var gravity_dir := Vector2.DOWN
 @export var character_build_id := 0
 @export var selected_suit: SuitData.SuitKeys = SuitData.SuitKeys.Trailblazer
 @export var perk_manager: PerkManager
+@export var suits_manager: SuitsManager
 var is_bohrer_active := false
 var deadzone := 0.25
 var stats: Stats = Stats.new()
@@ -37,7 +38,9 @@ var collected_crystals: Array[ItemCrystal] = []
 var can_take_damage := true
 var invuln_task_running := false
 var shield_damage_block := false
+var dash_damage_block := false
 var hit_iframe_duration := 1.0
+var active_barrier_shield = null
 
 ## Loads the selected suit before child nodes cache player stats.
 func _enter_tree() -> void:
@@ -71,30 +74,13 @@ func _load_saved_build() -> void:
 ## Rebuilds the player's runtime stats from the selected suit.
 func _load_stats_from_selected_suit() -> void:
 	var selected_suit_data := get_selected_suit_data()
+
 	if not is_instance_valid(selected_suit_data) or not selected_suit_data.has_unlocked:
 		stats = Stats.new()
 		return
 
-	var runtime_stats := selected_suit_data.stats.duplicate(true)
-	if runtime_stats is Stats:
-		stats = runtime_stats
-	else:
-		stats = Stats.new()
+	stats = selected_suit_data.get_runtime_stats()
 
-	_apply_saved_perks()
-
-
-## Adds build-specific unlocked perks on top of the suit stats.
-func _apply_saved_perks() -> void:
-	if character_build_id >= PlayerDataBuilds.player_saved_res.saved_builds.size():
-		return
-
-	var saved_build := PlayerDataBuilds.player_saved_res.saved_builds[character_build_id]
-	for perk in saved_build.unlocked_perks:
-		if is_instance_valid(perk):
-			var perk_copy := perk.duplicate(true)
-			if perk_copy is Perk:
-				stats.Perks.append(perk_copy)
 
 ## Updates the player movement and shader effects
 func _physics_process(_delta: float) -> void:
@@ -137,6 +123,45 @@ func set_shield_damage_block(enabled: bool) -> void:
 	shield_damage_block = enabled
 	_refresh_damage_state()
 
+## Stores the active barrier shield so area hit order cannot bypass it
+func set_active_barrier_shield(shield) -> void:
+	active_barrier_shield = shield
+	set_shield_damage_block(is_instance_valid(active_barrier_shield))
+
+## Clears the active barrier shield reference when this shield is removed
+func clear_active_barrier_shield(shield) -> void:
+	if active_barrier_shield != shield:
+		return
+	active_barrier_shield = null
+	set_shield_damage_block(false)
+
+## Returns true while a live shield should receive incoming damage
+func has_active_barrier_shield() -> bool:
+	return (
+		is_instance_valid(active_barrier_shield)
+		and active_barrier_shield.has_method("is_destroying")
+		and not active_barrier_shield.is_destroying()
+	)
+
+## Applies incoming damage to the current shield
+func damage_active_barrier_shield(attack: AttackResource, who_attacked: CharacterBody2D = null) -> bool:
+	if not has_active_barrier_shield():
+		return false
+	active_barrier_shield.get_hit(attack, who_attacked)
+	return true
+
+## Returns shield knockback scaling from the player resource
+func get_active_shield_knockback_multiplier() -> float:
+	for player_res: PlayerResource in GlobalGame.Players:
+		if player_res.player == self and player_res.shield_res.has_shield:
+			return player_res.shield_res.knockback_multiplier
+	return 1.0
+
+## Enables or disables temporary damage blocking from dash movement
+func set_dash_damage_block(enabled: bool) -> void:
+	dash_damage_block = enabled
+	_refresh_damage_state()
+
 ## Recomputes whether the player can currently take damage
 func _refresh_damage_state() -> void:
-	can_take_damage = not shield_damage_block and not invuln_task_running
+	can_take_damage = not shield_damage_block and not invuln_task_running and not dash_damage_block

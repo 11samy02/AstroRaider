@@ -198,7 +198,9 @@ func death() -> void:
 	if self in entity_list:
 		entity_list.erase(self)
 	
-	GSignals.ENE_killed_by.emit(killed_by)
+	if is_instance_valid(killed_by):
+		SuitExpRunTracker.add_kill_exp(stats.enemy_name, stats.suit_exp_reward)
+		GSignals.ENE_killed_by.emit(killed_by)
 	queue_free()
 
 

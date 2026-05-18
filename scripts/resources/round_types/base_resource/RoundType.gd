@@ -109,4 +109,9 @@ func on_round_started(spawner: EntitySpawner) -> void:
 func on_round_finished(spawner: EntitySpawner) -> void:
 	if ends_run:
 		if scene_after_round != null:
+			print(SuitExpRunTracker.get_full_run_breakdown_text())
+			for player_res: PlayerResource in GlobalGame.Players:
+				var player = player_res.player
+				var current_suit : SuitData = SuitData.load_suit_res(player.selected_suit)
+				SuitExpRunTracker.apply_to_suit(current_suit)
 			ScreenTransition.change_scene_to(scene_after_round)

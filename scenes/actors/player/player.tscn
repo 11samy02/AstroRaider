@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bu8pq2ln3ys4r" path="res://assets/images/objects/lights/sphere_light.png" id="3_fk0u8"]
 [ext_resource type="Texture2D" uid="uid://h7tvg3phhnw4" path="res://assets/sprites/actors/items/thriler.png" id="5_l8fgy"]
 [ext_resource type="PackedScene" uid="uid://d265aooh2knps" path="res://scenes/managers/hitbox.tscn" id="5_qr1wl"]
-[ext_resource type="Script" uid="uid://b7vdsffck7gup" path="res://scripts/actors/player/Crosshair.gd" id="7_pdl7m"]
+[ext_resource type="Script" uid="uid://c20buu6h3ex84" path="res://scripts/actors/player/suits/suits_manager.gd" id="7_suits_mgr"]
+[ext_resource type="Script" uid="uid://bnblcldwoih0b" path="res://scripts/actors/player/suits/trail_blazer.gd" id="7_trail_blazer"]
 [ext_resource type="Texture2D" uid="uid://c3v5coeuuf6c6" path="res://assets/sprites/actors/items/crosshair.png" id="7_vmm8m"]
 [ext_resource type="Script" uid="uid://c1lcsc3d35vpk" path="res://scripts/actors/player/player_shader_effects.gd" id="9_8mobi"]
 [ext_resource type="AudioStream" uid="uid://dhq4tomopgolt" path="res://assets/audio/sfx/LaserSound.wav" id="9_51d1q"]
@@ -49,6 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://bpc404cnfuccf" path="res://scenes/perks/perk_build/perk_temporal_collapse.tscn" id="47_o2pqv"]
 [ext_resource type="PackedScene" uid="uid://b0r42snyrrlpc" path="res://scenes/perks/perk_build/perk_blood_claws.tscn" id="48_5f53s"]
 [ext_resource type="PackedScene" uid="uid://di5pcjgabuv2k" path="res://scenes/perks/perk_build/perk_sentinel_drone.tscn" id="49_w5y2x"]
+[ext_resource type="PackedScene" uid="uid://dsmnwt8sq4arl" path="res://scenes/perks/perk_build/Perk_Magnetic_Pull.tscn" id="50_magpl"]
 [ext_resource type="Shader" uid="uid://bacc40ajix2rt" path="res://assets/shaders/ui/boss/bossbar.gdshader" id="52_w5y2x"]
 
 [sub_resource type="Animation" id="Animation_b8c3x"]
@@ -380,7 +382,7 @@ _data = {
 &"build_symbol": SubResource("Animation_ec8vi")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w0i13"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fykva"]
 resource_local_to_scene = true
 shader = ExtResource("52_w5y2x")
 shader_parameter/glow_intensity = 0.0
@@ -389,7 +391,7 @@ shader_parameter/crit_intensity = 0.0
 shader_parameter/crit_color = Color(1, 0.27058825, 0.2, 1)
 shader_parameter/glow_color = Color(0.54247046, 0.008527867, 1.4439226e-07, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvo2l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a2gh6"]
 resource_local_to_scene = true
 shader = ExtResource("52_w5y2x")
 shader_parameter/glow_intensity = 0.0
@@ -398,7 +400,7 @@ shader_parameter/crit_intensity = 0.0
 shader_parameter/crit_color = Color(1, 0.271, 0.2, 1)
 shader_parameter/glow_color = Color(1.0588765e-06, 0.61795694, 0.7694895, 1)
 
-[node name="Player" type="CharacterBody2D" unique_id=182532903 node_paths=PackedStringArray("movement", "shader_effects", "perk_manager")]
+[node name="Player" type="CharacterBody2D" unique_id=182532903 node_paths=PackedStringArray("movement", "shader_effects", "perk_manager", "suits_manager")]
 process_mode = 1
 collision_layer = 2
 collision_mask = 17
@@ -407,8 +409,8 @@ radar_icon = ExtResource("2_fdgfk")
 movement = NodePath("Script/Movement")
 shader_effects = NodePath("Script/PlayerShaderEffects")
 landing_anim_name = Array[String](["idle", "use_item"])
-selected_suit = 2
 perk_manager = NodePath("PerkManager")
+suits_manager = NodePath("SuitsManager")
 
 [node name="Script" type="Node" parent="." unique_id=179333978]
 
@@ -432,146 +434,29 @@ sprite = NodePath("../../Sprite")
 script = ExtResource("10_gddw4")
 player = NodePath("../..")
 
-[node name="Sprite" type="Sprite2D" parent="." unique_id=446006153]
-z_index = 1
-material = ExtResource("2_0osdd")
-texture = ExtResource("2_xfvlm")
-hframes = 4
-vframes = 3
-
-[node name="sprite_anim" type="AnimationPlayer" parent="Sprite" unique_id=533549951]
-libraries/ = SubResource("AnimationLibrary_sefct")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1819091065]
-libraries/ = SubResource("AnimationLibrary_t64nr")
-autoplay = &"fling"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=252945942]
-visible = false
-z_index = 1
-shape = SubResource("CapsuleShape2D_xxfga")
-
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=437509579]
-energy = 1.5
-shadow_enabled = true
-shadow_filter = 2
-texture = ExtResource("3_fk0u8")
-texture_scale = 1.5
-metadata/_edit_lock_ = true
-
-[node name="bohrer_holder" type="Node2D" parent="." unique_id=467809558]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(0, 11)
-
-[node name="item_sprite" type="AnimatedSprite2D" parent="bohrer_holder" unique_id=1462395087]
-material = SubResource("CanvasItemMaterial_bg3jk")
-sprite_frames = SubResource("SpriteFrames_4pxcq")
-animation = &"use_item"
-autoplay = "use_item"
-frame_progress = 0.2695
-
-[node name="Rays" type="Node2D" parent="." unique_id=1563812714]
-
-[node name="check_for_ground" type="ShapeCast2D" parent="Rays" unique_id=1716983062]
-shape = SubResource("CapsuleShape2D_mru7q")
-target_position = Vector2(0, 2)
-max_results = 4
-
-[node name="check_for_destroyable_ground" type="ShapeCast2D" parent="Rays" unique_id=2057027523]
-shape = SubResource("CapsuleShape2D_mru7q")
-target_position = Vector2(0, 2)
-max_results = 4
-
-[node name="Hitbox" parent="." unique_id=29441199 node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]
-entity = NodePath("..")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox" unique_id=781214013]
-visible = false
-shape = SubResource("CapsuleShape2D_mru7q")
-
-[node name="BohrerHitBox" type="Area2D" parent="." unique_id=386333529]
-collision_layer = 0
-collision_mask = 8
-
-[node name="bohrer_hit_coll" type="CollisionShape2D" parent="BohrerHitBox" unique_id=659313151]
-visible = false
-position = Vector2(0, 6)
-shape = SubResource("CapsuleShape2D_4eg5x")
-
-[node name="Crosshair" type="Node2D" parent="." unique_id=1047968572 node_paths=PackedStringArray("player")]
-top_level = true
-script = ExtResource("7_pdl7m")
+[node name="SuitsManager" type="Node" parent="." unique_id=1047968572 node_paths=PackedStringArray("player")]
+script = ExtResource("7_suits_mgr")
 player = NodePath("..")
 
-[node name="sprite" type="Sprite2D" parent="Crosshair" unique_id=1118446385]
+[node name="TrailBlazer" type="Node2D" parent="SuitsManager" unique_id=1118446385 node_paths=PackedStringArray("player")]
+top_level = true
+script = ExtResource("7_trail_blazer")
+alt_3_shot_spread_angle = 13.0
+alt_5_shot_spread_angle = 10.0
+suit_key = 1
+player = NodePath("../..")
+
+[node name="sprite" type="Sprite2D" parent="SuitsManager/TrailBlazer" unique_id=568386698]
 position = Vector2(50, 0)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_vmm8m")
 
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="Crosshair" unique_id=568386698]
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="SuitsManager/TrailBlazer" unique_id=98072370]
 stream = ExtResource("9_51d1q")
 bus = &"Sfx"
 script = ExtResource("10_pasbu")
 min_random_pitch = 0.5
 max_random_pitch = 1.5
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=98072370]
-remote_path = NodePath("../Crosshair")
-update_rotation = false
-
-[node name="Sounds" type="Node2D" parent="." unique_id=475641787]
-
-[node name="Damage" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1089492862]
-stream = ExtResource("11_bdp4b")
-bus = &"Sfx"
-script = ExtResource("10_pasbu")
-min_random_pitch = 0.4
-
-[node name="BohrerSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=661693454]
-stream = ExtResource("12_purh8")
-bus = &"Sfx"
-script = ExtResource("10_pasbu")
-min_random_pitch = 0.5
-max_random_pitch = 0.75
-
-[node name="LiveIndikator" type="AudioStreamPlayer2D" parent="Sounds" unique_id=287317411]
-stream = ExtResource("19_02ndh")
-bus = &"Sfx"
-script = ExtResource("10_pasbu")
-metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
-
-[node name="ErrorSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=670081951]
-stream = ExtResource("20_pg3yl")
-volume_db = 10.0
-bus = &"Sfx"
-script = ExtResource("10_pasbu")
-metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
-
-[node name="Symbol" type="Node2D" parent="." unique_id=752856294 node_paths=PackedStringArray("player")]
-visible = false
-modulate = Color(1.5, 1.5, 1.5, 1)
-material = SubResource("CanvasItemMaterial_4cyff")
-script = ExtResource("18_lmggw")
-player = NodePath("..")
-
-[node name="Building_Symbol" type="Node2D" parent="Symbol" unique_id=1866773359]
-use_parent_material = true
-position = Vector2(0, -15)
-scale = Vector2(0.6, 0.6)
-
-[node name="GearSymbol" type="Sprite2D" parent="Symbol/Building_Symbol" unique_id=1463311624]
-use_parent_material = true
-position = Vector2(9.33334, 2)
-texture = ExtResource("19_rplw8")
-
-[node name="HammerSymbol" type="Sprite2D" parent="Symbol/Building_Symbol" unique_id=140981485]
-use_parent_material = true
-position = Vector2(-2.66667, -8)
-texture = ExtResource("20_mmiwy")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Symbol/Building_Symbol" unique_id=467244832]
-libraries/ = SubResource("AnimationLibrary_0lpgm")
-autoplay = &"build_symbol"
 
 [node name="PerkManager" type="Node" parent="." unique_id=668604466 node_paths=PackedStringArray("player", "perk_selector", "selection", "slots", "perks_node", "abilities_ui")]
 process_mode = 3
@@ -643,6 +528,7 @@ player = NodePath("../../..")
 player = NodePath("../../..")
 
 [node name="Energy_Overload" parent="PerkManager/Perks" unique_id=999372027 node_paths=PackedStringArray("player") instance=ExtResource("41_823vk")]
+max_speed_bonus_percent = Array[float]([15.0, 20.0, 25.0, 30.0, 35.0, 45.0])
 player = NodePath("../../..")
 
 [node name="Impulse Drive" parent="PerkManager/Perks" unique_id=1336730520 node_paths=PackedStringArray("player") instance=ExtResource("44_oiqbg")]
@@ -661,6 +547,133 @@ player = NodePath("../../..")
 fire_rate_per_level = Array[float]([1.0, 1.0, 0.5, 0.5, 0.35, 0.35])
 player = NodePath("../../..")
 Level = 1
+
+[node name="Magnetic_Pull" parent="PerkManager/Perks" unique_id=611192030 node_paths=PackedStringArray("player") instance=ExtResource("50_magpl")]
+player = NodePath("../../..")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=446006153]
+z_index = 1
+material = ExtResource("2_0osdd")
+texture = ExtResource("2_xfvlm")
+hframes = 4
+vframes = 3
+
+[node name="sprite_anim" type="AnimationPlayer" parent="Sprite" unique_id=533549951]
+libraries/ = SubResource("AnimationLibrary_sefct")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1819091065]
+libraries/ = SubResource("AnimationLibrary_t64nr")
+autoplay = &"fling"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=252945942]
+visible = false
+z_index = 1
+shape = SubResource("CapsuleShape2D_xxfga")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=437509579]
+energy = 1.5
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("3_fk0u8")
+texture_scale = 1.5
+metadata/_edit_lock_ = true
+
+[node name="bohrer_holder" type="Node2D" parent="." unique_id=467809558]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, 11)
+
+[node name="item_sprite" type="AnimatedSprite2D" parent="bohrer_holder" unique_id=1462395087]
+material = SubResource("CanvasItemMaterial_bg3jk")
+sprite_frames = SubResource("SpriteFrames_4pxcq")
+animation = &"use_item"
+autoplay = "use_item"
+frame_progress = 0.2695
+
+[node name="Rays" type="Node2D" parent="." unique_id=1563812714]
+
+[node name="check_for_ground" type="ShapeCast2D" parent="Rays" unique_id=1716983062]
+shape = SubResource("CapsuleShape2D_mru7q")
+target_position = Vector2(0, 2)
+max_results = 4
+
+[node name="check_for_destroyable_ground" type="ShapeCast2D" parent="Rays" unique_id=2057027523]
+shape = SubResource("CapsuleShape2D_mru7q")
+target_position = Vector2(0, 2)
+max_results = 4
+
+[node name="Hitbox" parent="." unique_id=29441199 node_paths=PackedStringArray("entity") instance=ExtResource("5_qr1wl")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox" unique_id=781214013]
+visible = false
+shape = SubResource("CapsuleShape2D_mru7q")
+
+[node name="BohrerHitBox" type="Area2D" parent="." unique_id=386333529]
+collision_layer = 0
+collision_mask = 8
+
+[node name="bohrer_hit_coll" type="CollisionShape2D" parent="BohrerHitBox" unique_id=659313151]
+visible = false
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_4eg5x")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="." unique_id=475641788]
+remote_path = NodePath("../SuitsManager/TrailBlazer")
+update_rotation = false
+
+[node name="Sounds" type="Node2D" parent="." unique_id=475641787]
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1089492862]
+stream = ExtResource("11_bdp4b")
+bus = &"Sfx"
+script = ExtResource("10_pasbu")
+min_random_pitch = 0.4
+
+[node name="BohrerSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=661693454]
+stream = ExtResource("12_purh8")
+bus = &"Sfx"
+script = ExtResource("10_pasbu")
+min_random_pitch = 0.5
+max_random_pitch = 0.75
+
+[node name="LiveIndikator" type="AudioStreamPlayer2D" parent="Sounds" unique_id=287317411]
+stream = ExtResource("19_02ndh")
+bus = &"Sfx"
+script = ExtResource("10_pasbu")
+metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
+
+[node name="ErrorSound" type="AudioStreamPlayer2D" parent="Sounds" unique_id=670081951]
+stream = ExtResource("20_pg3yl")
+volume_db = 10.0
+bus = &"Sfx"
+script = ExtResource("10_pasbu")
+metadata/_custom_type_script = "uid://bpyfjjfqu7ghm"
+
+[node name="Symbol" type="Node2D" parent="." unique_id=752856294 node_paths=PackedStringArray("player")]
+visible = false
+modulate = Color(1.5, 1.5, 1.5, 1)
+material = SubResource("CanvasItemMaterial_4cyff")
+script = ExtResource("18_lmggw")
+player = NodePath("..")
+
+[node name="Building_Symbol" type="Node2D" parent="Symbol" unique_id=1866773359]
+use_parent_material = true
+position = Vector2(0, -15)
+scale = Vector2(0.6, 0.6)
+
+[node name="GearSymbol" type="Sprite2D" parent="Symbol/Building_Symbol" unique_id=1463311624]
+use_parent_material = true
+position = Vector2(9.33334, 2)
+texture = ExtResource("19_rplw8")
+
+[node name="HammerSymbol" type="Sprite2D" parent="Symbol/Building_Symbol" unique_id=140981485]
+use_parent_material = true
+position = Vector2(-2.66667, -8)
+texture = ExtResource("20_mmiwy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Symbol/Building_Symbol" unique_id=467244832]
+libraries/ = SubResource("AnimationLibrary_0lpgm")
+autoplay = &"build_symbol"
 
 [node name="Ui" type="CanvasLayer" parent="." unique_id=108126596]
 process_mode = 3
@@ -683,11 +696,14 @@ player = NodePath("..")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="Healthbar" parent="GameUI/Control/MarginContainer/Rader/HP-Frame" parent_id_path=PackedInt32Array(500140784, 930788651) index="1" unique_id=1731503030]
-material = SubResource("ShaderMaterial_w0i13")
+[node name="Healthbar" parent="GameUI/Control/MarginContainer/Rader/HP-Frame" parent_id_path=PackedInt32Array(500140784, 930788651) index="2" unique_id=1731503030]
+material = SubResource("ShaderMaterial_fykva")
+
+[node name="Shieldbar" parent="GameUI/Control/MarginContainer/Rader/HP-Frame" parent_id_path=PackedInt32Array(500140784, 930788651) index="3" unique_id=2105025427]
+material = SubResource("ShaderMaterial_fykva")
 
 [node name="GeneratorHealthbar" parent="GameUI/Control/MarginContainer/Rader/Generator-Frame" parent_id_path=PackedInt32Array(500140784, 1450266962) index="1" unique_id=602292616]
-material = SubResource("ShaderMaterial_fvo2l")
+material = SubResource("ShaderMaterial_a2gh6")
 
 [node name="ability" parent="GameUI/Control/MarginContainer/Abilities" parent_id_path=PackedInt32Array(500140784, 1065963898) index="0" unique_id=2030177814]
 custom_minimum_size = Vector2(75, 75)
@@ -756,9 +772,9 @@ offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[connection signal="show_perk_selection_ui" from="PerkManager" to="Ui/PerkSelector" method="set_perk_details"]
 [connection signal="area_entered" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_entered"]
 [connection signal="area_exited" from="BohrerHitBox" to="Script/Mining" method="_on_bohrer_hit_box_area_exited"]
-[connection signal="show_perk_selection_ui" from="PerkManager" to="Ui/PerkSelector" method="set_perk_details"]
 [connection signal="select_perk_by_index" from="Ui/PerkSelector" to="PerkManager" method="_select_by_index"]
 
 [editable path="GameUI"]

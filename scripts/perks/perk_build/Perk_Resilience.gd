@@ -5,13 +5,13 @@ func activate_perk() -> void:
 	super()
 	stats.set_modifier(
 		stats.hit_iframe_duration_modifiers,
-		Key,
+		"perk_%s" % str(Key),
 		-get_invincibility_reduction()
 	)
 
 ## Removes the hit invulnerability reduction applied by this perk
 func _reset_stats() -> void:
-	stats.remove_modifier(stats.hit_iframe_duration_modifiers, Key)
+	stats.remove_modifier(stats.hit_iframe_duration_modifiers, "perk_%s" % str(Key))
 
 ## Returns the reduction amount for hit invulnerability duration
 func get_invincibility_reduction() -> float:

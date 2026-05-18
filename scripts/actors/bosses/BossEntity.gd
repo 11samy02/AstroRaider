@@ -158,6 +158,7 @@ func die() -> void:
 		return
 	
 	is_dead = true
+	SuitExpRunTracker.add_boss_exp(stats.Boss_Name,stats.Sup_Title, stats.boss_exp_reward)
 	GlobalGame.Bosses.erase(self)
 	queue_free()
 

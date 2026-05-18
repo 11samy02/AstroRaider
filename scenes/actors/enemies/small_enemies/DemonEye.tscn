@@ -30,35 +30,37 @@ key = 2
 state = 2
 metadata/_custom_type_script = "uid://bs2i61l25dpft"
 
-[sub_resource type="Resource" id="Resource_6c7te"]
+[sub_resource type="Resource" id="Resource_k6b1m"]
 resource_local_to_scene = true
 script = ExtResource("7_jiem3")
 damage = 4
 crit_chance = 10.0
 
-[sub_resource type="Resource" id="Resource_7job5"]
+[sub_resource type="Resource" id="Resource_24yy3"]
 resource_local_to_scene = true
 script = ExtResource("7_jiem3")
 damage = 6
 knockback = 0.5
 crit_chance = 15.0
 
-[sub_resource type="Resource" id="Resource_cfqbu"]
+[sub_resource type="Resource" id="Resource_7gyor"]
 resource_local_to_scene = true
 script = ExtResource("8_yj8bj")
+enemy_name = "Demon Eye"
 max_health = 2
 max_Random_health_edit = 1
-attack = SubResource("Resource_6c7te")
+attack = SubResource("Resource_k6b1m")
 speed = 55.0
 max_speed = 140.0
 projectile = ExtResource("5_4325e")
-ranged_attack = SubResource("Resource_7job5")
+ranged_attack = SubResource("Resource_24yy3")
 ai_type_keys = Array[ExtResource("6_ra7ad")]([SubResource("Resource_nvx3s"), SubResource("Resource_n7l1v"), SubResource("Resource_7mash")])
 follow_distance = 300.0
 attack_distance = 100.0
 ranged_max_distance = 150.0
 ranged_chance = 70
 orbit_radius = 200.0
+suit_exp_reward = 5
 
 [sub_resource type="Resource" id="Resource_heoew"]
 script = ExtResource("7_6c7te")
@@ -115,7 +117,7 @@ _data = {
 radius = 6.0
 height = 25.0
 
-[sub_resource type="Shader" id="Shader_oq150"]
+[sub_resource type="Shader" id="Shader_bytku"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode unshaded;
@@ -134,9 +136,9 @@ void fragment() {
     COLOR = vec4(final_rgb, tex.a * opacity);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_heoew"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3al1h"]
 resource_local_to_scene = true
-shader = SubResource("Shader_oq150")
+shader = SubResource("Shader_bytku")
 shader_parameter/opacity = 1.0
 shader_parameter/blink_color = Color(0.9724769, 0, 0.43080175, 1)
 shader_parameter/blink_strength = 0.0
@@ -148,7 +150,7 @@ height = 25.0
 [node name="DemonEye" unique_id=1574381913 node_paths=PackedStringArray("Shoot_sound", "wander_time", "follow_time", "shoot_delay") instance=ExtResource("1_400u0")]
 z_index = 2
 script = ExtResource("2_xjylt")
-stats = SubResource("Resource_cfqbu")
+stats = SubResource("Resource_7gyor")
 stats_upgrades = SubResource("Resource_heoew")
 Shoot_sound = NodePath("Sounds/ShootSound")
 sprite_variation = Array[Texture2D]([ExtResource("7_1k81c"), ExtResource("8_hpmga")])
@@ -197,7 +199,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="sprite" parent="." index="5" unique_id=732736570]
-material = SubResource("ShaderMaterial_heoew")
+material = SubResource("ShaderMaterial_3al1h")
 position = Vector2(0, 7)
 texture = ExtResource("7_1k81c")
 hframes = 3

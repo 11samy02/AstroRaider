@@ -4,6 +4,9 @@ class_name EnemyStats
 
 static var time_warp_multiplier := 1.00
 
+@export_group("Details")
+@export var enemy_name: String =  ""
+
 @export_group("Default Stats")
 @export var max_health: int = 10
 @export var max_Random_health_edit: int = 0
@@ -28,6 +31,10 @@ static var time_warp_multiplier := 1.00
 @export var ranged_chance: int = 2
 @export var orbit_radius: float = 150.0
 @export var orbit_speed: float = 2.0
+
+@export_group("Rewards")
+@export var suit_exp_reward : int = 1
+
 
 @export_group("")
 @export_tool_button("Refresh Inspector", "FlipWinding") var _refresh_btn = _refresh

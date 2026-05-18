@@ -62,6 +62,8 @@ DebugMenu="*uid://cggqb75a8w8r"
 SettingsSaver="*uid://1l7j7tnaf1qj"
 InputHelper="*uid://cholww48njaeh"
 LocalizationManager="*uid://bjv5ufgo23ljc"
+SuitExpRunTracker="*uid://dhaf5jpt8f1xa"
+GameSaver="*res://scripts/managers/GameSaver.gd"
 
 [debug]
 

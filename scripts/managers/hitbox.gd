@@ -7,17 +7,17 @@ class_name Hitbox
 func get_hit(attack: AttackResource, who_attacked: CharacterBody2D = null) -> void:
 	if entity is Player and not entity.can_take_damage:
 		return
-
+	
 	if entity is BossEntity:
 		entity.get_hit(attack, who_attacked)
 		return
-
+	
 	if entity is EnemyBaseTemplate:
 		entity.killed_by = who_attacked
 		entity.stun_activated(attack)
-
+	
 	var final_damage := calculate_real_damage(attack.damage)
-
+	
 	if randf_range(0.0, 100.0) <= attack.crit_chance:
 		final_damage *= 3
 

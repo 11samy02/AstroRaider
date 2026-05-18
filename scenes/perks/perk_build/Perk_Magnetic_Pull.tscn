@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dsmnwt8sq4arl"]
+
+[ext_resource type="PackedScene" uid="uid://ggmqkrtktbeu" path="res://scenes/perks/perk_build/perk_build.tscn" id="1_build"]
+[ext_resource type="Script" uid="uid://c2k8m4gneticpul1" path="res://scripts/perks/perk_build/perk_magnetic_pull.gd" id="2_script"]
+
+[node name="Magnetic_Pull" instance=ExtResource("1_build")]
+script = ExtResource("2_script")
+Key = 24

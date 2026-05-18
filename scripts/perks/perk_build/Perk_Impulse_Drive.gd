@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 			_tiles_destroyed += 1
 		else:
 			_is_active = false
-			player.can_take_damage = true
+			player.set_dash_damage_block(false)
 			_duration_timer.stop()
 			_in_kill_window = true
 			_kill_window_timer.start(0.3)
@@ -63,7 +63,7 @@ func activate_perk() -> void:
 	_kills_during_dash = 0
 	_tiles_destroyed = 0
 	_is_active = true
-	player.can_take_damage = false
+	player.set_dash_damage_block(true)
 	_duration_timer.start(get_duration())
 	
 	if is_instance_valid(ability_slot_ref):
@@ -72,7 +72,7 @@ func activate_perk() -> void:
 ## Ends dash and opens kill window for cooldown reduction
 func _on_dash_finished() -> void:
 	_is_active = false
-	player.can_take_damage = true
+	player.set_dash_damage_block(false)
 	_in_kill_window = true
 	_kill_window_timer.start(0.3)
 
@@ -91,7 +91,7 @@ func _reset_stats() -> void:
 	_already_hit.clear()
 	_kills_during_dash = 0
 	if is_instance_valid(player):
-		player.can_take_damage = true
+		player.set_dash_damage_block(false)
 
 ## Checks for enemy collisions during dash and applies bohrer damage
 func _check_hits() -> void:

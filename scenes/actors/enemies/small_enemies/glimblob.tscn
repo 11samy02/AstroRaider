@@ -23,7 +23,7 @@ script = ExtResource("3_die81")
 key = 2
 state = 2
 
-[sub_resource type="Resource" id="Resource_b0nvu"]
+[sub_resource type="Resource" id="Resource_vnpa3"]
 resource_local_to_scene = true
 script = ExtResource("4_tv15v")
 damage = 12
@@ -32,18 +32,20 @@ knockback = 4.0
 [sub_resource type="Resource" id="Resource_0iplv"]
 script = ExtResource("4_tv15v")
 
-[sub_resource type="Resource" id="Resource_b6l0w"]
+[sub_resource type="Resource" id="Resource_dwn6l"]
 resource_local_to_scene = true
 script = ExtResource("5_hrj2a")
+enemy_name = "Glimblob"
 max_health = 8
 max_Random_health_edit = 2
-attack = SubResource("Resource_b0nvu")
+attack = SubResource("Resource_vnpa3")
 speed = 35.0
 max_speed = 120.0
 ranged_attack = SubResource("Resource_0iplv")
 default_crit_chance = 5.0
 stun_resistence = 2.5
 ai_type_keys = Array[ExtResource("3_die81")]([SubResource("Resource_6iokw"), SubResource("Resource_jp2f4"), SubResource("Resource_oasmq")])
+suit_exp_reward = 7
 
 [sub_resource type="Resource" id="Resource_lweds"]
 script = ExtResource("6_0iplv")
@@ -55,7 +57,7 @@ metadata/_custom_type_script = "uid://emhy5rua0xsg"
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fhm8i"]
 radius = 12.0
 
-[sub_resource type="Shader" id="Shader_q5wtd"]
+[sub_resource type="Shader" id="Shader_lyeci"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 render_mode unshaded;
@@ -74,9 +76,9 @@ void fragment() {
     COLOR = vec4(final_rgb, tex.a * opacity);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_glu0v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g032t"]
 resource_local_to_scene = true
-shader = SubResource("Shader_q5wtd")
+shader = SubResource("Shader_lyeci")
 shader_parameter/opacity = 1.0
 shader_parameter/blink_color = Color(0.6456891, 0.58574724, 3.85046e-07, 1)
 shader_parameter/blink_strength = 0.0
@@ -122,10 +124,10 @@ _data = {
 
 [node name="Glimblob" unique_id=1386771000 node_paths=PackedStringArray("wander_time") instance=ExtResource("1_j57v1")]
 script = ExtResource("2_82sf1")
-wander_time = NodePath("Timer/follow_time")
-stats = SubResource("Resource_b6l0w")
+stats = SubResource("Resource_dwn6l")
 stats_upgrades = SubResource("Resource_lweds")
 sprite_variation = Array[Texture2D]([ExtResource("2_onj4g")])
+wander_time = NodePath("Timer/follow_time")
 
 [node name="StateMachine" parent="Scripts" parent_id_path=PackedInt32Array(564846133) index="0" unique_id=1847201236 node_paths=PackedStringArray("enemy", "wander_time", "follow_time")]
 enemy = NodePath("../..")
@@ -141,7 +143,7 @@ position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_fhm8i")
 
 [node name="sprite" parent="." index="2" unique_id=732736570]
-material = SubResource("ShaderMaterial_glu0v")
+material = SubResource("ShaderMaterial_g032t")
 texture = ExtResource("2_onj4g")
 hframes = 3
 vframes = 3

@@ -18,7 +18,9 @@ signal PERK_Extra_health
 signal PERK_show_items_behind_wall
 signal PERK_add_vision_behind_wall
 signal PERK_barrier_shield_destroyed
+signal PERK_barrier_shield_changed(player: Player, current_shield: int, max_shield: int)
 signal PERK_energy_overload_stopped
+signal PERK_magnetic_pull_changed
 
 ## first value -> strength, seconst value -> duration
 signal CAM_shake_effect

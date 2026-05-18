@@ -15,6 +15,9 @@ func set_players() -> void:
 		if player is Player:
 			var player_res: PlayerResource = PlayerResource.new()
 			player_res.player = player
+			var start_max_hp := int(player.stats.get_max_hp_total())
+			player_res.max_health = start_max_hp
+			player_res.current_health = start_max_hp
 
 			var player_hand = PLAYER_HAND.instantiate()
 			player_hand.player_res = player_res

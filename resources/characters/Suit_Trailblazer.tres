@@ -4,7 +4,81 @@
 [ext_resource type="Texture2D" uid="uid://wwdmfcfdttcf" path="res://assets/sprites/items/Suits/TrailBlazer.png" id="1_kpepi"]
 [ext_resource type="Script" uid="uid://plag5btfsk1b" path="res://scripts/actors/player/Stats.gd" id="2_c38qa"]
 [ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://scripts/perks/resources/Perk_Resource.gd" id="2_h0q13"]
+[ext_resource type="Script" uid="uid://8qai0pbqvrwh" path="res://scripts/resources/player/SuitStatLevelRule.gd" id="3_0tqu3"]
 [ext_resource type="Script" uid="uid://bkju3dtig3ue6" path="res://scripts/perks/StatModifierResource.gd" id="3_kpepi"]
+[ext_resource type="Script" uid="uid://c4veidore1s7t" path="res://scripts/resources/player/SuitsStatBonus.gd" id="4_eqbe2"]
+
+[sub_resource type="Resource" id="Resource_dyt2o"]
+script = ExtResource("4_eqbe2")
+value = 1.0
+metadata/_custom_type_script = "uid://c4veidore1s7t"
+
+[sub_resource type="Resource" id="Resource_am65w"]
+script = ExtResource("4_eqbe2")
+stat_key = 1
+value = 1.0
+metadata/_custom_type_script = "uid://c4veidore1s7t"
+
+[sub_resource type="Resource" id="Resource_b1vo5"]
+script = ExtResource("3_0tqu3")
+rule_name = "Every Level"
+start_level = 2
+bonuses = Array[ExtResource("4_eqbe2")]([SubResource("Resource_dyt2o"), SubResource("Resource_am65w")])
+metadata/_custom_type_script = "uid://8qai0pbqvrwh"
+
+[sub_resource type="Resource" id="Resource_mjw46"]
+script = ExtResource("4_eqbe2")
+stat_key = 4
+value = 1.0
+metadata/_custom_type_script = "uid://c4veidore1s7t"
+
+[sub_resource type="Resource" id="Resource_pieyk"]
+script = ExtResource("3_0tqu3")
+rule_name = "bonus"
+start_level = 3
+repeat_every_levels = 3
+priority = 1
+bonuses = Array[ExtResource("4_eqbe2")]([SubResource("Resource_mjw46")])
+metadata/_custom_type_script = "uid://8qai0pbqvrwh"
+
+[sub_resource type="Resource" id="Resource_gg144"]
+script = ExtResource("4_eqbe2")
+value = 2.0
+metadata/_custom_type_script = "uid://c4veidore1s7t"
+
+[sub_resource type="Resource" id="Resource_d6230"]
+script = ExtResource("3_0tqu3")
+start_level = 5
+repeat_every_levels = 5
+priority = 2
+bonuses = Array[ExtResource("4_eqbe2")]([SubResource("Resource_gg144")])
+metadata/_custom_type_script = "uid://8qai0pbqvrwh"
+
+[sub_resource type="Resource" id="Resource_7ru64"]
+script = ExtResource("4_eqbe2")
+stat_key = 4
+value = 2.0
+metadata/_custom_type_script = "uid://c4veidore1s7t"
+
+[sub_resource type="Resource" id="Resource_3iug4"]
+script = ExtResource("4_eqbe2")
+stat_key = 3
+value = 1.0
+metadata/_custom_type_script = "uid://c4veidore1s7t"
+
+[sub_resource type="Resource" id="Resource_0tqu3"]
+script = ExtResource("4_eqbe2")
+stat_key = 7
+value = 1.0
+metadata/_custom_type_script = "uid://c4veidore1s7t"
+
+[sub_resource type="Resource" id="Resource_mwh11"]
+script = ExtResource("3_0tqu3")
+start_level = 10
+repeat_every_levels = 10
+priority = 3
+bonuses = Array[ExtResource("4_eqbe2")]([SubResource("Resource_7ru64"), SubResource("Resource_3iug4"), SubResource("Resource_0tqu3")])
+metadata/_custom_type_script = "uid://8qai0pbqvrwh"
 
 [sub_resource type="Resource" id="Resource_c38qa"]
 script = ExtResource("2_c38qa")
@@ -16,3 +90,4 @@ description = "Standard exploration suit."
 image = ExtResource("1_kpepi")
 has_unlocked = true
 stats = SubResource("Resource_c38qa")
+stat_level_rules = Array[ExtResource("3_0tqu3")]([SubResource("Resource_b1vo5"), SubResource("Resource_pieyk"), SubResource("Resource_d6230"), SubResource("Resource_mwh11")])

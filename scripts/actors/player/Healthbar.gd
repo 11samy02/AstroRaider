@@ -21,7 +21,7 @@ func _ready() -> void:
 		queue_free()
 	
 	if parent_entity is Player:
-		max_hp = parent_entity.stats.max_hp
+		max_hp = int(parent_entity.stats.get_max_hp_total())
 	current_hp = max_hp
 
 
