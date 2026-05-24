@@ -31,7 +31,5 @@ Astro Raider is a 2D pixel art roguelike shooter built in Godot 4. Each run last
 
 Astro Raider is currently in active development. A Steam release is planned — wishlist and playtest details coming soon.
 
-
-## Notice
 Windows may show a SmartScreen warning because Astro Raider is currently unsigned.
 Click "More info" → "Run anyway" to start the game.
