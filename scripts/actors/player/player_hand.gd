@@ -171,9 +171,11 @@ func place_building() -> void:
 		_deduct_building_cost()
 		GSignals.TUT_building_placed.emit(player_res.player, building, placed_key)
 		
-		var old_building_res : BluePrintResource = building_res.duplicate()
-		
-		building_res = null
+		if placed_key == BluePrintData.Keys.Generator:
+			building_res = null
+			GSignals.BUI_hide_resource_cost.emit()
+		else:
+			GSignals.UI_selected_blueprint.emit(building_res)
 
 
 

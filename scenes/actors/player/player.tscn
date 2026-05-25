@@ -486,90 +486,70 @@ ability_4 = NodePath("../../../GameUI/Control/MarginContainer/VBoxContainer2/Abi
 
 [node name="Speed_It_Up" parent="PerkManager/Perks" unique_id=1932687981 node_paths=PackedStringArray("player") instance=ExtResource("22_8v5l4")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Construction_expert" parent="PerkManager/Perks" unique_id=914926845 node_paths=PackedStringArray("player") instance=ExtResource("23_02ndh")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="AimBot" parent="PerkManager/Perks" unique_id=1063151400 node_paths=PackedStringArray("player") instance=ExtResource("24_pa3sa")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="AntiMineDetection" parent="PerkManager/Perks" unique_id=1856133259 node_paths=PackedStringArray("reveal", "player") instance=ExtResource("25_38jmy")]
 reveal = NodePath("../../../Script/PlayerRevealDetection")
 player = NodePath("../../..")
-Level = 5
 
 [node name="BarrierShield" parent="PerkManager/Perks" unique_id=1121491132 node_paths=PackedStringArray("player") instance=ExtResource("26_wpgrq")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="CoinMaster" parent="PerkManager/Perks" unique_id=842886800 node_paths=PackedStringArray("player") instance=ExtResource("26_3sfd7")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="PerkCriticalEdge" parent="PerkManager/Perks" unique_id=490348910 node_paths=PackedStringArray("player") instance=ExtResource("27_3sfd7")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Each_Round_Heal" parent="PerkManager/Perks" unique_id=1437008909 node_paths=PackedStringArray("player") instance=ExtResource("28_dis4x")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Emergency_Heal" parent="PerkManager/Perks" unique_id=1684271770 node_paths=PackedStringArray("player") instance=ExtResource("29_fs83k")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Extra_Health" parent="PerkManager/Perks" unique_id=218607484 node_paths=PackedStringArray("player") instance=ExtResource("30_6ll5j")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Resilience" parent="PerkManager/Perks" unique_id=1904476207 node_paths=PackedStringArray("player") instance=ExtResource("31_ds0h7")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="PowerShot" parent="PerkManager/Perks" unique_id=1298049131 node_paths=PackedStringArray("player") instance=ExtResource("35_m4e5o")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="PiercingShot" parent="PerkManager/Perks" unique_id=1629709656 node_paths=PackedStringArray("player") instance=ExtResource("36_f7306")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="StunGrenade" parent="PerkManager/Perks" unique_id=1597407078 node_paths=PackedStringArray("player") instance=ExtResource("37_4hqgc")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Energy_Overload" parent="PerkManager/Perks" unique_id=999372027 node_paths=PackedStringArray("player") instance=ExtResource("41_823vk")]
 max_speed_bonus_percent = Array[float]([15.0, 20.0, 25.0, 30.0, 35.0, 45.0])
 player = NodePath("../../..")
-Level = 5
 
 [node name="Impulse Drive" parent="PerkManager/Perks" unique_id=1336730520 node_paths=PackedStringArray("player") instance=ExtResource("44_oiqbg")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="VampireBite" parent="PerkManager/Perks" unique_id=1763410141 node_paths=PackedStringArray("player") instance=ExtResource("45_qxlfy")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="TemporalCollapse" parent="PerkManager/Perks" unique_id=717977835 node_paths=PackedStringArray("player") instance=ExtResource("47_o2pqv")]
 player = NodePath("../../..")
-Level = 2
 
 [node name="Perk_Blood_Claws" parent="PerkManager/Perks" unique_id=67303946 node_paths=PackedStringArray("player") instance=ExtResource("48_5f53s")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Perk_Sentinel_Drone" parent="PerkManager/Perks" unique_id=611192029 node_paths=PackedStringArray("player") instance=ExtResource("49_w5y2x")]
 fire_rate_per_level = Array[float]([1.0, 1.0, 0.5, 0.5, 0.35, 0.35])
 player = NodePath("../../..")
-Level = 5
+Level = 1
 
 [node name="Magnetic_Pull" parent="PerkManager/Perks" unique_id=611192030 node_paths=PackedStringArray("player") instance=ExtResource("50_magpl")]
 player = NodePath("../../..")
-Level = 5
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=446006153]
 z_index = 1
