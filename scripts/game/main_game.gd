@@ -31,10 +31,6 @@ func _ready() -> void:
 	if enviroment.finished_map:
 		call_deferred("start_Game")
 
-func _input(event: InputEvent) -> void:
-	if Input.is_key_pressed(KEY_B) and is_instance_valid(tutorial):
-		tutorial.queue_free()
-
 func start_Game() -> void:
 	if game_started or start_game_pending:
 		return

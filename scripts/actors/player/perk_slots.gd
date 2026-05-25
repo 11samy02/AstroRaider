@@ -20,6 +20,11 @@ var activation_slots: Dictionary = {
 
 
 func _process(_delta: float) -> void:
+	if GlobalGame.are_player_inputs_blocked():
+		return
+	if not GlobalGame.is_tutorial_action_allowed("use_ability"):
+		return
+
 	if Input.is_action_just_pressed("slot_q"):
 		activate_slot("Q")
 	if Input.is_action_just_pressed("slot_e"):

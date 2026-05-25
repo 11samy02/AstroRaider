@@ -12,9 +12,9 @@ var wall_notification: Array[Vector2i]
 func show_items_behind_wall(pos: Array[Vector2]) -> void:
 	for i in pos:
 		var tile_pos = Vector2i(env.local_to_map(i))
-		if env.tiles.tiles_dict.has(tile_pos):
+		var tile := env.tiles.get_tile_data(tile_pos)
+		if tile != null:
 			if !wall_notification.has(tile_pos):
-				var tile: DestroyableTileResource = env.tiles.tiles_dict[tile_pos]
 				if tile.key != DropData.Keys.Crystal:
 					var notification = ITEM_IN_WALL_NOTIFICATION.instantiate()
 					notification.global_position = i

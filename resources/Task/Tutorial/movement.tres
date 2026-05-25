@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TaskResource" format=3 uid="uid://cu43opqvxd7xm"]
+
+[ext_resource type="Script" uid="uid://dfmua83srk71q" path="res://scripts/resources/task/TaskResource.gd" id="1_nrow2"]
+
+[resource]
+script = ExtResource("1_nrow2")
+key = "tutorial_movement"
+task_kind = 0
+task_text = "[b]MOVE[/b]
+Press [color=gold]W A S D[/color] once"

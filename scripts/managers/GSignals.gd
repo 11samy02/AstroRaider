@@ -48,3 +48,9 @@ signal BUI_generator_is_placed(generator: CrystalGenerator)
 signal BUI_BUILDING_select_building
 signal BUI_allow_to_place
 signal BUI_hide_resource_cost
+
+#Tutorial
+signal TUT_tiles_destroyed(count: int)
+signal TUT_build_mode_changed(player: Player, is_build_mode: bool)
+signal TUT_building_placed(player: Player, building: Building, blueprint_key)
+signal TUT_building_salvaged(player: Player, blueprint_key)

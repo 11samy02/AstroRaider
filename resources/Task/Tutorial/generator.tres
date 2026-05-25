@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TaskResource" format=3 uid="uid://c5a4r17bp3rqi"]
+
+[ext_resource type="Script" uid="uid://dfmua83srk71q" path="res://scripts/resources/task/TaskResource.gd" id="1_q3mta"]
+
+[resource]
+script = ExtResource("1_q3mta")
+key = "tutorial_generator"
+task_kind = 0
+task_text = "[b]GENERATOR[/b]
+Press [color=gold]B[/color] and place it"

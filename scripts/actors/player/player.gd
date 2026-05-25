@@ -41,6 +41,7 @@ var shield_damage_block := false
 var dash_damage_block := false
 var hit_iframe_duration := 1.0
 var active_barrier_shield = null
+var _player_hitbox_collision_layer := -1
 
 ## Loads the selected suit before child nodes cache player stats.
 func _enter_tree() -> void:
@@ -50,6 +51,7 @@ func _enter_tree() -> void:
 
 ## Initializes runtime state after the player entered the scene.
 func _ready() -> void:
+	_cache_player_hitbox_collision_layer()
 	_refresh_damage_state()
 
 
@@ -121,6 +123,7 @@ func trigger_invincibility_frames() -> void:
 ## Enables or disables the damage block coming from the shield
 func set_shield_damage_block(enabled: bool) -> void:
 	shield_damage_block = enabled
+	_set_player_hitbox_enabled(not enabled)
 	_refresh_damage_state()
 
 ## Stores the active barrier shield so area hit order cannot bypass it
@@ -165,3 +168,25 @@ func set_dash_damage_block(enabled: bool) -> void:
 ## Recomputes whether the player can currently take damage
 func _refresh_damage_state() -> void:
 	can_take_damage = not shield_damage_block and not invuln_task_running and not dash_damage_block
+
+
+func _cache_player_hitbox_collision_layer() -> void:
+	if _player_hitbox_collision_layer >= 0:
+		return
+
+	if is_instance_valid(hitbox):
+		_player_hitbox_collision_layer = hitbox.collision_layer
+
+
+func _set_player_hitbox_enabled(enabled: bool) -> void:
+	if not is_instance_valid(hitbox):
+		return
+
+	_cache_player_hitbox_collision_layer()
+
+	if _player_hitbox_collision_layer < 0:
+		return
+
+	var next_layer := _player_hitbox_collision_layer if enabled else 0
+	hitbox.set_deferred("collision_layer", next_layer)
+	hitbox.set_deferred("monitorable", enabled)

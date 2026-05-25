@@ -6,6 +6,8 @@ const GROUND_PARTICLE = preload("res://scenes/particles/destroy_ground_particle.
 @export var TileDrops: Array[TileDropResource]
 
 var tiles_dict: Dictionary = {}
+var _drop_pool: Array[TileDropResource] = []
+var _drop_pool_built := false
 
 @onready var env: Enviroment = get_parent()
 
@@ -41,15 +43,29 @@ func set_live_to_tiles(tiles_to_process: Array = []) -> void:
 		var tile_pos: Vector2i = Vector2i(t)
 		if tiles_dict.has(tile_pos):
 			continue
-		var drop: TileDropResource = get_random_drop()
-		var tr = DestroyableTileResource.new()
-		tr.pos = tile_pos
-		tr.key = (drop.key if drop != null else 0)
-		tr.drop_count.min_value = (drop.min_amount if drop != null else 0)
-		tr.drop_count.max_value = (drop.max_amount if drop != null else 0)
-		if not ("health" in tr):
-			tr.health = 3
-		tiles_dict[tile_pos] = tr
+		if env.get_cell_source_id(tile_pos) == -1:
+			continue
+		tiles_dict[tile_pos] = _create_tile_data(tile_pos)
+
+
+func get_tile_data(tile_pos: Vector2i) -> DestroyableTileResource:
+	if tiles_dict.has(tile_pos):
+		return tiles_dict[tile_pos]
+	if env.get_cell_source_id(tile_pos) == -1:
+		return null
+	var tile_data := _create_tile_data(tile_pos)
+	tiles_dict[tile_pos] = tile_data
+	return tile_data
+
+
+func _create_tile_data(tile_pos: Vector2i) -> DestroyableTileResource:
+	var drop: TileDropResource = get_random_drop()
+	var tile_data := DestroyableTileResource.new()
+	tile_data.pos = tile_pos
+	tile_data.key = (drop.key if drop != null else 0)
+	tile_data.drop_count.min_value = (drop.min_amount if drop != null else 0)
+	tile_data.drop_count.max_value = (drop.max_amount if drop != null else 0)
+	return tile_data
 
 
 ## Applies damage to tiles at the given world positions and removes destroyed ones
@@ -79,8 +95,8 @@ func destroy_tile_at(pos: Array[Vector2], damage: int = 1) -> void:
 		for j in range(i, end):
 			var tile_pos := all_pos[j]
 		
-			if tiles_dict.has(tile_pos):
-				var tile: DestroyableTileResource = tiles_dict[tile_pos]
+			var tile := get_tile_data(tile_pos)
+			if tile != null:
 				tile.health -= damage
 		
 				if tile.health <= 0:
@@ -102,6 +118,7 @@ func destroy_tile_at(pos: Array[Vector2], damage: int = 1) -> void:
 		
 		if destroyed_tiles_count > 0:
 			SuitExpRunTracker.add_mining_tiles(destroyed_tiles_count)
+			GSignals.TUT_tiles_destroyed.emit(destroyed_tiles_count)
 
 		if not removed.is_empty():
 			var remset := {}
@@ -215,10 +232,22 @@ func get_custom_surrounding_cells(pos: Vector2i) -> Array:
 
 ## Picks a random drop from TileDrops weighted by rarity
 func get_random_drop() -> TileDropResource:
-	var list: Array[TileDropResource] = []
-	for t in TileDrops:
-		for _rar in t.rarity:
-			list.append(t)
-	if list.is_empty():
+	var pool := _get_drop_pool()
+	if pool.is_empty():
 		return null
-	return list[env.rng.randi_range(0, list.size() - 1)]
+	return pool[env.rng.randi_range(0, pool.size() - 1)]
+
+
+func _get_drop_pool() -> Array[TileDropResource]:
+	if _drop_pool_built:
+		return _drop_pool
+
+	_drop_pool.clear()
+	for t in TileDrops:
+		if t == null:
+			continue
+		for _i in range(maxi(t.rarity, 0)):
+			_drop_pool.append(t)
+
+	_drop_pool_built = true
+	return _drop_pool

@@ -12,6 +12,8 @@ var current_health := 150
 
 ## Whether this player currently has a valid navigation path.
 var has_a_path := false
+## Whether the one-time crystal path hint has already been shown this run.
+var has_shown_first_crystal_path := false
 
 ## Activation perks currently assigned to this player.
 var activation_skills : Array[PerkBuild] = []

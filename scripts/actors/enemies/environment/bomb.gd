@@ -92,6 +92,8 @@ func death():
 	var explosion: BombExplosion = EXPLOSION.instantiate()
 	explosion.global_position = global_position
 	explosion.damage = damage
+	explosion.shield_damage_multiplier = 1.0
+	explosion.max_shield_damage_per_hit = damage
 
 	# Kollisions-Radius an Explosion übergeben
 	var r_tiles := int(ceil(explosion_radius / 2.0))

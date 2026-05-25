@@ -21,6 +21,7 @@ static var generator: CrystalGenerator = null
 
 var is_collected := false
 var is_attached_to_generator := false
+var is_destroying := false
 var player_who_collected: Player = null
 var is_first_one := true
 
@@ -183,6 +184,9 @@ func collect(body: Node2D) -> void:
 	if not body is Player:
 		return
 
+	if not _can_player_collect_now():
+		return
+
 	if is_collected:
 		return
 
@@ -208,6 +212,7 @@ func on_collected() -> void:
 func _process(delta: float) -> void:
 	if not is_collected:
 		_apply_magnetic_pickup_radius()
+		_collect_overlapping_player_if_allowed()
 		return
 
 	if not is_instance_valid(player_who_collected):
@@ -228,6 +233,36 @@ func _process(delta: float) -> void:
 #endregion
 
 
+func _collect_overlapping_player_if_allowed() -> void:
+	if not _can_player_collect_now():
+		return
+
+	for body in get_overlapping_bodies():
+		if body is Player:
+			collect(body)
+			return
+
+
+func _can_player_collect_now() -> bool:
+	if not GlobalGame.is_in_tutorial or GlobalGame.tutorial == 1:
+		return true
+
+	if self is ItemCrystal:
+		return GlobalGame.is_tutorial_action_allowed("collect_crystal")
+
+	if self is OreTemplate:
+		return (
+			GlobalGame.is_tutorial_action_allowed("mining")
+			or GlobalGame.is_tutorial_action_allowed("collect_crystal")
+			or GlobalGame.is_tutorial_action_allowed("deliver_crystal")
+			or GlobalGame.is_tutorial_action_allowed("select_building")
+			or GlobalGame.is_tutorial_action_allowed("place_building")
+			or GlobalGame.is_tutorial_action_allowed("salvage_building")
+		)
+
+	return true
+
+
 #region Generator Attach
 
 func should_attach_to_generator() -> bool:
@@ -241,6 +276,9 @@ func should_attach_to_generator() -> bool:
 		return false
 
 	if not is_instance_valid(player_who_collected):
+		return false
+
+	if self is ItemCrystal and not GlobalGame.is_tutorial_action_allowed("deliver_crystal"):
 		return false
 
 	if generator.player_list.has(player_who_collected):
@@ -305,6 +343,10 @@ func update_custom_behavior(delta: float) -> void:
 
 
 func destroy() -> void:
+	if is_destroying:
+		return
+
+	is_destroying = true
 	rope.clear_points()
 	velocity = Vector2.ZERO
 	on_destroy()

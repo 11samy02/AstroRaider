@@ -63,6 +63,11 @@ func _process(delta: float) -> void:
 		return
 
 	show()
+
+	if GlobalGame.are_player_inputs_blocked() or not GlobalGame.is_tutorial_action_allowed("shooting"):
+		_cancel_charge()
+		return
+
 	_update_aim(delta)
 	_update_charge(delta)
 
@@ -72,6 +77,11 @@ func _process(delta: float) -> void:
 
 ## Handles primary fire input while the suit is active and the player can shoot.
 func _input(_event: InputEvent) -> void:
+	if GlobalGame.are_player_inputs_blocked():
+		return
+	if not GlobalGame.is_tutorial_action_allowed("shooting"):
+		return
+
 	if not is_active or player.current_state != player.states.Default:
 		return
 
@@ -147,6 +157,14 @@ func _is_alt_fire_pressed() -> bool:
 		or Input.get_joy_axis(player.controller_id, JOY_AXIS_TRIGGER_LEFT) > 0.0
 		or Input.is_joy_button_pressed(player.controller_id, JOY_BUTTON_LEFT_SHOULDER)
 	)
+
+
+func _cancel_charge() -> void:
+	_is_charging = false
+	_charge_time = 0.0
+
+	if is_instance_valid(aim_sprite):
+		aim_sprite.scale = base_aim_sprite_scale
 
 
 ## Releases the charged shot if the minimum charge time was reached.

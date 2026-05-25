@@ -1,0 +1,5 @@
+Daemon: You built something. I am horrified, but we continue.
+Daemon: [b][color=gold]Right click[/color][/b] switches to salvage mode.
+Daemon: Then [b][color=gold]left click[/color][/b] your building to tear it down and recover materials.
+Daemon: Not the generator. That one matters, unlike most of your decisions.
+[signal arg="wait_for_salvage_building"]

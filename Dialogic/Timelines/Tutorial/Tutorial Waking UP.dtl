@@ -1,0 +1,14 @@
+Daemon: [shake rate=12 level=4]Well, well...[/shake] look who crawled back from the vacuum.
+Daemon: My favorite little Astro Raider. The one who owes me... [b][color=gold]ONE MILLION Galactic Credits[/color][/b].
+Daemon: Do not look so confused. Yes, I revived you. [i]Again.[/i]
+Daemon: You die more often than my patience does.
+Daemon: Now listen carefully, little space-slug.
+Daemon: Normally I would not waste a single [wave amp=18 freq=3]cosmic heartbeat[/wave] teaching someone like you.
+Daemon: But until you pay off your debt, [b][color=#ff7676]YOU are technically MY property[/color][/b].
+Daemon: And I do not like my property exploding uselessly in deep space.
+Daemon: So I will show you how to [b]fly[/b], [b]shoot[/b], and [b]survive[/b]...
+Daemon: just enough to keep you alive long enough to [shake rate=18 level=6][b]PAY ME BACK[/b][/shake].
+Daemon: See that suit you are wearing? That is a [b][color=#8fd3ff]Gravitic Mobility Suit[/color][/b].
+Daemon: It bends local gravity around you. Meaning, wherever you press, you [wave amp=20 freq=4][b]FLOAT[/b][/wave].
+Daemon: So try it. Press [b][color=gold]W A S D[/color][/b] once each to move your pathetic body around.
+[signal arg="wait_for_movement"]

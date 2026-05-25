@@ -42,7 +42,9 @@ func _process(_delta: float) -> void:
 		setup_player_res()
 		return
 
+	_sync_from_active_shield()
 	_sync_max_value()
+	value = current_shield
 	_update_visibility()
 	_set_shield_label_text()
 
@@ -62,24 +64,49 @@ func setup_player_res() -> void:
 				chip_bar.max_value = max_value
 				chip_bar.value = current_shield
 
+			_sync_from_active_shield()
 			_update_visibility()
 			return
 
 
-## ShieldBar max value should always be the player's max health
+## ShieldBar max value is the active shield's own max health.
 func _sync_max_value() -> void:
-	if player_res == null or game_ui == null or game_ui.player == null:
-		return
-
-	if game_ui.player is not Player:
-		return
-
-	var player_max_hp := game_ui.player.stats.get_max_hp_total()
-
-	max_value = player_max_hp
+	var shield_max_value := maxi(maxi(max_shield, current_shield), 1)
+	max_value = shield_max_value
 
 	if is_instance_valid(chip_bar):
-		chip_bar.max_value = player_max_hp
+		chip_bar.max_value = shield_max_value
+
+
+func _sync_from_active_shield() -> void:
+	if game_ui == null or game_ui.player is not Player:
+		return
+
+	var player := game_ui.player as Player
+
+	if not player.has_active_barrier_shield():
+		if current_shield != 0:
+			current_shield = 0
+			value = current_shield
+
+			if is_instance_valid(chip_bar):
+				chip_bar.value = current_shield
+		return
+
+	var shield := player.active_barrier_shield as BarrierShield
+	if not is_instance_valid(shield):
+		return
+
+	if current_shield == shield.Health and max_shield == shield.MaxHealth:
+		return
+
+	current_shield = maxi(shield.Health, 0)
+	max_shield = maxi(shield.MaxHealth, 0)
+	_sync_max_value()
+	value = current_shield
+
+	if is_instance_valid(chip_bar):
+		chip_bar.value = current_shield
 
 
 ## Receives shield updates from BarrierShield
@@ -152,7 +179,7 @@ func _update_visibility() -> void:
 		shield_label.visible = has_visible_shield
 
 
-## Shows only the current shield value
+## Shows only the current shield HP.
 func _set_shield_label_text() -> void:
 	if not is_instance_valid(shield_label):
 		return

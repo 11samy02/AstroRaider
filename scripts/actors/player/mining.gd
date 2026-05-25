@@ -23,6 +23,12 @@ func _physics_process(_delta: float) -> void:
 
 
 func set_bohrer_state() -> void:
+	if GlobalGame.are_player_inputs_blocked() or not GlobalGame.is_tutorial_action_allowed("mining"):
+		player.is_bohrer_active = false
+		player.bohrer_sound.stop()
+		use_bohrer_anim()
+		return
+
 	use_bohrer_anim()
 	bohrer_damage_on_static_hit()
 	

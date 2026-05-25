@@ -7,14 +7,23 @@ signal slot_assigned
 @onready var ability3: Control = $ability3
 @onready var ability4: Control = $ability4
 
+@export var equip_text: Label
+
 var slots: PerkSlots
 var _slot_map: Dictionary = {}
 var _pending_perk: PerkBuild = null
 var _selecting := false
 var _tween_map: Dictionary = {}
+var _dialogic_open := false
 
 func _ready() -> void:
+	equip_text.hide()
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	_dialogic_open = Dialogic.current_timeline != null
+	if not Dialogic.timeline_started.is_connected(_on_dialogic_timeline_started):
+		Dialogic.timeline_started.connect(_on_dialogic_timeline_started)
+	if not Dialogic.timeline_ended.is_connected(_on_dialogic_timeline_ended):
+		Dialogic.timeline_ended.connect(_on_dialogic_timeline_ended)
 	await get_tree().process_frame
 	_resolve_slots()
 	_slot_map = {
@@ -27,8 +36,20 @@ func _ready() -> void:
 		var btn: Button = _slot_map[key].get_node("Button")
 		btn.pressed.connect(_on_slot_clicked.bind(key))
 	_refresh_all()
+	_sync_dialogic_visibility()
+
+
+func _exit_tree() -> void:
+	if Dialogic.timeline_started.is_connected(_on_dialogic_timeline_started):
+		Dialogic.timeline_started.disconnect(_on_dialogic_timeline_started)
+	if Dialogic.timeline_ended.is_connected(_on_dialogic_timeline_ended):
+		Dialogic.timeline_ended.disconnect(_on_dialogic_timeline_ended)
 
 func _process(_delta: float) -> void:
+	_sync_dialogic_visibility()
+	if _dialogic_open:
+		return
+
 	if not _selecting:
 		return
 	if Input.is_action_just_pressed("slot_q") and slots.activation_slots["Q"] == null:
@@ -37,6 +58,22 @@ func _process(_delta: float) -> void:
 		_assign_pending("E")
 	if Input.is_action_just_pressed("slot_c") and slots.activation_slots["C"] == null:
 		_assign_pending("C")
+
+
+func _on_dialogic_timeline_started() -> void:
+	_dialogic_open = true
+	_sync_dialogic_visibility()
+
+
+func _on_dialogic_timeline_ended() -> void:
+	_dialogic_open = false
+	_sync_dialogic_visibility()
+
+
+func _sync_dialogic_visibility() -> void:
+	_dialogic_open = GlobalGame.are_player_inputs_blocked()
+	visible = not _dialogic_open
+
 
 ## Resolves PerkSlots from the first player in GlobalGame
 func _resolve_slots() -> void:
@@ -95,14 +132,15 @@ func _start_pulse_on_free_slots() -> void:
 
 ## Starts pulse tween on a slot button
 func _start_pulse(key: String) -> void:
+	equip_text.show()
 	var btn: Button = _slot_map[key].get_node("Button")
 	if _tween_map.has(key) and is_instance_valid(_tween_map[key]):
 		_tween_map[key].kill()
 	var tween := create_tween().set_loops()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(btn, "modulate:a", 0.4, 0.3)
-	tween.tween_property(btn, "modulate:a", 1.0, 0.3)
+	tween.tween_property(btn, "modulate:a", 0.4, 0.5)
+	tween.tween_property(btn, "modulate:a", 1.0, 0.5)
 	_tween_map[key] = tween
 
 ## Stops pulse tween on a slot
@@ -113,9 +151,13 @@ func _stop_pulse(key: String) -> void:
 	var btn: Button = _slot_map[key].get_node("Button")
 	btn.modulate.a = 1.0
 	btn.scale = Vector2(1.0, 1.0)
+	equip_text.hide()
 
 ## Called when a slot button is clicked
 func _on_slot_clicked(key: String) -> void:
+	if GlobalGame.are_player_inputs_blocked():
+		return
+
 	if _selecting:
 		if key == "X":
 			return

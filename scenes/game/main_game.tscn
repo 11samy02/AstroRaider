@@ -311,10 +311,9 @@ tutorial = NodePath("TutorialManager/Tutorial")
 [node name="EntitySpawner" parent="." unique_id=957906261 instance=ExtResource("6_kru1y")]
 time_until_wave_start = SubResource("Resource_ccb4r")
 
-[node name="TutorialManager" type="Node" parent="." unique_id=1111507496 node_paths=PackedStringArray("enviroment", "key_labels", "wasd_tutorial")]
+[node name="TutorialManager" type="Node" parent="." unique_id=1111507496 node_paths=PackedStringArray("enviroment", "wasd_tutorial")]
 script = ExtResource("2_udiv6")
 enviroment = NodePath("../Enviroment")
-key_labels = [NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/w-key/Label"), NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/s-key/Label"), NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/a-key/Label"), NodePath("Tutorial_wasd/Control/MarginContainer/VBoxContainer/HBoxContainer/d-key/Label")]
 wasd_tutorial = NodePath("Tutorial_wasd")
 
 [node name="Tutorial" type="CanvasLayer" parent="TutorialManager" unique_id=127861471]
@@ -502,6 +501,7 @@ max_zoom = 1.5
 
 [node name="Enviroment" parent="." unique_id=1253534675 instance=ExtResource("1_wfgm1")]
 persistence_mode = 3
+saved_file_prefix = "planet_test_"
 
 [node name="tileMap Holder" type="Node2D" parent="." unique_id=1561767499]
 

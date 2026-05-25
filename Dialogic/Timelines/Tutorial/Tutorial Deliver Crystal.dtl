@@ -1,0 +1,5 @@
+Daemon: Excellent. You collected a crystal without swallowing it.
+Daemon: Now drag it to the [b][color=#8fd3ff]Generator[/color][/b].
+Daemon: Once you get close, the generator will pull it in and count it.
+Daemon: Crystals stored there buy upgrades, survival, and a microscopic dent in your [shake rate=10 level=3]debt[/shake].
+[signal arg="wait_for_crystal_deliver"]

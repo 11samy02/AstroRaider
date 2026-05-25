@@ -1,0 +1,6 @@
+Daemon: Payment received. Tiny, insulting payment, but payment.
+Daemon: Buildings cost ore. I added some to your pockets.
+Daemon: Do not ask where I found the pockets.
+Daemon: First, open build mode with [b][color=gold]B[/color][/b]. Then I will permit one actual structure.
+[signal arg="grant_tutorial_resources"]
+[signal arg="wait_for_build_mode"]

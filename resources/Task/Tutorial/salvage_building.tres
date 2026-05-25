@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TaskResource" format=3 uid="uid://dwlb8nd7d0f18"]
+
+[ext_resource type="Script" uid="uid://dfmua83srk71q" path="res://scripts/resources/task/TaskResource.gd" id="1_nt1wh"]
+
+[resource]
+script = ExtResource("1_nt1wh")
+key = "tutorial_salvage_building"
+task_kind = 0
+task_text = "[b]SALVAGE[/b]
+Right click, then left click a building"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TaskResource" format=3 uid="uid://dnn6tr8vo0k5r"]
+
+[ext_resource type="Script" uid="uid://dfmua83srk71q" path="res://scripts/resources/task/TaskResource.gd" id="1_ta5gb"]
+
+[resource]
+script = ExtResource("1_ta5gb")
+key = "tutorial_shooting"
+task_kind = 0
+task_text = "[b]SHOOT[/b]
+Kill bats: [color=gold]{current}/{target}[/color]"

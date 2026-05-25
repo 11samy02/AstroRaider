@@ -1,0 +1,6 @@
+Daemon: Movement complete. No applause. I have standards.
+Daemon: Before you start smashing rocks, you need a [b][color=#8fd3ff]Generator[/color][/b].
+Daemon: Press [b][color=gold]B[/color][/b] to open build mode, then place the generator with [b][color=gold]left click[/color][/b].
+Daemon: That is the only construction order you currently have. Do not improvise.
+Daemon: It stores crystals, unlocks upgrades, and gives enemies something expensive to ruin.
+[signal arg="wait_for_generator"]

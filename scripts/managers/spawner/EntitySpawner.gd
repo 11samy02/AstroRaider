@@ -150,7 +150,11 @@ func start_new_wave() -> void:
 
 ## Spawns one enemy outside of the camera.
 ## If random_enemy is false, the first enemy from the ENEMY list is spawned.
-func spawn_enemy(random_enemy: bool = true) -> void:
+func spawn_enemy(random_enemy: bool = true) -> EnemyBaseTemplate:
+	if GlobalGame.camera == null:
+		push_warning("EntitySpawner: Cannot spawn enemy without an active camera.")
+		return null
+
 	var spawn_pos: Vector2 = GlobalGame.camera.get_pos_out_of_cam()
 	var enemy_scene: PackedScene = null
 	
@@ -163,9 +167,13 @@ func spawn_enemy(random_enemy: bool = true) -> void:
 	
 	if enemy_scene == null:
 		push_warning("EntitySpawner: No enemy scene found.")
-		return
-	
-	var enemy = enemy_scene.instantiate()
+		return null
+
+	var enemy := enemy_scene.instantiate() as EnemyBaseTemplate
+	if enemy == null:
+		push_warning("EntitySpawner: Enemy scene is not an EnemyBaseTemplate.")
+		return null
+
 	enemy.global_position = spawn_pos
 	
 	if "level" in enemy:
@@ -178,8 +186,11 @@ func spawn_enemy(random_enemy: bool = true) -> void:
 	
 	get_parent().add_child(enemy)
 	EnemyBaseTemplate.entity_list.append(enemy)
-	
-	wave_spawn_count -= 1
+
+	if wave_spawn_count > 0:
+		wave_spawn_count -= 1
+
+	return enemy
 
 
 ## Resets all wave/spawn state.

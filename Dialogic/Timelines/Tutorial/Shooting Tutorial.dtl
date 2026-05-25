@@ -1,3 +1,7 @@
-join Daemon center
-Daemon: Lets see ur Aim now
-[signal arg="spawn_enemies"]
+Daemon: Payment received. Tiny, glowing, and almost useful.
+Daemon: Now shoot something before I regret reviving you.
+Daemon: Aim with your cursor. Fire with [b][color=gold]left click[/color][/b].
+Daemon: I am sending [shake rate=16 level=4][b][color=#ff7676]three bats[/color][/b][/shake].
+Daemon: Kill all three before I let your education continue.
+[signal arg="spawn_tutorial_enemies"]
+[signal arg="wait_for_shooting"]

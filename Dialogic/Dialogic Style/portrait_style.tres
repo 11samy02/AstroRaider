@@ -15,6 +15,7 @@
 script = ExtResource("2_17glr")
 scene = ExtResource("1_ingai")
 overrides = {
+"global_bg_color": "Color(0, 0, 0, 1)",
 "global_font_size": "24.0"
 }
 
@@ -67,4 +68,4 @@ layer_info = {
 "15": SubResource("Resource_dqb73"),
 "16": SubResource("Resource_0omll")
 }
-metadata/_latest_layer = "12"
+metadata/_latest_layer = ""

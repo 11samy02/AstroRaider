@@ -5,9 +5,14 @@ var Health := 25
 var MaxHealth := 25
 
 @export var atk_resource: AttackResource
+@export var hit_invuln_duration := 0.25
+
+@onready var shield_sprite: Sprite2D = $Shield_Sprite
 
 var _shield_mat: ShaderMaterial = null
 var _is_destroying := false
+var _hit_flash_tween: Tween = null
+var _hit_invuln := false
 
 
 func is_destroying() -> bool:
@@ -16,7 +21,12 @@ func is_destroying() -> bool:
 
 ## Caches the shield material for hit flash effects
 func _ready() -> void:
-	_shield_mat = self.material as ShaderMaterial
+	if self.material is ShaderMaterial:
+		self.material = self.material.duplicate()
+		_shield_mat = self.material as ShaderMaterial
+
+	if is_instance_valid(shield_sprite):
+		shield_sprite.use_parent_material = true
 
 	if MaxHealth <= 0:
 		MaxHealth = Health
@@ -43,13 +53,19 @@ func _physics_process(_delta: float) -> void:
 
 ## Applies incoming damage to the shield instead of the player
 func get_hit(attack: AttackResource, who_attacked: CharacterBody2D = null) -> void:
-	if _is_destroying:
+	if _is_destroying or _hit_invuln:
 		return
 
-	Health = maxi(Health - attack.damage, 0)
+	_hit_invuln = true
+	get_tree().create_timer(hit_invuln_duration).timeout.connect(func() -> void:
+		_hit_invuln = false
+	)
 
-	_emit_shield_changed()
+	var shield_damage := maxi(attack.damage, 0)
+	Health = maxi(Health - shield_damage, 0)
+
 	_flash_hit()
+	_emit_shield_changed()
 
 	if Health <= 0 and not $AnimationPlayer.is_playing():
 		_is_destroying = true
@@ -70,10 +86,13 @@ func _flash_hit() -> void:
 	if not is_instance_valid(_shield_mat):
 		return
 
+	if _hit_flash_tween and _hit_flash_tween.is_valid():
+		_hit_flash_tween.kill()
+
 	_shield_mat.set_shader_parameter("hit_flash", 1.0)
 
-	var tween := create_tween()
-	tween.tween_method(_set_hit_flash, 1.0, 0.0, 0.2)
+	_hit_flash_tween = create_tween()
+	_hit_flash_tween.tween_method(_set_hit_flash, 1.0, 0.0, 0.2)
 
 
 ## Updates the shader hit flash value

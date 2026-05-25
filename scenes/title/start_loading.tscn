@@ -196,9 +196,13 @@ expand_mode = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1547331541]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_right = 600.0
+offset_left = -350.0
+offset_right = 350.0
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 50
 theme_override_constants/margin_top = 50
@@ -297,6 +301,16 @@ icon = ExtResource("10_f37j7")
 alignment = 0
 expand_icon = true
 
+[node name="tutorial_game" type="Button" parent="MarginContainer2/menu/MarginContainer2/VBoxContainer/text/VBoxContainer2" unique_id=2013028608]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme = ExtResource("9_ayl17")
+text = "Start Tutorial"
+icon = ExtResource("10_f37j7")
+alignment = 0
+expand_icon = true
+
 [node name="Options" type="Button" parent="MarginContainer2/menu/MarginContainer2/VBoxContainer/text/VBoxContainer2" unique_id=493602505]
 unique_name_in_owner = true
 visible = false
@@ -322,4 +336,5 @@ expand_icon = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="MarginContainer2/menu/MarginContainer2/VBoxContainer/text/VBoxContainer2/new_game" to="." method="new_game_pressed"]
+[connection signal="pressed" from="MarginContainer2/menu/MarginContainer2/VBoxContainer/text/VBoxContainer2/tutorial_game" to="." method="_on_tutorial_game_pressed"]
 [connection signal="pressed" from="MarginContainer2/menu/MarginContainer2/VBoxContainer/text/VBoxContainer2/Exit_game" to="." method="_on_exit_pressed"]

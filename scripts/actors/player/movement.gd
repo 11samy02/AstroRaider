@@ -13,6 +13,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if GlobalGame.are_player_inputs_blocked():
+		return
+	if not GlobalGame.is_tutorial_action_allowed("movement"):
+		return
 	if player.current_state == player.states.Default:
 		input_movement(event)
 
@@ -124,6 +128,11 @@ func wrap_angle(angle: float) -> float:
 
 ## Returns the current input direction from keyboard or controller
 func get_input_direction() -> Vector2:
+	if GlobalGame.are_player_inputs_blocked():
+		return Vector2.ZERO
+	if not GlobalGame.is_tutorial_action_allowed("movement"):
+		return Vector2.ZERO
+
 	if player.controller_id == 0 and Input.get_connected_joypads().size() == 0 and player.player_id == 0:
 		return Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	else:

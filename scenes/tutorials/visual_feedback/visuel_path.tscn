@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dh0pntcc1umpu"]
+[gd_scene format=3 uid="uid://dh0pntcc1umpu"]
 
 [ext_resource type="Texture2D" uid="uid://dy0web74rkdn0" path="res://assets/sprites/ui/in_game/arrow_path.png" id="1_ct1hk"]
 [ext_resource type="Shader" uid="uid://qo4fouygeboj" path="res://assets/shaders/tutorials/visual_feedback/visuel_path.gdshader" id="1_sa1ms"]
@@ -11,7 +11,7 @@ shader_parameter/glow_color = Color(0.0245236, 0.105903, 0.317451, 1)
 shader_parameter/glow_strength = 1.0
 shader_parameter/blur_amount = 3.0
 
-[node name="Visuel_Path" type="Line2D"]
+[node name="Visuel_Path" type="Line2D" unique_id=1688730342]
 z_index = -50
 material = SubResource("ShaderMaterial_28hip")
 texture = ExtResource("1_ct1hk")

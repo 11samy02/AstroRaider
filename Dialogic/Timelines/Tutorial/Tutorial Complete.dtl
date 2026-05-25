@@ -1,0 +1,5 @@
+Daemon: [b][color=#7fffd4]Tutorial complete.[/color][/b]
+Daemon: You can move, mine, shoot, feed the generator, build, and undo your questionable construction.
+Daemon: From here on, the locks are off.
+Daemon: Now survive long enough to make my resurrection investment look slightly less stupid.
+[signal arg="finish_tutorial"]

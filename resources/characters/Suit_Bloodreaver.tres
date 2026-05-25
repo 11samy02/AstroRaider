@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b4v4suaupb8q2" path="res://assets/sprites/items/Suits/Bloodreaver.png" id="1_2s1k6"]
 [ext_resource type="Script" uid="uid://3sddgq0qt46h" path="res://scripts/resources/player/SuitData.gd" id="2_5lcbt"]
+[ext_resource type="Script" uid="uid://8qai0pbqvrwh" path="res://scripts/resources/player/SuitStatLevelRule.gd" id="3_5lcbt"]
 [ext_resource type="Script" uid="uid://bfd0euualynf6" path="res://scripts/perks/resources/Perk_Resource.gd" id="3_12b8m"]
 [ext_resource type="Script" uid="uid://bkju3dtig3ue6" path="res://scripts/perks/StatModifierResource.gd" id="4_hxq7g"]
 [ext_resource type="Script" uid="uid://plag5btfsk1b" path="res://scripts/actors/player/Stats.gd" id="5_cqm35"]

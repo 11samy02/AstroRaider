@@ -45,6 +45,7 @@ metadata/_custom_type_script = "uid://uxffft8cgyfq"
 
 [sub_resource type="Resource" id="Resource_w3tkl"]
 script = ExtResource("9_lrvd1")
+priority = 5
 wave_start = 5
 repeatable = true
 metadata/_custom_type_script = "uid://bddortti8811q"

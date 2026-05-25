@@ -15,6 +15,9 @@
 [ext_resource type="Script" uid="uid://bbredx6e4f0j4" path="res://scripts/ui/generator_healthbar.gd" id="10_orm7x"]
 [ext_resource type="Texture2D" uid="uid://xnitqyi280hl" path="res://assets/sprites/ui/in_game/shieldbar.png" id="10_x0n6o"]
 [ext_resource type="Script" uid="uid://bjdac6l43gtw2" path="res://scripts/ui/shieldbar_healthbar.gd" id="12_aq72h"]
+[ext_resource type="Texture2D" uid="uid://bhkdu7c2uelvw" path="res://assets/sprites/ui/in_game/level_border.png" id="14_pbku6"]
+[ext_resource type="Script" uid="uid://4cf15yiuh1vg" path="res://scripts/ui/level_frame.gd" id="15_i3ans"]
+[ext_resource type="FontFile" uid="uid://booga45fd18fs" path="res://assets/fonts/fonts/Orbitron-VariableFont_wght.ttf" id="16_5bpyr"]
 [ext_resource type="Shader" uid="uid://hfh13vgq8qp2" path="res://assets/shaders/grayscale.gdshader" id="16_oqj4c"]
 
 [sub_resource type="SystemFont" id="SystemFont_4dhts"]
@@ -143,11 +146,8 @@ _data = {
 atlas = ExtResource("7_jd38o")
 region = Rect2(0, 0, 81, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bjx7l"]
-load_path = "res://.godot/imported/healthbar.png-85cc653dc88da164635e5f5ac532565e.ctex"
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_oohqu"]
-atlas = SubResource("CompressedTexture2D_bjx7l")
+atlas = ExtResource("7_jd38o")
 region = Rect2(37, 37, 39, 6)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_orm7x"]
@@ -191,6 +191,12 @@ shader_parameter/glow_color = Color(1.0588765e-06, 0.61795694, 0.7694895, 1)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7suct"]
 atlas = ExtResource("8_q8rbd")
 region = Rect2(22, 21, 39, 6)
+
+[sub_resource type="FontVariation" id="FontVariation_84uof"]
+base_font = ExtResource("16_5bpyr")
+variation_embolden = 1.0
+spacing_glyph = 3
+spacing_space = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pbku6"]
 shader = ExtResource("16_oqj4c")
@@ -529,7 +535,57 @@ text = "500 / 500"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Abilities" type="HBoxContainer" parent="Control/MarginContainer" unique_id=1065963898]
+[node name="LevelFrame" type="TextureRect" parent="Control/MarginContainer/Rader" unique_id=1871035096 node_paths=PackedStringArray("game_ui")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -15.0
+offset_right = 24.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("14_pbku6")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("15_i3ans")
+game_ui = NodePath("../../../..")
+
+[node name="level_label" type="Label" parent="Control/MarginContainer/Rader/LevelFrame" unique_id=681466604]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.4774089, 0.7686246, 0.8875847, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -4
+theme_override_constants/shadow_offset_x = 0
+theme_override_font_sizes/font_size = 14
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/MarginContainer" unique_id=901078514]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 69
+alignment = 1
+
+[node name="equip_text" type="Label" parent="Control/MarginContainer/VBoxContainer2" unique_id=235006456]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8801946, 0.8978458, 0.8832375, 1)
+theme_override_fonts/font = SubResource("FontVariation_84uof")
+theme_override_font_sizes/font_size = 26
+text = "Press Q, E, or C to equip this ability"
+horizontal_alignment = 1
+
+[node name="Abilities" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer2" unique_id=1065963898 node_paths=PackedStringArray("equip_text")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -537,33 +593,44 @@ size_flags_vertical = 8
 mouse_filter = 2
 theme_override_constants/separation = 39
 script = ExtResource("7_v6n52")
+equip_text = NodePath("../equip_text")
 
-[node name="ability" parent="Control/MarginContainer/Abilities" unique_id=2030177814 instance=ExtResource("8_ywmy4")]
+[node name="ability" parent="Control/MarginContainer/VBoxContainer2/Abilities" unique_id=2030177814 instance=ExtResource("8_ywmy4")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ability2" parent="Control/MarginContainer/Abilities" unique_id=1257717628 instance=ExtResource("8_ywmy4")]
+[node name="cooldown" parent="Control/MarginContainer/VBoxContainer2/Abilities/ability/Button" parent_id_path=PackedInt32Array(2030177814, 2129939063) index="2" unique_id=846734397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ability2" parent="Control/MarginContainer/VBoxContainer2/Abilities" unique_id=1257717628 instance=ExtResource("8_ywmy4")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" parent="Control/MarginContainer/Abilities/ability2/Button" parent_id_path=PackedInt32Array(1257717628, 2129939063) index="1" unique_id=1646049229]
+[node name="Label" parent="Control/MarginContainer/VBoxContainer2/Abilities/ability2/Button" parent_id_path=PackedInt32Array(1257717628, 2129939063) index="1" unique_id=1646049229]
 text = "Q"
 
-[node name="ability3" parent="Control/MarginContainer/Abilities" unique_id=1373866711 instance=ExtResource("8_ywmy4")]
+[node name="ability3" parent="Control/MarginContainer/VBoxContainer2/Abilities" unique_id=1373866711 instance=ExtResource("8_ywmy4")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" parent="Control/MarginContainer/Abilities/ability3/Button" parent_id_path=PackedInt32Array(1373866711, 2129939063) index="1" unique_id=1646049229]
+[node name="Label" parent="Control/MarginContainer/VBoxContainer2/Abilities/ability3/Button" parent_id_path=PackedInt32Array(1373866711, 2129939063) index="1" unique_id=1646049229]
 text = "E"
 
-[node name="ColorRect" type="ColorRect" parent="Control/MarginContainer/Abilities" unique_id=1497521451]
+[node name="ColorRect" type="ColorRect" parent="Control/MarginContainer/VBoxContainer2/Abilities" unique_id=1497521451]
 custom_minimum_size = Vector2(2, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="ability4" parent="Control/MarginContainer/Abilities" unique_id=1249296522 instance=ExtResource("8_ywmy4")]
+[node name="ability4" parent="Control/MarginContainer/VBoxContainer2/Abilities" unique_id=1249296522 instance=ExtResource("8_ywmy4")]
 layout_mode = 2
 mouse_filter = 2
 
@@ -573,10 +640,16 @@ material = SubResource("ShaderMaterial_pbku6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 7.0
+offset_right = 12.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
-[editable path="Control/MarginContainer/Abilities/ability2"]
-[editable path="Control/MarginContainer/Abilities/ability3"]
-[editable path="Control/MarginContainer/Abilities/ability4"]
+[editable path="Control/MarginContainer/VBoxContainer2/Abilities/ability"]
+[editable path="Control/MarginContainer/VBoxContainer2/Abilities/ability2"]
+[editable path="Control/MarginContainer/VBoxContainer2/Abilities/ability3"]
+[editable path="Control/MarginContainer/VBoxContainer2/Abilities/ability4"]

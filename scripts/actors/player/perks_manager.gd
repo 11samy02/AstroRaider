@@ -16,6 +16,7 @@ var in_perk_session := false
 var needed_coins := 10
 var current_player_level := 1
 var _queued_selections := 0
+var _queued_selection_costs: Array[int] = []
 
 var _activation_miss_streak := 0
 var _ult_miss_streak := 0
@@ -58,14 +59,29 @@ func _check_generator_interact() -> void:
 
 	var can_open_selector := false
 	if is_instance_valid(player_res):
-		can_open_selector = player_res.crystal_count >= needed_coins and selection.has_any_selectable_perks()
+		var has_selectable_perks := selection.has_any_selectable_perks()
+		can_open_selector = (
+			(player_res.crystal_count >= needed_coins and has_selectable_perks)
+			or (player_res.crystal_count > 0 and not has_selectable_perks)
+		)
+
+	var tutorial_blocks_interact := (
+		GlobalGame.is_in_tutorial
+		and not GlobalGame.is_tutorial_action_allowed("interact_generator")
+	)
 	
 	for building in GlobalGame.Buildings:
 		if building is CrystalGenerator and building.player_list.has(player):
-			if can_open_selector:
+			if can_open_selector and not tutorial_blocks_interact:
 				building.interactionn_icon.show()
 			else:
 				building.interactionn_icon.hide()
+
+	if tutorial_blocks_interact:
+		return
+
+	if GlobalGame.are_player_inputs_blocked():
+		return
 	
 	if not Input.is_action_just_pressed("interact"):
 		return
@@ -86,14 +102,17 @@ func try_open_selector() -> void:
 
 	selection.prune_maxed()
 	if not selection.has_any_selectable_perks():
+		_convert_unused_crystals_to_overflow()
 		return
 	
 	if player_res.crystal_count < needed_coins:
 		return
 	
 	while player_res.crystal_count >= needed_coins:
+		var selection_cost := needed_coins
 		player_res.crystal_count -= needed_coins
 		_queued_selections += 1
+		_queued_selection_costs.append(selection_cost)
 		current_player_level += 1
 		needed_coins = exp_to_next()
 	
@@ -104,6 +123,7 @@ func try_open_selector() -> void:
 ## Processes the next queued perk selection.
 func _process_next_selection() -> void:
 	if _queued_selections <= 0:
+		_queued_selection_costs.clear()
 		is_selecting = false
 		in_perk_session = false
 		get_tree().paused = false
@@ -112,7 +132,7 @@ func _process_next_selection() -> void:
 	selection.prune_maxed()
 
 	if not selection.has_any_selectable_perks():
-		_queued_selections = 0
+		_convert_unused_crystals_to_overflow()
 		is_selecting = false
 		in_perk_session = false
 		get_tree().paused = false
@@ -122,13 +142,15 @@ func _process_next_selection() -> void:
 		selection.emergency_release_from_cooldown()
 	
 	if selection.perks_list.is_empty():
-		_queued_selections = 0
+		_convert_unused_crystals_to_overflow()
 		is_selecting = false
 		in_perk_session = false
 		get_tree().paused = false
 		return
 	
 	_queued_selections -= 1
+	if not _queued_selection_costs.is_empty():
+		_queued_selection_costs.pop_front()
 	is_selecting = true
 	in_perk_session = true
 	get_tree().paused = true
@@ -252,6 +274,28 @@ func _on_offer_built(chosen_type: PerkSelection.SelectorType) -> void:
 func _has_available_offer(selector_type: PerkSelection.SelectorType) -> bool:
 	var perks: Array[PerkBuild] = selection._get_available_perks(selector_type)
 	return not perks.is_empty()
+
+
+## Converts crystals from unused queued perk selections and remaining player crystals into Suit EXP.
+func _convert_unused_crystals_to_overflow() -> void:
+	var crystal_amount := 0
+	var unused_selection_count := _queued_selection_costs.size()
+
+	for cost in _queued_selection_costs:
+		crystal_amount += cost
+
+	_queued_selection_costs.clear()
+	_queued_selections = 0
+
+	if unused_selection_count > 0:
+		current_player_level = max(1, current_player_level - unused_selection_count)
+		needed_coins = exp_to_next()
+
+	if is_instance_valid(player_res):
+		crystal_amount += player_res.crystal_count
+		player_res.crystal_count = 0
+
+	SuitExpRunTracker.add_overflow_crystals(crystal_amount)
 
 
 ## Finalizes the selected perk and continues the queued perk session.

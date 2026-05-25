@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TaskResource" format=3 uid="uid://dbjoxgmx0rhyo"]
+
+[ext_resource type="Script" uid="uid://dfmua83srk71q" path="res://scripts/resources/task/TaskResource.gd" id="1_i6hfc"]
+
+[resource]
+script = ExtResource("1_i6hfc")
+key = "tutorial_place_building"
+task_kind = 0
+task_text = "[b]PLACE[/b]
+Press [color=gold]1[/color], [color=gold]2[/color], or [color=gold]3[/color], then left click"

@@ -1,0 +1,8 @@
+Daemon: Good. The generator exists before the shiny rocks do.
+Daemon: Next: [b][color=#c9a66b]mining[/color][/b].
+Daemon: Aim your gravity into a wall and keep pushing. The suit deploys its drill when you commit to the impact.
+Daemon: Mining shakes loose [wave amp=12 freq=3][b][color=#7fffd4]crystals[/color][/b][/wave] and [b][color=#c9a66b]ore[/color][/b].
+Daemon: Break [b][color=gold]one rock[/color][/b], then touch a crystal so it attaches to you.
+Daemon: Do both before I waste another cosmic heartbeat explaining basic resource extraction.
+[signal arg="spawn_tutorial_crystal"]
+[signal arg="wait_for_mining"]

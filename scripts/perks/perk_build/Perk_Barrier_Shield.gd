@@ -1,6 +1,6 @@
 extends PerkBuild
 
-const BARRIER_SHIELD := preload("res://scenes/objects/perk_specials/barrier_shield.tscn")
+const BARRIER_SHIELD: PackedScene = preload("res://scenes/objects/perk_specials/barrier_shield.tscn")
 
 const SHIELD_HP_PERCENT_BY_LEVEL: Array[float] = [
 	0.35,
@@ -55,7 +55,7 @@ func activate_perk() -> void:
 
 	var shield_health := _get_scaled_shield_health()
 	
-	var new_shield := BARRIER_SHIELD.instantiate()
+	var new_shield := BARRIER_SHIELD.instantiate() as BarrierShield
 	new_shield.entity = player
 	new_shield.global_position = player.global_position
 	new_shield.Health = shield_health

@@ -25,6 +25,9 @@ const SOURCE_KILLS := "kills"
 ## EXP source used for mining/resource related actions.
 const SOURCE_MINING := "mining"
 
+## EXP source used for crystals that can no longer be spent on perks.
+const SOURCE_OVERFLOW_CRYSTALS := "overflow_crystals"
+
 ## EXP source used for completed waves.
 const SOURCE_WAVES := "waves"
 
@@ -44,6 +47,7 @@ const SOURCE_DISPLAY_ORDER := [
 	SOURCE_WAVES,
 	SOURCE_KILLS,
 	SOURCE_MINING,
+	SOURCE_OVERFLOW_CRYSTALS,
 	SOURCE_GENERATOR_DEFENSE,
 	SOURCE_MISC,
 ]
@@ -51,6 +55,8 @@ const SOURCE_DISPLAY_ORDER := [
 ## How many destroyed mining tiles are needed for 1 Mining EXP.
 const MINING_TILES_PER_EXP := 10
 
+## How many useless/overflow crystals are needed for 1 Suit EXP.
+const OVERFLOW_CRYSTALS_PER_EXP := 1
 
 ## Total EXP collected during the current run.
 ## This is temporary and should only be applied to the selected suit at the end of the run.
@@ -59,6 +65,9 @@ var current_run_exp := 0
 ## Stores leftover destroyed mining tiles that were not enough for EXP yet.
 var pending_mining_tiles := 0
 
+## Stores leftover overflow crystals that were not enough for EXP yet.
+var pending_overflow_crystals := 0
+
 ## Stores how much EXP each source contributed during the current run.
 ## Useful for the endscreen summary.
 var exp_breakdown := {
@@ -66,6 +75,7 @@ var exp_breakdown := {
 	SOURCE_MINING: 0,
 	SOURCE_WAVES: 0,
 	SOURCE_BOSS: 0,
+	SOURCE_OVERFLOW_CRYSTALS: 0,
 	SOURCE_GENERATOR_DEFENSE: 0,
 	SOURCE_MISC: 0,
 }
@@ -201,6 +211,7 @@ func add_generator_defense_exp(amount: int) -> void:
 func reset_run_exp() -> void:
 	current_run_exp = 0
 	pending_mining_tiles = 0
+	pending_overflow_crystals = 0
 	
 	for key in exp_breakdown.keys():
 		exp_breakdown[key] = 0
@@ -282,6 +293,8 @@ func get_exp_from_source(source_name: String) -> int:
 func get_full_run_breakdown_data() -> Dictionary:
 	return {
 		"total_exp": current_run_exp,
+		"pending_mining_tiles": pending_mining_tiles,
+		"pending_overflow_crystals": pending_overflow_crystals,
 		"exp_breakdown": exp_breakdown.duplicate(true),
 		"boss_breakdown": boss_breakdown.duplicate(true),
 		"enemy_kill_breakdown": enemy_kill_breakdown.duplicate(true),
@@ -365,6 +378,26 @@ func add_mining_tiles(destroyed_tiles_count: int) -> void:
 	pending_mining_tiles -= mining_exp * MINING_TILES_PER_EXP
 	add_mining_exp(mining_exp)
 
+## Adds useless/overflow crystals and converts them into Suit EXP.
+## Use this when the player brings crystals to the generator but can no longer receive new perks.
+##
+## Example with OVERFLOW_CRYSTALS_PER_EXP = 1:
+## 1 overflow crystal = +1 Suit EXP
+## 10 overflow crystals = +10 Suit EXP
+func add_overflow_crystals(crystal_count: int) -> void:
+	if crystal_count <= 0:
+		return
+	
+	pending_overflow_crystals += crystal_count
+	
+	var overflow_exp := int(floor(float(pending_overflow_crystals) / float(OVERFLOW_CRYSTALS_PER_EXP)))
+	
+	if overflow_exp <= 0:
+		return
+	
+	pending_overflow_crystals -= overflow_exp * OVERFLOW_CRYSTALS_PER_EXP
+	add_exp(SOURCE_OVERFLOW_CRYSTALS, overflow_exp)
+
 ## Adds the main EXP source breakdown to the given line array.
 func _append_source_breakdown_lines(lines: Array[String]) -> void:
 	var has_any_source := false
@@ -443,13 +476,14 @@ func _format_source_name(source_name: String) -> String:
 			return "Waves"
 		SOURCE_BOSS:
 			return "Boss"
+		SOURCE_OVERFLOW_CRYSTALS:
+			return "Overflow Crystals"
 		SOURCE_GENERATOR_DEFENSE:
 			return "Generator Defense"
 		SOURCE_MISC:
 			return "Misc"
 		_:
 			return source_name.capitalize()
-
 
 ## Formats multiplier values for readable UI text.
 func _format_float(value: float) -> String:

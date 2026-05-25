@@ -6,15 +6,16 @@ class_name BombExplosion
 
 var damage: int = 1
 var _hit_entity_ids := {}
-var _shield_absorbed_player_ids := {}
 @export var radius_px: float = 0.0
+@export_range(0.0, 1.0, 0.01) var shield_damage_multiplier := 1.0
+@export var max_shield_damage_per_hit := 25
 
 
 func _ready() -> void:
 	emitting = true
 	_apply_radius_to_shape()
 	await get_tree().create_timer(lifetime + 0.1).timeout
-	static_attack_box.get_child(0).disabled = true
+	_disable_attack_box()
 	queue_free()
 
 
@@ -40,9 +41,6 @@ func _apply_radius_to_shape() -> void:
 
 
 func _on_static_attack_box_area_entered(area: Area2D) -> void:
-	if not is_instance_valid(area):
-		return
-
 	if not area is Hitbox:
 		return
 
@@ -52,71 +50,81 @@ func _on_static_attack_box_area_entered(area: Area2D) -> void:
 	if not is_instance_valid(target):
 		return
 
+	# Deduplicate by target entity — covers both direct player hits and shield hits
+	# that reference the same player entity. Also deduplicate the shield node itself
+	# to block re-entry events caused by runtime shape resizing.
 	var target_id := target.get_instance_id()
-	if _hit_entity_ids.has(target_id):
+	var area_id := area.get_instance_id()
+
+	if _hit_entity_ids.has(target_id) or _hit_entity_ids.has(area_id):
 		return
 
-	var attack := AttackResource.new()
-	attack.damage = damage
-	attack.knockback = 10
+	var attack := _make_base_attack()
 
 	if target is Player:
-		if hitbox is BarrierShield:
-			_hit_entity_ids[target_id] = true
-			_shield_absorbed_player_ids[target_id] = true
+		_hit_entity_ids[target_id] = true
 
-			var direct_shield_multiplier = target.get_active_shield_knockback_multiplier()
-			var direct_shield_attack := _make_shield_attack(attack, direct_shield_multiplier)
-			hitbox.get_hit(direct_shield_attack)
-			GSignals.CAM_shake_effect.emit()
+		if target.has_active_barrier_shield():
+			var shield := target.active_barrier_shield as BarrierShield
+			if is_instance_valid(shield):
+				# Also mark the shield area so resize-triggered re-entries are blocked
+				_hit_entity_ids[shield.get_instance_id()] = true
 
-			var direct_shield_dir := target.global_position - global_position
-			if direct_shield_dir != Vector2.ZERO:
-				target.get_knockback(direct_shield_dir.normalized(), attack.knockback * direct_shield_multiplier)
+				var shield_attack := _make_shield_attack(attack)
+				var shield_hp_before := shield.Health
+				shield.get_hit(shield_attack)
+				GSignals.CAM_shake_effect.emit()
 
-			return
+				# Pass overflow damage to player if shield broke under the hit
+				var actual_shield_damage := shield_hp_before - maxi(shield.Health, 0)
+				var overflow := maxi(shield_attack.damage - actual_shield_damage, 0)
 
-		var shield_multiplier = target.get_active_shield_knockback_multiplier()
-		var shield_attack := _make_shield_attack(attack, shield_multiplier)
-		if target.damage_active_barrier_shield(shield_attack):
-			_hit_entity_ids[target_id] = true
-			_shield_absorbed_player_ids[target_id] = true
-			GSignals.CAM_shake_effect.emit()
+				if overflow > 0 and target.can_take_damage:
+					var overflow_attack := attack.duplicate() as AttackResource
+					overflow_attack.damage = overflow
+					hitbox.get_hit(overflow_attack)
 
-			var shielded_dir := target.global_position - global_position
-			if shielded_dir != Vector2.ZERO:
-				target.get_knockback(shielded_dir.normalized(), attack.knockback * shield_multiplier)
-
-			return
-
-		var overlapping_shield := _get_overlapping_shield_for_player(target)
-		if is_instance_valid(overlapping_shield):
-			_hit_entity_ids[target_id] = true
-			_shield_absorbed_player_ids[target_id] = true
-			overlapping_shield.get_hit(shield_attack)
-			GSignals.CAM_shake_effect.emit()
-
-			var fallback_shield_dir := target.global_position - global_position
-			if fallback_shield_dir != Vector2.ZERO:
-				target.get_knockback(fallback_shield_dir.normalized(), attack.knockback * shield_multiplier)
-
-			return
-
-		if _shield_absorbed_player_ids.has(target_id):
+				_apply_player_knockback(target, attack.knockback * target.get_active_shield_knockback_multiplier())
 			return
 
 		if not target.can_take_damage:
 			return
 
-		_hit_entity_ids[target_id] = true
 		hitbox.get_hit(attack)
+		GSignals.CAM_shake_effect.emit()
+		_apply_player_knockback(target, attack.knockback)
+		return
 
+	# BarrierShield area arrived before the player hitbox — mark both the shield
+	# and its owner so neither fires again, then apply the hit via the shield.
+	if hitbox is BarrierShield:
+		var shield := hitbox as BarrierShield
+		if not is_instance_valid(shield.entity):
+			return
+
+		var player := shield.entity as Player
+		if not is_instance_valid(player):
+			return
+
+		_hit_entity_ids[area_id] = true
+		_hit_entity_ids[player.get_instance_id()] = true
+
+		var shield_attack := _make_shield_attack(attack)
+		var shield_hp_before := shield.Health
+		shield.get_hit(shield_attack)
 		GSignals.CAM_shake_effect.emit()
 
-		var dir := target.global_position - global_position
-		if dir != Vector2.ZERO:
-			target.get_knockback(dir.normalized(), attack.knockback)
+		var actual_shield_damage := shield_hp_before - maxi(shield.Health, 0)
+		var overflow := maxi(shield_attack.damage - actual_shield_damage, 0)
 
+		if overflow > 0 and player.can_take_damage:
+			var player_hitbox := _find_player_hitbox(player)
+			if is_instance_valid(player_hitbox):
+				var overflow_attack := attack.duplicate() as AttackResource
+				overflow_attack.damage = overflow
+				player_hitbox.get_hit(overflow_attack)
+
+		_apply_player_knockback(player, attack.knockback * player.get_active_shield_knockback_multiplier())
 		return
 
 	if target is EnemyBaseTemplate:
@@ -127,17 +135,36 @@ func _on_static_attack_box_area_entered(area: Area2D) -> void:
 		if dir != Vector2.ZERO:
 			target.get_knockback(dir.normalized(), attack.knockback)
 
-		return
 
-
-func _get_overlapping_shield_for_player(player: Player) -> BarrierShield:
-	for overlap_area in static_attack_box.get_overlapping_areas():
-		if overlap_area is BarrierShield and overlap_area.entity == player:
-			return overlap_area
+## Finds the non-shield Hitbox of a player for overflow damage delivery
+func _find_player_hitbox(player: Player) -> Hitbox:
+	for child in player.get_children():
+		if child is Hitbox and not child is BarrierShield:
+			return child as Hitbox
 	return null
 
 
-func _make_shield_attack(source_attack: AttackResource, shield_multiplier: float) -> AttackResource:
+func _make_base_attack() -> AttackResource:
+	var attack := AttackResource.new()
+	attack.damage = damage
+	attack.knockback = 10
+	return attack
+
+
+func _make_shield_attack(source_attack: AttackResource) -> AttackResource:
 	var shield_attack := source_attack.duplicate() as AttackResource
-	shield_attack.damage = maxi(1, int(ceil(float(source_attack.damage) * shield_multiplier)))
+	var raw_shield_damage := int(ceil(float(source_attack.damage) * shield_damage_multiplier))
+	shield_attack.damage = clampi(raw_shield_damage, 1, max_shield_damage_per_hit)
 	return shield_attack
+
+
+func _apply_player_knockback(player: Player, strength: float) -> void:
+	var dir := player.global_position - global_position
+	if dir != Vector2.ZERO:
+		player.get_knockback(dir.normalized(), strength)
+
+
+func _disable_attack_box() -> void:
+	static_attack_box.set_deferred("monitoring", false)
+	if is_instance_valid(collision_shape_2d):
+		collision_shape_2d.set_deferred("disabled", true)

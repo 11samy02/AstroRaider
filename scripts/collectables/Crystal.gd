@@ -23,8 +23,6 @@ func set_sprite() -> void:
 		sprite.frame = default_sprite
 
 func on_collected() -> void:
-	GSignals.PLA_collects_crystal.emit()
-
 	var max_collect_count := 25
 
 	if GlobalGame.Players.size() <= 2:
@@ -47,6 +45,8 @@ func on_collected() -> void:
 	if is_first_one:
 		GSignals.PERK_event_collect_crystal.emit(global_position)
 		is_first_one = false
+
+	GSignals.PLA_collects_crystal.emit()
 
 func _process(delta: float) -> void:
 	super(delta)

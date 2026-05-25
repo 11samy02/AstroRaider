@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TaskResource" format=3 uid="uid://c7jx0l7e7jv2u"]
+
+[ext_resource type="Script" uid="uid://dfmua83srk71q" path="res://scripts/resources/task/TaskResource.gd" id="1_2fdwn"]
+
+[resource]
+script = ExtResource("1_2fdwn")
+key = "tutorial_mining"
+task_kind = 0
+task_text = "[b]MINE[/b]
+Break rock, then touch a [color=#7ddcff]crystal[/color]"

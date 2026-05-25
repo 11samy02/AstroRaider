@@ -55,7 +55,6 @@ BluePrintData="*res://scripts/crafting/resources/BluePrintData.gd"
 DropData="*res://scripts/resources/environment/destroyable_tiles/DropData.gd"
 AiEnemyData="*res://scripts/resources/enemy/AiEnemyData.gd"
 GameOverScreen="*res://scenes/ui/game_over_screen.tscn"
-FirebaseSync="*res://scenes/services/firebase_sync.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 ScreenEffects="*uid://bpi0x0vtweskt"
 DebugMenu="*uid://cggqb75a8w8r"
@@ -80,7 +79,15 @@ directories/dch_directory={
 directories/dtl_directory={
 "Name your Character": "res://Dialogic/Timelines/Name your Character.dtl",
 "Shooting Tutorial": "res://Dialogic/Timelines/Tutorial/Shooting Tutorial.dtl",
-"Waking UP": "res://Dialogic/Timelines/Tutorial/Waking UP.dtl"
+"Tutorial Building": "res://Dialogic/Timelines/Tutorial/Tutorial Building.dtl",
+"Tutorial Complete": "res://Dialogic/Timelines/Tutorial/Tutorial Complete.dtl",
+"Tutorial Deliver Crystal": "res://Dialogic/Timelines/Tutorial/Tutorial Deliver Crystal.dtl",
+"Tutorial Exit Build Mode": "res://Dialogic/Timelines/Tutorial/Tutorial Exit Build Mode.dtl",
+"Tutorial Generator": "res://Dialogic/Timelines/Tutorial/Tutorial Generator.dtl",
+"Tutorial Mining": "res://Dialogic/Timelines/Tutorial/Tutorial Mining.dtl",
+"Tutorial Place Building": "res://Dialogic/Timelines/Tutorial/Tutorial Place Building.dtl",
+"Tutorial Salvage Building": "res://Dialogic/Timelines/Tutorial/Tutorial Salvage Building.dtl",
+"Waking UP": "res://Dialogic/Timelines/Tutorial/Tutorial Waking UP.dtl"
 }
 layout/style_list=["res://Dialogic/Dialogic Style/portrait_style.tres"]
 layout/default_style="res://Dialogic/Dialogic Style/portrait_style.tres"

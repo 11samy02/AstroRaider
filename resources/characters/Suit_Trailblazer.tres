@@ -88,6 +88,7 @@ script = ExtResource("1_7xk2m")
 suit_name = "Trailblazer"
 description = "Standard exploration suit."
 image = ExtResource("1_kpepi")
+current_level = 100
 has_unlocked = true
 stats = SubResource("Resource_c38qa")
 stat_level_rules = Array[ExtResource("3_0tqu3")]([SubResource("Resource_b1vo5"), SubResource("Resource_pieyk"), SubResource("Resource_d6230"), SubResource("Resource_mwh11")])

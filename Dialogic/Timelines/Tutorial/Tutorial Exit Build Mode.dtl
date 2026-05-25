@@ -1,0 +1,4 @@
+Daemon: A generator. Finally, a decision that was not embarrassing.
+Daemon: Press [b][color=gold]B[/color][/b] again to close build mode.
+Daemon: No more placing things yet. Admiring your own bad architecture is not progress.
+[signal arg="wait_for_exit_build_mode"]

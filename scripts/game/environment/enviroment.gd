@@ -6,6 +6,8 @@ var persistence_mode: int = 0
 
 @export var saved_dir: String = "res://resources/levels/level1"
 @export var saved_file_prefix: String = "generated_level_"
+@export var saved_level_paths: PackedStringArray = []
+@export var saved_binary_level_paths: PackedStringArray = []
 @export var use_seed_in_filename: bool = true
 
 static var max_tiles_to_generate = 0
@@ -16,6 +18,7 @@ static var tiles_generated = 0
 var seed: int
 
 @export var batch_size = 400
+@export var load_batch_size := 5000
 
 @export_group("Rooms Settings")
 @export var start_area_size: SimplefySettingMath = SimplefySettingMath.new()

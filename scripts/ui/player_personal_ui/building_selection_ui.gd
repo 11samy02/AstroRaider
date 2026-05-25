@@ -25,6 +25,9 @@ func _ready() -> void:
 	connect_signals()
 
 func _input(event: InputEvent) -> void:
+	if _player_inputs_blocked():
+		return
+
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == shortcut:
 			_on_pressed()
@@ -38,6 +41,9 @@ func connect_signals() -> void:
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		set_textures()
+		return
+
+	building_selection_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE if _player_inputs_blocked() else Control.MOUSE_FILTER_STOP
 
 func set_textures() -> void:
 	if !is_instance_valid(texture):
@@ -50,6 +56,9 @@ func set_textures() -> void:
 	margin_container.add_theme_constant_override("margin_right", texture_margin.w)
 
 func _on_mouse_entered() -> void:
+	if _player_inputs_blocked():
+		return
+
 	GSignals.BUI_allow_to_place.emit(true)
 	if tween and tween.is_running():
 		tween.kill()
@@ -68,4 +77,17 @@ func _on_mouse_exited() -> void:
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func _on_pressed() -> void:
+	if _player_inputs_blocked():
+		return
+
 	GSignals.BUI_BUILDING_select_building.emit(key)
+
+
+func _player_inputs_blocked() -> bool:
+	return (
+		not Engine.is_editor_hint()
+		and (
+			GlobalGame.are_player_inputs_blocked()
+			or not GlobalGame.is_tutorial_action_allowed("select_building")
+		)
+	)
